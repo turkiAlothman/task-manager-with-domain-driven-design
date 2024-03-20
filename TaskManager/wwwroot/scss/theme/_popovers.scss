@@ -1,0 +1,51 @@
+//Popovers
+.popover-primary {
+    --kleon-popover-border-color: var(--kleon-primary);
+    --kleon-popover-header-bg: var(--kleon-primary);
+    --kleon-popover-header-color: var(--kleon-white);
+}
+.popover-secondary {
+    --kleon-popover-border-color: var(--kleon-secondary);
+    --kleon-popover-header-bg: var(--kleon-secondary);
+    --kleon-popover-header-color: var(--kleon-white);
+}
+.popover-success {
+    --kleon-popover-border-color: var(--kleon-success);
+    --kleon-popover-header-bg: var(--kleon-success);
+    --kleon-popover-header-color: var(--kleon-white);
+}
+.popover-info {
+    --kleon-popover-border-color: var(--kleon-info);
+    --kleon-popover-header-bg: var(--kleon-info);
+    --kleon-popover-header-color: var(--kleon-white);
+}
+.popover-warning {
+    --kleon-popover-border-color: var(--kleon-warning);
+    --kleon-popover-header-bg: var(--kleon-warning);
+    --kleon-popover-header-color: var(--kleon-white);
+}
+.popover-danger {
+    --kleon-popover-border-color: var(--kleon-danger);
+    --kleon-popover-header-bg: var(--kleon-danger);
+    --kleon-popover-header-color: var(--kleon-white);
+}
+.popover-dark {
+    --kleon-popover-border-color: var(--kleon-dark);
+    --kleon-popover-header-bg: var(--kleon-dark);
+    --kleon-popover-header-color: var(--kleon-white);
+}
+.popover-orange {
+    --kleon-popover-border-color: var(--kleon-orange);
+    --kleon-popover-header-bg: var(--kleon-orange);
+    --kleon-popover-header-color: var(--kleon-white);
+}
+.popover-light {
+    --kleon-popover-border-color: var(--kleon-light);
+    --kleon-popover-header-bg: var(--kleon-light);
+    --kleon-popover-header-color: var(--kleon-dark);
+}
+.popover-white {
+    --kleon-popover-border-color: var(--kleon-white);
+    --kleon-popover-header-bg: var(--kleon-white);
+    --kleon-popover-header-color: var(--kleon-dark);
+}

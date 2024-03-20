@@ -1,0 +1,18 @@
+.list-group {
+    li {
+        margin-bottom: 0;
+    }
+}
+.list-group-item{
+    &.active {
+        box-shadow: 0 $_8px $_18px -$_8px rgba(254, 105, 106, 0.9);
+    }
+    &:first-child {
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+    }
+    &:last-child {
+        border-bottom-right-radius: inherit;
+        border-bottom-left-radius: inherit;
+    }
+}

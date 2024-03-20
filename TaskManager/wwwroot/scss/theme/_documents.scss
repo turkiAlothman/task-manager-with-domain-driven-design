@@ -1,0 +1,67 @@
+.table-responsive table {
+  .progress-doc {
+    height: 11px;
+    width: 105px;
+  }
+  .progress-doc {
+    .bg-grad-03 {
+      background: linear-gradient(193deg, #e328af 11.17%, #fc5cff 99.35%);
+      border-radius: 6px;
+    }
+
+    .progress-doc-value {
+      font-family: $font-family-heading;
+      font-weight: $font-weight-semibold;
+      font-size: $_16px;
+      color: $dark;
+    }
+  }
+}
+
+.dropdown-wrapper {
+
+  .right-panel-progress {
+    margin-top: 24px;
+
+    .folder-content {
+      h4 {
+        margin-bottom: $_21px;
+      }
+      .card-content {
+        margin-bottom: $_24px;
+        .card-img {
+          background-color: #dfedf2;
+          border-radius: $border-radius-sm;
+          padding: 20px 14px 16px;
+        }
+        .card-img img {
+          width: 27px;
+          height: 20px;
+        }
+      }
+
+      .file-info {
+        p {
+          font-family: $font-family-heading;
+          font-weight: $font-weight-semibold;
+          font-size: $_16px;
+          color: $dark;
+        }
+
+        small {
+          font-weight: $font-weight-normal;
+          font-size: $_14px;
+        }
+      }
+
+      .file-size {
+        small {
+          font-family: $font-family-heading;
+          font-size: $_14px;
+          color: $dark;
+          font-weight: $font-weight-semibold;
+        }
+      }
+    }
+  }
+}

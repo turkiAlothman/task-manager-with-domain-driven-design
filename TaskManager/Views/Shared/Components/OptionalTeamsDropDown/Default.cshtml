@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Teams>
+
+    <option value="" selected>All Teams</option>
+    @foreach (Teams team in Model)
+    {
+        <option value="@team.Id">@team.Name</option>
+    }
+

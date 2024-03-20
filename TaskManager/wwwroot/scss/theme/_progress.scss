@@ -1,0 +1,28 @@
+.progress-stacked {
+    display: flex;
+    overflow: hidden;
+    background-color: $light-200;
+}
+.progress-stacked>.progress {
+    height: 56px;
+    background-color: $light-200;
+    overflow: visible;
+}
+.progress-stacked>.progress>.progress-bar {
+    width: 100%;
+}
+
+.progress-bar {
+    position: relative;
+}
+.progress-classic .progress-value {
+    position: absolute;
+    right: 0;
+    top: -30px;
+    background: $light-200;
+    color: $primary;
+    font-size: $_14px;
+    font-weight: 600;
+    padding: 2px 4px;
+    border-radius: $border-radius-sm;
+}

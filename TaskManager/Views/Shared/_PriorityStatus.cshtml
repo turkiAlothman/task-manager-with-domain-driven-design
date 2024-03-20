@@ -1,0 +1,26 @@
+﻿@model string
+
+@{
+string PriorityColor = "";
+string PriorityTextColor = "";
+}
+
+@switch (Model)
+{
+    case "High":
+        PriorityColor = "danger";
+        PriorityTextColor = "red";
+        break;
+    case "Medium":
+        PriorityColor = "gray";
+        PriorityTextColor = "grey";
+        break;
+    case "Low":
+        PriorityColor = "success";
+        PriorityTextColor = "success";
+        break;
+
+}
+<p class="fw-semibold mb-0 text-@PriorityTextColor">
+    <span class="indicator bg-@PriorityColor"></span> @Model
+</p>

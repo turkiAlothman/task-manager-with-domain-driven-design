@@ -1,0 +1,218 @@
+﻿<div id="EmployeesDropDown" class="dropdown-content border-0 w-25 p-0">
+    <input type="text" name="name" id="search" value="" class="form-control w-100" placeholder="search..." />
+    
+    <div>
+
+        <div class="tab-pane fade active show position-relative" id="result5" role="tabpanel">
+            
+            <figure class="placeholder-glow row align-items-center">
+                <span class="avatar placeholder bg-gray text-white rounded-circle">
+                    <span class="avatar-initials"></span>
+                </span>
+                <span class="placeholder-glow w-75">
+                    <span class="placeholder col-12"></span>
+                </span>
+            </figure>
+
+
+            <figure class="placeholder-glow row align-items-center">
+                <span class="avatar placeholder bg-gray text-white rounded-circle">
+                    <span class="avatar-initials"></span>
+                </span>
+                <span class="placeholder-glow w-75">
+                    <span class="placeholder col-12"></span>
+                </span>
+            </figure>
+
+            <figure class="placeholder-glow row align-items-center">
+                <span class="avatar placeholder bg-gray text-white rounded-circle">
+                    <span class="avatar-initials"></span>
+                </span>
+                <span class="placeholder-glow w-75">
+                    <span class="placeholder col-12"></span>
+                </span>
+            </figure>
+
+        </div>
+
+        <div id="EmployeeListBody"></div>
+
+    
+
+
+    
+    </div>
+ 
+</div>
+
+<!-- Avatar Group -->
+<div class="card border-0 shadow-sm col-sm-4 ml-5">
+
+    <a href="javascript:void(0)" id="profileBtn"
+       class="card-header bg-transparent d-flex align-items-center justify-content-center p-3">
+        Add Asignee
+
+    </a>
+    <div class="card-body p-3">
+        <div class="tab-content">
+            <div class="avatar-group justify-content-center" id="avatarsBody">
+
+                 @* <span class="avatar bg-gray-300 rounded-circle" id="employee1" data-value="33">
+                    <span class="avatar-initials rounded-circle">Ap</span>
+                    <span class="avatar-status avatar-sm-status bg-danger">
+                        <a href="javascript:void(0)" onclick="deleteEmployee('employee1')" class="text-white">
+                            x
+                        </a>
+
+                    </span>
+                </span>  *@
+
+       
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+        function deleteEmployee(e) {
+
+        console.log($('#' + e).data("value"));
+            
+            $('#' + e).remove();
+        }
+
+        function insertSelected(id,firstName,lastName) {
+        $("#avatarsBody").append($('<span class="avatar bg-blue rounded-circle"  id="employee' + id + '" data-value="' + id + '">').html('<span class="avatar-initials rounded-circle">' + firstName.charAt(0) + lastName.charAt(0) + '</span> <span class="avatar-status avatar-sm-status bg-danger"> <a href="javascript:void(0)" onclick="deleteEmployee(\'employee' + id + '\')"> <span aria-hidden="true" class="text-white" style="font-size:11px;">x</span></a></span>'));
+        
+            $("#EmployeesDropDown").hide();
+        }
+
+
+    $(document).ready(function () {
+
+        
+        // Toggle the dropdown when the button is clicked
+        $("#profileBtn").click(function () {
+            $("#EmployeesDropDown").toggle();
+            wiewEmployees()
+        });
+
+        // on search
+        $('#search').on("input",function (search) {
+            wiewEmployees(search.target.value);
+        });
+
+
+        function wiewEmployees(search = '') {
+            var EmployeeListBody = $("#EmployeeListBody");
+            var placeholder = $("#result5");
+            placeholder.show()
+            EmployeeListBody.empty();
+            
+            if (search != null || search != "")
+                search = "?search=" + search; 
+
+            $.ajax(
+                {
+                    type: "GET",
+                    url: "/api/employees" + search,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (employees) {
+                        $.each(employees, (i, employee) => {
+                          
+                            EmployeeListBody.append($("<div>").html('<a href="javascript:void(0)" onclick="insertSelected(' + "'" + employee.id + "','" + employee.firstName + "','" + employee.lastName + "'" + ')" class="d-flex w-100"> <span class="avatar avatar-sm bg-blue text-white rounded-circle"> <span class="avatar-initials">' + employee.firstName.charAt(0) + employee.lastName.charAt(0) + '</span> </span> <div class="ml-1 w-75  text-truncate">' + employee.firstName + ' ' + employee.lastName + '</div> </a>'));
+                        })
+                        placeholder.hide()
+                    },
+                    error: function (respone) {
+                        console.log(respone)
+                    }
+                }
+            )
+
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        $(window).click(function (event) {
+            if (!event.target.matches('#profileBtn')) {
+                $("#EmployeesDropDown").hide();
+            }
+        });
+
+        // Prevent the dropdown from closing when clicking inside the dropdown
+        $("#EmployeesDropDown").click(function (event) {
+            event.stopPropagation();
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    /* Style for the navbar */
+    .navbar {
+        background-color: #333;
+        overflow: hidden;
+        color: white;
+        padding: 10px 20px;
+    }
+
+    /* Style for profile button */
+    .profile-btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        border-top-color: black;
+        display: none;
+        position: absolute;
+        height:30%;
+        background-color: white;
+        min-width: 260px;
+        border-radius: 10px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        overflow-y: scroll
+    }
+
+        /* Links inside the dropdown */
+        .dropdown-content div {
+            color: black;
+            padding: 6px 12px;
+            text-decoration: none;
+            display: block;
+        }
+</style>

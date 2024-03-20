@@ -1,0 +1,462 @@
+.avatar {
+    // scss-docs-start avatar-css-vars
+    --#{$prefix}avatar-font-family: #{$avatar-font-family};
+    @include rfs($avatar-font-size, --#{$prefix}avatar-font-size);
+    --#{$prefix}avatar-font-weight: #{$avatar-font-weight};
+    --#{$prefix}avatar-line-height: #{$avatar-line-height};
+    --#{$prefix}avatar-color: #{$avatar-color};
+    --#{$prefix}avatar-bg: #{$avatar-bg};
+    --#{$prefix}avatar-border-width: #{$avatar-border-width};
+    --#{$prefix}avatar-border-color: #{$avatar-border-color};
+    --#{$prefix}avatar-hover-border-color: #{$avatar-hover-border-color};
+    --#{$prefix}avatar-border-radius: #{$avatar-border-radius};
+    --#{$prefix}avatar-box-shadow: #{$avatar-box-shadow};
+    // scss-docs-end avatar-css-vars
+
+    position: relative;
+    width: $_48px;
+    height: $_48px;
+
+    display: inline-block;
+    font-family: var(--#{$prefix}avatar-font-family);
+    @include font-size(var(--#{$prefix}avatar-font-size));
+    font-weight: var(--#{$prefix}avatar-font-weight);
+    line-height: var(--#{$prefix}avatar-line-height);
+    color: var(--#{$prefix}avatar-color);
+    text-align: center;
+    background: var(--#{$prefix}avatar-bg);
+    border: var(--#{$prefix}avatar-border-width) solid var(--#{$prefix}avatar-border-color);
+    @include border-radius(var(--#{$prefix}avatar-border-radius));
+    @include transition($avatar-transition);
+
+    &:hover {
+        color: var(--#{$prefix}avatar-hover-color);
+        background-color: var(--#{$prefix}avatar-hover-bg);
+        border-color: var(--#{$prefix}avatar-hover-border-color);
+    }
+
+}
+[class*="avatar-outline"]{
+    border-width: $_2px;
+}
+.avatar-outline-primary {
+    --kleon-avatar-color: #1220a3;
+    --kleon-avatar-border-color: #1220a3;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #1220a3;
+    --kleon-avatar-hover-border-color: #1220a3;
+    --kleon-avatar-focus-shadow-rgb: 95, 161, 230;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #1220a3;
+    --kleon-avatar-active-border-color: #1220a3;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #1220a3;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-secondary {
+    --kleon-avatar-color: #E328AF;
+    --kleon-avatar-border-color: #E328AF;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #E328AF;
+    --kleon-avatar-hover-border-color: #E328AF;
+    --kleon-avatar-focus-shadow-rgb: 75, 86, 107;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #E328AF;
+    --kleon-avatar-active-border-color: #E328AF;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #E328AF;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-success {
+    --kleon-avatar-color: #38E25D;
+    --kleon-avatar-border-color: #38E25D;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #38E25D;
+    --kleon-avatar-hover-border-color: #38E25D;
+    --kleon-avatar-focus-shadow-rgb: 67, 130, 79;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #38E25D;
+    --kleon-avatar-active-border-color: #38E25D;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #38E25D;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-info {
+    --kleon-avatar-color: #5ECFFF;
+    --kleon-avatar-border-color: #5ECFFF;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #5ECFFF;
+    --kleon-avatar-hover-border-color: #5ECFFF;
+    --kleon-avatar-focus-shadow-rgb: 70, 76, 186;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #5ECFFF;
+    --kleon-avatar-active-border-color: #5ECFFF;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #5ECFFF;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-warning {
+    --kleon-avatar-color: #FF9325;
+    --kleon-avatar-border-color: #FF9325;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #FF9325;
+    --kleon-avatar-hover-border-color: #FF9325;
+    --kleon-avatar-focus-shadow-rgb: 233, 149, 95;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #FF9325;
+    --kleon-avatar-active-border-color: #FF9325;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #FF9325;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-danger {
+    --kleon-avatar-color: #FF4A55;
+    --kleon-avatar-border-color: #FF4A55;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #FF4A55;
+    --kleon-avatar-hover-border-color: #FF4A55;
+    --kleon-avatar-focus-shadow-rgb: 254, 105, 106;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #FF4A55;
+    --kleon-avatar-active-border-color: #FF4A55;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #FF4A55;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-orange {
+    --kleon-avatar-color: #FFAB2D;
+    --kleon-avatar-border-color: #FFAB2D;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #FFAB2D;
+    --kleon-avatar-hover-border-color: #FFAB2D;
+    --kleon-avatar-focus-shadow-rgb: 78, 84, 200;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #FFAB2D;
+    --kleon-avatar-active-border-color: #FFAB2D;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #FFAB2D;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-light {
+    --kleon-avatar-color: #F9F9F9;
+    --kleon-avatar-border-color: #F9F9F9;
+    --kleon-avatar-hover-color: #7D879C;
+    --kleon-avatar-hover-bg: #F9F9F9;
+    --kleon-avatar-hover-border-color: #F9F9F9;
+    --kleon-avatar-focus-shadow-rgb: 243, 245, 249;
+    --kleon-avatar-active-color: #7D879C;
+    --kleon-avatar-active-bg: #F9F9F9;
+    --kleon-avatar-active-border-color: #F9F9F9;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #F9F9F9;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-dark {
+    --kleon-avatar-color: #202020;
+    --kleon-avatar-border-color: #202020;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #202020;
+    --kleon-avatar-hover-border-color: #202020;
+    --kleon-avatar-focus-shadow-rgb: 55, 63, 80;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #202020;
+    --kleon-avatar-active-border-color: #202020;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #202020;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-blue {
+    --kleon-avatar-color: #1220a3;
+    --kleon-avatar-border-color: #1220a3;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #1220a3;
+    --kleon-avatar-hover-border-color: #1220a3;
+    --kleon-avatar-focus-shadow-rgb: 95, 161, 230;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #1220a3;
+    --kleon-avatar-active-border-color: #1220a3;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #1220a3;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-red {
+    --kleon-avatar-color: #FF4A55;
+    --kleon-avatar-border-color: #FF4A55;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #FF4A55;
+    --kleon-avatar-hover-border-color: #FF4A55;
+    --kleon-avatar-focus-shadow-rgb: 254, 105, 106;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #FF4A55;
+    --kleon-avatar-active-border-color: #FF4A55;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #FF4A55;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-yellow {
+    --kleon-avatar-color: #FFE161;
+    --kleon-avatar-border-color: #FFE161;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #FFE161;
+    --kleon-avatar-hover-border-color: #FFE161;
+    --kleon-avatar-focus-shadow-rgb: 233, 149, 95;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #FFE161;
+    --kleon-avatar-active-border-color: #FFE161;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #FFE161;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-green {
+    --kleon-avatar-color: #38E25D;
+    --kleon-avatar-border-color: #38E25D;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #38E25D;
+    --kleon-avatar-hover-border-color: #38E25D;
+    --kleon-avatar-focus-shadow-rgb: 67, 130, 79;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #38E25D;
+    --kleon-avatar-active-border-color: #38E25D;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #38E25D;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-cyan {
+    --kleon-avatar-color: #5ECFFF;
+    --kleon-avatar-border-color: #5ECFFF;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #5ECFFF;
+    --kleon-avatar-hover-border-color: #5ECFFF;
+    --kleon-avatar-focus-shadow-rgb: 70, 76, 186;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #5ECFFF;
+    --kleon-avatar-active-border-color: #5ECFFF;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #5ECFFF;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-black {
+    --kleon-avatar-color: #000000;
+    --kleon-avatar-border-color: #000000;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #000000;
+    --kleon-avatar-hover-border-color: #000000;
+    --kleon-avatar-focus-shadow-rgb: 0, 0, 0;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #000000;
+    --kleon-avatar-active-border-color: #000000;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #000000;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-white {
+    --kleon-avatar-color: #ffffff;
+    --kleon-avatar-border-color: #ffffff;
+    --kleon-avatar-hover-color: #7D879C;
+    --kleon-avatar-hover-bg: #ffffff;
+    --kleon-avatar-hover-border-color: #ffffff;
+    --kleon-avatar-focus-shadow-rgb: 255, 255, 255;
+    --kleon-avatar-active-color: #7D879C;
+    --kleon-avatar-active-bg: #ffffff;
+    --kleon-avatar-active-border-color: #ffffff;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #ffffff;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-gray {
+    --kleon-avatar-color: #A5A5A5;
+    --kleon-avatar-border-color: #A5A5A5;
+    --kleon-avatar-hover-color: #ffffff;
+    --kleon-avatar-hover-bg: #A5A5A5;
+    --kleon-avatar-hover-border-color: #A5A5A5;
+    --kleon-avatar-focus-shadow-rgb: 108, 117, 125;
+    --kleon-avatar-active-color: #ffffff;
+    --kleon-avatar-active-bg: #A5A5A5;
+    --kleon-avatar-active-border-color: #A5A5A5;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #A5A5A5;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+.avatar-outline-gray-100 {
+    --kleon-avatar-color: #A5A5A5;
+    --kleon-avatar-border-color: #A5A5A5;
+    --kleon-avatar-hover-color: #7D879C;
+    --kleon-avatar-hover-bg: #A5A5A5;
+    --kleon-avatar-hover-border-color: #A5A5A5;
+    --kleon-avatar-focus-shadow-rgb: 243, 245, 249;
+    --kleon-avatar-active-color: #7D879C;
+    --kleon-avatar-active-bg: #A5A5A5;
+    --kleon-avatar-active-border-color: #A5A5A5;
+    --kleon-avatar-active-shadow: inset 0 $_3px $_5px rgba(0, 0, 0, 0.125);
+    --kleon-avatar-disabled-color: #A5A5A5;
+    --kleon-avatar-disabled-bg: transparent;
+    --kleon-gradient: none;
+}
+
+
+.avatar:not(img) {
+    background-color: #fff;
+}
+.avatar-img {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+.avatar-initials {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    text-transform: uppercase;
+}
+.avatar-centered {
+    display: -ms-flexbox;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+}
+.avatar-group {
+    display: -ms-flexbox;
+    display: flex;
+}
+.avatar-group .avatar:hover {
+    z-index: 2;
+}
+.avatar-group .avatar .avatar-img,
+.avatar-group .avatar .avatar-initials {
+    border: $_2px solid #fff;
+}
+.avatar-group .avatar .avatar-initials {
+    font-family: $font-family-heading;
+    font-weight: $font-weight-semibold;
+    font-size: $_14px;
+    color: $white;
+}
+.avatar-group .avatar + .avatar {
+    margin-left: -$_10px;
+}
+
+// Size define
+.avatar-xs,
+.avatar-xs .avatar-initials {
+    width: $_24px;
+    height: $_24px;
+}
+.avatar-xs .avatar-initials {
+    font-size: $_12px;
+}
+.avatar-sm,
+.avatar-sm .avatar-initials {
+    width: $_32px;
+    height: $_32px;
+}
+.avatar-sm .avatar-initials {
+    font-size: $_12px;
+}
+.avatar-lg,
+.avatar-lg .avatar-initials {
+    width: $_60px;
+    height: $_60px;
+}
+.avatar-lg .avatar-initials {
+    font-size: $_14px;
+}
+.avatar-xl,
+.avatar-xl .avatar-initials {
+    width: $_80px;
+    height: $_80px;
+}
+.avatar-xl .avatar-initials {
+    font-size: $_20px;
+}
+.avatar-xxl,
+.avatar-xxl .avatar-initials {
+    width: $_100px;
+    height: $_100px;
+}
+.avatar-xxl .avatar-initials {
+    font-size: $_32px;
+}
+.avatar-xxxl,
+.avatar-xxxl .avatar-initials {
+    width: $_120px;
+    height: $_120px;
+}
+.avatar-xxxl .avatar-initials {
+    font-size: $_48px;
+}
+.avatar-status {
+    position: absolute;
+    bottom: -$_8px;
+    right: -$_8px;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: baseline;
+    border: $_2px solid #fff;
+    width: $_21px;
+    height: $_21px;
+    line-height: 1;
+    font-size: $_10px;
+    border-radius: 50%;
+}
+.avatar-sm-status {
+    top: -$_4px;
+    right: -$_4px;
+    width: $_15px;
+    height: $_15px;
+    font-size: $_8px;
+}
+.avatar-lg-status {
+    width: $_26px;
+    height: $_26px;
+    font-size: $_12px;
+}

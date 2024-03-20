@@ -1,0 +1,11 @@
+﻿@model Employees
+
+
+<span class="avatar bg-blue rounded-circle"
+      data-firstName="@Model.FirstName"
+      data-lastName="@Model.LastName"
+      data-position="@Model.Position"
+      data-phoneNumber="@Model.PhoneNumber"
+      data-email="@Model.Email">
+    <span class="avatar-initials rounded-circle text-white">@Model.FirstName.First()@Model.LastName.First()</span>
+</span>

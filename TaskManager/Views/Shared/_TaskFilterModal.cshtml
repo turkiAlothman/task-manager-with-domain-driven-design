@@ -1,0 +1,118 @@
+﻿
+<div class="modal modal-lg fade" id="TaskFilterModal" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">task filters</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-light">
+
+
+                <div>
+
+                    <div class="row justify-content-between">
+                        <div class="col-sm-6 form-group">
+                            <label class="text-gray-300 form-label">Project </label>
+                            <select class="form-select" id="ProjectId" name="ProjectId">
+                                @{
+                                            @await Component.InvokeAsync("ProjectsDropDown")
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <label class="text-gray-300 form-label">Team </label>
+                            @* @{
+
+                                    @await Component.InvokeAsync("TeamsDropDown", new { TeamId = @HttpContextAccessor.HttpContext.Request.Query["TeamId"].ToString()})
+                            } *@
+
+                            <select class="form-select" name="TeamId" id="TeamId">
+                            <vc:optional-teams-drop-down></vc:optional-teams-drop-down>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    
+                    <!-- row 2  -->
+
+                    <div class="row justify-content-between align-content-center mb-4">
+
+                        <!--Priority -->
+                        <div class="form-group col-sm-4 m-0">
+                            <label class="text-gray-300 form-label">Priority </label>
+                            <div class="">
+
+                                <select name="Priority" id="Priority" class="form-select">
+                                    <option value=""> All Priorities</option>
+                                    <option value="High"> High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                        <!--Status -->
+                        <div class="from-group col-sm-4">
+                            <label class="text-gray-300 form-label">Status </label>
+                            <div class="">
+
+                                <select name="Status" id="Status" class="form-select">
+                                    <option value=""> All Status</option>
+                                    <option value="Canceled"> Canceled</option>
+                                    <option value="Planned"> Planned</option>
+                                    <option value="In Progress"> In Progress</option>
+                                    <option value="Done">Done</option>
+
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-check col-sm-3 align-self-end ms-1 mt-1 align-content-center">
+                            <label class="form-label mb-0" for="checkbox1">Assigned to me</label>
+
+                            <input type="checkbox" class="form-check-input" id="checkbox1" name="AssignedToMe" value="true"  @(HttpContextAccessor.HttpContext.Request.Query["AssignedToMe"] == "true" ? "checked" : "")  >
+                        </div>
+
+                    </div>
+
+                    <div class=" row align-items-center justify-content-between p-2">
+
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" id="CLearButton" class="btn btn-primary btn-sm  px-2">clear</button>
+                <div>
+                    <button type="button" class="btn btn-light-200 text-danger btn-sm px-2"
+                            data-bs-dismiss="modal" id="closeFilterModal">
+                        Close
+                    </button>
+                    
+                    <button type="submit" id="FilterButton" class="btn btn-primary btn-sm  px-2">Filter</button>
+                   
+                </div>
+                
+                
+               
+            </div>
+        </div>
+    </div>
+</div>

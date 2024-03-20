@@ -1,0 +1,365 @@
+﻿@model Employees
+
+
+<div class="mb-3">
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            <div class="mb-5 text-center">
+
+                <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" href="#offcanvasRight" role="button" aria-controls="offcanvasRight">
+                    <span data-EmployeeId="@Model.Id" data-firstname="@Model.FirstName" data-lastname="@Model.LastName" data-position="@Model.Position" class="avatar  avatar-xxl bg-primary projectcontainer">
+                        <span class="avatar-initials text-white"> @Model.FirstName.First()@Model.LastName.First()</span>
+                    </span>
+
+
+                </a>
+
+                <div class="card-content mt-3">
+                    <h5 class="mb-0"><a class="text-dark"> @Model.FirstName @Model.LastName</a></h5>
+                    <small class="d-inline-block text-gray fs-14 fw-normal">@Model.Position at</small>
+                    <a href="#" class="fs-14 fw-semibold">@Model.team.Name Team</a>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <p class="fw-semibold text-truncate"><small><span class="bg-muted rounded-1 d-inline-block text-center text-primary lh-36 px-2 py-0 me-1 mb-1"><i class="bi bi-telephone-fill"></i></span> <a href="tel:@Model.PhoneNumber">@Model.PhoneNumber</a> </small> </p>
+                </div>
+                <div>
+                    <p class="fw-semibold text-truncate"><small><span class="bg-muted rounded-1 d-inline-block text-center text-primary lh-36 px-2 py-0 me-1"><i class="bi bi-envelope-fill"></i></span> <a href="mailto:@Model.Email">@Model.Email </a> </small> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="page-header d-flex align-items-center justify-content-between mt-7">
+    <div class="left-part">
+        <h2 class="text-dark">Team</h2>
+    </div>
+</div>
+
+
+
+<div class="row align-items-lg-start">
+    
+        <partial name="_Team" model="Model.team"></partial>
+    
+
+</div>
+
+
+
+
+<div class="page-header d-flex align-items-center justify-content-between mt-5">
+    <div class="left-part">
+        <h2 class="text-dark">Projects</h2>
+    </div>
+</div>
+
+
+
+<div class="row align-items-lg-start">
+    @foreach (Projects project in Model.Projects)
+    {
+        
+
+
+
+        <div class="col-xxl-4 col-lg-6">
+            <div class="card border-0">
+
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <div class="card-content">
+
+                            <h4 class="text-dark mb-1">
+                                
+                                    @project.Name
+                                
+                            </h4>
+                            <p class="fs-14 text-gray">@project.Type</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Middle Content -->
+                    <div>
+                        <h6 class="fw-semibold text-gray mb-1">Description</h6>
+                        <p class="fs-14 text-dark">@project.Description</p>
+                    </div>
+
+                    <!-- Avatar Div-->
+                    <div class="avatar-content">
+                        <h6 class="fw-semibold text-gray mb-2">Participants</h6>
+                        <div class="d-flex justify-content-between align-items-center gap-4">
+                            <!-- Avatar Group -->
+                            <div class="avatar-group">
+                                @{
+                                    int count = project.Employees.Count();
+                                    int index = 0;
+                                }
+                                @foreach (Employees employee in project.Employees)
+                                {
+                                    if (index == 5)
+                                    {
+                                        <span class="avatar bg-blue rounded-circle">
+                                            <span class="avatar-initials rounded-circle text-white">+@count</span>
+                                        </span>
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        <partial name="_SingleAvatar" model="employee"></partial>
+                                    }
+
+
+                                    index++;
+                                }
+                                @if (count == 0)
+                                {
+                                    <p class="fw-semibold text-gray fs-12">there are not Participants yet</p>
+                                }
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+        
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="offcanvas offcanvas-end w-50" id="offcanvasRight" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" aria-labelledby="offcanvasRightLabel">
+
+    <div class="offcanvas-body" id="offcanvas-body">
+
+        <button type="button position-absolute top-0 s-0" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+        <!-- Classic Tab -->
+        <ul class="nav nav-tabs mb-3 justify-content-around" id="pills-tab" role="tablist">
+
+            <li class="nav-item">
+                <a class="nav-link active" href="#tab-8" data-bs-toggle="tab" role="tab">tasks Assigned</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#tab-9" data-bs-toggle="tab" role="tab">tasks Reported</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#tab-10" data-bs-toggle="tab" role="tab">activities</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+
+            <div class="tab-pane fade show active  p-3" id="tab-8" role="tabpanel">
+                <partial name="Tabs/_TasksTab.cshtml"></partial>
+            </div>
+            <div class="tab-pane fade  p-3" id="tab-9" role="tabpanel">
+
+                <partial name="Tabs/_TasksReported.cshtml"></partial>
+
+            </div>
+            <div class="tab-pane fade  p-3" id="tab-10" role="tabpanel">
+                <p class="text-muted">
+                    <partial name="Tabs/_ActivitiesTab.cshtml"></partial>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+
+
+
+
+    $(".projectcontainer").click(function () {
+        var EmployeeId = $(this).data("employeeid");
+
+      
+
+        var offcanvasbody = $("#offcanvas-body");
+        var offcanvasright = $("#offcanvasRight");
+        offcanvasbody.hide();
+        console.log(EmployeeId);
+        offcanvasright.prepend($('<div class="spinner-border text-primary me-2  position-absolute top-50 end-50" role="status" id="offcanvasrightloding" style="width: 8rem; height: 8rem;">').html('<span class= "visually-hidden fs-24" > loading...</span>'))
+
+        offcanvasppened = true;
+
+        $("#activities").empty()
+        $("#TasksTableBody").empty()
+        $("#EmployeesTableBody").empty()
+
+        $.ajax({
+            type: "get",
+            url: "/api/Employees/tasks/" + EmployeeId,
+            contenttype: "application/json",
+            datatype: "json",
+            success: function (response) {
+
+                $("#TasksTableBody").empty()
+
+                var tasks = response;
+
+
+                $.each(tasks, (i, task) => {
+
+                    $("#TasksTableBody").append($("<tr>").html(`
+                                                <td> <a href="home/taskdetails/`+ task.id + `" >` + task.title + ` </a> </td>
+                                    <td>`+ task.status + `</td>
+                                    <td>`+ task.priority + `</td>
+                                `))
+
+                })
+                if (tasks.length == 0)
+                    $("#TasksTableBody").append($('<td>').html('<p class="fw - semibold text - gray fs - 12" >  there are no Tasks Assigned to this Employee yet </p>'))
+
+                $("#offcanvasrightloding").remove()
+                offcanvasbody.show();
+            },
+            error: function (response) { }
+
+        })
+
+
+
+
+
+
+
+
+        $.ajax({
+            type: "get",
+            url: "/api/Employees/tasks/" + EmployeeId + "?Reported=true",
+            contenttype: "application/json",
+            datatype: "json",
+            success: function (response) {
+
+                $("#tasksReportedTableBody").empty()
+
+                var tasksReported = response;
+
+
+                $.each(tasksReported, (i, task) => {
+
+                    $("#tasksReportedTableBody").append($("<tr>").html(`
+                                                    <td> <a href="home/taskdetails/`+ task.id + `" >` + task.title + ` </a> </td>
+                                        <td>`+ task.status + `</td>
+                                        <td>`+ task.priority + `</td>
+                                    `))
+
+                })
+
+                if (tasksReported.length == 0)
+                    $("#tasksReportedTableBody").append($('<td>').html('<p class="fw - semibold text - gray fs - 12" >  there are no Tasks Reported from this Employee yet</p>'))
+
+                $("#offcanvasrightloding").remove()
+                offcanvasbody.show();
+            },
+            error: function (response) { }
+
+        })
+
+
+
+
+        $.ajax({
+            type: "get",
+            url: "/api/Employees/activities/" + EmployeeId,
+            contenttype: "application/json",
+            datatype: "json",
+            success: function (response) {
+
+                // $("#TasksTableBody").empty()
+
+                var activities = response;
+
+
+                $.each(activities, (i, activity) => {
+
+                    var task = "";
+
+                    if (activity.task != null)
+                        task = '<span> at <a class="fw-bold" href="/Home/TaskDetails/' + activity.task.id + '">  ' + activity.task.title + ' </a>  task </span>';
+
+
+
+
+                    $("#activities").append($('<li class="author-online has-new-message d-flex gap-3 mb-1">').html(`
+
+
+                <span class="avatar avatar-sm bg-blue text-white"
+                          data-firstName=" `+ activity.actor.firstName + `"
+                          data-lastName="`+ activity.actor.lastName + `"
+                          data-position="`+ activity.actor.position + `"
+                          data-phoneNumber="`+ activity.actor.phoneNumber + `"
+                          data-email="`+ activity.actor.email + `">
+                                <span class="avatar-initials"> `+ activity.actor.firstName.charAt(0) + activity.actor.lastName.charAt(0) + `</span>
+                </span>
+                <div class="user-message">
+                    <sapn class="fs-14">
+                                    <span class="fw-bold">`+ activity.actor.firstName + ` ` + activity.actor.lastName + `</span> ` + activity.description + `
+                    `+ task + `
+                            in <span class="fw-bold">`+ activity.projectName + `</span> project
+                    </sapn>
+
+                                        <span class="fs-14 text-gray fw-normal ms-1">`+ new Date(activity.createdAt).toDateString() + `</span>
+                </div>
+
+                            `));
+
+                })
+
+                if (activities.length == 0)
+                    $("#activities").append($('<td>').html('<p class="fw - semibold text - gray fs - 12" >  there are no Activities issued from this Employee yet </p>'))
+
+
+
+
+                //$("#offcanvasrightloding").remove()
+                //offcanvasbody.show();
+            },
+            error: function (response) { }
+
+        })
+
+
+
+
+
+
+
+    })
+
+
+    function clearTables() {
+        $("#activities").empty()
+        $("#TasksTableBody").empty()
+        $("#EmployeesTableBody").empty()
+    }
+
+
+
+
+</script>

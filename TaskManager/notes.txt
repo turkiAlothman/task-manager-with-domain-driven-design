@@ -1,0 +1,165 @@
+project defalut structure:
+    1- connected services: the external services user connected to this project
+    2- depandancies: packages and depandancies list that will be  installed in this project 
+    3- Properties: has launchSettings.json inside it that contains a configuration info regarding how to run the app
+    4- appsettings.json: store configuration info.
+    5- wwwroot (in most cases(when view is sopported)): contains static like css , javaScript , images , atc
+    6- program.cs: contains logic when start the serevr to listing to incomming http request as well as configuring the application.
+        - set app configurations
+        - register services
+        - setting middlewares in pipeline,wather built-in middleware provided by .NET core or our ceeated middleware.
+
+
+Entity framework core(EF core):
+    - it's orm in .net that allow you to connect to the database.
+    - first you have to create your domain classes like user , Employee , Project , atc..
+    - it's require you to set up a DbContext class that inheret an abstraction class "DbContext".
+    - you have to inheret the constructor with (DbContextOptions<YourContextClass> Options) signeture
+    - inside the Dbcontext class you have to create DbSet<DomainModelClass> variable for each model(database class)
+    - now you have to set this new created DbContext class as a service in program.cs so that it can be injected with you repository classes
+    - you have to add the ConnectionString config option in  in appsettings.json specifying the db info(host,user,passwors,database)
+    -  now you can apply the migrations by two steps
+        1- add-migration: that will create a new migration file(if migraion folder not exist it will create it)
+        2- update-database: execute new created migration file
+
+
+kinds of depandancy injection:
+    1- singleton: one object used over the application
+    2- scoped: object created and shared within the request context. one the request processing finished, it will be deleted.
+    3- transient: created for every injection
+
+mvc framework:
+    1- Model
+    2- View
+    3- Controller
+    4- wwwroot: contains static like css , javaScript , images , atc 
+
+razor pages framework:
+    1- Pages
+    2- wwwroot
+
+blaszor server-side redering framework:
+    1- Components: contains .blaszor file inside it 
+    2- wwwroot
+
+
+xUnit: testing framework in dotnet.asp.
+    - you have to create new testing project to test your application
+    - new projext must exists with the same selution
+    - you have to add mock , xUnit packegs in .csproj file
+    - also you have to refrance the application to be tested as package in .csproj(**search for how to do it)
+    - also you can test the TagHalpers(**search for how to do it)
+    - **you have to search for how to get the model returned with the view to test the actual data
+    - assertion functions:
+        - Assert.Equeals: no need to explain
+        - Assert.IsType<expectedClass>(actualVeriable)
+Moq: framework that allow us to make mock Repositories, 
+    - since we do not need to connect to our database, we will ganna create a fake Repository that replace the actual one.
+    - this fake repository will not connect to the database, it just return fake data
+    - you can create mock Repository like this:
+        1- var mockTaskRepository  = new Mock<ITasksReposotory>();
+        2- mockTaskRepository.SetUp(t=> t.GetAll).Returns(new List<Tasks>{new Tasks{Name="bla bla"}}) -> like override the GetAll by setting testing data
+        3- after Setting up all methods , you can use mockTaskRepository as dummy(Mock) TasksReposotory
+        4- you can create a new intance of any Controller and pass the TasksReposotory in constructor
+        5- you can do that like this: HomeController homeController = new HomeController(mockTaskRepository.Object);
+
+partial views and view components:
+    partial View: just part of html code that will be reused multi times with a passed data
+        - create an isolated _ViewName.cshtml class that contain this partail view , use @model VariableName to receive data
+        - to call it: <partial = "filename" model ="VariableName" />
+    
+    view component: view + code. code will be exeuted and return a view.
+        1- create "Components" folder at the root of the project
+        2- create class inheret ViewComponent
+        3- implement the invoke method(method will be executed once the view called)
+        4- create a new Components folder in /Models/Shared/Components
+        5- create a new Folder under Components and call it as the same name of class in step2, Ex:/Models/Shared/Components/projectsList
+        6- create Default.cshtml under /Models/Shared/Components/projectsList/Default.cshtml
+        7- import the Components places in root in _ViewImports file like this: @using TaskManager.Components
+        7- Import the TagHelper of the applications in _ViewImports(like @addTagHelper *, TaskManager) so all the TagHelpers created by us will be visible in cshtml files
+        9- so to invoke the viewComponent in another csthml file , do this <vc:View-compnent-class-name> <vc:View-compnent-class-name/>
+    
+    TagHelper: same as view component but it's more lighter.used to make new html element(like <email/><email/>) 
+        1- create folder name TagHelpers in the root of the project
+        2- creat new class Ends with TagHelper (like emailTagHelper) and inheret the base class TagHelpers
+        3- define class attribute as they will be treated as tag attribute(like <email username="turki"><email/>)
+        3- ovveride the Process method
+        4- chnage the "output" veriable like TagName , Atributes , Content
+        5- Import the TagHelper of the applications in _ViewImports(like @addTagHelper *, TaskManager) so all the TagHelpers created by us will be visible in cshtml files
+        6- use the created tagHelper in any View files like this <email><email/>
+
+built-in tagHelpers:
+     - <a>
+        - asp-controller: select the controler name
+        - asp-controller: select controller function
+        - asp-route-QueryParameterName: adding query parameters 
+     - <form>
+        - asp-controller: select the controler name
+        - asp-controller: select controller function
+        - asp-route-QueryParameterName: adding query parameters 
+        - asp-antiforgery: generate new heddin post form the hold the token(to prevent cross-side attack)
+     - <input>
+        -asp-for: setting a name of the form attribute by specific class
+     
+
+what you can do in action methos:
+    - utilize the model bending by creating a class that catch the http request body , query parameteres, route parameter(path parameter)
+    - ModelState: very usefull global varbale that can be used in the request conetext to return error messages with the response.
+        - ModelState.AddModelError(key,value) -> adding error message maunly
+        - ModelState.IsValid: check whether the sent form is correct or not
+        - you can print the error mesaages in the view like this: <div asp-validation-summary="All"><div/>
+    
+    - ViewBag: seems to be same as ModelState but it's used for success messages.
+        - ViewBag.key = value
+        - then in the view you can use the value like this @ViewBag.key
+        
+request validation:
+    - you can set validatoins options in the model class(like user) directly like this:
+    - you can print the all error mesaages in the view like this: <div asp-validation-summary="All"><div/>
+    {
+    [Required(ErrorMEssage="bla bla")]
+    public string name {get;set;}
+    }
+    - you can print the error mesaage for specific Attribute like this: <div asp-validation-for="AttributeName"><div/>
+    - we have a lot of validation options(it more than what you think , search it)
+        - BindNever: attribute should not be in the form
+        - Required: attribute must be in the form
+        - Display(Name="bla bla"): the field name that will appear when setting <label asp:for="attributeName">
+        - StringLength: set max string length
+        
+
+        
+
+program.cs file:
+    # use program class with public static void main methods
+    # it use top level domain statements so no need to create the program class
+
+    1- var builder = WebApplication.CreateBuilder(args)
+        - set app Kestrel built-in web server that will handle the requests. Kestrel is cross paltform web server unlike IIS windows server  
+        - set up real server like IIS that the Kestrel run on;
+        - specify the content root , the code that will be executed with the application
+        - configuration information is read from a file called appsettings.json.
+        - look for wwwroot file
+        - you can use "builder" variable to access services collection
+
+    2- buildrer.Service.:
+        - used to register services(classes) in the container to be used in depandancy injection.
+
+    3- for new we have to ways to register custom services
+        1- builder.Services.AddScoped<Iclass,Class>() -> class sepified will gana be instantiated by the execution of class custructor 
+        2- builder.Services.AddScoped<Iclass,Class>(sp=>mathod1(sp)) -> now we manually create this service of type class by calling a method that return the same type of the class  
+        -- way 2 is usefull whan you want to specify the way that service is created + utililize the serviceProvider to access request context info like session , header 
+        -- you have to add builder.AddHttpRequestAccessor() so that you will ba aple to access the hhtp request context info.
+
+    4- buildrer.AddKeydXYZ<interface,interfaceImplementation>():
+        - refrence the object that will be added in the container with a key(this is in case if you have muiltple classes implements the same inteface)
+
+    5- var app = builder.Build():
+        1- the final step of this initialization.
+        2- you can use (app) to specify the application piplelines and middilewares
+
+    6- app.UseXYZ:
+        - this the main syntax of registring middlewares(order is imporntant)
+
+    7- app.UseDedalutConrollerRoute():
+        - set routing configuration options that match this pattern: http://hostname/controller/function/{id}

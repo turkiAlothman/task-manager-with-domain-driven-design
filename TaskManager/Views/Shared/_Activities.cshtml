@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Activities>
+<div class="">
+    <div class="card border-0 dropdown-widget p-5">
+        <div class="card-header border-0 mb-3 d-flex align-items-center gap-4">
+            <h4 class="mb-0">Activities</h4>
+            <div class="ms-auto">
+                <a>
+
+                </a>
+
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <ul class="list-unstyled">
+                
+                @if(Model.Count() == 0){
+                    <span class="fs-14 text-gray fw-normal ms-1">there are no activities yet</span>
+                }
+
+                @foreach(Activities activity in Model)
+                {
+                    <li class="author-online has-new-message d-flex gap-3 mb-1">
+                        <span class="avatar avatar-sm bg-blue text-white"
+                              data-firstName="@activity.actor.FirstName"
+                              data-lastName="@activity.actor.LastName"
+                              data-position="@activity.actor.Position"
+                              data-phoneNumber="@activity.actor.PhoneNumber"
+                              data-email="@activity.actor.Email">
+                            <span class="avatar-initials"> @activity.actor.FirstName.First()@activity.actor.LastName.First() </span>
+                        </span>
+                        <div class="user-message">
+                            <sapn class="fs-14"><span class="fw-bold">@activity.actor.FirstName @activity.actor.LastName </span> @Html.Raw(@activity.description)
+
+                                @if (activity.task != null)
+                                {
+                                    <span> at <a class="fw-bold" asp-controller="home" asp-action="taskdetails" asp-route-id="@activity.task.Id"> @activity.task.Title </a>  task </span>
+                                }
+                                in <span class="fw-bold"> @activity.ProjectName </span> project
+                            </sapn>
+                            
+                                <span class="fs-14 text-gray fw-normal ms-1">@activity.CreatedAt.Humanize(false)</span>
+                        </div>
+                    </li>
+                }
+                
+
+
+            </ul>
+
+
+        </div>
+    </div>
+</div>

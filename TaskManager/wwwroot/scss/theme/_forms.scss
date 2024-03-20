@@ -1,0 +1,218 @@
+// Form labels
+.form-label {
+    font-size: $_15px;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $_8px;
+    color: $dark;
+}
+
+//Form Control
+.form-control {
+    display: block;
+    width: 100%;
+    height: $_52px;
+    padding: $_5px $_20px;
+    font-family: $font-family-base;
+    font-size: $_14px;
+    font-weight: $font-weight-medium;
+    line-height: $input-line-height;
+    color: $body-color;
+    background-color: $input-bg;
+    border-radius: $_5px;
+    border: $_1px solid $light-200;
+    @include box-shadow($input-box-shadow);
+    @include transition($input-transition);
+  
+    &[type="file"] {
+        height: $_45px;
+        padding: $_12px $_12px;
+        overflow: hidden; // prevent pseudo element button overlap
+    
+        &:not(:disabled):not([readonly]) {
+            cursor: pointer;
+        }
+    }
+  
+    // Customize the `:focus` state to imitate native WebKit styles.
+    &:focus {
+        color: $dark;
+        background-color: $light-200;
+        border-color: $primary;
+        outline: 0;
+        @if $enable-shadows {
+            @include box-shadow($input-box-shadow, $input-focus-box-shadow);
+        } @else {
+            // Avoid using mixin so we can pass custom focus shadow properly
+            box-shadow: $input-focus-box-shadow;
+        }
+    }
+}
+.form-control-sm {
+    height: $_40px;
+    padding: $_5px $_15px;
+    min-height: auto;
+}
+
+.form-control-lg {
+    height: $_70px;
+    padding: $_5px $_15px;
+    min-height: auto;
+}
+.form-group{
+    margin-bottom: $_30px;
+}
+textarea.form-control{
+    height: $_80px;
+    font-size: $_14px;
+    font-weight: $font-weight-normal;
+    line-height: $_24px;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: $muted;
+}
+
+// Check/radio
+.form-check {
+    display: block;
+    margin-bottom: $_10px;
+    cursor: pointer;
+    .form-label {
+        cursor: pointer;
+    }
+}
+
+.form-check-input {
+    width: $_20px;
+    height: $_20px;
+    margin-right: $_10px;
+}
+.form-check-input[type="checkbox"] {
+    background-color: transparent;
+    border: 1px solid $gray;
+}
+.form-check-input[type="checkbox"]:checked {
+    background-color: $primary;
+    border: 1px solid $primary;
+}
+.form-check-label {
+    color: $form-check-label-color;
+    cursor: $form-check-label-cursor;
+}
+.form-check-input:focus {
+    box-shadow: none;
+}
+
+// Switch
+.form-switch {
+    position: relative;
+    padding-left: $form-switch-padding-start;
+    .form-label {
+        cursor: pointer;
+    }
+
+    .form-check-input {
+        width: $_50px;
+        height: $_26px;
+        margin-right: $_10px;
+        background-color: $light-200;
+        &:checked {
+            background-position: $form-switch-checked-bg-position;
+            background-color: $primary;
+            @if $enable-gradients {
+                background-image: escape-svg($form-switch-checked-bg-image), var(--#{$prefix}gradient);
+            } @else {
+                background-image: escape-svg($form-switch-checked-bg-image);
+            }
+        }
+    }
+}
+
+.form-check-inline {
+    display: inline-block;
+    margin-right: $form-check-inline-margin-end;
+}
+
+.btn-check {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    pointer-events: none;
+
+    &[disabled],
+    &:disabled {
+    + .btn {
+        pointer-events: none;
+        filter: none;
+        opacity: $form-check-btn-check-disabled-opacity;
+    }
+    }
+}
+
+// Check box & switch
+select.form-control[multiple], select.form-control[size]{
+    height: auto;
+}
+
+label.error {
+    color: $danger;
+    font-size: $_12px;
+}
+
+// Input Group
+.input-group-sm{
+    .form-control {
+        height: $_40px;
+        padding: $_5px $_15px;
+        min-height: auto;
+    }
+}
+.input-group-lg{
+    .form-control {
+        height: $_68px;
+        padding: $_5px $_15px;
+        min-height: auto;
+    }
+}
+
+// Basic Form Wizard 
+.form-wizard-block {
+    display: none;
+    transition: all 0.5s ease-in-out;
+}
+.form-wizard-block.active {
+    display: block;
+}
+
+
+// Custom Style Form Wizard 
+.custom-form-wizard-block-tab {
+    position: relative;
+}
+
+.custom-form-wizard-block-tab .btn {
+    width: $_50px;
+    height: $_50px;
+    line-height: $_44px;
+    text-align: center;
+    border-radius: 100%;
+    border: 2px solid $primary;
+    font-size: $_20px;
+    font-weight: $font-weight-bold;
+    color: $primary;
+}
+.custom-form-wizard-block-tab .btn.btn-success {
+    color: $white;
+    border-color: $success;
+}
+.custom-form-wizard-block-tab:not(:last-child).btn-success::after {
+    top: 50%;
+    left: 100%;
+    position: absolute;
+    content:" ";
+    width: 100%;
+    height: 1px;
+    background-color: $light-200;
+    z-index: 0;
+}
+
+// Tab Style Form Wizard 

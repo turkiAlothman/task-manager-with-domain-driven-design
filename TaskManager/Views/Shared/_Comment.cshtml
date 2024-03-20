@@ -1,0 +1,56 @@
+﻿@model Comments
+
+<li class="d-flex align-items-center gap-3 flex-wrap flex-xl-nowrap py-3 border-bottom border-1 border-light-200">
+    
+
+    
+    <div class=" gap-3 flex-wrap flex-xl-nowrap">
+       
+        <div class="d-flex align-items-start  gap-3 flex-wrap flex-xl-nowrap ">
+            <span class="avatar-lg rounded-1 bg-blue text-white ">
+                <span class="avatar-initials"> <span class="fs-22">@Model.Sender.FirstName.First()@Model.Sender.LastName.First()</span> </span>
+            </span>
+            <div>
+                <h5 class="mb-0 clearfix">
+                    @Model.Sender.FirstName @Model.Sender.LastName
+
+                    @if(Model.Sender.Id == User.GetUserId()){
+                        <span class="alert alert-primary p-1 fs-10 ms-1" role="alert">Me</span>
+                    }
+                    else if (Model.MessageTask.Reporter.Id == Model.Sender.Id)
+                    {
+                        <span class="alert alert-primary p-1 fs-10 ms-1" role="alert">Reporter</span>
+                    }
+                    else if (Model.MessageTask.Asignees.Contains(Model.Sender))
+                    {
+                        <span class="alert alert-primary p-1 fs-10 ms-1" role="alert">Asignee</span>
+                    }
+                    <span class="fs-14 text-gray fw-normal ms-1">@Model.CreatedAt.Humanize(false)</span>
+
+                
+                </h5>
+                <small class="text-gray-300">@Model.Sender.Position</small>
+
+            </div>
+        </div>
+
+        <div class=" mb-1 mt-5 ms-2"><p class="fs-14 text-dark"> @Model.MessageContent </p> </div>
+        
+        
+
+        
+
+    </div>
+    <div class="btn-group ms-auto flex-shrink-0 justify-content-between">
+
+        @if (Model.Sender.Id == User.GetUserId())
+        {
+            <button onclick="deleteComment('@Model.Id')" class="btn border-0 p-1 px-2 fs-20 rounded-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" data-bs-custom-class="tooltip-primary">
+                <i class="bi bi-trash-fill"></i>
+            </button>
+        }
+        <!-- <button type="submit" class="btn ff-heading fs-18 fw-bold text-dark p-0 m-0 border-0"> <i class="bi bi-hand-thumbs-up text-primary me-2"></i> 45 Like</button>
+        -->
+    </div>
+
+</li>

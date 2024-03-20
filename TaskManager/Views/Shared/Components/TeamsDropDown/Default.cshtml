@@ -1,0 +1,10 @@
+﻿@model TeamsDropDownModel
+
+<select asp-for="SelectedTeam.Id" class="kleon-select-simple" name="TeamId" id="teams">
+    <option value="" selected >All Teams</option>
+    @foreach(Teams team in Model.teams)
+    {
+        <option value="@team.Id">@team.Name</option>
+    }
+ 
+</select>

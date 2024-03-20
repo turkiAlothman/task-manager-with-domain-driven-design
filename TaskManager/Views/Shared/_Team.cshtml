@@ -1,0 +1,52 @@
+﻿@model Teams
+<div class="col-xxl-4 col-lg-6">
+    <div class="card border-0">
+
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div class="card-content">
+
+                    <h4 class="text-dark mb-1">
+                        <a>
+
+                            @Model.Name
+                        </a>
+                    </h4>
+                  
+                </div>
+
+            </div>
+
+            <!-- Middle Content -->
+            <div>
+                <h6 class="fw-semibold text-gray mb-1">Description</h6>
+                <p class="fs-14 text-dark">@Model.Description</p>
+            </div>
+
+            <!-- Avatar Div-->
+            <div class="avatar-content">
+                <h6 class="fw-semibold text-gray mb-2">Members</h6>
+                <div class="d-flex justify-content-between align-items-center gap-4">
+                    <!-- Avatar Group -->
+                    <div class="avatar-group">
+                        @{
+                            int count = Model.Members.Count();
+                            int index = 0;
+                        }
+                        @foreach (Employees employee in Model.Members)
+                        {
+                        
+                            
+                                <partial name="_SingleAvatar" model="employee"></partial>
+                        }
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

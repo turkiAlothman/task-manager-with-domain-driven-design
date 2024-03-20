@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Teams>
+
+
+
+<div class="page-header d-flex align-items-center justify-content-between mr-bottom-80">
+    <div class="left-part">
+        <h2 class="text-dark">Teams</h2>
+    </div>
+</div>
+
+
+
+<div class="row align-items-lg-start">
+
+    @foreach (Teams team in Model)
+    {
+        <partial name="_Team" model="team"></partial>
+    }
+        
+</div>

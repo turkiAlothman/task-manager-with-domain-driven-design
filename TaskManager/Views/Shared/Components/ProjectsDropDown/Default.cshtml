@@ -1,0 +1,12 @@
+﻿@model ProjectsDropDownModel
+
+        <option value="" selected>select project</option>
+        @foreach (Projects project in Model.projects)
+        {
+    <option value="@project.Id"> @project.Name </option>
+        }
+
+
+
+
+

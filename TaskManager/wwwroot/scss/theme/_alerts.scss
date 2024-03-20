@@ -1,0 +1,163 @@
+// Alert Overrides
+.alert {
+    border-radius: $border-radius;
+    padding: $_12px $_20px;
+    .alert-link {
+        font-weight: $font-weight-semibold;
+        text-decoration: underline;
+    }
+    &.additional {
+        padding: $_32px;
+        .alert-heading {
+            font-weight: $font-weight-medium;
+            margin-bottom: $_20px;
+        }
+    }
+}
+.alert-primary {
+    border-color: $primary;
+    background-color: rgba($primary, 0.1);
+    color: $primary;
+    .alert-link { 
+        color: $primary; 
+    }
+    .alert-icon-bg {
+        background-color: rgba($primary, 0.1);
+    }
+    .btn-close {
+        color: $primary;
+    }
+}
+.alert-secondary {
+    border-color: $secondary;
+    background-color: rgba($secondary, 0.1);
+    color: $secondary;
+    .alert-link { 
+        color: $secondary; 
+    }
+    .alert-icon-bg {
+        background-color: rgba($secondary, 0.1);
+    }
+    .btn-close {
+        color: $secondary;
+    }
+}
+.alert-success {
+    border-color: $success;
+    background-color: rgba($success, 0.1);
+    color: $success;
+    .alert-link { 
+        color: $success; 
+    }
+    .alert-icon-bg {
+        background-color: rgba($success, 0.1);
+    }
+    .btn-close {
+        color: $success;
+    }
+}
+.alert-danger {
+    border-color: $danger;
+    background-color: rgba($danger, 0.1);
+    color: $danger;
+    .alert-link { 
+        color: $danger; 
+    }
+    .alert-icon-bg {
+        background-color: rgba($danger, 0.1);
+    }
+    .btn-close {
+        color: $danger;
+    }
+}
+.alert-warning {
+    border-color: $warning;
+    background-color: rgba($warning, 0.1);
+    color: $warning;
+    .alert-link { 
+        color: $warning; 
+    }
+    .alert-icon-bg {
+        background-color: rgba($warning, 0.1);
+    }
+    .btn-close {
+        color: $warning;
+    }
+}
+.alert-info {
+    border-color: $info;
+    background-color: rgba($info, 0.1);
+    color: $info;
+    .alert-link { 
+        color: $info; 
+    }
+    .alert-icon-bg {
+        background-color: rgba($info, 0.1);
+    }
+    .btn-close {
+        color: $info;
+    }
+}
+.alert-light {
+    border-color: rgba($dark, 0.1);
+    background-color: rgba($light, 0.1);
+    color: $dark;
+    .alert-link { 
+        color: $dark; 
+    }
+    .alert-icon-bg {
+        background-color: rgba($dark, 0.1);
+    }
+    .btn-close {
+        color: $dark;
+    }
+}
+.alert-dark {
+    border-color: rgba($dark, 0.5);
+    background-color: rgba($dark, 0.4);
+    color: $white;
+    .alert-link { 
+        color: $white; 
+    }
+    .alert-icon-bg {
+        background-color: rgba($white, 0.4);
+    }
+}
+
+.alert-icon {
+    display: flex;
+    align-items: center;
+    + div {
+        margin-left: $_10px;
+    }
+}
+
+.alert-icon-bg {
+    display: flex;
+    align-items: center;
+    padding: 0.75em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+    + div {
+        margin-left: 35px;
+    }
+}
+
+.alert-dismissible {
+    .btn-close {
+        position: absolute;
+        top: 50%;
+        right: $_16px;
+        transform: translateY(-50%) rotate(45deg);
+        z-index: 2;
+        background: transparent;
+        padding: 0;
+        font-size: $_20px;
+        line-height: $_20px;
+        box-shadow: none;
+        opacity: 1;
+    }
+}

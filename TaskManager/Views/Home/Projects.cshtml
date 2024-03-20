@@ -1,0 +1,380 @@
+﻿@model IEnumerable<Projects>
+
+
+<!-- remove user modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-5" aria-hidden="true" aria-labelledby="deleteConfirmModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">remove employee from project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                are you sure tou want to remove this employee from the project
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="leaveModel" class="btn btn-light-200 text-danger btn-sm px-2" data-bs-dismiss="modal">no</button>
+                <button type="button" id="confirmEmployeeRemove" class="btn btn-primary btn-sm  px-2">yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Add Employee -->
+<div class="modal modal fade" id="addEmployee" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">add Employees to project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="d-flex align-content-end justify-content-center pt-lg-10 pb-lg-10">
+
+
+                    @{
+                            @await Component.InvokeAsync("AddAsigneesCard", new { allowChange = true, Asignees = new List<Employees>(), task = new Tasks(), TaskAdded = false, Execlude = true })
+                        ;
+                    }
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="leaveAddEmployeeModel" class="btn btn-light-200 text-danger btn-sm px-2" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="confirmEmployeeaddEmployee" class="btn btn-primary btn-sm  px-2">save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="page-header d-flex align-items-center justify-content-between mr-bottom-80">
+    <div class="left-part">
+        <h2 class="text-dark">Projects</h2>
+    </div>
+
+    @if (HttpContextAccessor.IsManager())
+    {
+    <div class="right-part d-flex align-items-center gap-4 flex-wrap">
+
+
+        <vc:create-project-modal></vc:create-project-modal>
+
+        <div>
+            <a data-bs-toggle="modal" data-bs-target="#createProjectModal" class="btn btn-primary ff-heading fs-18 fw-bold py-3"><span class="fs-21"><i class="bi bi-plus"></i></span> Create New Project</a>
+        </div>
+    </div>
+    }
+
+
+
+</div>
+
+    <div class="row align-items-lg-start">
+
+    @foreach (Projects project in Model)
+    {
+        <partial name="_Project" model="project" />
+    }
+
+    </div>
+
+    
+
+<div class="offcanvas offcanvas-end w-50" id="offcanvasRight" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" aria-labelledby="offcanvasRightLabel">
+   
+    <div class="offcanvas-body" id="offcanvas-body">
+
+
+
+        <button type="button position-absolute top-0 s-0" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="clearTables()"></button>
+        
+
+
+
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div class="card-content">
+
+                    <h4 class=" mb-1" id="projectname">
+                        
+                        
+                    </h4>
+                    <p class="fs-14 text-gray" id="projecttype"></p>
+                </div>
+
+            </div>
+
+    
+        </div>
+
+
+
+
+        <!-- Classic Tab -->
+        <ul class="nav nav-tabs mb-3 justify-content-around" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="#tab-7" data-bs-toggle="tab" role="tab">participants</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#tab-8" data-bs-toggle="tab" role="tab">tasks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#tab-9" data-bs-toggle="tab" role="tab">activities</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active p-3 h-100" id="tab-7" role="tabpanel">
+
+                <partial name="Tabs/_EmployeesTab.cshtml"></partial>
+            </div>
+            <div class="tab-pane fade  p-3" id="tab-8" role="tabpanel">
+                <partial name="Tabs/_TasksTab.cshtml"></partial>
+            </div>
+            <div class="tab-pane fade  p-3" id="tab-9" role="tabpanel">
+                <partial name="Tabs/_ActivitiesTab.cshtml"></partial>
+            </div>
+        </div>
+
+    </div>
+   
+</div>
+
+
+
+<script>
+    var offcanvasPpened = false;
+    $(".projectcontainer").click(function () {
+        var projectid =  $(this).data("projectid");
+        
+        $("#projectname").html($(this).data("name"));
+        $("#projecttype").html($(this).data("type"));
+
+
+
+        var offcanvasbody = $("#offcanvas-body");
+        var offcanvasright = $("#offcanvasRight");
+        offcanvasbody.hide();
+        offcanvasbody.attr("data-project")
+        offcanvasbody.data("project", projectid)
+
+        offcanvasright.prepend($('<div class="spinner-border text-primary me-2  position-absolute top-50 end-50" role="status" id="offcanvasrightloding" style="width: 8rem; height: 8rem;">').html('<span class= "visually-hidden fs-24" > loading...</span>'))
+
+        offcanvasppened = true;
+        $("#activities").empty()
+        $("#TasksTableBody").empty()
+        $("#EmployeesTableBody").empty()
+
+        $.ajax({
+            type:"get",
+            url: "/api/projects/employees/" + projectid,
+            contenttype:"application/json",
+            datatype:"json",
+            success: function (response) {
+
+
+                //employees
+                var employees = response;
+
+                
+               
+
+
+                $.each(employees, (i, employee) => {
+                    var actions = "";
+
+                    @if (HttpContextAccessor.IsManager())
+                    {
+                        <text>
+                                            actions = `<button type="button" onclick="removeEmployee('`+ employee.id + `','` + projectid+ `')" class="btn-close"  data-bs-toggle="modal" data-bs-target="#deleteConfirmModal" > </button>`;
+                        </text>
+
+                    }
+                    $("#EmployeesTableBody").append($("<tr id='employee"+employee.id+"'>").html(`
+                    
+                            <td>
+                                <span class="avatar bg-blue rounded-circle"
+                                              data-firstname="`+ employee.firstName + `"
+                                              data-lastname="`+ employee.lastName + `"
+                                              data-position="`+ employee.position + `"
+                                              data-phonenumber="`+ employee.phoneNumber + `"
+                                              data-email="`+ employee.email + `">
+                                                      <span class="avatar-initials rounded-circle text-white">`+ employee.firstName.charAt(0) + employee.lastName.charAt(0) + `</span>
+                                </span>
+                            </td>
+                            <td>`+employee.team+`</td>
+                                <td>`+   employee.signedTasksCount + `</td>
+                                <td>`+ employee.reportedTasksCount + `</td>
+
+                                            <td> `+ actions + ` </td>
+
+                    `))
+
+                })
+
+                if(employees.length == 0)
+                    $("#EmployeesTableBody").append($('<td>').html('<p class="fw - semibold text - gray fs - 12" >  there are not Participants in this project yet </p>'))
+                     
+
+
+                $("#offcanvasrightloding").remove()
+                offcanvasbody.show();
+            },
+            error: function (response) { }
+            
+        })
+
+
+        $.ajax({
+            type: "get",
+            url: "/api/projects/tasks/" + projectid,
+            contenttype: "application/json",
+            datatype: "json",
+            success: function (response) {
+
+                $("#TasksTableBody").empty()
+
+                var tasks = response;
+
+
+                $.each(tasks, (i, task) => {
+
+                    $("#TasksTableBody").append($("<tr>").html(`
+                                        <td> <a href="home/taskdetails/`+ task.id + `" >` + task.title + ` </a> </td>
+                            <td>`+ task.status + `</td>
+                            <td>`+ task.priority + `</td>
+                        `))
+
+                })
+
+                if (tasks.length == 0)
+                    $("#TasksTableBody").append($('<td>').html('<p class="fw - semibold text - gray fs - 12" >  there are no Tasks in this project yet </p>'))
+
+                $("#offcanvasrightloding").remove()
+                offcanvasbody.show();
+            },
+            error: function (response) { }
+
+        })
+
+
+
+
+
+
+        $.ajax({
+            type: "get",
+            url: "/api/projects/activities/" + projectid,
+            contenttype: "application/json",
+            datatype: "json",
+            success: function (response) {
+
+                // $("#TasksTableBody").empty()
+
+                var activities = response;
+
+
+                $.each(activities, (i, activity) => {
+
+                    var task = "";
+
+                    if (activity.task != null)
+                        task = '<span> at <a class="fw-bold" href="/Home/TaskDetails/' + activity.task.id + '">  ' + activity.task.title + ' </a>  task </span>';
+
+
+
+                    
+                    $("#activities").append($('<li class="author-online has-new-message d-flex gap-3 mb-1">').html(`
+
+                        
+        <span class="avatar avatar-sm bg-blue text-white"
+                  data-firstName=" `+ activity.actor.firstName + `"
+                  data-lastName="`+ activity.actor.lastName + `"
+                  data-position="`+ activity.actor.position + `"
+                  data-phoneNumber="`+ activity.actor.phoneNumber + `"
+                  data-email="`+ activity.actor.email + `">
+                        <span class="avatar-initials"> `+ activity.actor.firstName.charAt(0) + activity.actor.lastName.charAt(0) + `</span>
+        </span>
+        <div class="user-message">
+            <sapn class="fs-14">
+                            <span class="fw-bold">`+ activity.actor.firstName + ` ` + activity.actor.lastName + `</span> ` + activity.description + `
+            `+task+`
+                    in <span class="fw-bold">`+ activity.projectName + `</span> project
+            </sapn>
+
+                                <span class="fs-14 text-gray fw-normal ms-1">`+ new Date(activity.createdAt).toDateString() + `</span>
+        </div>
+                    
+                    `));
+
+                })
+
+                if (activities.length == 0)
+                $("#activities").append($('<td>').html('<p class="fw - semibold text - gray fs - 12" >  there are no Activities in this project yet </p>'))
+
+
+                //$("#offcanvasrightloding").remove()
+                //offcanvasbody.show();
+            },
+            error: function (response) { }
+
+        })
+
+
+
+
+
+
+    })
+
+
+    function removeEmployee(employeeid , projectid) {
+       
+
+        $("#confirmEmployeeRemove").attr("data-employeeid")
+        $("#confirmEmployeeRemove").data('employeeid', employeeid)
+
+        $("#confirmEmployeeRemove").attr("data-projectid")
+        $("#confirmEmployeeRemove").data('projectid', projectid)
+    }
+
+    
+    $("#confirmEmployeeRemove").click(function () {
+        var Employeeid = $(this).data("employeeid");
+        var projectid = $(this).data("projectid");
+        $(this).attr("disabled", true);
+        
+
+        $.ajax({
+            type:"DELETE",
+            url: "/api/Projects/" + projectid + "/employees/" + Employeeid,
+            contentType:"application/json",
+            success: function (response) {
+                //$("#deleteConfirmModal").modal("hide");
+                $("#confirmEmployeeRemove").removeAttr('disabled');
+                
+                $("#leaveModel").click();
+                $("#employee" + Employeeid).remove();
+                
+            },
+            error: function (response) { $("#confirmEmployeeRemove").removeAttr('disabled'); }
+               
+
+        })
+
+    })
+    
+
+
+    function clearTables(){
+        $("#activities").empty()
+        $("#TasksTableBody").empty()
+        $("#EmployeesTableBody").empty()
+    }
+
+</script>
+
+

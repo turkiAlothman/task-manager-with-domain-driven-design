@@ -1,0 +1,389 @@
+
+:root .dark-mode {
+    background: #0D0B21;
+    color: #FFFFFF;
+
+    // Background Color
+    .bg-white {
+        background: #15132B !important;
+    }
+    .bg-dark {
+        background: #FFFFFF !important;
+    }
+    .bg-black {
+        background: #FFFFFF !important;
+    }
+    .bg-light {
+        background: #0D0B21 !important;
+    }
+    .bg-light-100 {
+        background: #0D0B21 !important;
+    }
+    .bg-light-200 {
+        background: #1D1B33 !important;
+    }
+    .bg-light-300 {
+        background: #23213b !important;
+    }
+    .bg-light-400 {
+        background: #2B2940 !important;
+    }    
+    .bg-light-500 {
+        background: #2B2940 !important;
+    }
+    .bg-muted {
+        background: #2B2940 !important;
+    }
+    .bg-gray {
+        background: #FFFFFF !important;
+    }
+    .bg-gray-100 {
+        background: #FFFFFF !important;
+    }
+
+    // Text Color
+    .text-white {
+        color: #15132B !important;
+    }
+    .text-dark {
+        color: #FFFFFF !important;
+    }
+    .text-black {
+        color: #FFFFFF !important;
+    }
+    .text-light {
+        color: #0D0B21 !important;
+    }
+    .text-light-100 {
+        color: #0D0B21 !important;
+    }
+    .text-light-200 {
+        color: #1D1B33 !important;
+    }
+    .text-light-300 {
+        color: #23213b !important;
+    }
+    .text-light-400 {
+        color: #2B2940 !important;
+    }
+    .text-light-500 {
+        color: #2B2940 !important;
+    }
+    .text-muted {
+        color: rgba(165, 165, 165, 0.5) !important
+    }
+    .text-gray {
+        color: #FFFFFF !important;
+    }
+    .text-gray-100 {
+        color: #FFFFFF !important;
+    }
+
+    // Border Color
+    .border-white {
+        border-color: #15132B !important;
+    }
+    .border-dark {
+        border-color: #FFFFFF !important;
+    }
+    .border-black {
+        border-color: #FFFFFF !important;
+    }
+    .border-light {
+        border-color: #0D0B21 !important;
+    }
+    .border-light-100 {
+        border-color: #0D0B21 !important;
+    }
+    .border-light-200 {
+        border-color: #1D1B33 !important;
+    }
+    .border-light-300 {
+        border-color: #23213b !important;
+    }
+    .border-light-400 {
+        border-color: #2B2940 !important;
+    }
+    .border-light-500 {
+        border-color: #2B2940 !important;
+    }
+    .border-muted {
+        border-color: #2B2940 !important;
+    }
+    .border-gray {
+        border-color: #FFFFFF !important;
+    }
+    .border-gray-100 {
+        border-color: #FFFFFF !important;
+    }
+
+    // Button Color
+    .btn-white {
+        background: #15132B !important;
+    }
+    .btn-dark {
+        background: #FFFFFF !important;
+    }
+    .btn-black {
+        background: #FFFFFF !important;
+    }
+    .btn-light {
+        background: #0D0B21 !important;
+    }
+    .btn-light-100 {
+        background: #0D0B21 !important;
+    }
+    .btn-light-200 {
+        background: #1D1B33 !important;
+    }
+    .btn-light-300 {
+        background: #23213b !important;
+    }
+    .btn-light-400 {
+        background: #2B2940 !important;
+    }
+    .btn-light-500 {
+        background: #2B2940 !important;
+    }
+    .btn-muted {
+        background: #2B2940 !important;
+    }
+    .btn-gray {
+        background: #FFFFFF !important;
+    }
+    .btn-gray-100 {
+        background: #FFFFFF !important;
+    }
+
+    // Button Border Color 
+    .btn-white {
+        border-color: #15132B !important;
+    }
+    .btn-dark {
+        border-color: #FFFFFF !important;
+    }
+    .btn-black {
+        border-color: #FFFFFF !important;
+    }
+    .btn-light {
+        border-color: #0D0B21 !important;
+    }
+    .btn-light-100 {
+        border-color: #0D0B21 !important;
+    }
+    .btn-light-200 {
+        border-color: #1D1B33 !important;
+    }
+    .btn-light-300 {
+        border-color: #23213b !important;
+    }
+    .btn-light-400 {
+        border-color: #2B2940 !important;
+    }    
+    .btn-light-500 {
+        border-color: #2B2940 !important;
+    }
+    .btn-muted {
+        border-color: #2B2940 !important;
+    }
+    .btn-gray {
+        border-color: #FFFFFF !important;
+    }
+    .btn-gray-100 {
+        border-color: #FFFFFF !important;
+    }
+
+    
+    // Customize Elements
+    .header,
+    .kleon-vertical-nav,
+    .kleon-combo-nav ul.main-menu li ul li a, .kleon-horizontal-nav ul.main-menu li ul li a,
+    .kleon-right-side-panel,
+    .card:not(.boost-card),
+    .select2-container--default .select2-selection--single .select2-selection__rendered,
+    table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1, table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1, table.dataTable.display tbody tr:hover > .sorting_1, table.dataTable.order-column.hover tbody tr:hover > .sorting_1, table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover, table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd,
+    table.dataTable tbody tr,
+    table.defaultTable tbody tr,
+    .tox:not(.tox-tinymce-inline) .tox-editor-header,
+    .tox .tox-toolbar, .tox .tox-toolbar__overflow, .tox .tox-toolbar__primary,
+    .flatpickr-calendar,
+    .admin-card ul li a:hover,
+    .apexcharts-menu,
+    .select2-container--default .select2-selection--multiple .select2-selection__choice,
+    .dropdown-menu,
+    .btn-outline-light:hover {
+        background: #15132B;
+    }
+
+    .dataTables_wrapper .dataTables_length select,
+    .dataTables_wrapper .dataTables_filter input[type="search"],
+    .search-form .form-control,
+    .fc .fc-daygrid-event-harness,
+    .fc .fc-day-other,
+    .message-preview .message--body .message--text,
+    .message-list .dropdown-widget .notification-board li a:hover, .message-list .dropdown-widget .notification-board li a.active,
+    .message-box li a.active, .message-box li a:hover,
+    .tox .tox-tbtn--bespoke,
+    .form-control,
+    .form-select,
+    .modal-content,
+    .kleon-vertical-nav ul.main-menu li ul,
+    ::-webkit-scrollbar-thumb,
+    .select2-container--default .select2-selection--multiple{
+        background: #2B2940;
+    }
+
+    
+    .dropdown-item:hover, .dropdown-item:focus,
+    .dropdown-widget.dropdown-menu,
+    .admin-card.dropdown-widget.dropdown-menu .card,
+    .header .dropdown-menu::after,
+    ::-webkit-scrollbar,
+    .flatpickr-current-month .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+        background: #0D0B21;
+    }
+
+    .card,
+    .card-header,
+    .card-footer,
+    .dropdown-widget.dropdown-schedule .notification-board li,
+    .dropdown-widget .notification-board li:not(:last-child),
+    table.dataTable.no-footer,
+    table.dataTable thead th, table.dataTable thead td,
+    table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td,
+    .dataTables_wrapper .dataTables_length select,
+    .dataTables_wrapper .dataTables_filter input[type="search"],
+    table.defaultTable tbody th, table.defaultTable tbody td,
+    .select2-container--default .select2-selection--single .select2-selection__rendered,
+    .search-form .form-control,
+    .form-control,
+    .form-select,
+    .fc-theme-standard td, .fc-theme-standard th,
+    .fc td,
+    .fc-theme-standard .fc-scrollgrid,
+    .tox-tinymce,
+    .tox:not(.tox-tinymce-inline).tox-tinymce--toolbar-bottom .tox-editor-header,
+    &.kleon-vertical-nav--collapse .kleon-vertical-nav .menu-section-title,
+    .header .dropdown-menu::after,
+    .dropdown-menu,
+    .btn-outline-light {
+        border-color: #1D1B33;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered,
+    .apexcharts-menu,
+    .select2-container--default .select2-selection--multiple {
+        border-color: #15132B;
+    }
+    .card-email-inbox {
+        .email-item {
+            background-color: #15132B;
+            border-bottom: 1px solid #1D1B33;
+            &.starred,
+            &.checked,
+            &:hover {
+                background-color: #1D1B33;
+            }
+        }
+    }
+    
+
+    h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p,
+    .kleon-vertical-nav ul.main-menu li a,
+    .kleon-vertical-nav .kleon-vertical-nav-toggle,
+    .kleon-mobile-menu-opener,
+    .kleon-combo-nav ul.main-menu li a, .kleon-horizontal-nav ul.main-menu li a,
+    .bg-primary.text-white, .bg-primary .text-white,
+    .bg-secondary.text-white, .bg-secondary .text-white,
+    .bg-success.text-white, .bg-success .text-white,
+    .bg-info.text-white, .bg-info .text-white,
+    .bg-warning.text-white, .bg-warning .text-white,
+    .bg-danger.text-white, .bg-danger .text-white,
+    .bg-blue.text-white, .bg-blue .text-white,
+    .bg-green.text-white, .bg-green .text-white,
+    .bg-red.text-white, .bg-red .text-white,
+    .bg-yellow.text-white, .bg-yellow .text-white,
+    .bg-orange.text-white, .bg-orange .text-white,
+    .bg-cyan.text-white, .bg-cyan .text-white,
+    .bg-muted.text-white, .bg-muted .text-white,
+    .bg-white.text-primary, .bg-white .text-primary,
+    .fc .fc-daygrid-week-number,
+    .all-notifications .btn,
+    .btn-primary,
+    .badge.bg-primary,
+    .form-control,
+    .list-group-item,
+    .dataTables_wrapper .dataTables_length label, .dataTables_wrapper .dataTables_filter label,
+    table.dataTable thead th, table.dataTable thead td,
+    thead, tbody, tfoot, tr, td, th, td h6, td .h6,
+    .dataTables_wrapper .dataTables_paginate .paginate_button,
+    .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate,
+    .dataTables_wrapper .dataTables_length select,
+    .dataTables_wrapper .dataTables_filter input[type="search"],
+    .select2-container--default .select2-selection--single .select2-selection__rendered,
+    .page-link,
+    .fc .fc-daygrid-day-number,
+    .tox .tox-tbtn--bespoke,
+    .tox .mce-content-body,
+    .form-label,
+    .list-style li,
+    dl, dd, dt,
+    .flatpickr-months .flatpickr-month,
+    span.flatpickr-weekday,
+    .flatpickr-day:not(.flatpickr-disabled):not(.nextMonthDay),
+    .dropdown-item {
+        color: #FFFFFF !important;
+    }
+
+    .hidden-header,
+    .menu-section-title {
+        color: rgba(165, 165, 165, 0.5) !important
+    }
+
+    .form-control:disabled, .form-control[readonly],
+    .list-group-item.disabled {
+        color: rgba(165, 165, 165, 0.5) !important
+    }
+
+    .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month,
+    .apexcharts-text.apexcharts-xaxis-label, .apexcharts-text.apexcharts-yaxis-label,
+    .apexcharts-datalabel, .apexcharts-datalabel-label, .apexcharts-datalabel-value, .apexcharts-datalabels, .apexcharts-pie-label {
+        color: #FFFFFF !important;
+        fill: #FFFFFF !important;
+    }
+
+    hr {
+        color: #1D1B33;
+    }
+    .table-light thead, .table-light tbody, .table-light tfoot, .table-light tr, .table-light td, .table-light th, .table-light td h6, .table-light td .h6,
+    .table-primary thead, .table-primary tbody, .table-primary tfoot, .table-primary tr, .table-primary td, .table-primary th, .table-primary td h6, .table-primary td .h6,
+    .table-secondary thead, .table-secondary tbody, .table-secondary tfoot, .table-secondary tr, .table-secondary td, .table-secondary th, .table-secondary td h6, .table-secondary td .h6,
+    .table-success thead, .table-success tbody, .table-success tfoot, .table-success tr, .table-success td, .table-success th, .table-success td h6, .table-success td .h6,
+    .table-info thead, .table-info tbody, .table-info tfoot, .table-info tr, .table-info td, .table-info th, .table-info td h6, .table-info td .h6,
+    .table-warning thead, .table-warning tbody, .table-warning tfoot, .table-warning tr, .table-warning td, .table-warning th, .table-warning td h6, .table-warning td .h6,
+    .table-danger thead, .table-danger tbody, .table-danger tfoot, .table-danger tr, .table-danger td, .table-danger th, .table-danger td h6, .table-danger td .h6 {
+        color: #202020 !important;
+    }
+
+    .logo a {
+        .logo-text {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .logo-text-white {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    .kleon-vertical-nav ul.main-menu li.nav-open > a,
+    .kleon-vertical-nav ul.main-menu li a:hover {
+        background: #2b2940 !important;
+    }
+    .kleon-vertical-nav ul.main-menu li a:hover,
+    .kleon-vertical-nav ul.main-menu li.active > a {
+        color: #924AEF !important;
+        background: #2b2940 !important;
+    }
+    
+}

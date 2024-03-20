@@ -1,0 +1,52 @@
+﻿@model Employees
+<div class="col-xxl-3 col-lg-4">
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            <div class="mb-5 text-center">
+                
+                <a  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" href="#offcanvasRight" role="button" aria-controls="offcanvasRight">
+                    <span data-EmployeeId="@Model.Id" data-firstname="@Model.FirstName" data-lastname="@Model.LastName" data-position ="@Model.Position" class="avatar  avatar-xxl bg-primary projectcontainer">
+                        <span class="avatar-initials text-white"> @Model.FirstName.First()@Model.LastName.First()</span>
+                    </span>
+
+
+                </a>
+               
+                <div class="card-content mt-3">
+                    <h5 class="mb-0"><a  class="text-dark"> @Model.FirstName @Model.LastName</a>
+                                        
+                    </h5> 
+                    
+                    <small class="d-inline-block text-gray fs-14 fw-normal">@Model.Position at</small>
+                    <a href="#" class="fs-14 fw-semibold">@Model.team.Name Team</a>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <p class="fw-semibold text-truncate"><small><span class="bg-muted rounded-1 d-inline-block text-center text-primary lh-36 px-2 py-0 me-1 mb-1"><i class="bi bi-telephone-fill"></i></span> <a href="tel:@Model.PhoneNumber">@Model.PhoneNumber</a> </small> </p>
+                </div>
+                <div>
+                    <p class="fw-semibold text-truncate"><small><span class="bg-muted rounded-1 d-inline-block text-center text-primary lh-36 px-2 py-0 me-1"><i class="bi bi-envelope-fill"></i></span> <a href="mailto:@Model.Email">@Model.Email </a> </small> </p>
+                </div>
+
+                @if (Model.Manager)
+                {
+                    <div class="d-flex justify-content-center">
+
+                        <span class="alert alert-primary p-1 fs-10 ms-1" role="alert">Manager</span>
+                    </div>
+
+                }
+                else
+                {
+
+                    <div class="d-flex justify-content-center">
+
+                        <span class="alert alert-primary p-1 fs-10 ms-1" role="alert">Employee</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,307 @@
+﻿@model AddTaskForm
+<div class="modal modal-lg fade" id="CreateTaskModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-light">
+                
+
+                <form id="addTaskForm" nctype="multipart/form-data">
+                  
+
+                    <!--Title-->
+                    <div name="Title" class="form-group mb-2">
+                        <label class="form-label">Title</label>
+                        <input asp-for="title" type="text" class="form-control" id="title">
+                        <span asp-validation-for="title" class="text-danger"></span>
+                    </div>
+                    
+                   
+                   
+
+                    <!--Descriptoin -->
+                    <div name="description" class="form-group  mb-2">
+                        <label class="form-label">Description</label>
+                        <textarea asp-for="description" class="form-control" placeholder="Enter Text..." id="description"></textarea>
+                        <span asp-validation-for="description" class="text-danger"></span>
+
+                    </div>
+
+
+                    <!--Attachments -->
+                    <div class="form-group">
+                        <label class="form-label">Attachment</label>
+                        <div id="dpz-multiple-files" class="dropzone file-upload bg-light-200 border-gray-200">
+                            <div class="d-flex align-items-center gap-3 w-auto">
+                                <div class="bg-primary rounded-2 p-3 w-auto">
+                                    <img src="assets/img/svg/cloud-upload.svg" alt="img">
+                                </div>
+                                <div class="dz-message position-relative text-start" data-dz-message>
+                                    <p class="mb-0 fw-semibold text-dark">Upload File</p>
+                                    <small class="mb-0 fw-semibold text-gray">PDF, DOCX, TXT, JPG, PNG, JPG</small>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-danger" id="attachment" ></span>
+                    </div>
+
+
+
+                    <!-- Dates  -->
+
+                    <div id="dates" class="row justify-content-between">
+
+                        <!-- Start date -->
+                        <div class="form-group  col-sm-4">
+                            <label class="form-label">Start date</label>
+                            <input asp-for="startDate" type="datetime-local" class="form-control" id="startDate" value="">
+                            <span asp-validation-for="startDate" class="text-danger"></span>
+                        </div>
+
+
+
+                        <!-- Deadline -->
+                        <div class="form-group  col-sm-4">
+                            <label class="form-label">Deadline</label>
+                            <input asp-for="deadline" type="datetime-local" class="form-control" id="Deadline" value="">
+                            <span asp-validation-for="deadline" class="text-danger"></span>
+                        </div>
+
+
+
+                        <div class="form-group  col-sm-4">
+                            <label class="form-label">Project</label>
+
+
+                            <select id="project" class="form-select" aria-label="Default select example" asp-for="project">
+                                <vc:projects-drop-down></vc:projects-drop-down>
+
+                            </select>
+
+
+                            <span asp-validation-for="project" class="text-danger"></span>
+                        </div>
+
+
+                    </div>
+                    
+                    <div class=" row align-items-center justify-content-between p-2">
+
+
+                        <!-- select asignee -->
+                        <div class=" col-sm-4 ml-5">
+
+                            @{
+                                                        @await Component.InvokeAsync("AddAsigneesCard", new { allowChange = true, Asignees = new List<Employees>(), task = new Tasks(), TaskAdded = false, Execlude = false })
+                                ;
+                            }
+                        </div>
+                            
+
+                       
+                        
+
+
+
+
+                        <!-- Type -->
+                        <div class="form-group col-sm-3">
+                            <label class="form-label">type</label>
+                            <input asp-for="type" type="text" class="form-control" id="type" />
+                            <span asp-validation-for="type" class="text-danger"></span>
+                        </div>
+
+
+                        <!-- priority -->
+                        <div class="card border-0  shadow-sm p-2 col-sm-4">
+                            <div class="card-header bg-transparent d-flex align-items-center justify-content-center">
+                                priority
+
+                            </div>
+                            <span asp-validation-for="priority" class="text-danger"></span>
+                            <div class="card-body">
+
+                                <div class="row d-flex justify-content-start">
+                                    <div class="form-check form-check-inline col-sm-6">
+                                        <input type="radio" class="form-check-input" id="radio10" asp-for="priority" value="High">
+                                        <label class="form-label mb-0" style="font-size:0.7rem" for="radio10">High</label>
+                                    </div>
+                                    <div class="form-check form-check-inline  col-sm-6">
+                                        <input type="radio" class="form-check-input" id="radio11" asp-for="priority" value="Medium">
+                                        <label class="form-label mb-0" for="radio11" style="font-size:0.7rem">Medium</label>
+                                    </div>
+                                    <div class="form-check form-check-inline  col-sm-6">
+                                        <input type="radio" class="form-check-input" id="radio12" asp-for="priority" value="Low">
+                                        <label class="form-label mb-0" for="radio12" style="font-size:0.7rem">Low</label>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </form>
+
+
+
+
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-200 text-danger btn-sm px-2"
+                        data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" id="submitTask" class="btn btn-primary btn-sm  px-2">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+
+    $("#submitTask").click(function () {
+ 
+        // attachment
+        var myDropzone = Dropzone.forElement("#dpz-multiple-files");
+        var files = myDropzone.files
+
+        files.forEach(function (file) {
+
+            if (file.size >= 5500000) {
+                $("#attachment").html("maximum allowed size id 2MB");
+                return;
+            }
+
+
+            if (file.status === Dropzone.ERROR) {
+                $("#attachment").html("something want rong");
+                return;
+            }
+            
+            if (file.status === Dropzone.UPLOADING) {
+                $("#attachment").html("wait until all files uploaded completely");
+                return;
+            }
+            if (file.status !== Dropzone.SUCCESS) {
+                $("#attachment").html("something want rong");
+                return;
+            }
+
+                        })
+
+
+
+
+
+
+        $("#addTaskForm").validate()
+        if ($("#addTaskForm").valid()) {
+            $("#submitTask").attr('disabled', 'disabled')
+            
+  
+            var filesForm = new FormData()
+            
+            for (var i = 0; i < files.length; i++)
+                filesForm.append("Attachments", files[i])
+            
+            //asignees
+            var ids = [];
+            var employees = $("#avatarsBody").children().each(function () {
+                ids.push($(this).data("value"));
+                filesForm.append("asignees", $(this).data("value"))
+            })
+
+
+            var title = $("#title").val();
+            var description = $("#description").val();
+            var type = $("#type").val();
+            var priority = $("input[type='radio'][name='priority']:checked").val();
+            var startDate = $("#startDate").val();
+            var Deadline = $("#Deadline").val();
+            var project = $("#project").val()
+     
+
+            filesForm.append("title", title)
+            filesForm.append("description", description)
+            filesForm.append("type", type)
+            filesForm.append("priority", priority)
+            filesForm.append("startDate", startDate)
+            filesForm.append("deadline", Deadline)
+            filesForm.append("project", project)
+
+
+
+
+            $.ajax({
+                type: "POST",
+                url: "/api/Tasks",
+                processData: false,
+                data: filesForm,
+                contentType: false,
+
+
+                success: function (response) {
+                    $("#CreateTaskModal").hide();
+                    $(this).removeAttr('disabled');
+                    swal(
+                        'Success',
+                        'task created successfully!',
+                        'success',
+                    ).then(function () { 
+                        location.reload();
+                    });
+                },
+                error: function (response) {
+                    $(this).removeAttr('disabled');
+                    $("#CreateTaskModal").hide();
+                    swal(
+                        'Error!',
+                        'something went wrong!',
+                        'error'
+                    )
+                }
+
+
+            })
+        
+
+        }
+
+        })
+
+    $(document).ready(function () {
+        $("#asingeesContainer").hide();
+        $("#project").change(function () {
+            var value = $(this).val();
+            if (value == null || value == "")
+                $("#asingeesContainer").hide();
+            else {
+                $("#avatarsBody").empty();
+                $("#asingeesContainer").data("project", value)
+                $("#asingeesContainer").show();
+            }
+                
+            
+        })
+    })
+
+
+
+</script>

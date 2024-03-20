@@ -1,0 +1,147 @@
+﻿@model CreateProjectForm
+<div class="modal modal-lg fade" id="createProjectModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-light">
+
+
+                <form id="createProjectForm">
+
+
+                    <!--Name-->
+                    <div name="Title" class="form-group mb-2">
+                        <label class="form-label">Title</label>
+                        <input asp-for="Name" type="text" class="form-control">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+
+
+
+                    <!--Descriptoin -->
+                    <div name="description" class="form-group  mb-2">
+                        <label class="form-label">Description</label>
+                        <textarea asp-for="Description" class="form-control" placeholder="Enter Text..." id="description"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+
+                    </div>
+     
+                    <!-- Type -->
+                    <div class="form-group">
+                        <label class="form-label">type</label>
+                        <input asp-for="Type" type="text" class="form-control" id="type" />
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+
+                    <!-- Dates  -->
+
+                    <div id="dates" class="row justify-content-between">
+
+                        <!-- Start date -->
+                        <div class="form-group  col-sm-4">
+                            <label class="form-label">Start date</label>
+                            <input asp-for="StartDate" type="date" class="form-control" id="startDate" value="">
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+
+
+
+                        <!-- Deadline -->
+                        <div class="form-group  col-sm-4">
+                            <label class="form-label">Deadline</label>
+                            <input asp-for="DueDate" type="date" class="form-control" value="">
+                            <span asp-validation-for="DueDate" class="text-danger"></span>
+                        </div>
+
+
+
+                    </div>
+
+                </form>
+
+
+
+
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-200 text-danger btn-sm px-2" id="closeModal"
+                        data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" id="submitProject" class="btn btn-primary btn-sm  px-2">Create Project</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+    $("#submitProject").click(function () {
+
+        $("#createProjectForm").validate()
+        if ($("#createProjectForm").valid()) {
+
+            $("#submitProject").attr('disabled', 'disabled')
+
+
+            var Name = $("#Name").val();
+            var description = $("#description").val();
+            var type = $("#type").val();
+            var startDate = $("#startDate").val();
+            var deadline = $("#DueDate").val();
+            console.log(Name)
+
+            $.ajax({
+                type: "POST",
+                url: "/api/Projects",
+                data: JSON.stringify({
+                    Name: Name,
+                    Description: description,
+                    Type: type,
+                    StartDate: startDate,
+                    Deadline: deadline
+
+                }),
+                contentType: "application/json",
+
+                success: function (response) {
+                    $("#closeModal").click();
+                    $("#submitProject").removeAttr('disabled');
+                    swal(
+                        'Success',
+                        'Project created successfully!',
+                        'success',
+                    ).then(function () {
+                        location.reload();
+                    });
+                },
+                error: function (response) {
+                    $("#submitProject").removeAttr('disabled');
+                    $("#closeModal").click();
+                    swal(
+                        'Error!',
+                        'something went wrong!',
+                        'error'
+                    )
+                }
+
+
+            })
+
+
+        }
+
+    })
+
+</script>

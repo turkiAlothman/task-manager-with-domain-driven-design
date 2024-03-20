@@ -1,0 +1,283 @@
+.table-responsive {
+    padding-bottom: $_15px;
+}
+table.dataTable thead th, table.dataTable thead td {
+    font-family: $font-family-heading;
+    @include rfs(20px, font-size);
+    color: $dark;
+    padding: 30px 10px;
+    border-bottom: 1px solid $light-200;
+    text-align: left;
+    white-space: nowrap;
+}
+table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1,
+table.dataTable.display tbody tr.even>.sorting_1, table.dataTable.order-column.stripe tbody tr.even>.sorting_1,
+table.dataTable.display tbody tr:hover>.sorting_1, table.dataTable.order-column.hover tbody tr:hover>.sorting_1,
+table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover,
+table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+    background-color: $white;
+}
+table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+    border-top: 1px solid $light-200;
+}
+table.dataTable tbody th, table.dataTable tbody td{
+    text-align: left;
+    padding: 20px 15px;
+    white-space: nowrap;
+}
+table.dataTable tbody tr {
+    position: relative;
+    background-color: $white;
+    transition: $transition-base;
+    &:hover {
+        z-index: 1;
+        box-shadow: 0px 0px 1rem rgba(0, 0, 0, 0.15);
+    }
+}
+table.dataTable.no-footer {
+    border-bottom: 1px solid $light-200;
+}
+thead, tbody, tfoot, tr, td, th, td h6 {
+    font-family: $font-family-base;
+    color: $dark;
+}
+.table-dark {
+    thead, tbody, tfoot, tr, td, th, td h6 {
+        color: $white;
+    }
+}
+tbody tr td:last-child {
+    // text-align: right;
+    padding-right: 0px;
+}
+td h6 {
+    margin-bottom: 5px;
+}
+td small {
+    color: $gray;
+    font-weight: $font-weight-semibold;
+}
+.profilepicture img {
+    border-radius: 14px;
+}
+
+td .dropdown a {
+    font-size: 24px;
+    color: $gray;
+}
+td .dropdown .dropdown-menu {
+    min-width: auto;
+    width: 100px;
+}
+td .dropdown .dropdown-menu a {
+    font-size: $_13px;
+    font-weight: $font-weight-semibold;
+    color: $dark;
+}
+.dataTables_wrapper .dataTables_info {
+    font-weight: $font-weight-semibold;
+    color: $dark;
+    padding-top: $_30px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    padding-top: $_30px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    padding: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: $font-weight-semibold;
+    color: $dark !important;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    margin-left: 0px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+    background: $primary;
+    color: $white !important;
+    border: 1px solid transparent;
+    box-shadow: 0px 7px 16px rgba($primary, 0.14);
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous,
+.dataTables_wrapper .dataTables_paginate .paginate_button.next {
+    border: 1px solid $gray-200;
+    color: $primary;
+}
+.dataTables_wrapper .dataTables_paginate span {
+    display: inline-block;
+    border: 1px solid $gray-200;
+    border-radius: 14px;
+    margin: 0px 10px;
+}
+.dataTables_wrapper .dataTables_paginate span .paginate_button:not(:last-child) {
+    margin-right: 10px;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    width: 110px;
+    height: 48px;
+    background-color: $white;
+    color: $dark;
+    border: 1px solid $light-200;
+    border-radius: 14px;
+    padding: 0px 10px;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    position: relative;
+}
+
+.dataTables_wrapper .dataTables_length label,
+.dataTables_wrapper .dataTables_filter label {
+    position: relative;
+    font-family: $font-family-heading;
+    font-size: $_18px;
+    font-weight: $font-weight-semibold;
+    color: $dark;
+}
+.dataTables_wrapper .dataTables_filter label i {
+    position: absolute;
+    left: 24px;
+    top: 14px;
+    color: $primary;
+}
+.dataTables_wrapper .dataTables_filter input[type="search"] {
+    width: 100%;
+    max-width: 240px;
+    height: 48px;
+    background-color: $white;
+    color: $dark;
+    border: 1px solid $light-200;
+    border-radius: 14px;
+    margin: 0px;
+    padding-left: 50px;
+}
+.dataTables_wrapper .dataTables_filter input:focus-visible,
+.dataTables_wrapper .dataTables_length select:focus-visible {
+    outline: none;
+}
+
+.dataTables_wrapper .dataTables_filter ::placeholder {
+    font-family: $font-family-heading;
+    font-size: $_16px;
+    font-weight: $font-weight-semibold;
+    color: $dark;
+}
+
+table.dataTable td .badge {
+    font-size: $_16px;
+    font-weight: $font-weight-bold;
+    padding: 17px 27px;
+    border-radius: 14px;
+}
+table.dataTable td .badge i {
+    margin-right: 6px;
+}
+
+.table-hiring {
+    .dataTables_wrapper .dataTables_filter {
+        margin-bottom: $_25px;
+    }
+    table.dataTable thead th, table.dataTable thead td,
+    table.dataTable tbody th, table.dataTable tbody td {
+        border-right: 1px solid $light-200;
+        h6 {
+            margin-bottom: 0px;
+        }
+    }
+    table.dataTable.no-footer {
+        border: 1px solid $light-200;
+        border-bottom: 0px solid $light-200;
+    }
+}
+
+@media only screen and (max-width: 1399.90px) {
+    table.dataTable thead th, table.dataTable thead td {
+        padding: 15px 10px;
+    }
+    table.dataTable tbody th, table.dataTable tbody td {
+        padding: 10px 10px;
+    }
+}
+
+
+// Normal/Default Table 
+
+table.defaultTable thead th, table.defaultTable thead td {
+    font-family: $font-family-heading;
+    @include rfs(20px, font-size);
+    color: $dark;
+    padding: 30px 10px;
+    border-bottom: 1px solid $light-200;
+    text-align: left;
+    white-space: nowrap;
+}
+table.defaultTable.hover tbody tr:hover, table.defaultTable tbody tr:hover,
+table.defaultTable.stripe tbody tr.odd, table.defaultTable tbody tr.odd {
+    background-color: $white;
+}
+table.defaultTable tbody th, table.defaultTable tbody td{
+    border-top: 1px solid $light-200;
+    text-align: left;
+    padding: 20px 15px;
+    white-space: nowrap;
+}
+table.defaultTable tbody tr {
+    position: relative;
+    background-color: $white;
+    transition: $transition-base;
+    &:hover {
+        z-index: 1;
+        box-shadow: 0px 0px 1rem rgba(0, 0, 0, 0.15);
+    }
+}
+
+table.defaultTable td .badge {
+    font-size: $_16px;
+    font-weight: $font-weight-bold;
+    padding: 17px 27px;
+    border-radius: 14px;
+}
+table.defaultTable td .badge i {
+    margin-right: 6px;
+}
+
+.table-hiring {
+    .defaultTables_wrapper .defaultTables_filter {
+        margin-bottom: $_25px;
+    }
+    table.defaultTable thead th, table.defaultTable thead td,
+    table.defaultTable tbody th, table.defaultTable tbody td {
+        border-right: 1px solid $light-200;
+        h6 {
+            margin-bottom: 0px;
+        }
+    }
+    table.defaultTable.no-footer {
+        border: 1px solid $light-200;
+        border-bottom: 0px solid $light-200;
+    }
+}
+
+@media only screen and (max-width: 1399.90px) {
+    table.defaultTable thead th, table.defaultTable thead td {
+        padding: 15px 10px;
+    }
+    table.defaultTable tbody th, table.defaultTable tbody td {
+        padding: 10px 10px;
+    }
+}
+
+
+.table-striped > .tbody > .row:nth-of-type(odd) > * {
+    --kleon-table-accent-bg: var(--kleon-table-striped-bg);
+    color: var(--kleon-table-striped-color);
+}

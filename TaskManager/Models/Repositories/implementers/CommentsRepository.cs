@@ -1,0 +1,26 @@
+﻿using Microsoft.EntityFrameworkCore;
+using TaskManager.Models.DomainModels;
+using TaskManager.Models.Repositories.interfaces;
+
+namespace TaskManager.Models.Repositories.implementers
+{
+    public class CommentsRepository : ICommentsRepository
+    {
+        private TaskManagerDbContext _dbContext;
+        public CommentsRepository(TaskManagerDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        public async Task<Comments?> GetComment(int id)
+        {
+            return await _dbContext.Comments.Include(c => c.Sender).FirstOrDefaultAsync(c => c.Id == id);
+        }
+        public void DeleteComment(Comments comment)
+        {
+            _dbContext.Comments.Remove(comment);
+            _dbContext.SaveChanges();
+        }
+
+    }
+}

@@ -1,0 +1,193 @@
+.kleon-right-side-panel {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 106px;
+    background-color: $white;
+    z-index: 5;
+    padding: $_30px;
+}
+.inner-contents {
+    @include rfs($_40px, padding-top);
+    @include rfs($_40px, padding-left);
+    @include rfs($_40px, padding-right);
+}
+
+.kleon-vertical-nav {
+    width: 100%;
+    @include rfs(330px, max-width);
+    transition: $transition-base;
+}
+
+.header,
+.main-wrapper {
+    // margin-left: 345px;
+    @include rfs(330px, margin-left);
+    transition: $transition-base;
+}
+.forFixedNav .main-wrapper {
+    padding-top: 118px;
+}
+.kleon-combo-nav,
+.kleon-horizontal-nav {
+    display: none;
+}
+
+// Horizontal Nav
+.layout-horizontal-nav {
+    .kleon-default-nav,
+    .kleon-combo-nav {
+        display: none;
+    }
+    .kleon-horizontal-nav {
+        display: block;
+    }
+    .kleon-vertical-nav {
+        display: none;
+    }
+    .header {
+        margin-left: 0px;
+        &.kleon-default-nav {
+            display: none;
+        }
+    }
+    .main-wrapper {
+        margin-left: 0px;
+    }
+}
+
+// Combo Nav
+.layout-combo-nav {
+    .kleon-default-nav,
+    .kleon-horizontal-nav {
+        display: none;
+    }
+    .kleon-combo-nav {
+        display: block;
+    }
+    .kleon-vertical-nav {
+        .hidden-header {
+            display: none;
+        }
+    }
+    .header {
+        margin-left: 0px;
+        &.kleon-default-nav {
+            display: none;
+        }
+    }
+    .main-wrapper {
+        margin-left: 0px;
+    }
+}
+
+// Menu Collapse added at Body tag
+.kleon-vertical-nav--collapse {
+    .kleon-vertical-nav {
+        position: absolute;
+        bottom: 0;
+        max-width: 120px;
+        height: 100%;
+        overflow: visible;
+        .hidden-header {
+            display: none;
+        }
+        .logo {
+            justify-content: center;
+            padding: 0px 0px;
+            .logo-text {
+                display: none;
+            }
+        }
+        .kleon-vertical-nav-toggle {
+            position: absolute;
+            left: auto;
+            right: -25px;
+        }
+        ul.main-menu li {
+            ul {
+                display: none !important;
+            }
+            a {
+                width: 100%;
+                border-radius: $border-radius-sm;
+                .nav-icon {
+                    margin-right: 0px;
+                }
+                .nav-text {
+                    display: none;
+                }
+                .menuIndicator {
+                    display: none;
+                }
+            }
+            .submenu-opener {
+                display: none;
+            }
+            &:hover {
+                width: 310px;
+                overflow: visible;
+                ul {
+                    display: block !important;
+                    position: absolute;
+                    left: 60px;
+                    width: 250px;
+                }
+                a {
+                    .nav-icon {
+                        margin-right: 25px;
+                    }
+                    .nav-text {
+                        display: block;
+                    }
+                }
+            }
+            ul li a {
+                padding: 8px 20px;
+            }
+        }
+        .menu-title {
+            display: none
+        }
+        .boost-card {
+            display: none;
+        }
+        .menu-section-title {
+            border-bottom: 1px solid $light-400;
+            span {
+                display: none
+            }
+        }
+    }
+    .header,
+    .main-wrapper {
+        @include rfs(120px, margin-left);
+    }
+}
+
+// Mobile Menu Open 
+.kleon-mobile-menu-opener {
+    .close {
+        display: none;
+    }
+}
+
+// Side Menu Active 
+.kleon-vertical-nav--active {
+    .kleon-mobile-menu-opener {
+        .open {
+            display: none;
+        }
+        .close {
+            display: block;
+        }
+    }
+    .kleon-vertical-nav {
+        left: 0;
+    }
+}
+
+
+
+
+
+

@@ -1,0 +1,415 @@
+﻿@model IEnumerable<Employees>
+
+<!-- invite employee Modal-->
+<div class="modal fade" id="inviteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Invite new Employee To the workspace</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-light">
+
+
+                <form id="inviteForm" nctype="multipart/form-data">
+                    <!--email-->
+                    <div name="Email" class="form-group mb-2">
+                        <label class="form-label">New Employee Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="user@example.com" required>
+                    </div>
+
+                    <div class="form-check">
+                        <label class="form-label mb-0" for="checkbox1">As Manager</label>
+                        <input type="checkbox" class="form-check-input" id="asManager" value="true">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="closeInviteModal" type="button" class="btn btn-light-200 text-danger btn-sm px-2"
+                        data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" id="inviteEmployeeButton" class="btn btn-primary btn-sm  px-2">send invite</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+    
+    <div class="page-header d-flex align-items-center justify-content-between mr-bottom-80">
+        <div class="left-part">
+            <h2 class="text-dark">Employees</h2>
+        </div>
+    
+    
+    @if (HttpContextAccessor.IsManager())
+    {
+        <div class="right-part d-flex align-items-center gap-4 flex-wrap">
+
+
+
+
+            <div>
+                <a data-bs-toggle="modal" data-bs-target="#inviteModal" class="btn btn-primary ff-heading fs-18 fw-bold py-3"><span class="fs-21"><i class="bi bi-plus"></i></span> invite new employee</a>
+            </div>
+        </div>
+    }
+    
+    
+    
+    </div>
+
+<form asp-controller="Home" asp-action="Employees" method="GET" id="form">
+
+    <div class="row mb-5 justify-content-end d-flex align-items-center gap-4 flex-wrap">
+
+        <div class="col-sm-3">
+
+            @{
+
+                                                @await Component.InvokeAsync("TeamsDropDown", new { TeamId =  @HttpContextAccessor.HttpContext.Request.Query["TeamId"].ToString() })
+            }
+            
+               
+
+        </div>
+
+
+        <div class="col-sm-3">
+
+            <div class="w-auto search-form">
+                <input type="text" name="search" id="search" class=" bg-white form-control" placeholder="Search" value="@HttpContextAccessor.HttpContext.Request.Query["search"].ToString()">
+                <button type="submit" class="btn"><img src="assets/img/svg/search.svg" alt=""></button>
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
+ 
+<div class="row">
+        
+        
+    @foreach(Employees employee in Model)
+    {
+        <partial name="_Employee" model="employee" />
+    }
+
+    </div>
+
+
+
+
+<div class="offcanvas offcanvas-end w-50" id="offcanvasRight" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" aria-labelledby="offcanvasRightLabel">
+
+    <div class="offcanvas-body" id="offcanvas-body">
+
+        <button type="button position-absolute top-0 s-0" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+        
+        <!-- Profile -->
+        <div class="row align-content-center justify-content-center mb-5 text-center">
+
+
+            <div>
+                <span class="avatar  avatar-xxl bg-primary">
+                    <span class="avatar-initials text-white" id="avatarBody">DD</span>
+                </span>
+
+            </div>
+
+            <div class="card-content mt-3">
+                <h5 class="mb-0"><a class="text-dark" id="fullname">dd </a></h5>
+                <small class="d-inline-block text-gray fs-14 fw-normal" id="position">,o,kop</small>
+                
+            </div>
+
+
+        </div>
+
+        <!-- Classic Tab -->
+        <ul class="nav nav-tabs mb-3 justify-content-around" id="pills-tab" role="tablist">
+
+            <li class="nav-item">
+                <a class="nav-link active" href="#tab-8" data-bs-toggle="tab" role="tab">tasks Assigned</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#tab-9" data-bs-toggle="tab" role="tab">tasks Reported</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#tab-10" data-bs-toggle="tab" role="tab">activities</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+
+            <div class="tab-pane fade show active  p-3" id="tab-8" role="tabpanel">
+                <partial name="Tabs/_TasksTab.cshtml"></partial>
+            </div>
+            <div class="tab-pane fade  p-3" id="tab-9" role="tabpanel">
+
+                <partial name="Tabs/_TasksReported.cshtml"></partial>
+                
+            </div>
+            <div class="tab-pane fade  p-3" id="tab-10" role="tabpanel">
+                <p class="text-muted">
+                    <partial name="Tabs/_ActivitiesTab.cshtml"></partial>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+                <script>
+                    $("#teams").change(function () {
+
+                       
+        if ($("#teams").val() == "" || $("#teams").val() == null)
+                        $("#teams").remove(); 
+                        $("#form").submit();
+                    })
+
+                    $("#search").on("keypress", function (e) {
+                        if(e.keyCode == 13)
+                            $("#form").submit();
+                    })
+
+
+
+
+
+
+
+
+    $(".projectcontainer").click(function () {
+        var EmployeeId = $(this).data("employeeid");
+
+        $('#avatarBody').html($(this).data("firstname").charAt(0) + $(this).data("lastname").charAt(0))
+        $('#fullname').html($(this).data("firstname") + " " + $(this).data("lastname"))
+        $('#position').html($(this).data("position"))
+        
+
+
+        var offcanvasbody = $("#offcanvas-body");
+        var offcanvasright = $("#offcanvasRight");
+        offcanvasbody.hide();
+        console.log(EmployeeId);
+        offcanvasright.prepend($('<div class="spinner-border text-primary me-2  position-absolute top-50 end-50" role="status" id="offcanvasrightloding" style="width: 8rem; height: 8rem;">').html('<span class= "visually-hidden fs-24" > loading...</span>'))
+
+        offcanvasppened = true;
+
+        $("#activities").empty()
+        $("#TasksTableBody").empty()
+        $("#EmployeesTableBody").empty()
+
+        $.ajax({
+            type: "get",
+            url: "/api/Employees/tasks/" + EmployeeId,
+            contenttype: "application/json",
+            datatype: "json",
+            success: function (response) {
+
+                $("#TasksTableBody").empty()
+
+                var tasks = response;
+
+
+                $.each(tasks, (i, task) => {
+
+                    $("#TasksTableBody").append($("<tr>").html(`
+                                            <td> <a href="home/taskdetails/`+ task.id + `" >` + task.title + ` </a> </td>
+                                <td>`+ task.status + `</td>
+                                <td>`+ task.priority + `</td>
+                            `))
+
+                })
+                if (tasks.length == 0)
+                    $("#TasksTableBody").append($('<td>').html('<p class="fw - semibold text - gray fs - 12" >  there are no Tasks Assigned to this Employee yet </p>'))
+
+                $("#offcanvasrightloding").remove()
+                offcanvasbody.show();
+            },
+            error: function (response) { }
+
+        })
+
+
+
+
+
+
+
+
+        $.ajax({
+            type: "get",
+            url: "/api/Employees/tasks/" + EmployeeId + "?Reported=true",
+            contenttype: "application/json",
+            datatype: "json",
+            success: function (response) {
+
+                $("#tasksReportedTableBody").empty()
+
+                var tasksReported = response;
+
+
+                $.each(tasksReported, (i, task) => {
+
+                    $("#tasksReportedTableBody").append($("<tr>").html(`
+                                                <td> <a href="home/taskdetails/`+ task.id + `" >` + task.title + ` </a> </td>
+                                    <td>`+ task.status + `</td>
+                                    <td>`+ task.priority + `</td>
+                                `))
+
+                })
+
+                if (tasksReported.length == 0)
+                    $("#tasksReportedTableBody").append($('<td>').html('<p class="fw - semibold text - gray fs - 12" >  there are no Tasks Reported from this Employee yet</p>'))
+
+                $("#offcanvasrightloding").remove()
+                offcanvasbody.show();
+            },
+            error: function (response) { }
+
+        })
+
+
+
+
+        $.ajax({
+            type: "get",
+            url: "/api/Employees/activities/" + EmployeeId,
+            contenttype: "application/json",
+            datatype: "json",
+            success: function (response) {
+
+                // $("#TasksTableBody").empty()
+
+                var activities = response;
+
+
+                $.each(activities, (i, activity) => {
+
+                    var task = "";
+
+                    if (activity.task != null)
+                        task = '<span> at <a class="fw-bold" href="/Home/TaskDetails/' + activity.task.id + '">  ' + activity.task.title + ' </a>  task </span>';
+
+
+
+
+                    $("#activities").append($('<li class="author-online has-new-message d-flex gap-3 mb-1">').html(`
+
+
+            <span class="avatar avatar-sm bg-blue text-white"
+                      data-firstName=" `+ activity.actor.firstName + `"
+                      data-lastName="`+ activity.actor.lastName + `"
+                      data-position="`+ activity.actor.position + `"
+                      data-phoneNumber="`+ activity.actor.phoneNumber + `"
+                      data-email="`+ activity.actor.email + `">
+                            <span class="avatar-initials"> `+ activity.actor.firstName.charAt(0) + activity.actor.lastName.charAt(0) + `</span>
+            </span>
+            <div class="user-message">
+                <sapn class="fs-14">
+                                <span class="fw-bold">`+ activity.actor.firstName + ` ` + activity.actor.lastName + `</span> ` + activity.description + `
+                `+ task + `
+                        in <span class="fw-bold">`+ activity.projectName + `</span> project
+                </sapn>
+
+                                    <span class="fs-14 text-gray fw-normal ms-1">`+ new Date(activity.createdAt).toDateString() + `</span>
+            </div>
+
+                        `));
+
+                })
+                
+                if (activities.length == 0)
+                    $("#activities").append($('<td>').html('<p class="fw - semibold text - gray fs - 12" >  there are no Activities issued from this Employee yet </p>'))
+
+
+
+
+                //$("#offcanvasrightloding").remove()
+                //offcanvasbody.show();
+            },
+            error: function (response) { }
+
+        })
+
+
+
+
+
+
+
+    })
+    
+    
+    function clearTables() {
+        $("#activities").empty()
+        $("#TasksTableBody").empty()
+        $("#EmployeesTableBody").empty()
+    }
+
+
+
+
+
+
+
+
+    $("#inviteEmployeeButton").click(function () {
+
+        $("#inviteForm").validate()
+
+        if ($("#inviteForm").valid()) {
+            $(this).attr('disabled', 'disabled')
+            var email = $("#email").val()
+            var asManager = $("#asManager").is(':checked')
+            
+            $.ajax({
+                type: "POST",
+                url: "/api/Invite",
+                contentType: "application/json",
+                data: JSON.stringify({ email: email, AsManager: asManager }),
+                dataType: "json",
+                success: function (response, status) {
+                    console.log(status)
+                    $("#inviteModal").modal("hide")
+                    swal(
+                        'Success',
+                        'email invited successfully!',
+                        'success',
+                    ).then(function () {
+                        location.reload()
+                    });
+
+                },
+                error: function (response) {
+                    $("#closeInviteModal").click()
+                    swal(
+                        response.responseJSON.message,
+                        "error",
+                        'error'
+                    )
+                    $("#inviteEmployeeButton").attr("disabled", false)
+                }
+
+            })
+
+
+
+
+            
+        }
+    })
+
+                </script>

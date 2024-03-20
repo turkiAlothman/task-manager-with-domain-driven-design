@@ -1,0 +1,233 @@
+@model PageList<Tasks>
+<!-- add task modal -->
+<!-- <partial name="_AddTaskModal">-->
+    <vc:add-task-modal> </vc:add-task-modal>
+<div class="page-header d-flex align-items-center justify-content-between mr-bottom-60">
+    <div class="left-part">
+        <h2 class="text-dark">Tasks</h2>
+        <p class="text-gray mb-0">Tasks list</p>
+    </div>
+    <div class="right-part d-flex align-items-center gap-4 flex-wrap">
+        <div>
+            <a class="btn btn-primary ff-heading fs-18 fw-bold py-3" data-bs-toggle="modal"
+                data-bs-target="#CreateTaskModal"><span class="fs-21"><i class="bi bi-plus"></i></span> Create New
+                Task</a>
+        </div>
+    </div>
+</div>
+
+
+<form class="row justify-content-end align-content-center mt-3 p-2" id="filterForm" method="GET">
+    <partial name="_TaskFilterModal"></partial>
+    
+
+
+    <div class="col-sm-4 pb-2" >
+        <div class="w-auto search-form">
+            <input type="text" name="search" id="search" class=" bg-white form-control" placeholder=" Search" value="@HttpContextAccessor.HttpContext.Request.Query["search"].ToString()">
+            <button type="submit" id="searchButton" class="btn"><img src="assets/img/svg/search.svg" alt=""></button>
+        </div>
+    </div>
+
+    <button data-bs-toggle="modal"
+            data-bs-target="#TaskFilterModal" type="button" class="btn btn-primary btn-sm rounded-pill col-md-auto">
+        <i class="bi bi-filter"></i>Filter
+    </button>
+
+
+</form>
+<!-- Table Six -->
+<div class="card border-0 shadow-sm mt-3">
+
+    <div class="card-body pt-2">
+        <div class="table-responsive">
+            <table id="table-6" class="display text-center mb-3">
+                <thead>
+                    <tr>
+
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Assigned to</th>
+
+                        <th>Reporter</th>
+                        <th>Priority</th>
+                        <th>Start Date</th>
+                        <th>Deadline</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (Tasks task in Model)
+                    {
+                        <tr>
+                            <td>
+                                <p class="fs-14 fw-semibold text-dark mb-0">  <a asp-controller="home" asp-action="taskdetails" asp-route-id="@task.Id">@task.Title</a>   </p>
+
+                            </td>
+
+                            <td>
+                                <partial name="_Status" model="@task.Status"></partial>
+                            </td>
+
+
+                            <td>
+
+
+                                <div class="employee d-flex gap-2 flex-wrap">
+                                    <div class="avatar-group">
+                                        @if (task.Asignees != null)
+                                        {
+                                            @foreach (Employees Asignee in task.Asignees)
+                                            {
+                                                <partial name="_SingleAvatar" model="Asignee"></partial>
+                                            }
+                                        }
+
+
+
+                                    </div>
+                                </div>
+
+                            </td>
+
+
+
+                            <td>
+                                <div class="employee d-flex gap-2 flex-wrap">
+                                    <div class="description">
+                                        <h6 class="mb-0"> @task.Reporter.FirstName @task.Reporter.LastName </h6>
+                                        <small>@task.Reporter.Email</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+
+                                <partial name="_PriorityStatus" model="task.Priority"></partial>
+                            </td>
+
+                            <td>
+                                <p class="fs-14 fw-semibold text-dark mb-0">@task.StartDate.ToString("D") </p>
+                                <small>@task.StartDate.ToString("HH:mm tt")</small>
+                            </td>
+                            <td>
+                                <p class="fs-14 fw-semibold text-dark mb-0">@task.DueDate.ToString("D")</p>
+                                <small>@task.DueDate.ToString("HH:mm tt")</small>
+                            </td>
+
+
+                        </tr>
+
+                    }
+
+
+
+
+                </tbody>
+
+                
+            </table>
+
+
+
+            <div aria-label="Page navigation">
+                    <ul class="pagination">
+
+                    @if (Model.HasPrevious)
+                    {
+                        <li class="page-item"><a class="page-link" asp-controller="Home" asp-action="Tasks" asp-route-pageIndex="@(Model.PageIndex - 1)" asp-route-ProjectID="@(HttpContextAccessor.HttpContext.Request.Query["ProjectID"])" asp-route-TeamId="@(HttpContextAccessor.HttpContext.Request.Query["TeamId"])" asp-route-AssignedToMe="@(HttpContextAccessor.HttpContext.Request.Query["AssignedToMe"])"><i class="bi bi-chevron-left"></i></a></li>
+                    }
+                    @for(int i = 0 ; i < Model.TotalPages; i++){
+                        string active = (i + 1) == Model.PageIndex ? "active" : "";
+                        int index = i + 1;
+                        <li class="page-item @active"><a class="page-link" asp-controller="Home" asp-action="tasks" asp-route-pageIndex="@index" asp-route-ProjectID="@(HttpContextAccessor.HttpContext.Request.Query["ProjectID"])" asp-route-TeamId="@(HttpContextAccessor.HttpContext.Request.Query["TeamId"])" asp-route-AssignedToMe="@(HttpContextAccessor.HttpContext.Request.Query["AssignedToMe"])">@index</a></li>
+
+                    }
+                    
+                        
+                        
+                    @if (Model.HasNext)
+                    {
+                        <li class="page-item"><a class="page-link" asp-controller="Home" asp-action="Tasks" asp-route-pageIndex="@(Model.PageIndex + 1)" asp-route-ProjectID="@(HttpContextAccessor.HttpContext.Request.Query["ProjectID"])" asp-route-TeamId="@(HttpContextAccessor.HttpContext.Request.Query["TeamId"])" asp-route-AssignedToMe="@(HttpContextAccessor.HttpContext.Request.Query["AssignedToMe"])"><i class="bi bi-chevron-right"></i></a></li>
+
+                    }
+                    </ul>
+                </div>
+
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        
+        function ProjectSelectOption(ProjectId) {
+            $('#ProjectId').val(ProjectId);
+            $('#ProjectId').change();
+
+        }
+
+
+        function TeamSelectOption(TeamId) {
+
+            $('#TeamId').val(TeamId);
+            $('#TeamId').change();
+
+        }
+
+        
+        ProjectSelectOption(@HttpContextAccessor.HttpContext.Request.Query["ProjectID"]);
+        TeamSelectOption(@HttpContextAccessor.HttpContext.Request.Query["TeamId"]);
+
+
+
+        $("#search").on("keypress", function (e) {
+            if (e.keyCode == 13)
+                $("#filterForm").submit();
+        })
+
+
+        // $("#FilterButton").click(function () {
+        //     console.log("dffffffffffffffffffff")
+
+        //     console.log($("#Status").val())
+        //     $("#closeFilterModal").click()
+        //     $("#filterForm").submit()
+
+        // })
+
+     });
+
+
+    function StatusSelectOption(Status) {
+
+        $('#Status').val(Status);
+        $('#Status').change();
+    }
+    function PrioritySelectOption(Priority) {
+        console.log(Priority)
+
+        $('#Priority').val(Priority);
+        $('#Priority').change();
+
+    }
+
+    StatusSelectOption('@HttpContextAccessor.HttpContext.Request.Query["Status"]');
+    PrioritySelectOption('@HttpContextAccessor.HttpContext.Request.Query["Priority"]');
+
+
+    $("#CLearButton").click(function () {
+        $('#Priority').val("");
+        $('#Status').val("");
+        $('#TeamId').val("");
+        $('#ProjectId').val("");
+        $("#filterForm").submit();
+    })
+
+
+
+    // $("#teams").on("change", function () {
+    //     $("#filterForm").submit();
+    // })
+
+</script>

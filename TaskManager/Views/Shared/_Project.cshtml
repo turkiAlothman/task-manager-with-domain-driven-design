@@ -1,0 +1,64 @@
+﻿@model Projects
+<div class="col-xxl-4 col-lg-6">
+    <div class="card border-0">
+
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div class="card-content">
+                    
+                    <h4 class="text-dark mb-1 projectcontainer" data-projectId="@Model.Id" data-name="@Model.Name" data-type="@Model.Type">
+                        <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" href="#offcanvasRight" role="button" aria-controls="offcanvasRight">
+
+                            @Model.Name
+                    </a> </h4>
+                    <p class="fs-14 text-gray">@Model.Type</p>
+                </div>
+
+            </div>
+
+            <!-- Middle Content -->
+            <div>
+                <h6 class="fw-semibold text-gray mb-1">Description</h6>
+                <p class="fs-14 text-dark">@Model.Description</p>
+            </div>
+
+            <!-- Avatar Div-->
+            <div class="avatar-content">
+                <h6 class="fw-semibold text-gray mb-2">Participants</h6>
+                <div class="d-flex justify-content-between align-items-center gap-4">
+                    <!-- Avatar Group -->
+                    <div class="avatar-group">
+                        @{
+                            int count = Model.Employees.Count();
+                            int index = 0;
+                        }
+                        @foreach(Employees employee in Model.Employees){
+                            if(index == 5)
+                            {
+                                <span class="avatar bg-blue rounded-circle">
+                                    <span class="avatar-initials rounded-circle text-white">+@count</span>
+                                </span>
+                                break;
+                            }
+                            else
+                            {
+                                <partial name="_SingleAvatar" model="employee"></partial>
+                            }
+                                
+                            
+                            index++;
+                        }
+                        @if(count == 0)
+                        {
+                            <p class="fw-semibold text-gray fs-12">there are not Participants yet</p>
+                        }
+                    </div>
+
+                 
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

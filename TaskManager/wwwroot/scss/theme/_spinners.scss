@@ -1,0 +1,45 @@
+// Spinners
+.spinner-border {
+    // Custom border style
+    &.border-dashed {
+        border-style: dashed;
+    }
+    &.border-dotted {
+        border-style: dotted;
+    }
+    &.border-double {
+        border-style: double;
+    }
+
+    // Custom border-right color
+    &.border-right-primary {
+        border-right-color: $primary;
+    }
+    &.border-right-secondary {
+        border-right-color: $secondary;
+    }
+    &.border-right-success {
+        border-right-color: $success;
+    }
+    &.border-right-info {
+        border-right-color: $info;
+    }
+    &.border-right-warning {
+        border-right-color: $warning;
+    }
+    &.border-right-danger {
+        border-right-color: $danger;
+    }
+    &.border-right-orange {
+        border-right-color: $orange;
+    }
+    &.border-right-dark {
+        border-right-color: $dark;
+    }
+    &.border-right-light {
+        border-right-color: $light;
+    }
+    &.border-right-white {
+        border-right-color: $white;
+    }
+}

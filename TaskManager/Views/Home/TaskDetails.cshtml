@@ -1,0 +1,471 @@
+﻿  @model Tasks
+
+
+
+<!-- delete task modal -->
+<div class="modal fade" id="deleteTaskModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                are you sure you want to delete this task? all corresponding attachments and comments will be deleted
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-200 text-danger btn-sm px-2" id="deleteCancel" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-sm  px-2" id="deleteButton">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- jQuery for Bootstrap popover -->
+
+  <div class="card border-0">
+        <div class="card-header p-5">
+            <div class="d-flex align-items-center justify-content-between gap-5 flex-wrap mb-7">
+            <div class="col-sm-9">
+                <h4 class="fs-28 mb-1 flex-grow-1" id="title"> @Model.Title </h4>
+                <p class="fs-16 text-gray mb-0">@Model.Project.Name project</p>
+
+            </div>
+                
+                <div class="form-group">
+                <label for="reporster" class="text-gray-300 form-label">Reporter </label>
+
+                <div id="reporster" class="m-0 p-0">
+                    <partial name="_SingleAvatar" model="@Model.Reporter"></partial>
+                </div>
+                    
+            </div>
+            </div>
+
+            <div class=" justify-content-between gap-3 gap-xl-4 flex-wrap">
+                <div>
+                <div class="row align-items-center justify-content-between gap-5 flex-wrap mb-3">
+
+                    <div class=" col-sm-4 ml-5">
+
+                        @{
+                                        @await Component.InvokeAsync("AddAsigneesCard", new { allowChange = HttpContextAccessor.GetUserID() == Model.Reporter.Id, Asignees = Model.Asignees, task = Model, TaskAdded = true, Execlude = false })
+                            ;
+                        }
+                    </div>
+                    
+
+                    <div class="form-group col-sm-3 m-0">
+                        <label class="text-gray-300 form-label">Priority </label>
+                        @if (HttpContextAccessor.GetUserID() == Model.Reporter.Id || Model.Asignees.Any(a => a.Id == HttpContextAccessor.GetUserID()))
+                        {
+
+                            
+                            <div class=" border border-primary rounded-1">
+
+                                <select asp-for="Priority" class="kleon-select-simple">
+
+                                    <option value="High"> High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+
+                                </select>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <partial name="_PriorityStatus" model="Model.Priority"></partial>
+                        }
+
+                        
+
+                    </div>
+
+                    
+                    <div class="from-group col-sm-3 ">
+                        
+                        <p class="text-gray-300 form-label">Status </p>
+                         @if (HttpContextAccessor.GetUserID() == Model.Reporter.Id || Model.Asignees.Any(a => a.Id == HttpContextAccessor.GetUserID()))
+                        {
+                            
+                            <div class=" border border-primary rounded-1">
+
+                                <select asp-for="Status" class="kleon-select-simple">
+
+                                    <option value="Canceled"> Canceled</option>
+                                    <option value="Planned"> Planned</option>
+                                    <option value="In Progress"> In Progress</option>
+
+                                    <option value="Done">Done</option>
+
+                                </select>
+                            </div>
+                        }
+                        else
+                        {
+                            <partial name="_Status" model="@Model.Status"></partial>                            
+                        }
+
+
+                    </div>
+                   
+                </div>
+                    
+
+             
+
+                    <div class="d-flex justify-content-between align-items-center  gap-3 gap-xl-4 flex-wrap mt-6">
+                        
+
+                        <div class="d-flex gap-2">
+                            <i class="bi bi-clock text-primary"></i>
+                            <div>
+                                <p class="fw-semibold mb-1">Start Date</p>
+                            <p class="fs-14 text-gray mb-0">@Model.StartDate.ToString("D")</p>
+                            <small class="fs-12 text-gray mb-0">@Model.StartDate.ToString("HH:mm tt")</small>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <i class="bi bi-clock text-warning"></i>
+                            <div>
+                                <p class="fw-semibold mb-1">Due Date</p>
+                            <p class="fs-14 text-gray mb-0">@Model.DueDate.ToString("D")</p>
+                            <small class="fs-12 text-gray mb-0">@Model.DueDate.ToString("HH:mm tt")</small>
+                            </div>
+                        </div>
+
+                    <div>
+                        <div class=" btn-outline-gray-200 ff-heading fs-16 fw-bold text-dark d-flex align-items-center"> <i class="bi bi-chat-fill fs-20 text-primary me-2"></i> @Model.Comments.Count() Comments</a>
+                    </div>
+
+                    
+                    </div>
+                </div>
+
+              
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <h6 class="text-uppercase ls-1 text-gray my-3  mt-2">Task Description</h6>
+            <p id="description"> @Model.Description</p>
+
+            <h6 class="text-uppercase ls-1 text-gray my-3 mt-6">Attachments</h6>
+            <div class="row justify-content-start align-items-center">
+
+                
+                @if(Model.Attachments.Count() == 0)
+                {
+                    <small class="fs-12 text-gray mb-0">No attachments</small>
+                }
+                @foreach (Attachments attachment in Model.Attachments)
+                {
+                    if (new List<string> {".jpg", ".png", ".jpeg"}.Contains(attachment.url.GetExtansion()))
+                    {
+                        <div class="col-sm-3 h-25 p-0 me-1"><img src="@attachment.url" class="img-thumbnail img-fluid" alt="..." onclick="this.requestFullscreen()"></div>
+                        
+                        
+                    }
+                    else
+                    {
+                        <div class="bg-soft-primary p-3 rounded-1 col-sm-3 me-2">
+                            <img src="assets/img/svg/folder-primary.svg" alt="img">
+                            <a class="fw-semibold mb-0" href="@attachment.url" class="text-truncate"> @attachment.url.GetFileName()</a>
+                        </div>
+                        
+                    }
+
+                }
+            </div>
+
+            <h6 class="text-uppercase text-gray mt-7">Comments</h6>
+            <form id="MessageForm">
+                <div class="comment form-group position-relative">
+                    <textarea id="comment" class="form-control p-4" placeholder="Type comment here..." required=""></textarea>
+                    <div class="d-flex align-items-center gap-5 fs-24 position-absolute top-50 translate-middle-y end-0 me-4">
+                        <div class="btn-group align-items-start">
+@* 
+                            <button id="dpz-multiple-files" class="dropzone file-upload btn border-0 p-1 px-2 fs-30 rounded-2 text-primary m-0" type="button">
+                                <div class="dz-message" data-dz-message><span><i class="bi bi-paperclip fs-30"></i></span></div>
+                            </button> *@
+                            <a id="commentButton" href="javascript:void(0)" onclick="SendComment()" class="btn btn-primary rounded-2 ff-heading fs-18 text-uppercase m-0 flex-shrink-0"> <i class="bi bi-send-fill me-2"></i> Send</a>
+                        </div>
+                    </div>
+                </div>
+            
+            </form>
+            
+
+
+
+            <ul class="p-0 list-unstyled">
+
+ 
+                
+                @foreach (Comments comment in Model.Comments)
+                {
+                    <partial name="_Comment" model="comment"></partial>
+                }
+                    
+
+              
+              
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+<partial name="_Activities" model="Model.Activities"></partial>
+
+
+
+
+
+
+<div class="card border-0 dropdown-widget p-5">
+    <div class="card-header border-0 mb-3 d-flex align-items-center gap-4">
+        <h4 class="mb-0">Actions</h4>
+        
+    </div>
+   
+    @if(HttpContextAccessor.GetUserID() == Model.Reporter.Id)
+    {
+        <div class="card-body p-0">
+            <button type="button" class="btn btn-danger rounded-1" data-bs-toggle="modal" data-bs-target="#deleteTaskModal">deleteTask</button>
+        </div>
+    }
+    
+</div>
+
+
+<script>
+
+
+    $("#deleteButton").click(function () {
+        $("#deleteButton").attr("disabled", "disabled");
+        
+        $.ajax({
+            type: "DELETE",
+            url: "/api/tasks/" + @Model.Id,
+            contentType: "application/json",
+            success: function (response) {
+                $("#deleteCancel").click();
+                swal(
+                    'Success',
+                    'task deleted successfully!',
+                    'success',
+                ).then(function () {
+                    location.replace("home/tasks")
+                });
+
+            },
+        error: function (response) {
+                $("#deleteCancel").click();
+                swal(
+                    'Error',
+                    'error',
+                    'error',
+                ).then(function () {
+                    location.replace("home/tasks")
+                });
+        }
+        })
+    })
+
+    function SendComment() {
+        
+            $("#MessageForm").validate()
+
+            if ($("#MessageForm").valid()){
+
+            $("#commentButton").attr('disabled', 'disabled');
+                var comment = $("#comment").val();
+              
+                $.ajax({
+                    type:"PATCH",
+                    url: "/api/Tasks/AddComment/" + @Model.Id ,
+                    data:'\"'+ comment+ '\"',
+                    contentType:"application/json",
+                    success: function (response) { 
+                    location.reload();
+                    },
+                    error: function (response) { }
+                })
+            }
+    }
+
+
+
+    $("#Priority").on("change", function () {
+        
+        update([
+            {
+                "path": "/Priority",
+                "op": "replace",
+                "value": this.value
+            }
+        ])
+    })
+
+    $("#Status").on("change", function () {
+        update([
+            {
+                "path": "/Status",
+                "op": "replace",
+                "value": this.value
+            }
+        ])
+    })
+
+
+
+    function update(data) {
+
+        $.ajax({
+            type: "PATCH",
+            url: "/api/Tasks/" + @Model.Id,
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (response) { },
+            error: function (response) { },
+        })
+    }
+
+
+    function deleteComment(id) {
+
+        $.ajax({
+            type: "DELETE",
+        url: "/api/Tasks/DeleteComment/" + id,
+            contentType: "application/json",
+            success: function () {
+                location.reload();
+            },
+            error: function () { }
+        })
+    }
+
+
+
+     @if (HttpContextAccessor.GetUserID() == Model.Reporter.Id || Model.Asignees.Any(a => a.Id == HttpContextAccessor.GetUserID()))
+    {
+        
+    <text>
+
+
+
+            var haveTitleForm = false;
+
+        $("#title").dblclick(function () {
+
+            if (!haveTitleForm) {
+                $(this).html('<div class="w-75"> <input type="text" name="titleForm" class="form-control" id="titleForm" value="' + $(this).html() + '" /> </div> ');
+                haveTitleForm = true;
+            }
+
+        });
+
+        $(window).click(function (event) {
+            if (!event.target.matches('#titleForm') && haveTitleForm) {
+                var title = $("#titleForm").val()
+                $("#title").html(title)
+                haveTitleForm = false;
+
+                update([
+                    {
+                        "path": "/Title",
+                        "op": "replace",
+                        "value": title
+                    }
+                ]);
+
+            }
+        });
+
+        $("body").on("keypress", "#titleForm", function (e) {
+            if (e.keyCode == 13) {
+                var title = $("#titleForm").val();
+                $("#title").html(title);
+                haveTitleForm = false;
+
+                update([
+                    {
+                        "path": "/Title",
+                        "op": "replace",
+                        "value": title
+                    }
+                ]);
+            }
+
+        });
+
+
+
+
+        var haveDescriptionForm = false;
+
+        $("#description").dblclick(function () {
+
+            if (!haveTitleForm) {
+                $(this).html('<textarea name="descriptionForm" class="form-control w-50" id="descriptionForm" >' + $(this).html() + ' </textarea>');
+                haveDescriptionForm = true;
+            }
+
+        });
+
+        $(window).click(function (event) {
+            if (!event.target.matches('#descriptionForm') && haveDescriptionForm) {
+                var description = $("#descriptionForm").val()
+                $("#description").html(description)
+                haveDescriptionForm = false;
+
+                update([
+                    {
+                        "path": "/Description",
+                        "op": "replace",
+                        "value": description
+                    }
+                ]);
+
+            }
+        });
+
+        $("body").on("keypress", "#descriptionForm", function (e) {
+            if (e.keyCode == 13) {
+                var description = $("#descriptionForm").val();
+                $("#description").html(description);
+                haveDescriptionForm = false;
+
+                update([
+                    {
+                        "path": "/Description",
+                        "op": "replace",
+                        "value": description
+                    }
+                ]);
+            }
+
+        });
+    
+    </text>
+    
+    }
+
+
+    
+
+
+
+    // $("img").click(function () {
+    //     $(this).requestFullscreen()
+    // })
+
+</script>

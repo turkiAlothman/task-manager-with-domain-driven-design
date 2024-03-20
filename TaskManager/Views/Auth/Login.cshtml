@@ -1,0 +1,45 @@
+﻿@model LoginForm
+
+@{
+    Layout = "_AuthLayout";
+}
+
+<div class="card-header border-0 p-0 text-center">
+    <partial name="_Logo" />
+    <h3>Welcome back!</h3>
+    <p class="fs-14 text-dark my-4">Please login using your account.</p>
+</div>
+
+<div class="card-body p-0">
+   
+        
+       
+    <form class="form-horizontal" method="POST" asp-controller="Auth" asp-action="login">
+
+        <input type="hidden" asp-for="returnUrl" />
+        
+        <div class="form-group">
+            <input asp-for="Email" type="text" class="form-control" placeholder="Type Email">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input asp-for="Password" type="password" class="form-control" placeholder="Type Password">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-check">
+            <label class="form-label mb-0" for="checkbox1">stay logged in</label>
+            <input asp-for="StayLoggedIn" type="checkbox" class="form-check-input" value="true">
+
+        </div>
+        <apan class="text-danger"> @Html.ValidationMessage("LoginError") </apan>
+
+        <button type="submit"
+            class="btn btn-primary w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold shadow">Login</button>
+
+        <p class="d-flex align-items-center justify-content-between mt-4 mb-4">Forgot your password? <a
+                asp-controller="auth" asp-action="ResetPasswordRequest" class="text-primary fw-bold text-decoration-underline">Reset Here</a></p>
+
+
+    </form>
+</div>

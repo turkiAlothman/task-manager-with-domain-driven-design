@@ -1,0 +1,29 @@
+﻿@model string 
+
+@{
+    string icon = "";
+    string color = "";
+}
+@switch (Model)
+{
+    case "Planned":
+        icon = "calendar";
+        color = "warning";
+        break;
+    case "In Progress":
+        icon = "clock";
+        color = "info";
+        break; 
+    case "Done":
+        icon = "check";
+        color = "success";
+        break;
+    case "Canceled":
+        icon = "x";
+        color = "danger";
+        break;
+}
+
+<span class="badge badge-soft-@color">
+    <i class="bi bi-@icon"></i> @Model
+</span>

@@ -1,0 +1,27 @@
+// Breadcrumb
+.breadcrumb-item {
+    > a {
+        transition: $nav-link-transition;
+        color: $breadcrumb-color;
+        &:hover {
+        color: $breadcrumb-hover-color;
+        }
+    }
+    &.active { 
+        cursor: default; 
+    }
+}
+
+
+// Light version
+.breadcrumb-light .breadcrumb-item  {
+    > a {
+        color: $breadcrumb-light-color;
+        &:hover {
+        color: $breadcrumb-light-hover-color;
+        }
+    }
+    &.active { 
+        color: $breadcrumb-light-active-color; 
+    }
+}

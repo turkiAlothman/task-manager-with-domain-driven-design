@@ -1,0 +1,13 @@
+// Dropdowns
+.dropdown-menu {
+    .dropdown-header {
+        font-family: $font-family-heading;
+        font-size: $_16px;
+        border-bottom: 1px solid $dropdown-border-color;
+    }
+    &.dropdown-menu-dark {
+        .dropdown-header {
+            border-bottom: 1px solid rgba($dropdown-dark-color, 0.15);
+        }
+    }
+}

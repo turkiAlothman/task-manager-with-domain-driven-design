@@ -1,0 +1,112 @@
+.widget-categories {
+    border: $_1px solid $light-200;
+    border-radius: $border-radius;
+    padding:  $_32px;
+    .list-group {
+        border: none;
+        .list-group-item {
+            border: none;
+            padding: $_7px $_0px;
+            a {
+                color: $gray-300;
+                text-decoration: none;
+                transition: $transition-base;
+                &:hover {
+                    color: $purple;
+                }
+            }
+        }
+    }
+}
+
+.widget-categories-dropdown {
+    border: $_1px solid $light-200;
+    border-radius: $border-radius;
+    padding:  $_32px;
+    .accordion {
+        border: none;
+        .accordion-item {
+            border: none;
+            padding: $_7px $_0px;
+            ul li {
+                font-size: $_14px;
+                padding: $_6px $_0px;
+                border: none;
+                a {
+                    position: relative;
+                    color: $gray-100;
+                    padding: $_0px $_14px;
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 50%;
+                        width: $_9px;
+                        height: $_1px;
+                        background-color: $gray-100;
+                    }
+                }
+            }
+            
+            a {
+                color: $gray-300;
+                text-decoration: none;
+                transition: $transition-base;
+                cursor: pointer;
+                &.collapsed {
+                    .caret {
+                        background-color: $gray-100;
+                        color: $gray-100;
+                    }
+                }
+                .caret {
+                    width: $_24px;
+                    height: $_24px;
+                    line-height: $_24px;
+                    border-radius: 50%;
+                    font-size: $_12px;
+                    background-color: $light-400;
+                    color: $red;
+                    transition: $transition-base;
+                }
+                &:not(.collapsed) {
+                    .caret {
+                        transform: rotate(-180deg);
+                    }
+                }
+                &:hover {
+                    color: $red;
+                    .caret {
+                        background-color: $light-400;
+                        color: $red;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.widget-products {
+    border: $_1px solid $light-200;
+    border-radius: $border-radius;
+    padding:  $_32px;
+    .list-group {
+        border: none;
+        .list-group-item {
+            border: none;
+            padding: $_0px $_0px;
+            .widget-product-title {
+                a {
+                    font-family: $font-family-base;
+                    font-size: $_13px;
+                    line-height: $_22px;
+                    color: $dark;
+                    text-decoration: none;
+                    &:hover {
+                        color: $gray-300;
+                    }
+                }
+            }
+        }
+    }
+}

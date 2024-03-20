@@ -1,0 +1,120 @@
+.card {
+    background-color: $white;
+    transition: all .5s ease-in-out;
+    position: relative;
+    border-radius: $card-border-radius;
+    box-shadow: $card-box-shadow;
+    margin-bottom: $_30px;
+    overflow: auto;
+	
+
+    &-body {
+        padding: $_30px;
+    }
+
+    &-title {
+        font-size: $_24px;
+        font-weight: $font-weight-bold;
+        // line-height: 2.2rem;
+        color: $black;
+        text-transform: capitalize;
+        // margin-bottom: 1.5rem;
+    
+        &--large{
+            font-size: 1.5rem;
+        }
+    
+        &--medium{
+            font-size: 1rem;
+        }
+    
+        &--small{
+            font-size: 0.875rem;
+        }
+    }
+
+    &-header {
+        border-color: $light-200;
+        border-bottom: 1px solid $light-200;
+        position: relative;
+        background: transparent;
+        padding: $_10px $_0px;
+
+        .card-title{
+            margin-bottom: $_0px;
+        }
+        .subtitle{
+            padding-top: $_5px;
+            font-size: $_14px;
+        }
+    }
+
+    &-footer {
+        border-color: $light-200;
+        background: transparent;
+        padding: $_20px $_20px;
+    }
+
+    h3.lg {
+        font-size: $_38px;
+    }
+    h5.md {
+        font-size: $_18px;
+    }
+
+    &-graph {
+        .card-img {
+            span {
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                text-align: center;
+                border-radius: $border-radius-sm;
+            }
+        }
+    }
+    &-footer {
+        .icon {
+            font-size: $_20px;
+        }
+        p {
+            font-size: $_14px;
+            span {
+                font-family: $font-family-heading;
+                font-size: $_18px;
+            }
+        }
+    }
+
+    &-donut {
+        h5 {
+            font-family: $font-family-base;
+            font-size: $_18px;
+        }
+        p {
+            font-size: $_14px;
+            color: $gray;
+        }
+    }
+    &.card-total-employees {
+        .card-img {
+            span {
+                width: 56px;
+                height: 56px;
+                line-height: 56px;
+                text-align: center;
+                border-radius: $border-radius-sm;
+            }
+        }
+    }
+}
+
+.transparent-card{
+    &.card{
+        background: transparent;
+        border: 0px solid transparent;
+        box-shadow: none;
+    }
+}
+
+
