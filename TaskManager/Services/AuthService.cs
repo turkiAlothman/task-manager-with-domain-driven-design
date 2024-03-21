@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
-using Domain.Models.DomainModels;
 using TaskManager.Services;
+using Domain.Entities;
 
 
 namespace TaskManager.Services

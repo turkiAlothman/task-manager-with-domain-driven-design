@@ -1,4 +1,5 @@
-﻿using Domain.Models.DomainModels;
+﻿using Domain.Entities;
+
 namespace Domain.Models.Repositories.interfaces
 {
     public interface IActivitiesRepository

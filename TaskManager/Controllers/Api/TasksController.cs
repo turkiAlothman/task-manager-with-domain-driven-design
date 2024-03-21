@@ -4,10 +4,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using TaskManager.HttpExtensions;
-using Domain.Models.DomainModels;
 using Domain.Models.Repositories.interfaces;
 using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
+using Domain.Entities;
 
 namespace TaskManager.Controllers.Api
 {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using TaskManager.HttpExtensions;
-using Domain.Models.DomainModels;
 using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
 using TaskManager.Utilities;
+using Domain.Entities;
 namespace TaskManager.Controllers
 {
 

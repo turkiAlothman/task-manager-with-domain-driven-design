@@ -1,11 +1,11 @@
 ﻿using System.Diagnostics;
-using Domain.Models.DomainModels;
 using TaskManager.HttpExtensions;
 using System.Text.Json;
 using Azure;
 using Newtonsoft.Json.Linq;
 using Domain.Models.Repositories.interfaces;
 using System.Linq;
+using Domain.Entities;
 
 namespace TaskManager.Middlewares
 {

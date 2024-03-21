@@ -7,10 +7,10 @@ using RandomString4Net;
 using System.ComponentModel.DataAnnotations;
 using Application.Services.Interfaces;
 using infrastructure.Extentions;
-using Domain.Models.DomainModels;
 using TaskManager.Services;
 using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
+using Domain.Entities;
 
 
 namespace TaskManager.Controllers

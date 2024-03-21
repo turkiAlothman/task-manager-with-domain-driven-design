@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Domain.Models.DomainModels;
 using Domain.Models.Repositories.interfaces;
 using TaskManager.Components.ViewModels;
+using Domain.Entities;
 namespace TaskManager.Components
 {
     public class ProjectsDropDown : ViewComponent

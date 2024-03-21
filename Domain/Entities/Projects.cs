@@ -1,4 +1,4 @@
-﻿namespace Domain.Models.DomainModels
+﻿namespace Domain.Entities
 {
     public class Projects : BaseEntity
     {

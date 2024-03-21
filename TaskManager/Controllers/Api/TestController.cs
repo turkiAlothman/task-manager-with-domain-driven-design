@@ -7,7 +7,7 @@ using Microsoft.Identity.Client.Extensions.Msal;
 using System.Security.Claims;
 using infrastructure.Extentions;
 using infrastructure.Persistence;
-using Domain.Models.DomainModels;
+using Domain.Entities;
 using Domain.Models.Repositories.interfaces;
 using Application.Services.Interfaces;
 

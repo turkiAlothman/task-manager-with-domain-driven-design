@@ -1,9 +1,9 @@
 ﻿using System.Numerics;
 using System;
 using infrastructure.Extentions;
-using Domain.Models.DomainModels;
 using Microsoft.Identity.Client;
 using infrastructure.Persistence;
+using Domain.Entities;
 namespace TaskManager
 {
     public static class DbSeeder

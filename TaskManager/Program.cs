@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 using TaskManager.Middlewares;
 using Domain.Models;
-using Domain.Models.DomainModels;
+using Domain.Entities;
 using Domain.Models.Repositories.interfaces;
 using Application.Services.Interfaces;
 using infrastructure;

@@ -6,10 +6,10 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using infrastructure.Configurations;
-using Domain.Models.DomainModels;
 using Application.Services.Interfaces;
 using Domain.Models.Models;
 using Application.Services.Interfaces;
+using Domain.Entities;
 
 namespace infrastructure
 {

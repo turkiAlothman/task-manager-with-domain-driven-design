@@ -1,4 +1,4 @@
-﻿using Domain.Models.DomainModels;
+﻿using Domain.Entities;
 
 namespace TaskManager.Components.ViewModels
 {

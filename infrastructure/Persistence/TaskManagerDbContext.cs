@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Domain.Models.DomainModels;
+using Domain.Entities;
 namespace infrastructure.Persistence
 {
     public class TaskManagerDbContext : DbContext

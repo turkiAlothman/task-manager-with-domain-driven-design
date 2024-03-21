@@ -1,6 +1,6 @@
-﻿namespace Domain.Models.DomainModels
+﻿namespace Domain.Entities
 {
-    public class Attachments: BaseEntity
+    public class Attachments : BaseEntity
     {
         public string? url { get; set; }
         public string? PhysicalPath { get; set; }

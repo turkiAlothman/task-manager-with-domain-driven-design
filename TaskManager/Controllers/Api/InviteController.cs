@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.HttpExtensions;
-using Domain.Models.DomainModels;
 using Domain.Models.Repositories.interfaces;
 using RandomString4Net;
 using infrastructure.Extentions;
@@ -9,6 +8,7 @@ using Domain.Models.Models;
 using TaskManager.RequestForms;
 using System.Security.Claims;
 using Application.Services.Interfaces;
+using Domain.Entities;
 namespace TaskManager.Controllers.Api
 {
     [Route("api/[controller]")]

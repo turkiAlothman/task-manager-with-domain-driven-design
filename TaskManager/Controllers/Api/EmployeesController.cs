@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 using System.Runtime.Serialization;
-using Domain.Models.DomainModels;
 using Domain.Models.Repositories.interfaces;
+using Domain.Entities;
 
 namespace TaskManager.Controllers.Api
 {

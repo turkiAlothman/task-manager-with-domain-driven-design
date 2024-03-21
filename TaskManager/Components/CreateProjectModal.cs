@@ -1,7 +1,8 @@
 ﻿
 
 using Microsoft.AspNetCore.Mvc;
-using Domain.Models.DomainModels;
+using Domain.Entities;
+using Domain.Entities;
 using TaskManager.RequestForms;
 namespace TaskManager.Components
 {

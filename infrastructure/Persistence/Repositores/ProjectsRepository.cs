@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using System.Linq;
-using Domain.Models.DomainModels;
 using Domain.Models.Repositories.interfaces;
 using System.Collections.Generic;
+using Domain.Entities;
 
 
 namespace infrastructure.Persistence.Repositores

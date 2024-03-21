@@ -1,4 +1,4 @@
-﻿using Domain.Models.DomainModels;
+﻿using Domain.Entities;
 using Domain.Models.Models;
 
 namespace Application.Services.Interfaces

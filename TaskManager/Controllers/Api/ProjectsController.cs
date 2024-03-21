@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TaskManager.HttpExtensions;
-using Domain.Models.DomainModels;
 using infrastructure.Persistence.Repositores;
 
 using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
+using Domain.Entities;
 
 namespace TaskManager.Controllers.Api
 {
