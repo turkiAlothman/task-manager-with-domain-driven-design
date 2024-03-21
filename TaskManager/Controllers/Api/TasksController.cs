@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using TaskManager.Extentions;
-using TaskManager.Models.DomainModels;
-using TaskManager.Models.Repositories.interfaces;
+using TaskManager.HttpExtensions;
+using Domain.Models.DomainModels;
+using Domain.Models.Repositories.interfaces;
+using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
 
 namespace TaskManager.Controllers.Api

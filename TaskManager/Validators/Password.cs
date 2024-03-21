@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using TaskManager.Extentions;
-using TaskManager.ExtentionsMethods;
+using TaskManager.HttpExtensions;
 
 
 namespace TaskManager.Validators

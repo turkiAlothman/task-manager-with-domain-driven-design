@@ -1,19 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TaskManager.Extentions;
-using TaskManager.Models.DomainModels;
-using TaskManager.Models.Repositories.implementers;
-using TaskManager.Models.Repositories.interfaces;
+using TaskManager.HttpExtensions;
+using Domain.Models.DomainModels;
+using Domain.Models.Repositories.interfaces;
 using RandomString4Net;
-using System.Diagnostics;
-using System.ComponentModel.DataAnnotations;
-using TaskManager.ExtentionsMethods;
-using TaskManager.Services.Implementers;
-using TaskManager.Services.Interfaces;
-using TaskManager.Models.Models;
+using infrastructure.Extentions;
+using Domain.Models.Models;
 using TaskManager.RequestForms;
 using System.Security.Claims;
-
+using Application.Services.Interfaces;
 namespace TaskManager.Controllers.Api
 {
     [Route("api/[controller]")]
@@ -62,7 +57,7 @@ namespace TaskManager.Controllers.Api
             string SecretKey =  RandomString.GetString(Types.ALPHABET_LOWERCASE, 10);
 
             // send SecretKey to email with view 
-            _emailService.SendInviteEmail(inviter, form.email, SecretKey);
+            _emailService.SendInviteEmail(inviter, form.email, SecretKey, _contextAccessor.HttpContext.Request.Host.Value);
 
 
             await _invitesRepository.CreateInvite(new Invites { inviteeEmail = form.email, AsManager = form.AsManager,inviter = inviter , SecretKey = SecretKey.Hash() });

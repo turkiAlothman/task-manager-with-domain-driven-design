@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client.Extensions.Msal;
 using System.Security.Claims;
-using TaskManager.Extentions;
-using TaskManager.Models;
-using TaskManager.Models.DomainModels;
-using TaskManager.Models.Repositories.interfaces;
-using TaskManager.Services.Interfaces;
+using infrastructure.Extentions;
+using infrastructure.Persistence;
+using Domain.Models.DomainModels;
+using Domain.Models.Repositories.interfaces;
+using Application.Services.Interfaces;
 
 namespace TaskManager.Controllers.Api
 {

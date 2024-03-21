@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
-using TaskManager.Models.DomainModels;
-using TaskManager.Extentions;
+using Domain.Models.DomainModels;
+using TaskManager.HttpExtensions;
 using System.Text.Json;
 using Azure;
 using Newtonsoft.Json.Linq;
-using TaskManager.Models.Repositories.interfaces;
+using Domain.Models.Repositories.interfaces;
 using System.Linq;
 
 namespace TaskManager.Middlewares

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaskManager.Models;
-using TaskManager.Models.DomainModels;
-using TaskManager.Models.Repositories.implementers;
-using TaskManager.Models.Repositories.interfaces;
+using infrastructure.Persistence;
+using Domain.Models.DomainModels;
+
+using Domain.Models.Repositories.interfaces;
 using TaskManager.Components.ViewModels;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.IdentityModel.Tokens;

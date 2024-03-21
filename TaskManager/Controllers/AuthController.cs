@@ -5,17 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using RandomString4Net;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Claims;
-using TaskManager.ExtentionsMethods;
-using TaskManager.Models.DomainModels;
-using TaskManager.Models.Models;
-using TaskManager.Models.Repositories.interfaces;
+using Application.Services.Interfaces;
+using infrastructure.Extentions;
+using Domain.Models.DomainModels;
+using TaskManager.Services;
+using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
-using TaskManager.Services.Implementers;
-using TaskManager.Services.Interfaces;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
 namespace TaskManager.Controllers
@@ -184,10 +179,10 @@ namespace TaskManager.Controllers
             // request expire after 20 minutes
             DateTime ExpirationDate = DateTime.Now.AddMinutes(20);
             string SecretKey = RandomString.GetString(Types.ALPHABET_LOWERCASE, 30);
-            
+
 
             // send email here 
-            await this._emailService.SendResetPasswordEmail(Email, SecretKey);
+            await this._emailService.SendResetPasswordEmail(Email, SecretKey, _httpContextAccessor.HttpContext.Request.Host.Value);
 
             await _resetPasswordRepository.CreateResetPasswordRequest(new ResetPassword { Email = Email , ExpirationDate =  ExpirationDate , SecretKey = SecretKey.Hash() });
 

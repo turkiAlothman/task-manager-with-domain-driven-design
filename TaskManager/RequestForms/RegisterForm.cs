@@ -2,8 +2,7 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
-using TaskManager.Extentions;
-using TaskManager.ExtentionsMethods;
+using TaskManager.HttpExtensions;
 using TaskManager.Validators;
 namespace TaskManager.RequestForms
 {

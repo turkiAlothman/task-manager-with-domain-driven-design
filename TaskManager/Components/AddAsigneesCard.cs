@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaskManager.Models.DomainModels;
+using Domain.Models.DomainModels;
 using TaskManager.Components.ViewModels;
 
 

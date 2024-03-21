@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TaskManager.Models;
+using infrastructure.Persistence;
 
 #nullable disable
 
@@ -49,7 +49,7 @@ namespace TaskManager.Migrations
                     b.ToTable("EmployeesTasks");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Activities", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Activities", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,7 +84,7 @@ namespace TaskManager.Migrations
                     b.ToTable("Activities");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Attachments", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Attachments", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,7 +112,7 @@ namespace TaskManager.Migrations
                     b.ToTable("Attachments");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Comments", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Comments", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,7 +143,7 @@ namespace TaskManager.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Employees", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Employees", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -195,7 +195,7 @@ namespace TaskManager.Migrations
                     b.ToTable("employees");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Invites", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Invites", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -228,7 +228,7 @@ namespace TaskManager.Migrations
                     b.ToTable("Invites");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Projects", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Projects", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -263,7 +263,7 @@ namespace TaskManager.Migrations
                     b.ToTable("projects");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.ResetPassword", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.ResetPassword", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -290,7 +290,7 @@ namespace TaskManager.Migrations
                     b.ToTable("resetPassword");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Tasks", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Tasks", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -341,7 +341,7 @@ namespace TaskManager.Migrations
                     b.ToTable("tasks");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Teams", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Teams", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -368,13 +368,13 @@ namespace TaskManager.Migrations
 
             modelBuilder.Entity("EmployeesProjects", b =>
                 {
-                    b.HasOne("TaskManager.Models.DomainModels.Employees", null)
+                    b.HasOne("Domain.Models.DomainModels.Employees", null)
                         .WithMany()
                         .HasForeignKey("EmployeesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TaskManager.Models.DomainModels.Projects", null)
+                    b.HasOne("Domain.Models.DomainModels.Projects", null)
                         .WithMany()
                         .HasForeignKey("ProjectsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -383,28 +383,28 @@ namespace TaskManager.Migrations
 
             modelBuilder.Entity("EmployeesTasks", b =>
                 {
-                    b.HasOne("TaskManager.Models.DomainModels.Employees", null)
+                    b.HasOne("Domain.Models.DomainModels.Employees", null)
                         .WithMany()
                         .HasForeignKey("AsigneesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TaskManager.Models.DomainModels.Tasks", null)
+                    b.HasOne("Domain.Models.DomainModels.Tasks", null)
                         .WithMany()
                         .HasForeignKey("TasksId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Activities", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Activities", b =>
                 {
-                    b.HasOne("TaskManager.Models.DomainModels.Employees", "actor")
+                    b.HasOne("Domain.Models.DomainModels.Employees", "actor")
                         .WithMany("activities")
                         .HasForeignKey("actorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TaskManager.Models.DomainModels.Tasks", "task")
+                    b.HasOne("Domain.Models.DomainModels.Tasks", "task")
                         .WithMany("Activities")
                         .HasForeignKey("taskId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -414,9 +414,9 @@ namespace TaskManager.Migrations
                     b.Navigation("task");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Attachments", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Attachments", b =>
                 {
-                    b.HasOne("TaskManager.Models.DomainModels.Tasks", "task")
+                    b.HasOne("Domain.Models.DomainModels.Tasks", "task")
                         .WithMany("Attachments")
                         .HasForeignKey("taskId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -425,15 +425,15 @@ namespace TaskManager.Migrations
                     b.Navigation("task");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Comments", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Comments", b =>
                 {
-                    b.HasOne("TaskManager.Models.DomainModels.Tasks", "MessageTask")
+                    b.HasOne("Domain.Models.DomainModels.Tasks", "MessageTask")
                         .WithMany("Comments")
                         .HasForeignKey("MessageTaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TaskManager.Models.DomainModels.Employees", "Sender")
+                    b.HasOne("Domain.Models.DomainModels.Employees", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -444,9 +444,9 @@ namespace TaskManager.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Employees", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Employees", b =>
                 {
-                    b.HasOne("TaskManager.Models.DomainModels.Teams", "team")
+                    b.HasOne("Domain.Models.DomainModels.Teams", "team")
                         .WithMany("Members")
                         .HasForeignKey("teamId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -455,9 +455,9 @@ namespace TaskManager.Migrations
                     b.Navigation("team");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Invites", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Invites", b =>
                 {
-                    b.HasOne("TaskManager.Models.DomainModels.Employees", "inviter")
+                    b.HasOne("Domain.Models.DomainModels.Employees", "inviter")
                         .WithMany()
                         .HasForeignKey("inviterId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -466,13 +466,13 @@ namespace TaskManager.Migrations
                     b.Navigation("inviter");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Tasks", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Tasks", b =>
                 {
-                    b.HasOne("TaskManager.Models.DomainModels.Projects", "Project")
+                    b.HasOne("Domain.Models.DomainModels.Projects", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectId");
 
-                    b.HasOne("TaskManager.Models.DomainModels.Employees", "Reporter")
+                    b.HasOne("Domain.Models.DomainModels.Employees", "Reporter")
                         .WithMany("tasksReported")
                         .HasForeignKey("ReporterId");
 
@@ -481,19 +481,19 @@ namespace TaskManager.Migrations
                     b.Navigation("Reporter");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Employees", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Employees", b =>
                 {
                     b.Navigation("activities");
 
                     b.Navigation("tasksReported");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Projects", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Projects", b =>
                 {
                     b.Navigation("Tasks");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Tasks", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Tasks", b =>
                 {
                     b.Navigation("Activities");
 
@@ -502,7 +502,7 @@ namespace TaskManager.Migrations
                     b.Navigation("Comments");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.DomainModels.Teams", b =>
+            modelBuilder.Entity("Domain.Models.DomainModels.Teams", b =>
                 {
                     b.Navigation("Members");
                 });

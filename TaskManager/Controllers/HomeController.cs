@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using TaskManager.Extentions;
-using TaskManager.Models.DomainModels;
-using TaskManager.Models.Repositories.interfaces;
+using TaskManager.HttpExtensions;
+using Domain.Models.DomainModels;
+using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
 using TaskManager.Utilities;
 namespace TaskManager.Controllers
@@ -32,7 +32,7 @@ namespace TaskManager.Controllers
         public async Task<IActionResult> Tasks(TasksFilterQuery query)
         {
 
-            (IEnumerable<Tasks> tasks, int count) = await _TasksRepository.GetAll(query);
+            (IEnumerable<Tasks> tasks, int count) = await _TasksRepository.GetAll(query.pageIndex , query.pageSize, query.ProjectId , query.TeamId , query.AssignedToMe, query.search , query.Status, query.Priority, _HttpContextAccessor.GetUserID());
 
 
 

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TaskManager.Models.DomainModels;
+using Domain.Models.DomainModels;
 
 namespace TaskManager.RequestForms
 {

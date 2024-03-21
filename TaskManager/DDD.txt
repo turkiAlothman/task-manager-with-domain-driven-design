@@ -1,0 +1,29 @@
+domain drevien design:
+
+1- domain layer: fucos on data persistence and how the  data manupilation  and database schema shoud be . 
+	rules:
+		- this layer connot reference any other layers
+	
+	internal components:
+		- repository interfaces
+		- factories
+		- aggrigations
+		- domain services
+
+2- application layer: a set of application services. orchesterator of our system
+	- the majoraty of the use cases in this layer
+
+
+3- infrustructure layer: related to anything about exernal systems(databases, storage,emailing , redis ,)
+
+4- presentation layer: entry point to out system. contains endpoints that allow outer users to use our system trough.
+	it could be:
+		- restfull  api(s)
+		- view controllers
+		- RPC
+
+
+
+the main goal of the repository is the abstraction of datbases manupilation logic.
+but some orginixations can do without repositories  with help of entity framework since entity framework already has high level of abstraction
+

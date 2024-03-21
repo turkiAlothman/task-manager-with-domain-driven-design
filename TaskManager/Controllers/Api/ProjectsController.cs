@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using TaskManager.Extentions;
-using TaskManager.Models.DomainModels;
-using TaskManager.Models.Repositories.implementers;
-using TaskManager.Models.Repositories.interfaces;
+using TaskManager.HttpExtensions;
+using Domain.Models.DomainModels;
+using infrastructure.Persistence.Repositores;
+
+using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
 
 namespace TaskManager.Controllers.Api

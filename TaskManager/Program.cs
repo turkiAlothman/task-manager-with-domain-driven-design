@@ -6,17 +6,20 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 using TaskManager.Middlewares;
-using TaskManager.Models;
-using TaskManager.Models.DomainModels;
-using TaskManager.Models.Repositories.implementers;
-using TaskManager.Models.Repositories.interfaces;
-using TaskManager.Middlewares;
+using Domain.Models;
+using Domain.Models.DomainModels;
+using Domain.Models.Repositories.interfaces;
+using Application.Services.Interfaces;
+using infrastructure;
+using infrastructure.Persistence.Repositores;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.FileProviders;
-using TaskManager.Services.Implementers;
-using TaskManager.Services.Interfaces;
-using TaskManager.Configurations;
-using TaskManager.Models.Models;
+using Application.Services.Interfaces;
+using TaskManager.Services;
+using infrastructure.Configurations;
+using Domain.Models.Models;
+using TaskManager;
+using infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,7 +50,7 @@ builder.Services.AddTransient<IEmailService, EmailService>();
 
 // configurting the database(mysql)
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<TaskManager.Models.TaskManagerDbContext>(Options=>{
+builder.Services.AddDbContext<TaskManagerDbContext>(Options=>{
     Options.UseMySql(
         connectionString, ServerVersion.AutoDetect(connectionString)
         );
