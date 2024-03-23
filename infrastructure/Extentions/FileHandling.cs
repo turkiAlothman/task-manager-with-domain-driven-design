@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-
-namespace TaskManager.HttpExtensions
+using Microsoft.AspNetCore.Http;
+namespace infrastructure.Extentions
 
 {
     public static class FileHandling

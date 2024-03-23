@@ -10,6 +10,7 @@ using infrastructure.Persistence;
 using Domain.Entities;
 using Domain.Models.Repositories.interfaces;
 using Application.Services.Interfaces;
+using Application.Errors;
 
 namespace TaskManager.Controllers.Api
 {
@@ -33,10 +34,9 @@ namespace TaskManager.Controllers.Api
         [HttpGet]
         public async Task<IActionResult> Index(IConfiguration _configuration , IEmailService mail )
         {
-            
-            //await mail.SendMail(new Models.Models.Mail { EmailTo = "toto2014a.a@gmail.com", Subject = "test" });
 
-            return Ok(new {message = _contextAccessor.HttpContext.User.FindFirstValue("manager") });
+            //throw new TaskNotFoundException();
+            return Ok();
         }
     }
 }

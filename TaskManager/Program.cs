@@ -1,25 +1,20 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 using TaskManager.Middlewares;
-using Domain.Models;
-using Domain.Entities;
 using Domain.Models.Repositories.interfaces;
 using Application.Services.Interfaces;
 using infrastructure;
 using infrastructure.Persistence.Repositores;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.FileProviders;
-using Application.Services.Interfaces;
 using TaskManager.Services;
 using infrastructure.Configurations;
-using Domain.Models.Models;
 using TaskManager;
 using infrastructure.Persistence;
+using infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,7 +40,7 @@ builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailS
 
 // Custom services
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddTransient<IEmailService, EmailService>();
+builder.Services.AddApplicationServices();
 
 
 // configurting the database(mysql)
@@ -87,9 +82,11 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath="/static"
 });
 
+
 // middleware for iserting tasks activites in the database
 app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/Tasks") && !context.Request.Method.Equals("GET") && context.Response.StatusCode == 200, AppBuilder => AppBuilder.UseMiddleware<TasksActivitiesMiddleware>());
 
+// app.UseExceptionHandler("/error");
 
 app.MapControllerRoute(name:"default",pattern:"{controller=Home}/{action=dashboard}/{id?}");
 

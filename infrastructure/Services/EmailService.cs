@@ -11,25 +11,25 @@ using Domain.Models.Models;
 using Application.Services.Interfaces;
 using Domain.Entities;
 
-namespace infrastructure
+namespace infrastructure.Services
 {
     public class EmailService : IEmailService
     {
         private readonly MailSettings _settings;
-        public  EmailService(IOptions<MailSettings> settings)
+        public EmailService(IOptions<MailSettings> settings)
         {
             _settings = settings.Value;
-            
+
         }
 
-        public  async Task SendMail(Mail mail)
+        public async Task SendMail(Mail mail)
         {
-            using (SmtpClient  Client = new SmtpClient())
+            using (SmtpClient Client = new SmtpClient())
             {
 
                 // setup client
                 await Client.ConnectAsync(_settings.Server, _settings.Port, SecureSocketOptions.SslOnConnect);
-                
+
                 await Client.AuthenticateAsync(_settings.Username, _settings.Password);
 
                 MimeMessage Message = new MimeMessage();
@@ -51,9 +51,9 @@ namespace infrastructure
 
         }
 
-        public async Task SendInviteEmail(Employees inviter, string inviteeEmail, string SecretKey , string host)
+        public async Task SendInviteEmail(Employees inviter, string inviteeEmail, string SecretKey, string host)
         {
-            await this.SendMail(new Mail { Body = @$"
+            await SendMail(new Mail { Body = @$"
 
                     <div style=""max-width: 600px; margin: 0 auto; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);"">
                         <h2 style=""text-align: center; color: #333;"">Account Registration</h2>
@@ -63,12 +63,12 @@ namespace infrastructure
                             <a href="" https://{host}/auth/RegisterationRedirect/{inviteeEmail}/{SecretKey}""  style=""display: inline-block; padding: 10px 20px; background-color: #924AEF; color: #fff; text-decoration: none; border-radius: 5px;"">Register Now</a>
                         </div>
                     </div>
-                            " , EmailTo = inviteeEmail , Subject= "Account Registration" });
+                            ", EmailTo = inviteeEmail, Subject = "Account Registration" });
         }
 
         public async Task SendResetPasswordEmail(string Email, string SecretKey, string host)
         {
-            await this.SendMail(new Mail { Body = @$"
+            await SendMail(new Mail { Body = @$"
 
                     <div style=""max-width: 600px; margin: 0 auto; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);"">
                         <h2 style=""text-align: center; color: #333;"">Reset Password</h2>
