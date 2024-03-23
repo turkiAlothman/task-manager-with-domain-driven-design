@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.Diagnostics;
-using System.Runtime.Serialization;
+﻿using Application.Services.Interfaces;
 using Domain.Models.Repositories.interfaces;
-using Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TaskManager.Controllers.Api
 {
@@ -14,44 +10,39 @@ namespace TaskManager.Controllers.Api
     {
         private readonly IEmployeesRepository _employeesRepository;
         private readonly IProjectsRepository _projectsRepository;
+        private readonly IEmployeesService _employeesService;
 
-        public EmployeesController(IEmployeesRepository employeesRepository, IProjectsRepository projectsRepository)
+        public EmployeesController(IEmployeesRepository employeesRepository, IProjectsRepository projectsRepository, IEmployeesService employeesService)
         {
             _employeesRepository = employeesRepository;
             _projectsRepository = projectsRepository;
+            _employeesService = employeesService;
         }
 
         [HttpGet()]
-        public async Task<IActionResult> Search([FromQuery] string search="" , [FromQuery] int? projectId = null)
+        public async Task<IActionResult> Search([FromQuery] string search = "", [FromQuery] int? projectId = null)
         {
-            Projects? project = null;
-            if (projectId!= null)
-            {
-                project = await _projectsRepository.GetById(projectId.Value);
-
-            }
-            
-            return new JsonResult(await _employeesRepository.GetAll(search , project: project));
+            return new JsonResult(await _employeesService.Search(search, projectId));
         }
 
         [HttpGet("Exelude/")]
-        public async Task<IActionResult> ExeludeEmployees([FromQuery] int ProjectId ,[FromQuery] string? search = null )
+        public async Task<IActionResult> ExeludeEmployees([FromQuery] int ProjectId, [FromQuery] string? search = null)
         {
-            return new JsonResult( await _employeesRepository.ExeludeEmployees(ProjectId , search));
+            return new JsonResult(await _employeesService.ExeludeEmployees(ProjectId, search));
         }
-       
-        
-        
-        
+
+
+
+
         [HttpGet("tasks/{id}")]
-       public async Task<IActionResult> GetEmployeeTasks(int id, [FromQuery] bool Reported = false)
+        public async Task<IActionResult> GetEmployeeTasks(int id, [FromQuery] bool Reported = false)
         {
-            Employees employee = await _employeesRepository.GetEmployee(id);
+            var result = await _employeesService.GetEmployeeTasks(id, Reported);
+            return result.Match(
+                tasks => Ok(tasks),
+                error => StatusCode((int)error.StatusCode, error)
+            );
 
-            if (employee == null)
-                return NotFound();
-
-            return new JsonResult(await _employeesRepository.GetEmployeeTasks(employee, Reported));
         }
 
 
@@ -60,12 +51,11 @@ namespace TaskManager.Controllers.Api
         [HttpGet("activities/{id}")]
         public async Task<IActionResult> GetEmployeeActivities(int id)
         {
-            Employees employee = await _employeesRepository.GetEmployee(id);
-
-            if (employee == null)
-                return NotFound();
-
-            return new JsonResult(await _employeesRepository.GetEmployeeActivities(employee));
+            var result = await _employeesService.GetEmployeeActivities(id);
+            return result.Match(
+                 activities => Ok(activities),
+                 error => StatusCode((int)error.StatusCode, error)
+                 );
         }
 
 

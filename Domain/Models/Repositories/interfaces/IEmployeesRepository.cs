@@ -4,7 +4,7 @@ namespace Domain.Models.Repositories.interfaces
 {
     public interface IEmployeesRepository
     {
-        public Task<IEnumerable<Employees>> GetAll(string search="" , int? TeamID = null, Projects? project = null);
+        public Task<IEnumerable<Employees>> GetAll(string search="" , int? TeamID = null, int? projectId = null);
         public Task<Employees> GetEmployee(int id);
         public Task<Employees> GetProfile(int id);
         public Task CreateEmployee(Employees employee);

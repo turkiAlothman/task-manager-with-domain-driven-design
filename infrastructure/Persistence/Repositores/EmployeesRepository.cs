@@ -12,7 +12,7 @@ namespace infrastructure.Persistence.Repositores
             _context = context;
         }
 
-        public async Task<IEnumerable<Employees>> GetAll(string search = "", int? TeamID = null, Projects? project = null)
+        public async Task<IEnumerable<Employees>> GetAll(string search = "", int? TeamID = null, int? projectId = null)
         {
 
             var query = _context.employees.AsNoTracking().OrderBy(e => e.Id).Include(e => e.team).Where(e => e.FirstName.Contains(search) || e.LastName.Contains(search)).AsQueryable();
@@ -20,8 +20,8 @@ namespace infrastructure.Persistence.Repositores
             if (TeamID != null)
                 query = query.Where(e => e.team.Id == TeamID);
 
-            if (project != null)
-                query = query.Where(e => e.Projects.Contains(project));
+            if (projectId != null)
+                query = query.Where(e => e.Projects.Any(p=>p.Id == projectId.Value));
 
             return await query.ToListAsync(); ;
 

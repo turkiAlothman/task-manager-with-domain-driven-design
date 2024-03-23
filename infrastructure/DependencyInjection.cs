@@ -15,6 +15,7 @@ namespace infrastructure
         {
             collection.AddTransient<IEmailService, EmailService>();
             collection.AddTransient<ITasksService, TasksService>();
+            collection.AddTransient<IEmployeesService, EmployeesService>();
 
             return collection;
         }
