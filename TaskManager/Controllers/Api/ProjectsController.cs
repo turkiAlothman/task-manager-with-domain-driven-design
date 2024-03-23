@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using TaskManager.HttpExtensions;
-using infrastructure.Persistence.Repositores;
-
-using Domain.Models.Repositories.interfaces;
-using TaskManager.RequestForms;
+﻿using Application.Errors;
+using Application.Services.Interfaces;
 using Domain.Entities;
+using Domain.Models.Repositories.interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
+using OneOf.Types;
+using TaskManager.HttpExtensions;
+using TaskManager.RequestForms;
 
 namespace TaskManager.Controllers.Api
 {
@@ -18,41 +18,33 @@ namespace TaskManager.Controllers.Api
         private readonly ITasksRepository _tasksRepository;
         private readonly IEmployeesRepository _employeesRepository;
         private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IProjectsService _projectsService;
 
-        public ProjectsController(IProjectsRepository projectsRepository, ITasksRepository tasksRepository, IEmployeesRepository employeesRepository, IHttpContextAccessor contextAccessor)
+        public ProjectsController(IProjectsRepository projectsRepository, ITasksRepository tasksRepository, IEmployeesRepository employeesRepository, IHttpContextAccessor contextAccessor, IProjectsService projectsService)
         {
             _projectsRepository = projectsRepository;
             _tasksRepository = tasksRepository;
             _employeesRepository = employeesRepository;
             _contextAccessor = contextAccessor;
+            _projectsService = projectsService;
         }
 
         [HttpGet("employees/{projectsId}")]
         public async Task<IActionResult> GetProjectsEmployeesDetails(int projectsId)
         {
-            Projects project = await _projectsRepository.GetById(projectsId);
-
-            if(project == null)
-                return NotFound();
-
-            return Ok(await _projectsRepository.GetProjectsEmployeesDetails(project));
+            var result = await _projectsService.GetProjectsEmployeesDetails(projectsId);
+            return result.Match(
+                 employees => Ok(employees),
+                 error => StatusCode((int)error.StatusCode, error)
+                 );
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateProject([FromBody] CreateProjectForm form)
         {
-            if (!_contextAccessor.IsManager())
-                return Unauthorized(new { Message = "Manager is only allowed to create new Project" });
-
-            await _projectsRepository.CreateProject(new Projects
-            {
-                Name = form.Name,
-                Description = form.Description,
-                Type = form.Type,
-                StartDate = form.StartDate,
-                DueDate = form.DueDate,
-                
-            });
-
+            IError result = await _projectsService.CreateProject(_contextAccessor.IsManager(), form.Name, form.Type, form.Description, form.StartDate, form.DueDate);
+            if (result != null)
+                return StatusCode((int)result.StatusCode, result);
             return Ok();
         }
 
@@ -61,60 +53,45 @@ namespace TaskManager.Controllers.Api
         [HttpGet("tasks/{projectsId}")]
         public async Task<IActionResult> GetProjectsTasksDetails(int projectsId)
         {
-            Projects project = await _projectsRepository.GetById(projectsId);
+            var result  = await _projectsService.GetProjectsTasksDetails(projectsId);
 
-            if (project == null)
-                return NotFound();
-
-            return Ok(await _tasksRepository.GetByProject(project));
+            return result.Match(
+             tasks => Ok(tasks),
+             error => StatusCode((int)error.StatusCode, error)
+             );
         }
 
         [HttpGet("activities/{projectsId}")]
         public async Task<IActionResult> GetProjectsActivities(int projectsId)
         {
-            Projects project = await _projectsRepository.GetById(projectsId);
+            var result = await _projectsService.GetProjectsActivities(projectsId);
 
-            if (project == null)
-                return NotFound();
+            return result.Match(
+             activities => Ok(activities),
+             error => StatusCode((int)error.StatusCode, error)
+             );
+           
+        }
 
-            return Ok(await _projectsRepository.GetProjectsActivities(project));
+
+
+        [HttpPost("{ProjectId}/employees/")]
+        public async Task<IActionResult> AddEmployeeToProject([FromRoute] int ProjectId, [FromBody] List<int> EmployeesIds)
+        {
+            IError result = await _projectsService.AddEmployeeToProject(_contextAccessor.IsManager(), ProjectId, EmployeesIds);
+            if(result != null)
+                return StatusCode((int)result.StatusCode, result);
+
+            return Ok();
         }
 
 
         [HttpDelete("{ProjectId}/employees/{employeeId}")]
-        public async Task<IActionResult> DeleteEmployee(int ProjectId, int employeeId )
+        public async Task<IActionResult> DeleteEmployee(int ProjectId, int employeeId)
         {
-            if (!_contextAccessor.IsManager())
-                return Unauthorized(new { Message = "Manager is only allowed to remove Employee To Project" });
-
-            Projects project = await _projectsRepository.GetById(ProjectId);
-            if (project == null)
-                return NotFound(new { Message="Project not Found"});
-            
-            Employees employee = await _employeesRepository.GetEmployee(employeeId);
-            if(employee == null)
-                return NotFound(new { Message = "Employee not Found" });
-
-
-            await _projectsRepository.RemoveEmployee(project, employee);
-            return  Ok();
-        }
-
-        [HttpPost("{ProjectId}/employees/")]
-        public async Task<IActionResult> AddEmployeeToProject([FromRoute] int ProjectId , [FromBody] List<int> EmployeesIds)
-        {
-            if(!_contextAccessor.IsManager())
-                return Unauthorized(new {Message ="Manager is only allowed to add Employee To Project"});
-
-           Projects project = await _projectsRepository.GetById(ProjectId);
-
-           if (project == null)
-               return NotFound(new { Message="Project Not Found"});
-
-           List<Employees> employees = await _employeesRepository.GetEmployeesByListOfIds(EmployeesIds,project);
-
-            await _projectsRepository.AddListOfEmployeesInPoject(project, employees);
-
+            IError result = await _projectsService.DeleteEmployee(_contextAccessor.IsManager(), ProjectId, employeeId);
+            if (result != null)
+                return StatusCode((int)result.StatusCode, result);
 
             return Ok();
         }

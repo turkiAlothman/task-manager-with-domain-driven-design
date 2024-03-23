@@ -5,11 +5,14 @@ using System.Linq;
 using Domain.Models.Repositories.interfaces;
 using System.Collections.Generic;
 using Domain.Entities;
+using Domain.Records;
+using Domain.Models.Models;
+using Org.BouncyCastle.Crypto;
 
 
 namespace infrastructure.Persistence.Repositores
 {
-    public class ProjectsRepository : IProjectsRepository
+    public class ProjectsRepository : IProjectsRepository 
     {
         private readonly TaskManagerDbContext _context;
 
@@ -35,39 +38,42 @@ namespace infrastructure.Persistence.Repositores
             _context.projects.Add(project);
             await _context.SaveChangesAsync();
         }
-        public async Task<object?> GetProjectsEmployeesDetails(Projects project)
+        public async Task<IEnumerable<EmployeesDetailsWithinProjectResposne>?> GetProjectsEmployeesDetails(int ProjectId)
         {
-            return await _context.projects
-                .AsNoTracking().Where(p => p.Id == project.Id)
+            
+
+                return await _context.projects
+                .AsNoTracking().AsQueryable().Where(p => p.Id == ProjectId)
                 .Select(p => p.Employees.Select(e => new
+               EmployeesDetailsWithinProjectResposne()
                 {
                     id = e.Id,
-                    e.FirstName,
-                    e.LastName,
-                    e.Position,
-                    e.PhoneNumber,
-                    e.Email,
+                    FirstName = e.FirstName,
+                    LastName = e.LastName,
+                    Position = e.Position,
+                    PhoneNumber = e.PhoneNumber,
+                    Email = e.Email,
                     team = e.team.Name,
-                    SignedTasksCount = e.Tasks.Where(t => t.Project.Id == project.Id).Count(),
-                    ReportedTasksCount = e.tasksReported.Where(t => t.Project.Id == project.Id).Count(),
-                })).FirstAsync();
+                    SignedTasksCount = e.Tasks.Where(t => t.Project.Id == ProjectId).Count(),
+                    ReportedTasksCount = e.tasksReported.Where(t => t.Project.Id == ProjectId).Count(),
+                })).FirstOrDefaultAsync();
         }
 
 
-        public async Task<IEnumerable<object>> GetProjectsActivities(Projects project)
+        public async Task<IEnumerable<ActivityRecord>> GetProjectsActivities(Projects project)
         {
             return await _context.projects
                 .AsNoTracking()
                 .Where(p => p.Equals(project))
                 .Select(p => p.Tasks.SelectMany(t => t.Activities
                 .Select(a =>
-                new
+                new ActivityRecord()
                 {
-                    a.description,
-                    actor = new { a.actor.FirstName, a.actor.LastName, a.actor.Position, a.actor.Email, a.actor.PhoneNumber, },
-                    task = new { a.task.Id, a.task.Title },
-                    a.ProjectName,
-                    a.CreatedAt
+                    description = a.description,
+                    actor = new ActivityActorRecord{ FirstName = a.actor.FirstName, LastName = a.actor.LastName, Position = a.actor.Position, Email = a.actor.Email, PhoneNumber = a.actor.PhoneNumber, },
+                    task = new ActivityTaskRecord{ Id = a.task.Id, Title  = a.task.Title },
+                    ProjectName = a.ProjectName,
+                    CreatedAt = a.CreatedAt
 
                 }))).FirstAsync();
         }
