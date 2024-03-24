@@ -11,6 +11,7 @@ using TaskManager.Services;
 using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
 using Domain.Entities;
+using Application.Errors;
 
 
 namespace TaskManager.Controllers
@@ -57,14 +58,12 @@ namespace TaskManager.Controllers
                 return View();
             }
 
-            Employees employee = await this._employeesRepository.GetByEmailAndPassword(form.Email, form.Password);
-            if (employee == null)
+            IError result = await auth.LogInWithCheck(form.Email, form.Password, form.StayLoggedIn);
+            if (result != null)
             {
                 ModelState.AddModelError("LoginError", "username or password is incorrect");
                 return View();
-
             }
-            await auth.Login(employee, form.StayLoggedIn);
 
             return LocalRedirect(form.returnUrl);
         }
@@ -73,7 +72,6 @@ namespace TaskManager.Controllers
         public async Task<IActionResult> logOut()
         {
             await HttpContext.SignOutAsync();
-
             return Redirect("/");
         }
 

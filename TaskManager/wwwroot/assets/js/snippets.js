@@ -216,22 +216,3 @@
     })
   }
 })()
-
-
-$("#Password").focus(function () {
-    $(this).popover({
-        placement: 'top',
-        html: true,
-        content: function () {
-
-
-            return $('<ul>').html(`
-                        <li>must be with a minimum length of 8 </li>
-                                <li>must contain a lower case letter</li>
-                                <li> must contain a digit</li>
-                                <li>must contain a Special Character</li>
-                            `);
-        },
-
-    });
-})

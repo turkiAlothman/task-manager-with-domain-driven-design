@@ -3,16 +3,20 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using TaskManager.Services;
 using Domain.Entities;
-
+using Application.Errors;
+using Domain.Models.Repositories.interfaces;
+using Application.Errors.Authentication;
 
 namespace TaskManager.Services
 {
     public class AuthService : IAuthService
     {
         private readonly IHttpContextAccessor _contextAccessor;
-        public AuthService(IHttpContextAccessor contextAccessor)
+        private readonly IEmployeesRepository _employeesRepository;
+        public AuthService(IHttpContextAccessor contextAccessor, IEmployeesRepository employeesRepository)
         {
             _contextAccessor = contextAccessor;
+            _employeesRepository = employeesRepository;
         }
         public async Task Login(Employees employee, bool StayLoggedIn = true)
         {
@@ -29,6 +33,16 @@ namespace TaskManager.Services
             ClaimsPrincipal principal = new ClaimsPrincipal(identity);
             await _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { IsPersistent = StayLoggedIn });
 
+        }
+
+        public async Task<IError> LogInWithCheck(string email, string password , bool StayLoggedIn)
+        {
+
+            Employees employee = await this._employeesRepository.GetByEmailAndPassword(email, password);
+            if (employee == null) return new EmailOrPasswordNotCorrectError();
+           
+            await Login(employee, StayLoggedIn);
+            return null;
         }
     }
 }
