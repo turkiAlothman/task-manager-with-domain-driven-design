@@ -9,6 +9,7 @@ using TaskManager.RequestForms;
 using System.Security.Claims;
 using Application.Services.Interfaces;
 using Domain.Entities;
+using Application.Errors;
 namespace TaskManager.Controllers.Api
 {
     [Route("api/[controller]")]
@@ -19,12 +20,14 @@ namespace TaskManager.Controllers.Api
         private readonly IEmployeesRepository _employeesRepository;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IEmailService _emailService;
-        public InviteController(IInvitesRepository invitesRepository, IEmployeesRepository employeesRepository, IHttpContextAccessor contextAccessor, IEmailService emailService)
+        private readonly IInviteService _inviteService;
+        public InviteController(IInvitesRepository invitesRepository, IEmployeesRepository employeesRepository, IHttpContextAccessor contextAccessor, IEmailService emailService, IInviteService inviteService)
         {
             _invitesRepository = invitesRepository;
             _employeesRepository = employeesRepository;
             _contextAccessor = contextAccessor;
             _emailService = emailService;
+            _inviteService = inviteService;
         }
 
         [HttpPost]
@@ -36,32 +39,10 @@ namespace TaskManager.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            if(! _contextAccessor.IsManager() )
-                return Unauthorized(new { Message ="only manager who authorized to invite an employee"});
 
-            Employees employee = await _employeesRepository.GetByEmail(form.email);
-            
-            // check if Employee already exist
-            if(employee != null) 
-                return BadRequest(new {Message = "this email already exists"});
+            IError result = await _inviteService.InviteEmployee(_contextAccessor.IsManager(), _contextAccessor.GetUserID(), _contextAccessor.HttpContext.Request.Host.Value, form.email, form.AsManager);
 
-            Invites invite  = await _invitesRepository.GetByEmail(form.email);
-            
-            // check if the requested email already invited
-            if (invite != null)
-                return BadRequest(new { Message = "this email already invited" });
-            
-            
-            Employees inviter = await _employeesRepository.GetEmployee(_contextAccessor.GetUserID());
-            
-            string SecretKey =  RandomString.GetString(Types.ALPHABET_LOWERCASE, 10);
-
-            // send SecretKey to email with view 
-            _emailService.SendInviteEmail(inviter, form.email, SecretKey, _contextAccessor.HttpContext.Request.Host.Value);
-
-
-            await _invitesRepository.CreateInvite(new Invites { inviteeEmail = form.email, AsManager = form.AsManager,inviter = inviter , SecretKey = SecretKey.Hash() });
-                    
+            if (result != null) { return StatusCode((int)result.StatusCode, result); }
 
             return Ok(new {Message="email invited successfully!"});
 
