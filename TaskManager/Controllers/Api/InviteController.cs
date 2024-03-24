@@ -16,17 +16,11 @@ namespace TaskManager.Controllers.Api
     [ApiController]
     public class InviteController : ControllerBase
     {
-        private readonly IInvitesRepository _invitesRepository;
-        private readonly IEmployeesRepository _employeesRepository;
         private readonly IHttpContextAccessor _contextAccessor;
-        private readonly IEmailService _emailService;
         private readonly IInviteService _inviteService;
-        public InviteController(IInvitesRepository invitesRepository, IEmployeesRepository employeesRepository, IHttpContextAccessor contextAccessor, IEmailService emailService, IInviteService inviteService)
+        public InviteController( IHttpContextAccessor contextAccessor, IInviteService inviteService)
         {
-            _invitesRepository = invitesRepository;
-            _employeesRepository = employeesRepository;
             _contextAccessor = contextAccessor;
-            _emailService = emailService;
             _inviteService = inviteService;
         }
 

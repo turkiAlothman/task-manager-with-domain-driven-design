@@ -8,14 +8,10 @@ namespace TaskManager.Controllers.Api
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly IEmployeesRepository _employeesRepository;
-        private readonly IProjectsRepository _projectsRepository;
         private readonly IEmployeesService _employeesService;
 
-        public EmployeesController(IEmployeesRepository employeesRepository, IProjectsRepository projectsRepository, IEmployeesService employeesService)
+        public EmployeesController(IEmployeesService employeesService)
         {
-            _employeesRepository = employeesRepository;
-            _projectsRepository = projectsRepository;
             _employeesService = employeesService;
         }
 

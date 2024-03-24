@@ -14,17 +14,12 @@ namespace TaskManager.Controllers.Api
     [ApiController]
     public class ProjectsController : ControllerBase
     {
-        private readonly IProjectsRepository _projectsRepository;
-        private readonly ITasksRepository _tasksRepository;
-        private readonly IEmployeesRepository _employeesRepository;
+        
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IProjectsService _projectsService;
 
-        public ProjectsController(IProjectsRepository projectsRepository, ITasksRepository tasksRepository, IEmployeesRepository employeesRepository, IHttpContextAccessor contextAccessor, IProjectsService projectsService)
+        public ProjectsController(IHttpContextAccessor contextAccessor, IProjectsService projectsService)
         {
-            _projectsRepository = projectsRepository;
-            _tasksRepository = tasksRepository;
-            _employeesRepository = employeesRepository;
             _contextAccessor = contextAccessor;
             _projectsService = projectsService;
         }

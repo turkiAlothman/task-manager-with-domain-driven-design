@@ -14,21 +14,13 @@ namespace TaskManager.Controllers.Api
     [ApiController]
     public class TasksController : ControllerBase
     {
-        private readonly ITasksRepository _tasksRepository;
-        private readonly IEmployeesRepository _employeesRepository;
-        private readonly IProjectsRepository _projectsRepository;
         private readonly IHttpContextAccessor _contextAccessor;
-        private readonly ICommentsRepository _commentsRepository;
         private readonly ITasksService _tasksService;
 
 
-        public TasksController(ITasksRepository tasksRepository, IEmployeesRepository _EmployeesRepository, IProjectsRepository _projectsRepository, IHttpContextAccessor _contextAccessor, ICommentsRepository _commentsRepository, ITasksService tasksService)
+        public TasksController(IHttpContextAccessor _contextAccessor, ITasksService tasksService)
         {
-            this._tasksRepository = tasksRepository;
-            this._employeesRepository = _EmployeesRepository;
-            this._projectsRepository = _projectsRepository;
             this._contextAccessor = _contextAccessor;
-            this._commentsRepository = _commentsRepository;
             this._tasksService = tasksService;
 
         }
