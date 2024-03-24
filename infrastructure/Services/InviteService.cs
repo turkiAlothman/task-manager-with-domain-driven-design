@@ -58,5 +58,10 @@ namespace infrastructure.Services
             await _invitesRepository.CreateInvite(new Invites { inviteeEmail = email, AsManager = AsManager, inviter = inviter, SecretKey = SecretKey.Hash() });
             return null;
         }
+
+        public async Task<Invites> GetInvite(string email, string SecretKey)
+        {
+            return  await _invitesRepository.GetByEmailAndSecretKey(email, SecretKey.Hash());
+        }
     }
 }

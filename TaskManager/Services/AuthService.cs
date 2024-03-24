@@ -6,6 +6,12 @@ using Domain.Entities;
 using Application.Errors;
 using Domain.Models.Repositories.interfaces;
 using Application.Errors.Authentication;
+using infrastructure.Persistence.Repositores;
+using TaskManager.RequestForms;
+using Application.Services.Interfaces;
+using infrastructure.Extentions;
+using Application.Errors.Invites;
+using Application.Errors.Teams;
 
 namespace TaskManager.Services
 {
@@ -13,10 +19,14 @@ namespace TaskManager.Services
     {
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IEmployeesRepository _employeesRepository;
-        public AuthService(IHttpContextAccessor contextAccessor, IEmployeesRepository employeesRepository)
+        private readonly IInvitesRepository _invitesRepository;
+        private readonly ITeamsRepository _teamsRepository;
+        public AuthService(IHttpContextAccessor contextAccessor, IEmployeesRepository employeesRepository, IInvitesRepository invitesRepository, ITeamsRepository teamsRepository)
         {
             _contextAccessor = contextAccessor;
             _employeesRepository = employeesRepository;
+            _invitesRepository = invitesRepository;
+            _teamsRepository = teamsRepository;
         }
         public async Task Login(Employees employee, bool StayLoggedIn = true)
         {
@@ -43,6 +53,40 @@ namespace TaskManager.Services
            
             await Login(employee, StayLoggedIn);
             return null;
+        }
+
+        public async Task<IError> Register(string FirstName, string LastName, string PhoneNumber, string Position, DateTime BirthDay, string Password, string email, string SecretKey, int TeamId)
+        {
+            
+            Invites invite = await _invitesRepository.GetByEmailAndSecretKey(email, SecretKey.Hash());
+            if (invite == null)
+                return new InviteNotFoundError();
+            
+            Teams team = await _teamsRepository.GetTeam(TeamId);
+            if (team == null)
+                return new TeamNotFoundError();
+
+
+            Employees employee = new Employees
+            {
+                FirstName = FirstName,
+                LastName = LastName,
+                Position = Position,
+                BirthDay = BirthDay,
+                Email = email,
+                PhoneNumber = PhoneNumber,
+                Password = Password.Hash(),
+                team = team,
+                Manager = invite.AsManager
+
+            };
+
+            await _employeesRepository.CreateEmployee(employee);
+            await  Login(employee);
+            await _invitesRepository.deleteInvite(invite);
+
+            return null;
+
         }
     }
 }

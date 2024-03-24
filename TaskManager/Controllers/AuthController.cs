@@ -12,6 +12,8 @@ using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
 using Domain.Entities;
 using Application.Errors;
+using Domain.Models.Models;
+using TaskManager.Validators;
 
 
 namespace TaskManager.Controllers
@@ -26,7 +28,8 @@ namespace TaskManager.Controllers
         private readonly IResetPasswordRepository _resetPasswordRepository;
         private readonly IAuthService auth;
         private readonly IEmailService _emailService;
-        public AuthController(IEmployeesRepository employeesRepository, IHttpContextAccessor _httpContextAccessor, IInvitesRepository invitesRepository, ITeamsRepository teamsRepository, IAuthService auth, IEmailService emailService, IResetPasswordRepository resetPasswordRepository)
+        private readonly IInviteService _inviteService;
+        public AuthController(IEmployeesRepository employeesRepository, IHttpContextAccessor _httpContextAccessor, IInvitesRepository invitesRepository, ITeamsRepository teamsRepository, IAuthService auth, IEmailService emailService, IResetPasswordRepository resetPasswordRepository, IInviteService inviteService)
         {
             this._employeesRepository = employeesRepository;
             this._httpContextAccessor = _httpContextAccessor;
@@ -35,6 +38,7 @@ namespace TaskManager.Controllers
             this._resetPasswordRepository = resetPasswordRepository;
             this.auth = auth;
             this._emailService = emailService;
+            this._inviteService = inviteService;
         }
 
         public IActionResult Login(string returnUrl = "/")
@@ -82,7 +86,7 @@ namespace TaskManager.Controllers
         public async Task<IActionResult> RegisterationRedirect(string email, string secretKey)
         {
 
-            Invites invite = await _invitesRepository.GetByEmailAndSecretKey(email, secretKey.Hash());
+            Invites invite = await _inviteService.GetInvite(email, secretKey);
 
             if (invite == null)
                 return Unauthorized();
@@ -112,39 +116,11 @@ namespace TaskManager.Controllers
         public async Task<IActionResult> Register([FromForm] RegisterForm registerForm)
         {
             if (!ModelState.IsValid)
-            {
                 return View(registerForm);
-            }
 
-            Invites invite = await _invitesRepository.GetByEmailAndSecretKey(registerForm.email, registerForm.SecretKey.Hash());
-
-            if (invite == null)
-                return Unauthorized();
-
-            Teams team = await _teamsRepository.GetTeam(registerForm.TeamId);
-
-            if (team == null)
-                return BadRequest();
-
-
-            Employees employee = new Employees
-            {
-                FirstName = registerForm.FirstName,
-                LastName = registerForm.LastName,
-                Position = registerForm.Position,
-                BirthDay = registerForm.BirthDay,
-                Email = registerForm.email,
-                PhoneNumber = registerForm.PhoneNumber,
-                Password = registerForm.Password.Hash(),
-                team = team,
-                Manager = invite.AsManager
-
-            };
-
-            await _employeesRepository.CreateEmployee(employee);
-            await auth.Login(employee);
-            await _invitesRepository.deleteInvite(invite);
-
+            IError result = await auth.Register(registerForm.FirstName, registerForm.LastName, registerForm.PhoneNumber, registerForm.Position, registerForm.BirthDay, registerForm.Password, registerForm.email, registerForm.SecretKey, registerForm.TeamId);
+            if (result != null)
+                return StatusCode((int)result.StatusCode);
 
             return Redirect("/");
         }

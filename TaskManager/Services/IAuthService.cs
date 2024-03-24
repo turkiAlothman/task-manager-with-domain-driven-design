@@ -7,5 +7,6 @@ namespace TaskManager.Services
     {
         public Task<IError> LogInWithCheck(string email , string password, bool StayLoggedIn);
         public Task Login(Employees employee, bool StayLoggedIn = true);
+        public Task<IError> Register(string FirstName, string LastName, string PhoneNumber, string Position, DateTime BirthDay, string Password, string email, string SecretKey, int TeamId);
     }
 }
