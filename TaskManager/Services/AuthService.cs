@@ -12,6 +12,10 @@ using Application.Services.Interfaces;
 using infrastructure.Extentions;
 using Application.Errors.Invites;
 using Application.Errors.Teams;
+using RandomString4Net;
+using Application.Errors.ResetPassword;
+using Application.Errors.Employees;
+using Application.Errors.Authorizations;
 
 namespace TaskManager.Services
 {
@@ -21,12 +25,16 @@ namespace TaskManager.Services
         private readonly IEmployeesRepository _employeesRepository;
         private readonly IInvitesRepository _invitesRepository;
         private readonly ITeamsRepository _teamsRepository;
-        public AuthService(IHttpContextAccessor contextAccessor, IEmployeesRepository employeesRepository, IInvitesRepository invitesRepository, ITeamsRepository teamsRepository)
+        private readonly IResetPasswordRepository _resetPasswordRepository;
+        private readonly IEmailService _emailService;
+        public AuthService(IHttpContextAccessor contextAccessor, IEmployeesRepository employeesRepository, IInvitesRepository invitesRepository, ITeamsRepository teamsRepository, IResetPasswordRepository resetPasswordRepository, IEmailService emailService)
         {
             _contextAccessor = contextAccessor;
             _employeesRepository = employeesRepository;
             _invitesRepository = invitesRepository;
             _teamsRepository = teamsRepository;
+            _resetPasswordRepository = resetPasswordRepository;
+            _emailService = emailService;
         }
         public async Task Login(Employees employee, bool StayLoggedIn = true)
         {
@@ -87,6 +95,55 @@ namespace TaskManager.Services
 
             return null;
 
+        }
+
+        public async Task<IError> ResetPasswordRequest(string Email , string host)
+        {
+            ResetPassword ResetPasswordRequest = await _resetPasswordRepository.GetByEmail(Email);
+
+            if (ResetPasswordRequest != null && ResetPasswordRequest.ExpirationDate > DateTime.Now)
+            {
+                return new ResetPasswordAlreadyRequestedError();
+            }
+
+            Employees employee = await _employeesRepository.GetByEmail(Email);
+
+            if (employee == null)
+                return new EmailNotFoundError();
+
+
+            // request expire after 20 minutes
+            DateTime ExpirationDate = DateTime.Now.AddMinutes(20);
+            string SecretKey = RandomString.GetString(Types.ALPHABET_LOWERCASE, 30);
+
+
+            // send email 
+            await this._emailService.SendResetPasswordEmail(Email, SecretKey,host);
+
+            await _resetPasswordRepository.CreateResetPasswordRequest(new ResetPassword { Email = Email, ExpirationDate = ExpirationDate, SecretKey = SecretKey.Hash() });
+            return null;
+
+        }
+
+        public async Task<IError> ResetPassword(string Password, string Email, string SecretKey)
+        {
+            ResetPassword ResetPasswordRequest = await _resetPasswordRepository.GetByEmailAndSecret(Email, SecretKey.Hash());
+
+            if (ResetPasswordRequest == null)
+                return new NotAuthorizedResetPasswordRequest();
+
+            if (ResetPasswordRequest.ExpirationDate < DateTime.Now)
+                return new ResetPasswordRequestExpiredError();
+
+            Employees employee = await _employeesRepository.GetByEmail(Email);
+            if (employee == null)
+                return new EmployeeNotFoundError();
+
+            employee.Password = Password.Hash();
+
+            await _employeesRepository.Update(employee);
+            
+            return null;
         }
     }
 }

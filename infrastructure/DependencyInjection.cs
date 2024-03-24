@@ -18,6 +18,7 @@ namespace infrastructure
             collection.AddTransient<IEmployeesService, EmployeesService>();
             collection.AddTransient<IProjectsService, ProjectsService>();
             collection.AddTransient<IInviteService, InviteService>();
+            collection.AddTransient<IResetPasswordService, ResetPasswordService>();
 
             return collection;
         }

@@ -14,6 +14,7 @@ using Domain.Entities;
 using Application.Errors;
 using Domain.Models.Models;
 using TaskManager.Validators;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 
 namespace TaskManager.Controllers
@@ -29,7 +30,8 @@ namespace TaskManager.Controllers
         private readonly IAuthService auth;
         private readonly IEmailService _emailService;
         private readonly IInviteService _inviteService;
-        public AuthController(IEmployeesRepository employeesRepository, IHttpContextAccessor _httpContextAccessor, IInvitesRepository invitesRepository, ITeamsRepository teamsRepository, IAuthService auth, IEmailService emailService, IResetPasswordRepository resetPasswordRepository, IInviteService inviteService)
+        private readonly IResetPasswordService _resetPasswordService;
+        public AuthController(IEmployeesRepository employeesRepository, IHttpContextAccessor _httpContextAccessor, IInvitesRepository invitesRepository, ITeamsRepository teamsRepository, IAuthService auth, IEmailService emailService, IResetPasswordRepository resetPasswordRepository, IInviteService inviteService, IResetPasswordService resetPasswordService)
         {
             this._employeesRepository = employeesRepository;
             this._httpContextAccessor = _httpContextAccessor;
@@ -39,6 +41,7 @@ namespace TaskManager.Controllers
             this.auth = auth;
             this._emailService = emailService;
             this._inviteService = inviteService;
+            this._resetPasswordService = resetPasswordService;
         }
 
         public IActionResult Login(string returnUrl = "/")
@@ -134,32 +137,14 @@ namespace TaskManager.Controllers
         [HttpPost]
         public async Task<IActionResult> ResetPasswordRequest([EmailAddress] string Email)
         {
-           ResetPassword ResetPasswordRequest =   await _resetPasswordRepository.GetByEmail(Email);
 
-            if(ResetPasswordRequest != null && ResetPasswordRequest.ExpirationDate > DateTime.Now)
+            IError result = await auth.ResetPasswordRequest(Email, _httpContextAccessor.HttpContext.Request.Host.Value);
+            
+            if (result != null)
             {
-                ModelState.AddModelError("ResetPasswordError", "this email already requested to reset password , please check your email");
+                ModelState.AddModelError("ResetPasswordError", result.Message);
                 return View();
             }
-
-            Employees employee = await _employeesRepository.GetByEmail(Email);
-
-            if(employee == null)
-            {
-                ModelState.AddModelError("ResetPasswordError", "email not found");
-                return View();
-            }
-
-            // request expire after 20 minutes
-            DateTime ExpirationDate = DateTime.Now.AddMinutes(20);
-            string SecretKey = RandomString.GetString(Types.ALPHABET_LOWERCASE, 30);
-
-
-            // send email here 
-            await this._emailService.SendResetPasswordEmail(Email, SecretKey, _httpContextAccessor.HttpContext.Request.Host.Value);
-
-            await _resetPasswordRepository.CreateResetPasswordRequest(new ResetPassword { Email = Email , ExpirationDate =  ExpirationDate , SecretKey = SecretKey.Hash() });
-
             ViewData["Success"] = "email sent suucessfully, please check your email";
             return View();
         }
@@ -167,11 +152,11 @@ namespace TaskManager.Controllers
         [HttpGet("/auth/ResetPasswordRedirect/{email}/{secretKey}")]
         public async Task<IActionResult> ResetPasswordRedirect(string email, string secretKey) {
             
-            ResetPassword resetPassword = await _resetPasswordRepository.GetByEmailAndSecret(email, secretKey.Hash());
+            IError result = await _resetPasswordService.CheckResetPasswordRequest(email, secretKey);
 
-            if(resetPassword == null || resetPassword.ExpirationDate < DateTime.Now)
-                return Unauthorized();
-            
+            if (result != null)
+                return StatusCode((int) result.StatusCode);
+
 
             TempData["email"] = email;
             TempData["secretKey"] = secretKey;
@@ -193,26 +178,14 @@ namespace TaskManager.Controllers
         public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordForm from)
         {
             if (!ModelState.IsValid)
-                return View();
+                return View(from);
 
-            ResetPassword ResetPasswordRequest = await  _resetPasswordRepository.GetByEmailAndSecret(from.Email , from.SecretKey.Hash());
-
-            if(ResetPasswordRequest == null)
-                return Unauthorized();
-
-            if(ResetPasswordRequest.ExpirationDate < DateTime.Now)
+            IError result = await auth.ResetPassword(from.Password , from.Email , from.SecretKey);
+            if(result != null)
             {
-                ModelState.AddModelError("ResetPasswordError", "ResetPasswordRequest has Been Expired, please make another request");
-                return View();
+                ModelState.AddModelError("ResetPasswordError", result.Message);
+                return View(from);
             }
-
-            Employees employee = await _employeesRepository.GetByEmail(from.Email);
-            if (employee == null)
-                return BadRequest();
-
-            employee.Password = from.Password.Hash();
-
-            await _employeesRepository.Update(employee);
 
             return View("/Views/Auth/ResetPasswordSuccess.cshtml");
             
