@@ -3,7 +3,10 @@ using System;
 using infrastructure.Extentions;
 using Microsoft.Identity.Client;
 using infrastructure.Persistence;
-using Domain.Entities;
+using Domain.Task;
+using Domain.Employee;
+using Domain.Team;
+using Domain.Project;
 namespace TaskManager
 {
     public static class DbSeeder

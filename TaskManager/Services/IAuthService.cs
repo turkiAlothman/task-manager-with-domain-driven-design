@@ -1,6 +1,6 @@
 ﻿using Application.Errors;
-using Domain.Entities;
-using Domain.Models.Models;
+using Domain.Employee;
+using Domain.Models;
 using OneOf;
 using System.ComponentModel.DataAnnotations;
 namespace TaskManager.Services

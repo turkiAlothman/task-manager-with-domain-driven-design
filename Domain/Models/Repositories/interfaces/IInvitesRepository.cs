@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Employee;
 
 namespace Domain.Models.Repositories.interfaces
 {
@@ -7,8 +7,8 @@ namespace Domain.Models.Repositories.interfaces
 
         public Task<Invites> GetByEmailAndSecretKey(string email, string SecretKey);
         public Task<Invites> GetByEmail(string email);
-        public  Task CreateInvite(Invites invit);
-        public Task deleteInvite(Invites invite);
+        public System.Threading.Tasks.Task CreateInvite(Invites invit);
+        public System.Threading.Tasks.Task deleteInvite(Invites invite);
 
     }
 }

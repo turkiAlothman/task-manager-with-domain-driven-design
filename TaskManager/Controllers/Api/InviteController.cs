@@ -4,7 +4,7 @@ using TaskManager.HttpExtensions;
 using Domain.Models.Repositories.interfaces;
 using RandomString4Net;
 using infrastructure.Extentions;
-using Domain.Models.Models;
+using Domain.Models;
 using TaskManager.RequestForms;
 using System.Security.Claims;
 using Application.Services.Interfaces;

@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿using Domain.Employee;
+using Domain.Project;
+using Domain.Task;
 
 namespace Domain.Models.Repositories.interfaces
 {
@@ -7,7 +9,7 @@ namespace Domain.Models.Repositories.interfaces
         public Task<IEnumerable<Employees>> GetAll(string search="" , int? TeamID = null, int? projectId = null);
         public Task<Employees> GetEmployee(int id);
         public Task<Employees> GetProfile(int id);
-        public Task CreateEmployee(Employees employee);
+        public System.Threading.Tasks.Task CreateEmployee(Employees employee);
         public Task<Employees> GetByEmail(string email);
         public Task<IEnumerable<Employees>> Search(string SearchQuery);
         public Task<List<Employees>> getByIds(List<int> ids);
@@ -17,7 +19,7 @@ namespace Domain.Models.Repositories.interfaces
         public Task<IEnumerable<Object>> GetEmployeeActivities(Employees employee);
         public Task<IEnumerable<Object>> ExeludeEmployees(int ProjectID , string? search);
         public Task<List<Employees>> GetEmployeesByListOfIds(List<int> ids, Projects? project = null);
-        public Task Update(Employees employee);
+        public System.Threading.Tasks.Task Update(Employees employee);
 
 
     }

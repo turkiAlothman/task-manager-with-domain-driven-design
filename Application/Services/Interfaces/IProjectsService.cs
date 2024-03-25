@@ -1,9 +1,9 @@
 ﻿using Application.Errors;
-using Domain.Entities;
-using Domain.Records;
+using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using OneOf;
 using System.ComponentModel.DataAnnotations;
+using Domain.Task;
 
 namespace Application.Services.Interfaces
 {

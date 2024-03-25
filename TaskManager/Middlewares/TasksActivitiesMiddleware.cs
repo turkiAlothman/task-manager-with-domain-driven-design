@@ -5,7 +5,10 @@ using Azure;
 using Newtonsoft.Json.Linq;
 using Domain.Models.Repositories.interfaces;
 using System.Linq;
-using Domain.Entities;
+using Domain.Task;
+using Domain.Employee;
+using Domain.Project;
+using Domain.Activitiy;
 
 namespace TaskManager.Middlewares
 {

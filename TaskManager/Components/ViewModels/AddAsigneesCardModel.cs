@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.Employee;
+using Domain.Task;
 
 namespace TaskManager.Components.ViewModels
 {

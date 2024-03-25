@@ -5,7 +5,7 @@ using Domain.Models.Repositories.interfaces;
 using TaskManager.Components.ViewModels;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.IdentityModel.Tokens;
-using Domain.Entities;
+using Domain.Team;
 
 namespace TaskManager.Components
 {

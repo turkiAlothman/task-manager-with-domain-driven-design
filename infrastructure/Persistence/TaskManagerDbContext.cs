@@ -1,5 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
+using Domain.Task;
+using Domain.Employee;
+using Domain.Team;
+using Domain.Project;
+using Domain.Activitiy;
+using Domain.Comment;
+using Domain.ResetPasswords;
 namespace infrastructure.Persistence
 {
     public class TaskManagerDbContext : DbContext

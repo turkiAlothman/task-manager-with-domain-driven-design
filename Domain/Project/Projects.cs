@@ -1,6 +1,10 @@
-﻿namespace Domain.Entities
+﻿using Domain.Employee;
+using Domain.Entities;
+using Domain.Task;
+
+namespace Domain.Project
 {
-    public class Projects : BaseEntity<int>
+    public partial class Projects : BaseEntity<int>
     {
         public string Name { set; get; }
         public string Type { set; get; }

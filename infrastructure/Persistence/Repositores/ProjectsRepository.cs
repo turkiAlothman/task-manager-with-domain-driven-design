@@ -4,10 +4,11 @@ using MySqlConnector;
 using System.Linq;
 using Domain.Models.Repositories.interfaces;
 using System.Collections.Generic;
-using Domain.Entities;
-using Domain.Records;
-using Domain.Models.Models;
+using Domain.DTOs;
+using Domain.Models;
 using Org.BouncyCastle.Crypto;
+using Domain.Employee;
+using Domain.Project;
 
 
 namespace infrastructure.Persistence.Repositores

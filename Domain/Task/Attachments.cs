@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities
+﻿using Domain.Entities;
+
+namespace Domain.Task
 {
     public class Attachments : BaseEntity<int>
     {

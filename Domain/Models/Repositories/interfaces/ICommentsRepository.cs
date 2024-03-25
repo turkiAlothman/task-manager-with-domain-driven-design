@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Comment;
 
 namespace Domain.Models.Repositories.interfaces
 {

@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Domain.Employee;
+using Domain.Entities;
 
-namespace Domain.Entities
+namespace Domain.Team
 {
-    public class Teams : BaseEntity<int>
+    public partial class Teams : BaseEntity<int>
     {
         [Required(ErrorMessage = "team field is required")]
         public int Id { get; set; }

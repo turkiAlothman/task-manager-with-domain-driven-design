@@ -1,10 +1,10 @@
-﻿using Domain.Entities;
+﻿using Domain.ResetPasswords;
 
 namespace Domain.Models.Repositories.interfaces
 {
     public interface IResetPasswordRepository
     {
-        public Task CreateResetPasswordRequest(ResetPassword resetPassword);
+        public System.Threading.Tasks.Task CreateResetPasswordRequest(ResetPassword resetPassword);
         public Task<ResetPassword> GetByEmail(string email);
         public Task<ResetPassword> GetByEmailAndSecret(string email,string SecretKey);
 

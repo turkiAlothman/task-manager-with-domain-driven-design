@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Team;
 
 namespace TaskManager.Components.ViewModels
 {

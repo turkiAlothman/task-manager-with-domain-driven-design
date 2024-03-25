@@ -1,8 +1,13 @@
 ﻿using System.ComponentModel;
+using Domain.Activitiy;
+using Domain.Entities;
+using Domain.Project;
+using Domain.Team;
+using Domain.Task;
 
-namespace Domain.Entities
+namespace Domain.Employee
 {
-    public class Employees : BaseEntity<int>
+    public partial class Employees : BaseEntity<int>
     {
         public bool Manager { get; set; }
 

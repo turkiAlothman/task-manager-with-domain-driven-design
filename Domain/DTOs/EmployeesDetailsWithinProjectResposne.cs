@@ -1,4 +1,4 @@
-﻿namespace Domain.Records
+﻿namespace Domain.DTOs
 {
     public class EmployeesDetailsWithinProjectResposne
     {

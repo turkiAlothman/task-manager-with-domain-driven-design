@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Models.Repositories.interfaces;
-using Domain.Entities;
+using Domain.Team;
 
 namespace TaskManager.Components
 {

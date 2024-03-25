@@ -1,5 +1,5 @@
 ﻿using Application.Errors;
-using Domain.Entities;
+using Domain.Task;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 

@@ -1,4 +1,8 @@
-﻿using Domain.Entities;
+﻿using Domain.Task;
+using Domain.Employee;
+using Domain.Comment;
+using Domain.Project;
+
 
 namespace Domain.Models.Repositories.interfaces
 {
@@ -6,8 +10,8 @@ namespace Domain.Models.Repositories.interfaces
     {
         public Task<(IEnumerable<Tasks>, int)> GetAll(int pageIndex = 1, int pageSize = 30, int? ProjectId = null, int? TeamId = null, bool AssignedToMe = false, string search = null, string Status = null, string Priority = null, int? userId = null);
         public Task<int> Count();
-        public Task Add(Tasks task);
-        public Task Delete(Tasks task);
+        public System.Threading.Tasks.Task Add(Tasks task);
+        public System.Threading.Tasks.Task Delete(Tasks task);
         public Task<Tasks> GetTaskWithAllDetails(int id);
         public Task<Tasks> GetTaskWithAssigneesAndReporter(int id);
         public Task<bool> IsAssigneeOrReporter(int TaskId, int EmployeeId);

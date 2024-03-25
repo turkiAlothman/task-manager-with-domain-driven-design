@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using Domain.Models.Repositories.interfaces;
 using TaskManager.Components.ViewModels;
-using Domain.Entities;
+using Domain.Project;
 namespace TaskManager.Components
 {
     public class ProjectsDropDown : ViewComponent

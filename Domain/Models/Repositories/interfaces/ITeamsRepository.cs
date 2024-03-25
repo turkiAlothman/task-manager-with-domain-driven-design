@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Team;
 
 namespace Domain.Models.Repositories.interfaces
 {

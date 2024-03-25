@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using TaskManager.Services;
-using Domain.Entities;
 using Application.Errors;
 using Domain.Models.Repositories.interfaces;
 using Application.Errors.Authentication;
@@ -16,6 +15,9 @@ using RandomString4Net;
 using Application.Errors.ResetPassword;
 using Application.Errors.Employees;
 using Application.Errors.Authorizations;
+using Domain.Employee;
+using Domain.Team;
+using Domain.ResetPasswords;
 
 namespace TaskManager.Services
 {

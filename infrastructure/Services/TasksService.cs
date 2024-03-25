@@ -1,6 +1,5 @@
 ﻿using Application.Errors;
 using Application.Services.Interfaces;
-using Domain.Entities;
 using Domain.Models.Repositories.interfaces;
 using Application.Errors.Tasks;
 using Application.Errors.Employees;
@@ -13,6 +12,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 using infrastructure.Extentions;
 using Domain.Base;
+using Domain.Task;
+using Domain.Employee;
+using Domain.Comment;
 
 namespace infrastructure.Services
 {

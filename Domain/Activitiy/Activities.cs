@@ -1,6 +1,10 @@
-﻿namespace Domain.Entities
+﻿using Domain.Employee;
+using Domain.Entities;
+using Domain.Task;
+
+namespace Domain.Activitiy
 {
-    public class Activities : BaseEntity<int>
+    public partial class Activities : BaseEntity<int>
     {
         public Tasks? task { get; set; }
         public Employees actor { get; set; }

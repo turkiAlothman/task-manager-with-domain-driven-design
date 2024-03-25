@@ -10,11 +10,11 @@ using infrastructure.Extentions;
 using TaskManager.Services;
 using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
-using Domain.Entities;
 using Application.Errors;
-using Domain.Models.Models;
+using Domain.Models;
 using TaskManager.Validators;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Domain.Employee;
 
 
 namespace TaskManager.Controllers

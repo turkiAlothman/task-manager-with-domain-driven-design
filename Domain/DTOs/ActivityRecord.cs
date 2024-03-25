@@ -1,11 +1,10 @@
-﻿namespace Domain.Records
+﻿namespace Domain.DTOs
 {
     public record ActivityRecord
     {
         public string description { get; set; }
         public ActivityActorRecord actor { get; set; }
         public ActivityTaskRecord task { get; set; }
-
         public string ProjectName { get; set; }
         public DateTime CreatedAt { set; get; }
 

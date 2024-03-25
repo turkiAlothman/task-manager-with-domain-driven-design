@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskManager.Components.ViewModels;
-using Domain.Entities;
+using Domain.Task;
+using Domain.Employee;
 
 
 namespace TaskManager.Components

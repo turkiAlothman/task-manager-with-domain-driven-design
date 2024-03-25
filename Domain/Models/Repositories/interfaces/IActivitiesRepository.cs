@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Activitiy;
 
 namespace Domain.Models.Repositories.interfaces
 {

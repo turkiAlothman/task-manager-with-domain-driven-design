@@ -4,7 +4,8 @@ using TaskManager.HttpExtensions;
 using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
 using TaskManager.Utilities;
-using Domain.Entities;
+using Domain.Task;
+using Domain.Activitiy;
 namespace TaskManager.Controllers
 {
 

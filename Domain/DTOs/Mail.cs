@@ -1,4 +1,4 @@
-﻿namespace Domain.Models.Models
+﻿namespace Domain.DTOs
 {
     public class Mail
     {

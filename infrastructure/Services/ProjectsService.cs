@@ -4,11 +4,13 @@ using Application.Errors.Employees;
 using Application.Errors.Tasks;
 using Application.Services.Interfaces;
 using Domain.Base;
-using Domain.Entities;
 using Domain.Models.Repositories.interfaces;
-using Domain.Records;
+using Domain.DTOs;
 using infrastructure.Persistence.Repositores;
 using OneOf;
+using Domain.Task;
+using Domain.Employee;
+using Domain.Project;
 
 namespace infrastructure.Services
 {

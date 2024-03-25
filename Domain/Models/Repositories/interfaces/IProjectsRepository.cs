@@ -1,5 +1,6 @@
-﻿using Domain.Entities;
-using Domain.Records;
+﻿using Domain.DTOs;
+using Domain.Employee;
+using Domain.Project;
 namespace Domain.Models.Repositories.interfaces
 {
     public interface IProjectsRepository
@@ -7,11 +8,11 @@ namespace Domain.Models.Repositories.interfaces
         public  Task<IEnumerable<Projects>> GetAll();
         public Task<IEnumerable<Projects>> GetWithDetails();
         public Task<Projects> GetById(int id);
-        public Task CreateProject(Projects project);
+        public System.Threading.Tasks.Task CreateProject(Projects project);
         public Task<IEnumerable<EmployeesDetailsWithinProjectResposne>?> GetProjectsEmployeesDetails(int  ProjectId);
         public Task<IEnumerable<ActivityRecord>> GetProjectsActivities(Projects project);
-        public Task RemoveEmployee(Projects project , Employees employee);
-        public Task AddListOfEmployeesInPoject(Projects project, List<Employees> employees);
+        public System.Threading.Tasks.Task RemoveEmployee(Projects project , Employees employee);
+        public System.Threading.Tasks.Task AddListOfEmployeesInPoject(Projects project, List<Employees> employees);
 
     }
 }

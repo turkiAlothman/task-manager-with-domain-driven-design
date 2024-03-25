@@ -2,15 +2,12 @@
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Text;
 using infrastructure.Configurations;
 using Application.Services.Interfaces;
-using Domain.Models.Models;
 using Application.Services.Interfaces;
-using Domain.Entities;
 using Domain.Base;
+using Domain.DTOs;
+using Domain.Employee;
 
 namespace infrastructure.Services
 {
