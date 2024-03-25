@@ -3,6 +3,7 @@ using Application.Errors.Authorizations;
 using Application.Errors.Employees;
 using Application.Errors.Tasks;
 using Application.Services.Interfaces;
+using Domain.Base;
 using Domain.Entities;
 using Domain.Models.Repositories.interfaces;
 using Domain.Records;
@@ -11,12 +12,12 @@ using OneOf;
 
 namespace infrastructure.Services
 {
-    public class ProjectsService : IProjectsService
+    public class ProjectsService : BaseService,IProjectsService
     {
         private readonly IProjectsRepository _projectsRepository;
         private readonly ITasksRepository _tasksRepository;
         private readonly IEmployeesRepository _employeesRepository;
-        public ProjectsService(IProjectsRepository projectsRepository, ITasksRepository tasksRepository, IEmployeesRepository employeesRepository)
+        public ProjectsService(IUnitOfWork unitOfWork , IProjectsRepository projectsRepository, ITasksRepository tasksRepository, IEmployeesRepository employeesRepository) :base(unitOfWork)
         {
             _projectsRepository = projectsRepository;
             _tasksRepository = tasksRepository;

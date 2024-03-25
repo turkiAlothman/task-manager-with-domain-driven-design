@@ -10,16 +10,16 @@ using Application.Services.Interfaces;
 using Domain.Models.Models;
 using Application.Services.Interfaces;
 using Domain.Entities;
+using Domain.Base;
 
 namespace infrastructure.Services
 {
-    public class EmailService : IEmailService
+    public class EmailService :  BaseService , IEmailService
     {
         private readonly MailSettings _settings;
-        public EmailService(IOptions<MailSettings> settings)
-        {
+        public EmailService(IUnitOfWork unitOfWork, IOptions<MailSettings> settings) : base(unitOfWork)
+        {  
             _settings = settings.Value;
-
         }
 
         public async Task SendMail(Mail mail)

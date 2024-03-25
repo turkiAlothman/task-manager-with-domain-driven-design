@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    public class Invites : BaseEntity
+    public class Invites : BaseEntity<int>
     {
         public Employees inviter { get; set; }
         public string inviteeEmail { get; set; }

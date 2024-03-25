@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    public class Projects : BaseEntity
+    public class Projects : BaseEntity<int>
     {
         public string Name { set; get; }
         public string Type { set; get; }

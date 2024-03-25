@@ -5,13 +5,15 @@ using infrastructure.Extentions;
 using Application.Errors.Authentication;
 using Application.Errors.Authorizations;
 using Application.Errors;
+using Domain.Base;
 
 namespace infrastructure.Services
 {
-    public class ResetPasswordService : IResetPasswordService
+    public class ResetPasswordService :BaseService ,  IResetPasswordService
     {
         private readonly IResetPasswordRepository _resetPasswordRepository;
-        public ResetPasswordService(IResetPasswordRepository resetPasswordRepository) {
+        public ResetPasswordService(IUnitOfWork unitOfWork, IResetPasswordRepository resetPasswordRepository) :base(unitOfWork)
+        {
             _resetPasswordRepository = resetPasswordRepository;
         }
         public async Task<IError> CheckResetPasswordRequest(string email, string secretKey)

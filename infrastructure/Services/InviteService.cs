@@ -12,16 +12,17 @@ using System.Text;
 using System.Threading.Tasks;
 using RandomString4Net;
 using Application.Errors.Invites;
+using Domain.Base;
 
 namespace infrastructure.Services
 {
-    public class InviteService : IInviteService
+    public class InviteService : BaseService, IInviteService
     {
         private readonly IEmployeesRepository _employeesRepository;
         private readonly IInvitesRepository _invitesRepository;
         private readonly IEmailService _emailService;
 
-        public InviteService(IEmployeesRepository employeesRepository, IInvitesRepository invitesRepository, IEmailService emailService)
+        public InviteService(IUnitOfWork unitOfWork ,IEmployeesRepository employeesRepository, IInvitesRepository invitesRepository, IEmailService emailService) : base(unitOfWork)
         {
             _employeesRepository = employeesRepository;
             _invitesRepository = invitesRepository;

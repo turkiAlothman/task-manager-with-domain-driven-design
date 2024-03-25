@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    public class Activities : BaseEntity
+    public class Activities : BaseEntity<int>
     {
         public Tasks? task { get; set; }
         public Employees actor { get; set; }

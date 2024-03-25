@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    public class Employees : BaseEntity
+    public class Employees : BaseEntity<int>
     {
         public bool Manager { get; set; }
 

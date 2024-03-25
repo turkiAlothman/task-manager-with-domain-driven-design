@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Domain.Entities
 {
-    public class Tasks : BaseEntity
+    public class Tasks : BaseEntity<int>
     {
         [StringLength(50)]
         public string? Title { get; set; } = string.Empty;

@@ -44,15 +44,15 @@ namespace infrastructure.Persistence
 
         private void AddTimeStamps()
         {
-            var entries = ChangeTracker.Entries().Where(e => e.Entity is BaseEntity && (e.State == EntityState.Added || e.State == EntityState.Modified));
+            var entries = ChangeTracker.Entries().Where(e => e.Entity is BaseEntity<int> && (e.State == EntityState.Added || e.State == EntityState.Modified));
             foreach (var entry in entries)
             {
                 var now = DateTime.Now;
 
                 if(entry.State == EntityState.Added)
-                    ((BaseEntity)entry.Entity).CreatedAt = now;
+                    ((BaseEntity<int>)entry.Entity).CreatedAt = now;
                 
-                    ((BaseEntity)entry.Entity).UpdatedAt = now;
+                    ((BaseEntity<int>)entry.Entity).UpdatedAt = now;
 
             }
         

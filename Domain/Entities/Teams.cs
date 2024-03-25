@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    public class Teams : BaseEntity
+    public class Teams : BaseEntity<int>
     {
         [Required(ErrorMessage = "team field is required")]
         public int Id { get; set; }

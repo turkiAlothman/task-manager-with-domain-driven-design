@@ -12,17 +12,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 using infrastructure.Extentions;
+using Domain.Base;
 
 namespace infrastructure.Services
 {
-    public class TasksService : ITasksService
+    public class TasksService : BaseService ,  ITasksService
     {
         private readonly ITasksRepository _tasksRepository;
         private readonly IEmployeesRepository _employeesRepository;
         private readonly ICommentsRepository _commentsRepository;
         private readonly IProjectsRepository _projectsRepository;
         private readonly IConfiguration _configuration;
-        public TasksService(ITasksRepository tasksRepository, IEmployeesRepository employeesRepository, ICommentsRepository commentsRepository, IProjectsRepository projectsRepository, IConfiguration configuration)
+        public TasksService(IUnitOfWork unitOfWork  , ITasksRepository tasksRepository, IEmployeesRepository employeesRepository, ICommentsRepository commentsRepository, IProjectsRepository projectsRepository, IConfiguration configuration) :base(unitOfWork)
         {
             _tasksRepository = tasksRepository;
             _employeesRepository = employeesRepository;
@@ -64,6 +65,8 @@ namespace infrastructure.Services
             });
 
 
+            // after the task is commited in the database , we get the Id of the task to specify the storage path of the attachments
+
             if (!attachments.IsNullOrEmpty())
             {
                 Directory.CreateDirectory((_configuration.GetValue<string>("TaskAttachmantsStoragePathUrl") + attachments.First().task.Id).Replace("static", _configuration.GetValue<string>("StoragePath")));
@@ -84,6 +87,9 @@ namespace infrastructure.Services
                 }
 
             }
+
+            await UnitOfWork.SaveChangesAsync();
+
 
             return null;
 

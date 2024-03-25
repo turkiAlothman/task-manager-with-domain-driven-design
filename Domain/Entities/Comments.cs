@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    public class Comments : BaseEntity
+    public class Comments : BaseEntity<int>
     {
         public string MessageContent { get; set; }
 
