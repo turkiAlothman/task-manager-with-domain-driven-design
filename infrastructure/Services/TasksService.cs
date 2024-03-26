@@ -15,6 +15,8 @@ using Domain.Base;
 using Domain.Task;
 using Domain.Employee;
 using Domain.Comment;
+using Microsoft.VisualBasic;
+using Domain.Project;
 
 namespace infrastructure.Services
 {
@@ -47,28 +49,25 @@ namespace infrastructure.Services
                     return new customError { Message = Message  , StatusCode = System.Net.HttpStatusCode.BadRequest};
 
                 attachments.Add(new Attachments());
-
             }
 
 
-            await _tasksRepository.Add(new Tasks
+            Projects Project = await _projectsRepository.GetById(project);
+
+            if(Project == null)
             {
-                Title = title,
-                Description = description,
-                Priority = priority,
-                Type = type,
-                Asignees = await _employeesRepository.getByIds(asignees),
-                StartDate = startDate,
-                DueDate = deadline,
-                Status = "Planned",
-                Reporter = await _employeesRepository.GetEmployee(UserId),
-                Project = await _projectsRepository.GetById(project),
-                Attachments = attachments
-            });
+                return new ProjectNotFoundError();
+            }
 
+            Tasks task = new Tasks(title, startDate, deadline,  priority , description, "Planned", type);
+            task.SetReporter(await _employeesRepository.GetEmployee(UserId));
+            task.AddAssignees(await _employeesRepository.getByIds(asignees));
+            task.SetProject(Project);
+            task.AddAttachments(attachments);
+            await _tasksRepository.Add(task);
 
+            
             // after the task is commited in the database , we get the Id of the task to specify the storage path of the attachments
-
             if (!attachments.IsNullOrEmpty())
             {
                 Directory.CreateDirectory((_configuration.GetValue<string>("TaskAttachmantsStoragePathUrl") + attachments.First().task.Id).Replace("static", _configuration.GetValue<string>("StoragePath")));
@@ -115,14 +114,14 @@ namespace infrastructure.Services
             var result = new List<ValidationResult>();
             var context = new ValidationContext(Origin, null, null);
 
-            patch.ApplyTo(Origin);
+             patch.ApplyToTask(Origin);
 
 
 
             if (! Validator.TryValidateObject(Origin,context , result,true))
                 return new customError {Message = result.First().ErrorMessage.ToString() ,  StatusCode = System.Net.HttpStatusCode.BadRequest} ;
 
-            _tasksRepository.Update(Origin);
+            await UnitOfWork.SaveChangesAsync();
 
             return null;
         }
@@ -196,12 +195,14 @@ namespace infrastructure.Services
 
             Employees employee = await _employeesRepository.GetEmployee(UserId);
 
-            
-             this._tasksRepository.AddComment(task, new Comments
+
+            task.AddComment( new Comments
             {
                 Sender = employee,
                 MessageContent = MessageContent
             });
+
+            await UnitOfWork.SaveChangesAsync();
 
             return null;
         }

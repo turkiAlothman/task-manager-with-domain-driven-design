@@ -70,7 +70,7 @@ namespace infrastructure.Persistence.Repositores
         public async Task Add(Tasks task)
         {
             await _Context.tasks.AddAsync(task);
-            _Context.SaveChanges();
+            await _Context.SaveChangesAsync();
         }
 
         public async Task Delete(Tasks task)
@@ -120,13 +120,7 @@ namespace infrastructure.Persistence.Repositores
             _Context.SaveChanges(true);
         }
 
-        public void AddComment(Tasks task, Comments comment)
-        {
-            task.Comments = new List<Comments>();
-            task.Comments.Add(comment);
-            _Context.SaveChanges();
 
-        }
 
         public void DeleteComment(Tasks task, Comments comment)
         {

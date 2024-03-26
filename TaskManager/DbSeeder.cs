@@ -3,10 +3,12 @@ using System;
 using infrastructure.Extentions;
 using Microsoft.Identity.Client;
 using infrastructure.Persistence;
+using Domain.Entities;
 using Domain.Task;
-using Domain.Employee;
-using Domain.Team;
 using Domain.Project;
+using Domain.Team;
+using Domain.Employee;
+using Domain.Task;
 namespace TaskManager
 {
     public static class DbSeeder
@@ -48,37 +50,44 @@ namespace TaskManager
                     new Teams{
                         Name = "Quality Assurance",
                         Description = "Ensures the quality of software products through rigorous testing and evaluation."
-                    },
+                    }
+                    ,
 
                     new Teams{
                         Name = "Backend Team",
                         Description = "Develops and maintains the server-side logic, databases, and application integration."
-                    },
+                    }
+                    ,
 
                     new Teams{
                         Name = "Frontend Team",
                         Description = "Focuses on developing user interface and user experience for web and mobile applications."
-                    },
+                    }
+                    ,
 
                     new Teams{
                         Name = "DevOps Team",
                         Description = "Facilitates collaboration between development and operations teams to improve productivity and project delivery."
-                    },
+                    }
+                    ,
 
                     new Teams{
                         Name = "Product Management",
                         Description = "Oversees the development and marketing strategy of products from conception to launch."
-                    },
+                    }
+                    ,
 
                     new Teams{
                         Name = "UX/UI Design Team",
                         Description = "Designs intuitive and engaging user interfaces that enhance user experience."
-                    },
+                    }
+                    ,
 
                     new Teams{
                         Name = "Marketing Team",
                         Description = "Develops strategies to effectively promote products and engage with the target audience."
-                    },
+                    }
+                    ,
 
                     new Teams{
                         Name = "Customer Support",
@@ -101,7 +110,8 @@ namespace TaskManager
                         team = teams[0]
                         ,Projects = [project1, project2]
                     
-                        },
+                        }
+                    ,
 
                     // 1
                      new Employees{
@@ -115,7 +125,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("2004-05-23"),
                         team = teams[0]
                         ,Projects = [project1 , project2]
-                        },
+                        }
+                     ,
                      
                      // 2  
                      new Employees{
@@ -130,7 +141,8 @@ namespace TaskManager
                         team = teams[0]
                         ,Projects = [project1]
 
-                        },
+                        }
+                     ,
                      //3
                      new Employees{
                         Manager = true,
@@ -158,7 +170,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1995-11-12"),
                         team = teams[4]
                         ,Projects = [project1, project2]
-                        },
+                        }
+                    ,
                     // 5
                     new Employees{
                         Manager = true,
@@ -171,7 +184,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1980-03-24"),
                         team = teams[4]
                         ,Projects = [project1, project2]
-                        },
+                        }
+                    ,
                     // 6
                     new Employees{ 
                         Manager = true,
@@ -184,7 +198,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1959-03-10"),
                         team = teams[1]
                         ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
 
                     // 7
                     new Employees{
@@ -198,7 +213,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1990-03-10"),
                         team = teams[1]
                         ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
                     
                     // 8
                     new Employees{
@@ -212,7 +228,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1995-05-22"),
                         team = teams[1]
                         ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
                     // 9
                     new Employees{
                         Manager = true,
@@ -225,7 +242,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("2001-05-22"),
                         team = teams[1]
                         ,Projects = [project1]
-                    },
+                    }
+                    ,
 
                     // 10
                     new Employees{
@@ -239,7 +257,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("2002-06-12"),
                         team = teams[1],
                         Projects = [project1]
-                    },
+                    }
+                    ,
 
                     // 11
                     new Employees{
@@ -253,7 +272,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse( "1960-09-20"),
                         team = teams[4]
                         ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
 
                     // 12 
                     new Employees{
@@ -267,7 +287,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1966-03-18"),
                     team = teams[4]
                     ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
 
                     // 13
                     new Employees{
@@ -281,7 +302,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1966-03-18"),
                     team = teams[4]
                     ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
 
                     // 14
                     new Employees{
@@ -295,7 +317,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1971-10-30"),
                     team = teams[5]
                     ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
 
                     // 15
                     new Employees{
@@ -309,7 +332,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1982-04-06"),
                         team = teams[5]
                         ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
 
                     // 16
                     new Employees{
@@ -323,7 +347,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("2005-04-06"),
                         team = teams[5]
                         ,Projects = [project1]
-                    },
+                    }
+                    ,
 
                     // 17
                     new Employees{
@@ -337,7 +362,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1978-06-22"),
                         team= teams[2]
                         ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
                     // 18
                     new Employees{
                         Manager = false,
@@ -350,7 +376,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1998-06-02"),
                         team= teams[2]
                         ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
                     
                     // 19
                     new Employees{
@@ -366,7 +393,8 @@ namespace TaskManager
                         ,Projects = [project1, project2]
 
 
-                    },
+                    }
+                    ,
                     
                     // 20
                     new Employees{
@@ -380,7 +408,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1991-01-29"),
                         team= teams[3]
                         ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
 
                     // 21
                     new Employees{
@@ -394,7 +423,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1989-11-27"),
                         team= teams[3]
                         ,Projects = [project1]
-                    },
+                    }
+                    ,
 
                     // 22
                     new Employees{
@@ -408,7 +438,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1999-10-27"),
                         team= teams[3]
                         ,Projects = [project1]
-                    },
+                    }
+                    ,
 
                     // 23
                     new Employees{
@@ -422,7 +453,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1965-03-10"),
                         team = teams[6]
                         ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
 
                     // 24
                     new Employees{
@@ -436,7 +468,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1980-08-03"),
                         team = teams[6]
                         ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
                     
                     // 25
                     new Employees{
@@ -450,7 +483,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1994-03-30"),
                         team = teams[6]
                         ,Projects = [project1]
-                    },
+                    }
+                    ,
 
                     // 26
                     new Employees{
@@ -464,7 +498,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1962-12-18"),
                         team = teams[7]
                         ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
 
                     // 27
                     new Employees{
@@ -478,7 +513,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1983-07-19"),
                         team = teams[7]
                         ,Projects = [project1, project2]
-                    },
+                    }
+                    ,
 
                     // 28
                     new Employees{
@@ -492,7 +528,8 @@ namespace TaskManager
                         BirthDay = DateTime.Parse("1993-07-28"),
                         team = teams[7]
                         ,Projects = [project1]
-                    },
+                    }
+                    ,
 
                     // 29
                     new Employees{
@@ -529,7 +566,7 @@ namespace TaskManager
                     // project1
                     // Quality assurance tasks
                     
-                    new Tasks{
+                    Tasks.createDummy(new {
                         Title = "Test Plan Creation",
                         StartDate = DateTime.Parse("2024-03-01"),
                         DueDate = DateTime.Parse("2024-03-05"),
@@ -537,12 +574,12 @@ namespace TaskManager
                         Description = "Create detailed test plans for the new project features.",
                         Status = "Not Started",
                         Type="Quality assurance",
-                        Asignees = [employess[0]],
+                        Asignees = employess[0],
                         Reporter =employess[4]
 
-                    },
-
-                    new Tasks{
+                    }),
+                    
+                    Tasks.createDummy(new {
                         Title = "Automated Test Development",
                         StartDate = DateTime.Parse("2024-03-06"),
                         DueDate = DateTime.Parse("2024-03-12"),
@@ -550,11 +587,11 @@ namespace TaskManager
                         Description = "Develop automated tests for continuous integration.",
                         Status = "In Progress",
                         Type="Quality assurance",
-                        Asignees = [employess[0]],
+                        Asignees = employess[0],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Regression Testing",
                         StartDate = DateTime.Parse("2024-03-13"),
                         DueDate = DateTime.Parse("2024-03-19"),
@@ -562,11 +599,11 @@ namespace TaskManager
                         Description = "Conduct regression testing for the latest release.",
                         Status = "Not Started",
                         Type="Quality assurance",
-                        Asignees = [employess[0]],
+                        Asignees = employess[0],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Performance Testing",
                         StartDate = DateTime.Parse("2024-03-20"),
                         DueDate = DateTime.Parse("2024-03-26"),
@@ -574,11 +611,11 @@ namespace TaskManager
                         Description = "Perform performance testing on critical features.",
                         Status = "Not Started",
                         Type="Quality assurance",
-                        Asignees = [employess[0]],
+                        Asignees = employess[0],
                         Reporter =employess[13]
-                    },
+                    }),
                     
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Security Testing",
                         StartDate = DateTime.Parse("2024-03-27"),
                         DueDate = DateTime.Parse("2024-04-02"),
@@ -586,11 +623,11 @@ namespace TaskManager
                         Description = "Execute comprehensive security testing protocols.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[0]],
+                        Asignees = employess[0],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Test Report Compilation",
                         StartDate = DateTime.Parse("2024-04-03"),
                         DueDate = DateTime.Parse("2024-04-09"),
@@ -598,12 +635,12 @@ namespace TaskManager
                         Description = "Compile testing reports and document findings.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[1]],
+                        Asignees = employess[1],
                         Reporter =employess[11]
 
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "User Acceptance Testing Coordination",
                         StartDate = DateTime.Parse("2024-04-10"),
                         DueDate = DateTime.Parse("2024-04-16"),
@@ -611,12 +648,12 @@ namespace TaskManager
                         Description = "Coordinate user acceptance testing with stakeholders.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[1]],
+                        Asignees = employess[1],
                         Reporter =employess[12]
 
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Bug Triage Meetings",
                         StartDate = DateTime.Parse("2024-04-17"),
                         DueDate = DateTime.Parse("2024-04-23"),
@@ -624,11 +661,11 @@ namespace TaskManager
                         Description = "Lead bug triage meetings to prioritize bug fixes.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[1]],
+                        Asignees = employess[1],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Testing Tools Evaluation",
                         StartDate = DateTime.Parse("2024-04-24"),
                         DueDate = DateTime.Parse("2024-04-30"),
@@ -636,11 +673,11 @@ namespace TaskManager
                         Description = "Evaluate new testing tools and processes for efficiency.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[1]],
+                        Asignees = employess[1],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Quality Assurance Process Review",
                         StartDate = DateTime.Parse("2024-05-01"),
                         DueDate = DateTime.Parse("2024-05-07"),
@@ -648,11 +685,11 @@ namespace TaskManager
                         Description = "Review and update the quality assurance processes.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[1]],
+                        Asignees = employess[1],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                                        new Tasks{
+                                        Tasks.createDummy(new{
                         Title = "Accessibility Testing",
                         StartDate = DateTime.Parse("2024-05-08"),
                         DueDate = DateTime.Parse("2024-05-14"),
@@ -660,11 +697,11 @@ namespace TaskManager
                         Description = "Ensure software compliance with accessibility standards.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[2]],
+                        Asignees = employess[2],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Cross-Browser Testing",
                         StartDate = DateTime.Parse("2024-05-15"),
                         DueDate = DateTime.Parse("2024-05-21"),
@@ -672,11 +709,11 @@ namespace TaskManager
                         Description = "Test application compatibility across multiple browsers.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[2]],
+                        Asignees = employess[2],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "API Testing",
                         StartDate = DateTime.Parse("2024-05-22"),
                         DueDate = DateTime.Parse("2024-05-28"),
@@ -684,11 +721,11 @@ namespace TaskManager
                         Description = "Validate the functionality, reliability, performance, and security of the application's API.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[2]],
+                        Asignees = employess[2],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Load Testing",
                         StartDate = DateTime.Parse("2024-05-29"),
                         DueDate = DateTime.Parse("2024-06-04"),
@@ -696,11 +733,11 @@ namespace TaskManager
                         Description = "Simulate peak load conditions to test system performance and stability.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[2]],
+                        Asignees = employess[2],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Usability Testing",
                         StartDate = DateTime.Parse("2024-06-05"),
                         DueDate = DateTime.Parse("2024-06-11"),
@@ -708,11 +745,11 @@ namespace TaskManager
                         Description = "Evaluate the application for user friendliness and ease of use.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[2]],
+                        Asignees = employess[2],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Localization Testing",
                         StartDate = DateTime.Parse("2024-06-12"),
                         DueDate = DateTime.Parse("2024-06-18"),
@@ -720,11 +757,11 @@ namespace TaskManager
                         Description = "Check the software for adaptability in different languages and regions.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[3]],
+                        Asignees = employess[3],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Integration Testing",
                         StartDate = DateTime.Parse("2024-06-19"),
                         DueDate = DateTime.Parse("2024-06-25"),
@@ -732,11 +769,11 @@ namespace TaskManager
                         Description = "Test the integration points between the application modules.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[3]],
+                        Asignees = employess[3],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Security Certification Preparation",
                         StartDate = DateTime.Parse("2024-06-26"),
                         DueDate = DateTime.Parse("2024-07-02"),
@@ -744,12 +781,12 @@ namespace TaskManager
                         Description = "Prepare the application for security certification assessments.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[3]]
+                        Asignees = employess[3]
                         ,
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Continuous Testing Pipeline Enhancement",
                         StartDate = DateTime.Parse("2024-07-03"),
                         DueDate = DateTime.Parse("2024-07-09"),
@@ -757,11 +794,11 @@ namespace TaskManager
                         Description = "Improve the efficiency and coverage of the continuous testing pipeline.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[3]],
+                        Asignees = employess[3],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Test Case Review and Optimization",
                         StartDate = DateTime.Parse("2024-07-10"),
                         DueDate = DateTime.Parse("2024-07-16"),
@@ -769,12 +806,12 @@ namespace TaskManager
                         Description = "Review and optimize existing test cases for better efficiency.",
                         Status = "Planned",
                         Type="Quality assurance",
-                        Asignees = [employess[3]],
+                        Asignees = employess[3],
                         Reporter =employess[14]
-                    },
+                    }),
 
                     // backend tasks
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Database Schema Design",
                         StartDate = DateTime.Parse("2024-01-01"),
                         DueDate = DateTime.Parse("2024-01-07"),
@@ -782,11 +819,11 @@ namespace TaskManager
                         Description = "Design and review database schema for the new inventory system.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[6]],
+                        Asignees = employess[6],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Authentication Service Update",
                         StartDate = DateTime.Parse("2024-01-08"),
                         DueDate = DateTime.Parse("2024-01-14"),
@@ -794,11 +831,11 @@ namespace TaskManager
                         Description = "Update the authentication service to support OAuth 2.0.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[6]],
+                        Asignees = employess[6],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "API Rate Limiting Implementation",
                         StartDate = DateTime.Parse("2024-01-15"),
                         DueDate = DateTime.Parse("2024-01-21"),
@@ -806,11 +843,11 @@ namespace TaskManager
                         Description = "Implement rate limiting on public APIs to enhance security.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[6]],
+                        Asignees = employess[6],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Logging Framework Integration",
                         StartDate = DateTime.Parse("2024-01-22"),
                         DueDate = DateTime.Parse("2024-01-28"),
@@ -818,11 +855,11 @@ namespace TaskManager
                         Description = "Integrate a new logging framework for better traceability.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[6]],
+                        Asignees = employess[6],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Payment Gateway Integration",
                         StartDate = DateTime.Parse("2024-01-29"),
                         DueDate = DateTime.Parse("2024-02-04"),
@@ -830,11 +867,11 @@ namespace TaskManager
                         Description = "Integrate Stripe payment gateway for processing transactions.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[6]],
+                        Asignees = employess[6],
                         Reporter =employess[14]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Redis Caching Layer Addition",
                         StartDate = DateTime.Parse("2024-02-05"),
                         DueDate = DateTime.Parse("2024-02-11"),
@@ -842,11 +879,11 @@ namespace TaskManager
                         Description = "Add Redis caching to improve application performance.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[7]],
+                        Asignees = employess[7],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Microservices Architecture Migration",
                         StartDate = DateTime.Parse("2024-02-12"),
                         DueDate = DateTime.Parse("2024-02-18"),
@@ -854,11 +891,11 @@ namespace TaskManager
                         Description = "Migrate monolithic architecture to microservices for scalability.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[7]],
+                        Asignees = employess[7],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Dockerization of Services",
                         StartDate = DateTime.Parse("2024-02-19"),
                         DueDate = DateTime.Parse("2024-02-25"),
@@ -866,11 +903,11 @@ namespace TaskManager
                         Description = "Dockerize existing services for better deployment efficiency.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[7]],
+                        Asignees = employess[7],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Automated Backup System",
                         StartDate = DateTime.Parse("2024-02-26"),
                         DueDate = DateTime.Parse("2024-03-04"),
@@ -878,11 +915,11 @@ namespace TaskManager
                         Description = "Implement an automated backup system for disaster recovery.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[7]],
+                        Asignees = employess[7],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "GraphQL Endpoint Implementation",
                         StartDate = DateTime.Parse("2024-03-05"),
                         DueDate = DateTime.Parse("2024-03-11"),
@@ -890,11 +927,11 @@ namespace TaskManager
                         Description = "Implement GraphQL endpoints for more flexible data retrieval.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[7]],
+                        Asignees = employess[7],
                         Reporter =employess[11]
 
-                    },
-                    new Tasks{
+                    }),
+                    Tasks.createDummy(new{
                         Title = "Continuous Integration Pipeline Setup",
                         StartDate = DateTime.Parse("2024-03-12"),
                         DueDate = DateTime.Parse("2024-03-18"),
@@ -902,11 +939,11 @@ namespace TaskManager
                         Description = "Set up a CI pipeline for automated testing and deployment.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[8]],
+                        Asignees = employess[8],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Service Monitoring Implementation",
                         StartDate = DateTime.Parse("2024-03-19"),
                         DueDate = DateTime.Parse("2024-03-25"),
@@ -914,11 +951,11 @@ namespace TaskManager
                         Description = "Implement monitoring for backend services to ensure uptime and performance.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[8]],
+                        Asignees = employess[8],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Database Optimization",
                         StartDate = DateTime.Parse("2024-03-26"),
                         DueDate = DateTime.Parse("2024-04-01"),
@@ -926,11 +963,11 @@ namespace TaskManager
                         Description = "Optimize database queries and indexes for performance improvement.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[8]],
+                        Asignees = employess[8],
                         Reporter =employess[14]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Error Handling Framework",
                         StartDate = DateTime.Parse("2024-04-02"),
                         DueDate = DateTime.Parse("2024-04-08"),
@@ -938,12 +975,12 @@ namespace TaskManager
                         Description = "Develop a comprehensive error handling framework for the backend.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[8]]
+                        Asignees = employess[8]
                         ,
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "API Documentation",
                         StartDate = DateTime.Parse("2024-04-09"),
                         DueDate = DateTime.Parse("2024-04-15"),
@@ -951,11 +988,11 @@ namespace TaskManager
                         Description = "Create detailed API documentation for developers and API consumers.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[8]],
+                        Asignees = employess[8],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Data Encryption Implementation",
                         StartDate = DateTime.Parse("2024-04-16"),
                         DueDate = DateTime.Parse("2024-04-22"),
@@ -963,11 +1000,11 @@ namespace TaskManager
                         Description = "Implement data encryption for sensitive user data storage and transfer.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[9]],
+                        Asignees = employess[9],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Third-Party API Integration",
                         StartDate = DateTime.Parse("2024-04-23"),
                         DueDate = DateTime.Parse("2024-04-29"),
@@ -976,11 +1013,11 @@ namespace TaskManager
                         Status = "Planned",
                         Type="backend",
                         
-                        Asignees = [employess[9]],
+                        Asignees = employess[9],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Backend Refactoring",
                         StartDate = DateTime.Parse("2024-04-30"),
                         DueDate = DateTime.Parse("2024-05-06"),
@@ -988,11 +1025,11 @@ namespace TaskManager
                         Description = "Refactor existing backend code to improve maintainability and scalability.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[9]],
+                        Asignees = employess[9],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "User Authentication Enhancements",
                         StartDate = DateTime.Parse("2024-05-07"),
                         DueDate = DateTime.Parse("2024-05-13"),
@@ -1000,11 +1037,11 @@ namespace TaskManager
                         Description = "Enhance user authentication mechanisms to include multi-factor authentication.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[9]],
+                        Asignees = employess[9],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Serverless Architecture Exploration",
                         StartDate = DateTime.Parse("2024-05-14"),
                         DueDate = DateTime.Parse("2024-05-20"),
@@ -1012,11 +1049,11 @@ namespace TaskManager
                         Description = "Explore the adoption of serverless architecture for specific microservices.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[9]],
+                        Asignees = employess[9],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Kubernetes Deployment",
                         StartDate = DateTime.Parse("2024-05-21"),
                         DueDate = DateTime.Parse("2024-05-27"),
@@ -1024,11 +1061,11 @@ namespace TaskManager
                         Description = "Deploy backend services on Kubernetes for orchestration.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[10]],
+                        Asignees = employess[10],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Cloud Services Cost Optimization",
                         StartDate = DateTime.Parse("2024-05-28"),
                         DueDate = DateTime.Parse("2024-06-03"),
@@ -1036,12 +1073,12 @@ namespace TaskManager
                         Description = "Optimize cloud services usage to reduce costs while maintaining performance.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[10]]
+                        Asignees = employess[10]
                         ,
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Backend Security Audit",
                         StartDate = DateTime.Parse("2024-06-04"),
                         DueDate = DateTime.Parse("2024-06-10"),
@@ -1049,11 +1086,11 @@ namespace TaskManager
                         Description = "Conduct a security audit to identify and fix potential vulnerabilities.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[10]],
+                        Asignees = employess[10],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "WebSockets Implementation",
                         StartDate = DateTime.Parse("2024-06-11"),
                         DueDate = DateTime.Parse("2024-06-17"),
@@ -1061,11 +1098,11 @@ namespace TaskManager
                         Description = "Implement WebSockets for real-time data exchange.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[10]],
+                        Asignees = employess[10],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Automated Database Migrations",
                         StartDate = DateTime.Parse("2024-06-18"),
                         DueDate = DateTime.Parse("2024-06-24"),
@@ -1073,12 +1110,12 @@ namespace TaskManager
                         Description = "Set up automated database migration scripts for seamless deployments.",
                         Status = "Planned",
                         Type="backend",
-                        Asignees = [employess[10]],
+                        Asignees = employess[10],
                         Reporter =employess[12]
-                    },
+                    }),
 
                     // UI-UX designer
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "User Research for New App",
                         StartDate = DateTime.Parse("2024-01-01"),
                         DueDate = DateTime.Parse("2024-01-07"),
@@ -1086,11 +1123,11 @@ namespace TaskManager
                         Description = "Conduct user research to gather insights for the new mobile application design.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[14]],
+                        Asignees = employess[14],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Design Sprints for Feature X",
                         StartDate = DateTime.Parse("2024-01-08"),
                         DueDate = DateTime.Parse("2024-01-14"),
@@ -1098,11 +1135,11 @@ namespace TaskManager
                         Description = "Run design sprints to prototype Feature X for user testing.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[14]],
+                        Asignees = employess[14],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Create Wireframes for Dashboard",
                         StartDate = DateTime.Parse("2024-01-15"),
                         DueDate = DateTime.Parse("2024-01-21"),
@@ -1110,11 +1147,11 @@ namespace TaskManager
                         Description = "Develop wireframes for the new dashboard design.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[14]],
+                        Asignees = employess[14],
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Develop UI Kit",
                         StartDate = DateTime.Parse("2024-01-22"),
                         DueDate = DateTime.Parse("2024-01-28"),
@@ -1122,11 +1159,11 @@ namespace TaskManager
                         Description = "Create a UI kit for consistent design across all platforms.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[14]],
+                        Asignees = employess[14],
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "User Flow Analysis",
                         StartDate = DateTime.Parse("2024-01-29"),
                         DueDate = DateTime.Parse("2024-02-04"),
@@ -1134,11 +1171,11 @@ namespace TaskManager
                         Description = "Analyze and optimize user flows for the checkout process.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[14]],
+                        Asignees = employess[14],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Accessibility Review",
                         StartDate = DateTime.Parse("2024-02-05"),
                         DueDate = DateTime.Parse("2024-02-11"),
@@ -1146,11 +1183,11 @@ namespace TaskManager
                         Description = "Review and enhance the accessibility of web applications.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[15]],
+                        Asignees = employess[15],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Interactive Prototyping",
                         StartDate = DateTime.Parse("2024-02-12"),
                         DueDate = DateTime.Parse("2024-02-18"),
@@ -1158,11 +1195,11 @@ namespace TaskManager
                         Description = "Create interactive prototypes for the new feature set.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[15]],
+                        Asignees = employess[15],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Design System Update",
                         StartDate = DateTime.Parse("2024-02-19"),
                         DueDate = DateTime.Parse("2024-02-25"),
@@ -1170,11 +1207,11 @@ namespace TaskManager
                         Description = "Update the design system with new components and guidelines.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[15]],
+                        Asignees = employess[15],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "User Testing Session Setup",
                         StartDate = DateTime.Parse("2024-02-26"),
                         DueDate = DateTime.Parse("2024-03-04"),
@@ -1182,11 +1219,11 @@ namespace TaskManager
                         Description = "Set up user testing sessions for the latest prototype.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[15]],
+                        Asignees = employess[15],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Competitive Analysis Report",
                         StartDate = DateTime.Parse("2024-03-05"),
                         DueDate = DateTime.Parse("2024-03-11"),
@@ -1194,12 +1231,12 @@ namespace TaskManager
                         Description = "Conduct a competitive analysis to benchmark UX practices.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[15]]
+                        Asignees = employess[15]
                         ,
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Persona Development",
                         StartDate = DateTime.Parse("2024-03-12"),
                         DueDate = DateTime.Parse("2024-03-18"),
@@ -1207,11 +1244,11 @@ namespace TaskManager
                         Description = "Develop user personas for targeted design strategies.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[16]],
+                        Asignees = employess[16],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "UX Workshop Facilitation",
                         StartDate = DateTime.Parse("2024-03-19"),
                         DueDate = DateTime.Parse("2024-03-25"),
@@ -1219,11 +1256,11 @@ namespace TaskManager
                         Description = "Facilitate a UX workshop for the product team.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[16]],
+                        Asignees = employess[16],
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Mobile App Redesign",
                         StartDate = DateTime.Parse("2024-03-26"),
                         DueDate = DateTime.Parse("2024-04-01"),
@@ -1231,11 +1268,11 @@ namespace TaskManager
                         Description = "Lead the redesign of the mobile app for enhanced user experience.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[16]],
+                        Asignees = employess[16],
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Landing Page Design",
                         StartDate = DateTime.Parse("2024-04-02"),
                         DueDate = DateTime.Parse("2024-04-08"),
@@ -1243,11 +1280,11 @@ namespace TaskManager
                         Description = "Design a new landing page to increase conversions.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[16]],
+                        Asignees = employess[16],
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Brand Identity Refresh",
                         StartDate = DateTime.Parse("2024-04-09"),
                         DueDate = DateTime.Parse("2024-04-15"),
@@ -1255,12 +1292,12 @@ namespace TaskManager
                         Description = "Refresh the brand identity to align with the new company vision.",
                         Status = "Planned",
                         Type="UI-UX",
-                        Asignees = [employess[16]],
+                        Asignees = employess[16],
                         Reporter =employess[4]
-                    },
+                    }),
 
                     // frontend devoleper
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Landing Page Redesign",
                         StartDate = DateTime.Parse("2024-01-01"),
                         DueDate = DateTime.Parse("2024-01-08"),
@@ -1268,11 +1305,11 @@ namespace TaskManager
                         Description = "Redesign the landing page to improve user engagement and conversion rates.",
                         Status = "Planned",
                         Type="frontend",
-                        Asignees = [employess[17]],
+                        Asignees = employess[17],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "React Component Library Development",
                         StartDate = DateTime.Parse("2024-01-09"),
                         DueDate = DateTime.Parse("2024-01-16"),
@@ -1280,12 +1317,12 @@ namespace TaskManager
                         Description = "Develop a reusable component library using React for faster development cycles.",
                         Status = "Planned",
                         Type="frontend",
-                        Asignees = [employess[17]]
+                        Asignees = employess[17]
                         ,
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Accessibility Audit and Improvements",
                         StartDate = DateTime.Parse("2024-01-17"),
                         DueDate = DateTime.Parse("2024-01-24"),
@@ -1293,12 +1330,12 @@ namespace TaskManager
                         Description = "Perform an accessibility audit and implement improvements to meet WCAG standards.",
                         Status = "Planned",
                         Type="frontend",
-                        Asignees = [employess[17]]
+                        Asignees = employess[17]
                         ,
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Implement Responsive Design",
                         StartDate = DateTime.Parse("2024-01-25"),
                         DueDate = DateTime.Parse("2024-02-01"),
@@ -1306,11 +1343,11 @@ namespace TaskManager
                         Description = "Ensure all new web pages are fully responsive across devices.",
                         Status = "Planned",
                         Type="frontend",
-                        Asignees = [employess[17]],
+                        Asignees = employess[17],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Performance Optimization",
                         StartDate = DateTime.Parse("2024-02-02"),
                         DueDate = DateTime.Parse("2024-02-09"),
@@ -1318,11 +1355,11 @@ namespace TaskManager
                         Description = "Optimize website performance to achieve a sub-2-second load time.",
                         Status = "Planned",
                         Type="frontend",
-                        Asignees = [employess[17]],
+                        Asignees = employess[17],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "CSS Refactoring",
                         StartDate = DateTime.Parse("2024-02-10"),
                         DueDate = DateTime.Parse("2024-02-17"),
@@ -1330,11 +1367,11 @@ namespace TaskManager
                         Description = "Refactor CSS to improve maintainability and reduce stylesheet size.",
                         Status = "Planned",
                         Type="frontend",
-                        Asignees = [employess[18]],
+                        Asignees = employess[18],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Integrate New API Endpoints",
                         StartDate = DateTime.Parse("2024-02-18"),
                         DueDate = DateTime.Parse("2024-02-25"),
@@ -1342,12 +1379,12 @@ namespace TaskManager
                         Description = "Integrate frontend with new backend API endpoints for enhanced functionality.",
                         Status = "Planned",
                         Type="frontend",
-                        Asignees = [employess[18]]
+                        Asignees = employess[18]
                         ,
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Frontend Security Enhancements",
                         StartDate = DateTime.Parse("2024-02-26"),
                         DueDate = DateTime.Parse("2024-03-05"),
@@ -1355,12 +1392,12 @@ namespace TaskManager
                         Description = "Implement security best practices to protect against XSS and CSRF attacks.",
                         Status = "Planned",
                         Type="frontend",
-                        Asignees = [employess[18]]
+                        Asignees = employess[18]
                         ,
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Single Page Application (SPA) Routing",
                         StartDate = DateTime.Parse("2024-03-06"),
                         DueDate = DateTime.Parse("2024-03-13"),
@@ -1368,11 +1405,11 @@ namespace TaskManager
                         Description = "Implement client-side routing for the SPA to improve user experience.",
                         Status = "Planned",
                         Type="frontend",
-                        Asignees = [employess[18]],
+                        Asignees = employess[18],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "UI Testing Automation",
                         StartDate = DateTime.Parse("2024-03-14"),
                         DueDate = DateTime.Parse("2024-03-21"),
@@ -1380,13 +1417,13 @@ namespace TaskManager
                         Description = "Set up automated UI testing to ensure frontend stability and reduce bugs.",
                         Status = "Planned",
                         Type="frontend",
-                        Asignees = [employess[18]]
+                        Asignees = employess[18]
                         ,
                         Reporter =employess[4]
-                    },
+                    }),
 
                     // DevOps Tasks
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "CI/CD Pipeline Setup",
                         StartDate = DateTime.Parse("2024-01-01"),
                         DueDate = DateTime.Parse("2024-01-15"),
@@ -1394,11 +1431,11 @@ namespace TaskManager
                         Description = "Establish a Continuous Integration/Continuous Deployment pipeline to automate the software release process.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[19]],
+                    Asignees = employess[19],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Infrastructure as Code Implementation",
                         StartDate = DateTime.Parse("2024-01-16"),
                         DueDate = DateTime.Parse("2024-01-31"),
@@ -1406,11 +1443,11 @@ namespace TaskManager
                         Description = "Implement Infrastructure as Code (IaC) using Terraform to manage and provision infrastructure through code.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[19]],
+                    Asignees = employess[19],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Containerization with Docker",
                         StartDate = DateTime.Parse("2024-02-01"),
                         DueDate = DateTime.Parse("2024-02-14"),
@@ -1418,12 +1455,12 @@ namespace TaskManager
                         Description = "Containerize applications using Docker to enhance portability and consistency across environments.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[19]]
+                    Asignees = employess[19]
                     ,
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Kubernetes Cluster Configuration",
                         StartDate = DateTime.Parse("2024-02-15"),
                         DueDate = DateTime.Parse("2024-03-01"),
@@ -1431,11 +1468,11 @@ namespace TaskManager
                         Description = "Configure and manage a Kubernetes cluster for orchestrating containerized applications.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[19]],
+                    Asignees = employess[19],
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Logging and Monitoring Setup",
                         StartDate = DateTime.Parse("2024-03-02"),
                         DueDate = DateTime.Parse("2024-03-16"),
@@ -1443,11 +1480,11 @@ namespace TaskManager
                         Description = "Set up logging and monitoring solutions to track application performance and troubleshoot issues.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[19]],
+                    Asignees = employess[19],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Cloud Resource Optimization",
                         StartDate = DateTime.Parse("2024-03-17"),
                         DueDate = DateTime.Parse("2024-03-31"),
@@ -1455,11 +1492,11 @@ namespace TaskManager
                         Description = "Analyze and optimize cloud resource usage to reduce costs without compromising performance.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[20]],
+                    Asignees = employess[20],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Security Best Practices Implementation",
                         StartDate = DateTime.Parse("2024-04-01"),
                         DueDate = DateTime.Parse("2024-04-15"),
@@ -1467,12 +1504,12 @@ namespace TaskManager
                         Description = "Implement security best practices and tools to safeguard the infrastructure and applications.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[20]]
+                    Asignees = employess[20]
                     ,
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Automated Backup Strategies",
                         StartDate = DateTime.Parse("2024-04-16"),
                         DueDate = DateTime.Parse("2024-04-30"),
@@ -1480,12 +1517,12 @@ namespace TaskManager
                         Description = "Develop and implement automated backup strategies for disaster recovery and data retention.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[20]]
+                    Asignees = employess[20]
                     ,
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Serverless Architecture Deployment",
                         StartDate = DateTime.Parse("2024-05-01"),
                         DueDate = DateTime.Parse("2024-05-15"),
@@ -1493,11 +1530,11 @@ namespace TaskManager
                         Description = "Deploy serverless architecture components to improve scalability and reduce operational costs.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[20]],
+                    Asignees = employess[20],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Performance Tuning and Stress Testing",
                         StartDate = DateTime.Parse("2024-05-16"),
                         DueDate = DateTime.Parse("2024-05-30"),
@@ -1505,11 +1542,11 @@ namespace TaskManager
                         Description = "Conduct performance tuning and stress testing to ensure the system's reliability under high load.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[20]],
+                    Asignees = employess[20],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Automate Database Migrations",
                         StartDate = DateTime.Parse("2024-06-01"),
                         DueDate = DateTime.Parse("2024-06-15"),
@@ -1517,11 +1554,11 @@ namespace TaskManager
                         Description = "Automate the database migration process to ensure seamless transitions between versions.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[21]],
+                    Asignees = employess[21],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Implement Zero Downtime Deployments",
                         StartDate = DateTime.Parse("2024-06-16"),
                         DueDate = DateTime.Parse("2024-06-30"),
@@ -1529,11 +1566,11 @@ namespace TaskManager
                         Description = "Implement strategies for zero downtime deployments to enhance user experience.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[21]],
+                    Asignees = employess[21],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Secure Secrets Management",
                         StartDate = DateTime.Parse("2024-07-01"),
                         DueDate = DateTime.Parse("2024-07-15"),
@@ -1541,12 +1578,12 @@ namespace TaskManager
                         Description = "Set up a secure secrets management tool to handle sensitive information like passwords and API keys.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[21]]
+                    Asignees = employess[21]
                     ,
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Cloud Network Configuration",
                         StartDate = DateTime.Parse("2024-07-16"),
                         DueDate = DateTime.Parse("2024-07-31"),
@@ -1554,11 +1591,11 @@ namespace TaskManager
                         Description = "Configure cloud network settings to optimize performance and security.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[21]],
+                    Asignees = employess[21],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Automated Security Scanning",
                         StartDate = DateTime.Parse("2024-08-01"),
                         DueDate = DateTime.Parse("2024-08-15"),
@@ -1566,11 +1603,11 @@ namespace TaskManager
                         Description = "Implement automated security scanning within the CI/CD pipeline to detect vulnerabilities early.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[21]],
+                    Asignees = employess[21],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Infrastructure Cost Analysis",
                         StartDate = DateTime.Parse("2024-08-16"),
                         DueDate = DateTime.Parse("2024-08-31"),
@@ -1578,12 +1615,12 @@ namespace TaskManager
                         Description = "Perform a thorough cost analysis of the current infrastructure and identify areas for cost reduction.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[22]]
+                    Asignees = employess[22]
                     ,
                         Reporter =employess[14]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Build Artifacts Repository Setup",
                         StartDate = DateTime.Parse("2024-09-01"),
                         DueDate = DateTime.Parse("2024-09-15"),
@@ -1591,11 +1628,11 @@ namespace TaskManager
                         Description = "Set up a build artifacts repository to store and manage build artifacts efficiently.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[22]],
+                    Asignees = employess[22],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Disaster Recovery Plan",
                         StartDate = DateTime.Parse("2024-09-16"),
                         DueDate = DateTime.Parse("2024-09-30"),
@@ -1603,11 +1640,11 @@ namespace TaskManager
                         Description = "Develop and document a comprehensive disaster recovery plan for critical services.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[22]],
+                    Asignees = employess[22],
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Internal Developer Platform Enhancement",
                         StartDate = DateTime.Parse("2024-10-01"),
                         DueDate = DateTime.Parse("2024-10-15"),
@@ -1615,11 +1652,11 @@ namespace TaskManager
                         Description = "Enhance the internal developer platform to streamline development workflows.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[22]],
+                    Asignees = employess[22],
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Compliance Auditing Automation",
                         StartDate = DateTime.Parse("2024-10-16"),
                         DueDate = DateTime.Parse("2024-10-31"),
@@ -1627,13 +1664,13 @@ namespace TaskManager
                         Description = "Automate compliance auditing processes to ensure continuous compliance with industry standards.",
                         Status = "Planned",
                         Type="DevOps",
-                    Asignees = [employess[22]]
+                    Asignees = employess[22]
                     ,
                         Reporter =employess[12]
-                    },
+                    }),
 
                     // Marketing Tasks
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "SEO Strategy Development",
                         StartDate = DateTime.Parse("2024-01-01"),
                         DueDate = DateTime.Parse("2024-01-15"),
@@ -1641,12 +1678,12 @@ namespace TaskManager
                         Description = "Develop a comprehensive SEO strategy to improve organic search rankings.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[23]]
+                    Asignees = employess[23]
                     ,
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Content Marketing Plan",
                         StartDate = DateTime.Parse("2024-01-16"),
                         DueDate = DateTime.Parse("2024-01-31"),
@@ -1654,11 +1691,11 @@ namespace TaskManager
                         Description = "Create a content marketing plan to support SEO goals and user engagement.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[23]],
+                    Asignees = employess[23],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Social Media Campaign Launch",
                         StartDate = DateTime.Parse("2024-02-01"),
                         DueDate = DateTime.Parse("2024-02-14"),
@@ -1666,11 +1703,11 @@ namespace TaskManager
                         Description = "Launch a social media campaign to increase brand awareness and engagement.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[23]],
+                    Asignees = employess[23],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Email Marketing Automation",
                         StartDate = DateTime.Parse("2024-02-15"),
                         DueDate = DateTime.Parse("2024-02-28"),
@@ -1678,12 +1715,12 @@ namespace TaskManager
                         Description = "Implement email marketing automation to nurture leads and convert subscribers.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[23]]
+                    Asignees = employess[23]
                     ,
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "PPC Campaign Optimization",
                         StartDate = DateTime.Parse("2024-03-01"),
                         DueDate = DateTime.Parse("2024-03-15"),
@@ -1691,11 +1728,11 @@ namespace TaskManager
                         Description = "Optimize PPC campaigns to improve click-through and conversion rates.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[23]],
+                    Asignees = employess[23],
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Market Research for Product Launch",
                         StartDate = DateTime.Parse("2024-03-16"),
                         DueDate = DateTime.Parse("2024-03-31"),
@@ -1703,12 +1740,12 @@ namespace TaskManager
                         Description = "Conduct market research to inform the strategy for an upcoming product launch.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[24]]
+                    Asignees = employess[24]
                     ,
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Influencer Partnership Program",
                         StartDate = DateTime.Parse("2024-04-01"),
                         DueDate = DateTime.Parse("2024-04-15"),
@@ -1716,12 +1753,12 @@ namespace TaskManager
                         Description = "Develop an influencer partnership program to extend brand reach.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[24]]
+                    Asignees = employess[24]
                     ,
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Customer Feedback Survey",
                         StartDate = DateTime.Parse("2024-04-16"),
                         DueDate = DateTime.Parse("2024-04-30"),
@@ -1729,12 +1766,12 @@ namespace TaskManager
                         Description = "Deploy a customer feedback survey to gather insights for product improvements.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[24]]
+                    Asignees = employess[24]
                     ,
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Brand Messaging Refresh",
                         StartDate = DateTime.Parse("2024-05-01"),
                         DueDate = DateTime.Parse("2024-05-15"),
@@ -1742,12 +1779,12 @@ namespace TaskManager
                         Description = "Refresh the brand messaging to align with current market positioning.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[24]]
+                    Asignees = employess[24]
                     ,
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Website UX/UI Overhaul",
                         StartDate = DateTime.Parse("2024-05-16"),
                         DueDate = DateTime.Parse("2024-05-31"),
@@ -1755,11 +1792,11 @@ namespace TaskManager
                         Description = "Overhaul the website's UX/UI to improve user experience and increase engagement.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[24]],
+                    Asignees = employess[24],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Product Video Production",
                         StartDate = DateTime.Parse("2024-06-01"),
                         DueDate = DateTime.Parse("2024-06-15"),
@@ -1767,11 +1804,11 @@ namespace TaskManager
                         Description = "Produce a product video to highlight features and benefits for marketing channels.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[25]],
+                    Asignees = employess[25],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Trade Show Preparation",
                         StartDate = DateTime.Parse("2024-06-16"),
                         DueDate = DateTime.Parse("2024-06-30"),
@@ -1779,11 +1816,11 @@ namespace TaskManager
                         Description = "Prepare for trade show participation, including booth design and promotional materials.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[25]],
+                    Asignees = employess[25],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Customer Case Study Development",
                         StartDate = DateTime.Parse("2024-07-01"),
                         DueDate = DateTime.Parse("2024-07-15"),
@@ -1791,11 +1828,11 @@ namespace TaskManager
                         Description = "Develop customer case studies to showcase success stories and build trust.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[25]],
+                    Asignees = employess[25],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Analytics and Reporting System Setup",
                         StartDate = DateTime.Parse("2024-07-16"),
                         DueDate = DateTime.Parse("2024-07-31"),
@@ -1803,11 +1840,11 @@ namespace TaskManager
                         Description = "Set up a comprehensive analytics and reporting system for marketing performance tracking.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[25]],
+                    Asignees = employess[25],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Rebranding Strategy Session",
                         StartDate = DateTime.Parse("2024-08-01"),
                         DueDate = DateTime.Parse("2024-08-15"),
@@ -1815,13 +1852,13 @@ namespace TaskManager
                         Description = "Conduct a strategy session to explore potential rebranding efforts.",
                         Status = "Planned",
                         Type="Marketing",
-                    Asignees = [employess[25]],
+                    Asignees = employess[25],
                         Reporter =employess[12]
-                    },
+                    }),
 
 
                     // customer support team
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Implement New Ticketing System",
                         StartDate = DateTime.Parse("2024-01-01"),
                         DueDate = DateTime.Parse("2024-01-10"),
@@ -1829,11 +1866,11 @@ namespace TaskManager
                         Description = "Deploy and configure a new ticketing system to improve issue tracking and response times.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[26]],
+                    Asignees = employess[26],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Customer Satisfaction Survey",
                         StartDate = DateTime.Parse("2024-01-11"),
                         DueDate = DateTime.Parse("2024-01-20"),
@@ -1841,11 +1878,11 @@ namespace TaskManager
                         Description = "Conduct a customer satisfaction survey to gather feedback on support interactions.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[26]],
+                    Asignees = employess[26],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Knowledge Base Overhaul",
                         StartDate = DateTime.Parse("2024-01-21"),
                         DueDate = DateTime.Parse("2024-02-01"),
@@ -1853,11 +1890,11 @@ namespace TaskManager
                         Description = "Revise and expand the knowledge base to provide more comprehensive self-service resources.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[26]],
+                    Asignees = employess[26],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Support Chatbot Implementation",
                         StartDate = DateTime.Parse("2024-02-02"),
                         DueDate = DateTime.Parse("2024-02-15"),
@@ -1865,11 +1902,11 @@ namespace TaskManager
                         Description = "Implement a chatbot to offer instant support for common issues and questions.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[26]],
+                    Asignees = employess[26],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Agent Training Program",
                         StartDate = DateTime.Parse("2024-02-16"),
                         DueDate = DateTime.Parse("2024-03-01"),
@@ -1877,11 +1914,11 @@ namespace TaskManager
                         Description = "Develop and execute a training program for support agents to enhance service quality.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[26]],
+                    Asignees = employess[26],
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Weekly Support Team Meetings",
                         StartDate = DateTime.Parse("2024-03-02"),
                         DueDate = DateTime.Parse("2024-03-09"),
@@ -1889,11 +1926,11 @@ namespace TaskManager
                         Description = "Establish weekly meetings to discuss ongoing issues, feedback, and strategies for improvement.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[27]],
+                    Asignees = employess[27],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Customer Onboarding Process Improvement",
                         StartDate = DateTime.Parse("2024-03-10"),
                         DueDate = DateTime.Parse("2024-03-20"),
@@ -1901,11 +1938,11 @@ namespace TaskManager
                         Description = "Revise the customer onboarding process to ensure a smoother start and reduce early-stage tickets.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[27]],
+                    Asignees = employess[27],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Monthly Performance Review",
                         StartDate = DateTime.Parse("2024-03-21"),
                         DueDate = DateTime.Parse("2024-03-31"),
@@ -1913,11 +1950,11 @@ namespace TaskManager
                         Description = "Initiate monthly performance reviews to assess ticket resolution efficiency and customer feedback.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[27]],
+                    Asignees = employess[27],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Support Workflow Automation",
                         StartDate = DateTime.Parse("2024-04-01"),
                         DueDate = DateTime.Parse("2024-04-15"),
@@ -1925,11 +1962,11 @@ namespace TaskManager
                         Description = "Implement workflow automation tools to streamline ticket routing and resolution processes.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[27]],
+                    Asignees = employess[27],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Emergency Response Protocol",
                         StartDate = DateTime.Parse("2024-04-16"),
                         DueDate = DateTime.Parse("2024-04-30"),
@@ -1937,11 +1974,11 @@ namespace TaskManager
                         Description = "Develop an emergency response protocol for handling critical support issues.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[27]],
+                    Asignees = employess[27],
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Refine Auto-Response Templates",
                         StartDate = DateTime.Parse("2024-05-01"),
                         DueDate = DateTime.Parse("2024-05-07"),
@@ -1949,11 +1986,11 @@ namespace TaskManager
                         Description = "Update and refine auto-response email templates to provide more personalized and helpful initial responses.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[28]],
+                    Asignees = employess[28],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Cross-Training Support Agents",
                         StartDate = DateTime.Parse("2024-05-08"),
                         DueDate = DateTime.Parse("2024-05-14"),
@@ -1961,11 +1998,11 @@ namespace TaskManager
                         Description = "Initiate cross-training sessions for support agents to handle a wider range of customer issues.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[28]],
+                    Asignees = employess[28],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Customer Feedback Analysis",
                         StartDate = DateTime.Parse("2024-05-15"),
                         DueDate = DateTime.Parse("2024-05-21"),
@@ -1973,11 +2010,11 @@ namespace TaskManager
                         Description = "Analyze recent customer feedback to identify common issues and areas for service improvement.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[28]],
+                    Asignees = employess[28],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Develop Customer Loyalty Program",
                         StartDate = DateTime.Parse("2024-05-22"),
                         DueDate = DateTime.Parse("2024-05-28"),
@@ -1985,11 +2022,11 @@ namespace TaskManager
                         Description = "Work with the marketing team to develop a customer loyalty program to reward and retain long-term customers.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[28]],
+                    Asignees = employess[28],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Internal Knowledge Sharing Sessions",
                         StartDate = DateTime.Parse("2024-05-29"),
                         DueDate = DateTime.Parse("2024-06-04"),
@@ -1997,11 +2034,11 @@ namespace TaskManager
                         Description = "Organize regular knowledge sharing sessions among support agents to disseminate solutions to common problems.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[28]],
+                    Asignees = employess[28],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Update Support SLAs",
                         StartDate = DateTime.Parse("2024-06-05"),
                         DueDate = DateTime.Parse("2024-06-11"),
@@ -2009,11 +2046,11 @@ namespace TaskManager
                         Description = "Review and update the support service level agreements (SLAs) to ensure they meet current customer expectations.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[29]],
+                    Asignees = employess[29],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Optimize Support Channels",
                         StartDate = DateTime.Parse("2024-06-12"),
                         DueDate = DateTime.Parse("2024-06-18"),
@@ -2021,11 +2058,11 @@ namespace TaskManager
                         Description = "Evaluate the effectiveness of different support channels and optimize based on customer preferences and resolution efficiency.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[29]],
+                    Asignees = employess[29],
                         Reporter =employess[3]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Customer Success Stories Compilation",
                         StartDate = DateTime.Parse("2024-06-19"),
                         DueDate = DateTime.Parse("2024-06-25"),
@@ -2033,12 +2070,12 @@ namespace TaskManager
                         Description = "Compile customer success stories to highlight the value of support services in solving critical issues.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[29]]
+                    Asignees = employess[29]
                     ,
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Support Team Wellness Program",
                         StartDate = DateTime.Parse("2024-06-26"),
                         DueDate = DateTime.Parse("2024-07-02"),
@@ -2046,11 +2083,11 @@ namespace TaskManager
                         Description = "Implement a wellness program for the support team to address burnout and improve overall job satisfaction.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[29]],
+                    Asignees = employess[29],
                         Reporter =employess[5]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Annual Support Strategy Review",
                         StartDate = DateTime.Parse("2024-07-03"),
                         DueDate = DateTime.Parse("2024-07-09"),
@@ -2058,9 +2095,9 @@ namespace TaskManager
                         Description = "Conduct an annual review of the support strategy to align with company goals and changing customer needs.",
                         Status = "Planned",
                         Type="Customer Support",
-                    Asignees = [employess[29]],
+                    Asignees = employess[29],
                         Reporter =employess[12]
-                    }
+                    })
 
 
                 };
@@ -2073,518 +2110,518 @@ namespace TaskManager
                     {
 
                     // quality assurance 
-                   new Tasks{
+                   Tasks.createDummy(new{
                         Title = "Test Plan Development for CRM System",
                         StartDate = DateTime.Parse("2024-03-01"),
                         DueDate = DateTime.Parse("2024-03-07"),
                         Priority = "High",
                         Description = "Develop a comprehensive test plan covering all functional areas of the CRM system.",
                         Status = "Planned",
-                        Asignees = [employess[0]],
+                        Asignees = employess[0],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Automated Testing Framework Setup",
                         StartDate = DateTime.Parse("2024-03-08"),
                         DueDate = DateTime.Parse("2024-03-14"),
                         Priority = "High",
                         Description = "Set up an automated testing framework to facilitate continuous testing throughout the development cycle.",
                         Status = "Planned",
-                        Asignees = [employess[0]],
+                        Asignees = employess[0],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "User Acceptance Testing Criteria Definition",
                         StartDate = DateTime.Parse("2024-03-15"),
                         DueDate = DateTime.Parse("2024-03-21"),
                         Priority = "Medium",
                         Description = "Define clear user acceptance testing criteria in collaboration with stakeholders to ensure the system meets business requirements.",
                         Status = "Planned",
-                        Asignees = [employess[0]],
+                        Asignees = employess[0],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Performance Testing of CRM System",
                         StartDate = DateTime.Parse("2024-03-22"),
                         DueDate = DateTime.Parse("2024-03-28"),
                         Priority = "High",
                         Description = "Conduct performance testing to ensure the CRM system can handle expected load and user count efficiently.",
                         Status = "Planned",
-                        Asignees = [employess[1]],
+                        Asignees = employess[1],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Security Vulnerability Assessment",
                         StartDate = DateTime.Parse("2024-03-29"),
                         DueDate = DateTime.Parse("2024-04-04"),
                         Priority = "High",
                         Description = "Perform a security vulnerability assessment to identify and mitigate potential security risks.",
                         Status = "Planned",
-                        Asignees = [employess[1]],
+                        Asignees = employess[1],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "CRM System Regression Testing",
                         StartDate = DateTime.Parse("2024-04-05"),
                         DueDate = DateTime.Parse("2024-04-11"),
                         Priority = "Medium",
                         Description = "Execute regression testing prior to major releases to ensure new changes do not adversely affect existing functionalities.",
                         Status = "Planned",
-                        Asignees = [employess[1]],
+                        Asignees = employess[1],
                         Reporter =employess[4]
-                    },
+                    }),
 
 
 
 
 
                     // software developer 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "CRM Database Design",
                         StartDate = DateTime.Parse("2024-02-01"),
                         DueDate = DateTime.Parse("2024-02-10"),
                         Priority = "High",
                         Description = "Design and model the database schema for the CRM system to ensure efficient data storage and retrieval.",
                         Status = "Planned",
-                        Asignees = [employess[6]],
+                        Asignees = employess[6],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "API Development for CRM Features",
                         StartDate = DateTime.Parse("2024-02-11"),
                         DueDate = DateTime.Parse("2024-02-20"),
                         Priority = "High",
                         Description = "Develop RESTful APIs for managing customer data, interactions, and insights within the CRM system.",
                         Status = "Planned",
-                        Asignees = [employess[6]],
+                        Asignees = employess[6],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Integration with Email Services",
                         StartDate = DateTime.Parse("2024-02-21"),
                         DueDate = DateTime.Parse("2024-03-02"),
                         Priority = "Medium",
                         Description = "Implement integration with email services for marketing campaigns and customer communication.",
                         Status = "Planned",
-                        Asignees = [employess[6]],
+                        Asignees = employess[6],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "User Authentication and Authorization",
                         StartDate = DateTime.Parse("2024-03-03"),
                         DueDate = DateTime.Parse("2024-03-12"),
                         Priority = "High",
                         Description = "Develop a secure authentication and authorization module for the CRM system.",
                         Status = "Planned",
-                        Asignees = [employess[7]],
+                        Asignees = employess[7],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Frontend Development for CRM Dashboard",
                         StartDate = DateTime.Parse("2024-03-13"),
                         DueDate = DateTime.Parse("2024-03-22"),
                         Priority = "High",
                         Description = "Design and develop the frontend interface for the CRM dashboard, focusing on usability and data visualization.",
                         Status = "Planned",
-                        Asignees = [employess[7]],
+                        Asignees = employess[7],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Mobile Application Development",
                         StartDate = DateTime.Parse("2024-03-23"),
                         DueDate = DateTime.Parse("2024-04-01"),
                         Priority = "Medium",
                         Description = "Develop a mobile application version of the CRM system for iOS and Android platforms.",
                         Status = "Planned",
-                        Asignees = [employess[7]],
+                        Asignees = employess[7],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Implementing Customer Feedback Features",
                         StartDate = DateTime.Parse("2024-04-02"),
                         DueDate = DateTime.Parse("2024-04-11"),
                         Priority = "Medium",
                         Description = "Implement features within the CRM to collect and analyze customer feedback.",
                         Status = "Planned",
-                        Asignees = [employess[8]],
+                        Asignees = employess[8],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Data Migration Tools Development",
                         StartDate = DateTime.Parse("2024-04-12"),
                         DueDate = DateTime.Parse("2024-04-21"),
                         Priority = "Low",
                         Description = "Create tools to facilitate data migration from existing systems to the new CRM system.",
                         Status = "Planned",
-                        Asignees = [employess[8]],
+                        Asignees = employess[8],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Real-time Analytics and Reporting",
                         StartDate = DateTime.Parse("2024-04-22"),
                         DueDate = DateTime.Parse("2024-05-01"),
                         Priority = "High",
                         Description = "Develop real-time analytics and reporting capabilities to provide insights into customer interactions and system performance.",
                         Status = "Planned",
-                        Asignees = [employess[8]],
+                        Asignees = employess[8],
                         Reporter =employess[4]
-                    },
+                    }),
 
                     // UI-UX 
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "CRM User Interface Design",
                         StartDate = DateTime.Parse("2024-02-01"),
                         DueDate = DateTime.Parse("2024-02-08"),
                         Priority = "High",
                         Description = "Design the user interface for the CRM system, focusing on simplicity and ease of navigation for an optimal user experience.",
                         Status = "Planned",
-                        Asignees = [employess[14]],
+                        Asignees = employess[14],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "User Experience Research",
                         StartDate = DateTime.Parse("2024-02-09"),
                         DueDate = DateTime.Parse("2024-02-16"),
                         Priority = "High",
                         Description = "Conduct user experience research to identify the needs and pain points of CRM users.",
                         Status = "Planned",
-                        Asignees = [employess[14]],
+                        Asignees = employess[14],
                         Reporter =employess[11]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Design System for CRM",
                         StartDate = DateTime.Parse("2024-02-17"),
                         DueDate = DateTime.Parse("2024-02-24"),
                         Priority = "Medium",
                         Description = "Develop a design system for the CRM project to ensure consistency across all user interfaces.",
                         Status = "Planned",
-                        Asignees = [employess[14]],
+                        Asignees = employess[14],
                         Reporter =employess[13]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Interactive Prototyping",
                         StartDate = DateTime.Parse("2024-02-25"),
                         DueDate = DateTime.Parse("2024-03-04"),
                         Priority = "High",
                         Description = "Create interactive prototypes of the CRM system for early testing and feedback.",
                         Status = "Planned",
-                        Asignees = [employess[15]],
+                        Asignees = employess[15],
                         Reporter =employess[4]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Accessibility and Inclusivity Audit",
                         StartDate = DateTime.Parse("2024-03-05"),
                         DueDate = DateTime.Parse("2024-03-12"),
                         Priority = "Medium",
                         Description = "Perform an audit to ensure the CRM design is accessible and inclusive, adhering to WCAG guidelines.",
                         Status = "Planned",
-                        Asignees = [employess[15]],
+                        Asignees = employess[15],
                         Reporter =employess[12]
-                    },
+                    }),
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                         Title = "Usability Testing Sessions",
                         StartDate = DateTime.Parse("2024-03-13"),
                         DueDate = DateTime.Parse("2024-03-20"),
                         Priority = "High",
                         Description = "Organize usability testing sessions with potential CRM users to gather feedback and identify areas for improvement.",
                         Status = "Planned",
-                        Asignees = [employess[15]],
+                        Asignees = employess[15],
                         Reporter =employess[12]
-                    },
+                    }),
 
                     //frontend developers
 
 
-                    new Tasks{
+                    Tasks.createDummy(new{
                             Title = "Implement CRM Dashboard UI",
                             StartDate = DateTime.Parse("2024-02-01"),
                             DueDate = DateTime.Parse("2024-02-10"),
                             Priority = "High",
                             Description = "Develop the user interface for the CRM dashboard based on the UX designs, ensuring responsive design across devices.",
                             Status = "Planned",
-                            Asignees = [employess[17]],
+                            Asignees = employess[17],
                             Reporter =employess[4]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Integration with Backend APIs",
                             StartDate = DateTime.Parse("2024-02-11"),
                             DueDate = DateTime.Parse("2024-02-17"),
                             Priority = "High",
                             Description = "Integrate the frontend components with backend APIs for dynamic data retrieval and management.",
                             Status = "Planned",
-                            Asignees = [employess[17]],
+                            Asignees = employess[17],
                             Reporter =employess[12]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Frontend Performance Optimization",
                             StartDate = DateTime.Parse("2024-02-18"),
                             DueDate = DateTime.Parse("2024-02-24"),
                             Priority = "Medium",
                             Description = "Optimize frontend performance to ensure quick load times and a smooth user experience.",
                             Status = "Planned",
-                            Asignees = [employess[17]],
+                            Asignees = employess[17],
                             Reporter =employess[11]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Implement Advanced Data Visualization",
                             StartDate = DateTime.Parse("2024-02-25"),
                             DueDate = DateTime.Parse("2024-03-03"),
                             Priority = "Medium",
                             Description = "Develop advanced data visualization components for the CRM dashboard to help users easily interpret complex datasets.",
                             Status = "Planned",
-                            Asignees = [employess[18]],
+                            Asignees = employess[18],
                             Reporter =employess[11]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Mobile Responsiveness Testing",
                             StartDate = DateTime.Parse("2024-03-04"),
                             DueDate = DateTime.Parse("2024-03-10"),
                             Priority = "High",
                             Description = "Conduct thorough testing to ensure the CRM system is fully responsive and functional on mobile devices.",
                             Status = "Planned",
-                            Asignees = [employess[18]],
+                            Asignees = employess[18],
                             Reporter =employess[11]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Frontend Security Enhancements",
                             StartDate = DateTime.Parse("2024-03-11"),
                             DueDate = DateTime.Parse("2024-03-17"),
                             Priority = "High",
                             Description = "Implement security enhancements in the frontend to protect against XSS, CSRF, and other vulnerabilities.",
                             Status = "Planned",
-                            Asignees = [employess[18]],
+                            Asignees = employess[18],
                             Reporter =employess[11]
-                        },
+                        }),
 
 
                         //DevOps
 
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "CI/CD Pipeline for CRM Development",
                             StartDate = DateTime.Parse("2024-02-01"),
                             DueDate = DateTime.Parse("2024-02-07"),
                             Priority = "High",
                             Description = "Set up and configure a CI/CD pipeline to automate the build, test, and deployment processes for the CRM system.",
                             Status = "Planned",
-                            Asignees = [employess[19]],
+                            Asignees = employess[19],
                             Reporter =employess[12]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Cloud Infrastructure Provisioning",
                             StartDate = DateTime.Parse("2024-02-08"),
                             DueDate = DateTime.Parse("2024-02-14"),
                             Priority = "High",
                             Description = "Provision and configure cloud infrastructure for hosting the CRM system, ensuring scalability and reliability.",
                             Status = "Planned",
-                            Asignees = [employess[19]],
+                            Asignees = employess[19],
                             Reporter =employess[12]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Containerization with Docker",
                             StartDate = DateTime.Parse("2024-02-15"),
                             DueDate = DateTime.Parse("2024-02-21"),
                             Priority = "Medium",
                             Description = "Containerize the CRM application using Docker to ensure consistency across different environments.",
                             Status = "Planned",
-                            Asignees = [employess[19]],
+                            Asignees = employess[19],
                             Reporter =employess[12]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Kubernetes Orchestration Setup",
                             StartDate = DateTime.Parse("2024-02-22"),
                             DueDate = DateTime.Parse("2024-02-28"),
                             Priority = "High",
                             Description = "Set up Kubernetes orchestration for the Docker containers to manage the CRM application deployment and scaling.",
                             Status = "Planned",
-                            Asignees = [employess[20]],
+                            Asignees = employess[20],
                             Reporter =employess[12]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Monitoring and Logging Systems",
                             StartDate = DateTime.Parse("2024-03-01"),
                             DueDate = DateTime.Parse("2024-03-07"),
                             Priority = "Medium",
                             Description = "Implement monitoring and logging systems to track the CRM system's performance and troubleshoot issues.",
                             Status = "Planned",
-                            Asignees = [employess[20]],
+                            Asignees = employess[20],
                             Reporter =employess[12]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Automated Backup and Recovery Plan",
                             StartDate = DateTime.Parse("2024-03-08"),
                             DueDate = DateTime.Parse("2024-03-14"),
                             Priority = "High",
                             Description = "Develop and implement an automated backup and recovery plan to ensure data integrity and availability.",
                             Status = "Planned",
-                            Asignees = [employess[20]],
+                            Asignees = employess[20],
                             Reporter =employess[12]
-                        },
+                        }),
 
                         // marketing
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "CRM System Market Analysis",
                             StartDate = DateTime.Parse("2024-02-01"),
                             DueDate = DateTime.Parse("2024-02-08"),
                             Priority = "High",
                             Description = "Conduct a comprehensive market analysis to understand the competitive landscape and identify target markets for the CRM system.",
                             Status = "Planned",
-                            Asignees = [employess[23]],
+                            Asignees = employess[23],
                             Reporter =employess[11]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Branding and Messaging Strategy",
                             StartDate = DateTime.Parse("2024-02-09"),
                             DueDate = DateTime.Parse("2024-02-15"),
                             Priority = "High",
                             Description = "Develop a branding and messaging strategy that clearly communicates the value proposition of the CRM system.",
                             Status = "Planned",
-                            Asignees = [employess[23]],
+                            Asignees = employess[23],
                             Reporter =employess[11]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Content Creation Plan",
                             StartDate = DateTime.Parse("2024-02-16"),
                             DueDate = DateTime.Parse("2024-02-22"),
                             Priority = "Medium",
                             Description = "Outline a content creation plan for blog posts, whitepapers, and case studies that highlight the CRM system's features and benefits.",
                             Status = "Planned",
-                            Asignees = [employess[23]],
+                            Asignees = employess[23],
                             Reporter =employess[11]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Social Media Promotion Strategy",
                             StartDate = DateTime.Parse("2024-02-23"),
                             DueDate = DateTime.Parse("2024-03-01"),
                             Priority = "Medium",
                             Description = "Develop a social media strategy to promote the CRM system and engage with potential customers on various platforms.",
                             Status = "Planned",
-                            Asignees = [employess[24]],
+                            Asignees = employess[24],
                             Reporter =employess[13]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Launch Event Planning",
                             StartDate = DateTime.Parse("2024-03-02"),
                             DueDate = DateTime.Parse("2024-03-09"),
                             Priority = "High",
                             Description = "Plan and organize a launch event for the CRM system to generate buzz and attract early adopters.",
                             Status = "Planned",
-                            Asignees = [employess[24]],
+                            Asignees = employess[24],
                             Reporter =employess[13]
-                        },
+                        }),
 
-                        new Tasks{
+                        Tasks.createDummy(new{
                             Title = "Customer Testimonial Campaign",
                             StartDate = DateTime.Parse("2024-03-10"),
                             DueDate = DateTime.Parse("2024-03-17"),
                             Priority = "Low",
                             Description = "Organize a campaign to collect and feature testimonials from early CRM system users to build credibility and trust.",
                             Status = "Planned",
-                            Asignees = [employess[24]],
+                            Asignees = employess[24],
                             Reporter =employess[13]
-                        },
+                        }),
 
                         // customer support
 
-                        new Tasks{
+                        Tasks.createDummy(new{
     Title = "CRM Support Training Program",
     StartDate = DateTime.Parse("2024-02-01"),
     DueDate = DateTime.Parse("2024-02-10"),
     Priority = "High",
     Description = "Develop and conduct a training program for customer support agents on the new CRM system to ensure they are equipped to assist users effectively.",
     Status = "Planned",
-    Asignees = [employess[26]],
+    Asignees = employess[26],
     Reporter =employess[4]
-},
+}),
 
-new Tasks{
+Tasks.createDummy(new{
     Title = "FAQs Compilation for CRM System",
     StartDate = DateTime.Parse("2024-02-11"),
     DueDate = DateTime.Parse("2024-02-17"),
     Priority = "Medium",
     Description = "Compile a comprehensive list of FAQs related to the CRM system to aid in quick resolution of common queries.",
     Status = "Planned",
-    Asignees = [employess[26]],
+    Asignees = employess[26],
     Reporter =employess[4]
-},
+}),
 
-new Tasks{
+Tasks.createDummy(new{
     Title = "Create CRM System Support Guides",
     StartDate = DateTime.Parse("2024-02-18"),
     DueDate = DateTime.Parse("2024-02-24"),
     Priority = "Medium",
     Description = "Create detailed support guides and documentation for the CRM system to enhance the self-service resources for users.",
     Status = "Planned",
-    Asignees = [employess[26]],
+    Asignees = employess[26],
     Reporter =employess[4]
-},
+}),
 
-new Tasks{
+Tasks.createDummy(new{
     Title = "Feedback Collection Mechanism",
     StartDate = DateTime.Parse("2024-02-25"),
     DueDate = DateTime.Parse("2024-03-03"),
     Priority = "High",
     Description = "Implement a mechanism for collecting feedback from CRM system users to continuously improve the support process.",
     Status = "Planned",
-    Asignees = [employess[27]],
+    Asignees = employess[27],
     Reporter =employess[11]
-},
+}),
 
-new Tasks{
+Tasks.createDummy(new{
     Title = "Support Channel Optimization",
     StartDate = DateTime.Parse("2024-03-04"),
     DueDate = DateTime.Parse("2024-03-10"),
     Priority = "Medium",
     Description = "Evaluate and optimize the various support channels (email, phone, chat) to ensure efficient and effective user support.",
     Status = "Planned",
-    Asignees = [employess[27]],
+    Asignees = employess[27],
     Reporter =employess[12]
-},
+}),
 
-new Tasks{
+Tasks.createDummy(new{
     Title = "Emergency Response Plan for CRM Issues",
     StartDate = DateTime.Parse("2024-03-11"),
     DueDate = DateTime.Parse("2024-03-17"),
     Priority = "High",
     Description = "Develop an emergency response plan to swiftly address and resolve critical issues reported by CRM system users.",
     Status = "Planned",
-    Asignees = [employess[27]],
+    Asignees = employess[27],
     Reporter =employess[13]
-}
+})
 
 
 

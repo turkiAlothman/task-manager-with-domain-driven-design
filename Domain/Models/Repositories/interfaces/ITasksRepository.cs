@@ -23,7 +23,7 @@ namespace Domain.Models.Repositories.interfaces
 
         public void RemoveAsignee(Tasks task, Employees Asignee);
 
-        public void AddComment(Tasks task , Comments comment);
+
 
         public Task<IEnumerable<Tasks>> GetByProject(Projects project);
         
