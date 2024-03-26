@@ -3931,7 +3931,7 @@ chart_fourtyfour.render();
 
 // CHart 45
 var options = {
-  series: [75],
+  series: [79],
   chart: {
     height: 160,
     width: 160,

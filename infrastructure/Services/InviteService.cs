@@ -1,7 +1,6 @@
 ﻿using Application.Errors;
 using Application.Errors.Authorizations;
 using Application.Services.Interfaces;
-using Domain.Models.Repositories.interfaces;
 using infrastructure.Extentions;
 using infrastructure.Persistence.Repositores;
 using System;
@@ -13,6 +12,7 @@ using RandomString4Net;
 using Application.Errors.Invites;
 using Domain.Base;
 using Domain.Employee;
+using Domain.DomainModels.Employee;
 
 namespace infrastructure.Services
 {

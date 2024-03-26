@@ -4,13 +4,15 @@ using Application.Errors.Employees;
 using Application.Errors.Tasks;
 using Application.Services.Interfaces;
 using Domain.Base;
-using Domain.Models.Repositories.interfaces;
 using Domain.DTOs;
 using infrastructure.Persistence.Repositores;
 using OneOf;
 using Domain.Task;
 using Domain.Employee;
 using Domain.Project;
+using Domain.DomainModels.Employee;
+using Domain.DomainModels.ResetPasswords;
+using Domain.DomainModels.Task;
 
 namespace infrastructure.Services
 {

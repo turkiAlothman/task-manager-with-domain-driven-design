@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -8,13 +7,11 @@ using System.ComponentModel.DataAnnotations;
 using Application.Services.Interfaces;
 using infrastructure.Extentions;
 using TaskManager.Services;
-using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
 using Application.Errors;
-using Domain.Models;
-using TaskManager.Validators;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Domain.Employee;
+using Domain.DomainModels.Employee;
+using Domain.DomainModels.ResetPasswords;
+using Domain.DomainModels.Team;
 
 
 namespace TaskManager.Controllers

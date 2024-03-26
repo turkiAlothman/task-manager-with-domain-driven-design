@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Domain.Models.Repositories.interfaces;
 using Domain.ResetPasswords;
+using Domain.DomainModels.ResetPasswords;
 
 namespace infrastructure.Persistence.Repositores
 {

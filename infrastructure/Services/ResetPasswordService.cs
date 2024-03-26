@@ -1,11 +1,11 @@
 ﻿using Application.Services.Interfaces;
-using Domain.Models.Repositories.interfaces;
 using infrastructure.Extentions;
 using Application.Errors.Authentication;
 using Application.Errors.Authorizations;
 using Application.Errors;
 using Domain.Base;
 using Domain.ResetPasswords;
+using Domain.DomainModels.ResetPasswords;
 
 namespace infrastructure.Services
 {

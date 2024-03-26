@@ -6,6 +6,7 @@ using Domain.Project;
 using System.Collections.Generic;
 using System.Data;
 using Microsoft.AspNetCore.JsonPatch;
+using Domain.DomainModels.Task;
 
 namespace Domain.Task
 {

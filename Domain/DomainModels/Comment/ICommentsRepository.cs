@@ -1,6 +1,6 @@
 ﻿using Domain.Comment;
 
-namespace Domain.Models.Repositories.interfaces
+namespace Domain.DomainModels.Comment
 {
     public interface ICommentsRepository
     {

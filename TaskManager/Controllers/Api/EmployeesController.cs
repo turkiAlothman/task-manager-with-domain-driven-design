@@ -1,5 +1,4 @@
 ﻿using Application.Services.Interfaces;
-using Domain.Models.Repositories.interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TaskManager.Controllers.Api

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Domain.Models.Repositories.interfaces;
 using infrastructure.Extentions;
 using Domain.Task;
 using Domain.Employee;
 using Domain.Project;
+using Domain.DomainModels.Employee;
 namespace infrastructure.Persistence.Repositores
 {
     public class EmployeesRepository : IEmployeesRepository

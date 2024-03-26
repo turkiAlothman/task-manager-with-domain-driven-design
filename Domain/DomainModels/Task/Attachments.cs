@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
+using Domain.Task;
 
-namespace Domain.Task
+namespace Domain.DomainModels.Task
 {
     public class Attachments : BaseEntity<int>
     {

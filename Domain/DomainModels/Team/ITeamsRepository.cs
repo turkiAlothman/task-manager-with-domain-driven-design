@@ -1,6 +1,6 @@
 ﻿using Domain.Team;
 
-namespace Domain.Models.Repositories.interfaces
+namespace Domain.DomainModels.Team
 {
     public interface ITeamsRepository
     {

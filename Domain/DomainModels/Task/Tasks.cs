@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using Domain.Activitiy;
 using Domain.Comment;
+using Domain.DomainModels.Task;
 using Domain.Employee;
 using Domain.Entities;
 using Domain.Project;

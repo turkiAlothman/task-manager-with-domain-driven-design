@@ -1,6 +1,4 @@
-﻿using Domain.Employee;
-
-namespace Domain.Models.Repositories.interfaces
+﻿namespace Domain.DomainModels.Employee
 {
     public interface IInvitesRepository
     {

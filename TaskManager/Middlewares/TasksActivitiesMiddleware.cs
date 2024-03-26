@@ -1,6 +1,9 @@
 ﻿using Domain.Activitiy;
+using Domain.DomainModels.Activitiy;
+using Domain.DomainModels.Employee;
+using Domain.DomainModels.ResetPasswords;
+using Domain.DomainModels.Task;
 using Domain.Employee;
-using Domain.Models.Repositories.interfaces;
 using Domain.Project;
 using Domain.Task;
 using Newtonsoft.Json.Linq;

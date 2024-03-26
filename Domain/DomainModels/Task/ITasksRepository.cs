@@ -4,7 +4,7 @@ using Domain.Comment;
 using Domain.Project;
 
 
-namespace Domain.Models.Repositories.interfaces
+namespace Domain.DomainModels.Task
 {
     public interface ITasksRepository
     {
@@ -17,7 +17,7 @@ namespace Domain.Models.Repositories.interfaces
         public Task<bool> IsAssigneeOrReporter(int TaskId, int EmployeeId);
         public Task<Tasks> GetTaskWithProject(int id);
         public Task<Tasks> GetTask(int id);
-        
+
         public void Update(Tasks task);
         public void AddAsignee(Tasks task, Employees Asignee);
 
@@ -26,7 +26,7 @@ namespace Domain.Models.Repositories.interfaces
 
 
         public Task<IEnumerable<Tasks>> GetByProject(Projects project);
-        
+
 
     }
 }

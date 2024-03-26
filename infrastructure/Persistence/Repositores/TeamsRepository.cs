@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Domain.Models.Repositories.interfaces;
 using Domain.Team;
+using Domain.DomainModels.Team;
 
 namespace infrastructure.Persistence.Repositores
 {

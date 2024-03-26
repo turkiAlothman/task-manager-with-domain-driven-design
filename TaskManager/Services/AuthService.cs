@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using TaskManager.Services;
 using Application.Errors;
-using Domain.Models.Repositories.interfaces;
 using Application.Errors.Authentication;
 using infrastructure.Persistence.Repositores;
 using TaskManager.RequestForms;
@@ -18,6 +17,9 @@ using Application.Errors.Authorizations;
 using Domain.Employee;
 using Domain.Team;
 using Domain.ResetPasswords;
+using Domain.DomainModels.Employee;
+using Domain.DomainModels.ResetPasswords;
+using Domain.DomainModels.Team;
 
 namespace TaskManager.Services
 {

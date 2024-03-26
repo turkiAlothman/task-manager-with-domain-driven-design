@@ -1,14 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TaskManager.HttpExtensions;
-using Domain.Models.Repositories.interfaces;
-using RandomString4Net;
-using infrastructure.Extentions;
-using Domain.Models;
 using TaskManager.RequestForms;
-using System.Security.Claims;
 using Application.Services.Interfaces;
-using Domain.Entities;
 using Application.Errors;
 namespace TaskManager.Controllers.Api
 {

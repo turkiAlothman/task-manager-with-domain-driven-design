@@ -1,6 +1,5 @@
 ﻿using Application.Errors;
 using Application.Services.Interfaces;
-using Domain.Models.Repositories.interfaces;
 using Domain.Task;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;

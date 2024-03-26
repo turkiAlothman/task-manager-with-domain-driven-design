@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using System.Linq;
-using Domain.Models.Repositories.interfaces;
 using System.Collections.Generic;
 using Domain.DTOs;
-using Domain.Models;
 using Org.BouncyCastle.Crypto;
 using Domain.Employee;
 using Domain.Project;
+using Domain.DomainModels.ResetPasswords;
 
 
 namespace infrastructure.Persistence.Repositores

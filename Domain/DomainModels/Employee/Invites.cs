@@ -1,6 +1,7 @@
-﻿using Domain.Entities;
+﻿using Domain.Employee;
+using Domain.Entities;
 
-namespace Domain.Employee
+namespace Domain.DomainModels.Employee
 {
     public class Invites : BaseEntity<int>
     {

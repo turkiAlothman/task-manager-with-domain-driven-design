@@ -2,12 +2,12 @@
 using Microsoft.IdentityModel.Tokens;
 using System.Linq;
 using infrastructure.Extentions;
-using Domain.Models.Repositories.interfaces;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Domain.Task;
 using Domain.Employee;
 using Domain.Project;
 using Domain.Comment;
+using Domain.DomainModels.Task;
 namespace infrastructure.Persistence.Repositores
 {
     public class TasksRepository : ITasksRepository

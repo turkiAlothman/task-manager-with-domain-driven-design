@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Domain.Models.Repositories.interfaces;
 using TaskManager.Components.ViewModels;
 using Domain.Project;
+using Domain.DomainModels.ResetPasswords;
 namespace TaskManager.Components
 {
     public class ProjectsDropDown : ViewComponent

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Domain.Models.Repositories.interfaces;
 using Domain.Comment;
+using Domain.DomainModels.Comment;
 
 namespace infrastructure.Persistence.Repositores
 {

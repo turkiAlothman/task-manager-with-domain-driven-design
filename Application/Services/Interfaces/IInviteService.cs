@@ -1,7 +1,7 @@
 ﻿
 
 using Application.Errors;
-using Domain.Employee;
+using Domain.DomainModels.Employee;
 
 namespace Application.Services.Interfaces
 {

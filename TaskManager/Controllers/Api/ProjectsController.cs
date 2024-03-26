@@ -1,7 +1,5 @@
 ﻿using Application.Errors;
 using Application.Services.Interfaces;
-using Domain.Entities;
-using Domain.Models.Repositories.interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using OneOf.Types;

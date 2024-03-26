@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using infrastructure.Persistence;
-
-using Domain.Models.Repositories.interfaces;
 using TaskManager.Components.ViewModels;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.IdentityModel.Tokens;
 using Domain.Team;
+using Domain.DomainModels.Team;
 
 namespace TaskManager.Components
 {

@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using TaskManager.HttpExtensions;
-using Domain.Models.Repositories.interfaces;
 using TaskManager.RequestForms;
 using TaskManager.Utilities;
 using Domain.Task;
 using Domain.Activitiy;
+using Domain.DomainModels.Activitiy;
+using Domain.DomainModels.Employee;
+using Domain.DomainModels.ResetPasswords;
+using Domain.DomainModels.Task;
+using Domain.DomainModels.Team;
 namespace TaskManager.Controllers
 {
 

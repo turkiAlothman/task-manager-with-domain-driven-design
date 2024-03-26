@@ -7,6 +7,7 @@ using Domain.Project;
 using Domain.Activitiy;
 using Domain.Comment;
 using Domain.ResetPasswords;
+using Domain.DomainModels.Employee;
 namespace infrastructure.Persistence
 {
     public class TaskManagerDbContext : DbContext

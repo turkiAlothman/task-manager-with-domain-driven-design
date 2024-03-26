@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 using TaskManager.Middlewares;
-using Domain.Models.Repositories.interfaces;
 using Application.Services.Interfaces;
 using infrastructure;
 using infrastructure.Persistence.Repositores;
@@ -15,6 +14,12 @@ using infrastructure.Configurations;
 using TaskManager;
 using infrastructure.Persistence;
 using infrastructure;
+using Domain.DomainModels.Activitiy;
+using Domain.DomainModels.Comment;
+using Domain.DomainModels.Employee;
+using Domain.DomainModels.ResetPasswords;
+using Domain.DomainModels.Task;
+using Domain.DomainModels.Team;
 
 var builder = WebApplication.CreateBuilder(args);
 

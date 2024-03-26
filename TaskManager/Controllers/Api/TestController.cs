@@ -8,9 +8,10 @@ using System.Security.Claims;
 using infrastructure.Extentions;
 using infrastructure.Persistence;
 using Domain.Entities;
-using Domain.Models.Repositories.interfaces;
 using Application.Services.Interfaces;
 using Application.Errors;
+using Domain.DomainModels.Employee;
+using Domain.DomainModels.ResetPasswords;
 
 namespace TaskManager.Controllers.Api
 {

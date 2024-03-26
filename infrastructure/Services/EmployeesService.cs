@@ -2,8 +2,9 @@
 using Application.Errors.Employees;
 using Application.Services.Interfaces;
 using Domain.Base;
+using Domain.DomainModels.Employee;
+using Domain.DomainModels.ResetPasswords;
 using Domain.Employee;
-using Domain.Models.Repositories.interfaces;
 using Domain.Task;
 using OneOf;
 namespace infrastructure.Services
