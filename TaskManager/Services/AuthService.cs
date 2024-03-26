@@ -78,18 +78,17 @@ namespace TaskManager.Services
 
 
             Employees employee = new Employees
-            {
-                FirstName = FirstName,
-                LastName = LastName,
-                Position = Position,
-                BirthDay = BirthDay,
-                Email = email,
-                PhoneNumber = PhoneNumber,
-                Password = Password.Hash(),
-                team = team,
-                Manager = invite.AsManager
-
-            };
+            (
+                invite.AsManager,
+                FirstName,
+                LastName,
+                PhoneNumber,
+                email,
+                Password.Hash(),
+                Position,
+                BirthDay
+            );
+            employee.SetTeam(team);
 
             await _employeesRepository.CreateEmployee(employee);
             await  Login(employee);
@@ -141,7 +140,7 @@ namespace TaskManager.Services
             if (employee == null)
                 return new EmployeeNotFoundError();
 
-            employee.Password = Password.Hash();
+            employee.ChangePassword(Password.Hash());
 
             await _employeesRepository.Update(employee);
             

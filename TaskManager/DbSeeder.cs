@@ -1,35 +1,31 @@
-﻿using System.Numerics;
-using System;
-using infrastructure.Extentions;
-using Microsoft.Identity.Client;
-using infrastructure.Persistence;
-using Domain.Entities;
-using Domain.Task;
+﻿using Domain.Employee;
 using Domain.Project;
-using Domain.Team;
-using Domain.Employee;
 using Domain.Task;
+using Domain.Team;
+using infrastructure.Extentions;
+using infrastructure.Persistence;
 namespace TaskManager
 {
     public static class DbSeeder
     {
-        
+
         public static void Seed(IApplicationBuilder app)
         {
 
-            
-            TaskManagerDbContext Context =  app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<TaskManagerDbContext>();
-            
-            if(!Context.projects.Any())
+
+            TaskManagerDbContext Context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<TaskManagerDbContext>();
+
+            if (!Context.projects.Any())
             {
 
-                Projects project1 = new Projects {
+                Projects project1 = new Projects
+                {
                     Name = "E-commerce Platform",
                     Description = "Building a comprehensive platform for online sales and customer management.",
                     Type = "E-commerce"
                 };
-                
-                
+
+
                 Projects project2 = new Projects
                 {
                     Name = "Customer Relationship Management System",
@@ -94,11 +90,12 @@ namespace TaskManager
                         Description = "Provides assistance and support to customers, ensuring customer satisfaction and loyalty."
                     }
 
-                }; 
+                };
+                var priject12 = new List<Projects>{ project1, project2 };
 
                 List<Employees> employess = new List<Employees> {
                     // 0
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Angel",
                         LastName = "Rodriguez",
@@ -108,13 +105,13 @@ namespace TaskManager
                         Position = "Quality Assurance",
                         BirthDay = DateTime.Parse("2004-05-10"),
                         team = teams[0]
-                        ,Projects = [project1, project2]
-                    
-                        }
+                        ,Projects = new List<Projects>{project1, project2}
+
+                        })
                     ,
 
                     // 1
-                     new Employees{
+                     Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Mark",
                         LastName = "Ruben",
@@ -124,12 +121,12 @@ namespace TaskManager
                         Position = "Quality Assurance",
                         BirthDay = DateTime.Parse("2004-05-23"),
                         team = teams[0]
-                        ,Projects = [project1 , project2]
-                        }
+                        ,Projects = new List<Projects>{project1 , project2}
+                        })
                      ,
                      
                      // 2  
-                     new Employees{
+                     Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Muhammed",
                         LastName = "Ali",
@@ -139,12 +136,12 @@ namespace TaskManager
                         Position = "Quality Assurance Manager",
                         BirthDay = DateTime.Parse("2001-08-20"),
                         team = teams[0]
-                        ,Projects = [project1]
+                        ,Projects = new List<Projects>{project1}
 
-                        }
+                        })
                      ,
                      //3
-                     new Employees{
+                     Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Turki",
                         LastName = "Salem",
@@ -154,12 +151,12 @@ namespace TaskManager
                         Position = "Quality Assurance intern",
                         BirthDay = DateTime.Parse("2004-04-10"),
                         team = teams[0]
-                        ,Projects = [project1]
+                        ,Projects = new List<Projects>{project1}
 
-                        }
+                        })
                     ,
                      // 4
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "Norma",
                         LastName = "Mcguire",
@@ -169,11 +166,11 @@ namespace TaskManager
                         Position = "Project Manager",
                         BirthDay = DateTime.Parse("1995-11-12"),
                         team = teams[4]
-                        ,Projects = [project1, project2]
-                        }
+                        ,Projects =new List<Projects> {project1, project2}
+                        })
                     ,
                     // 5
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Rhonda",
                         LastName = "Huynh",
@@ -183,11 +180,11 @@ namespace TaskManager
                         Position = "System Analyst",
                         BirthDay = DateTime.Parse("1980-03-24"),
                         team = teams[4]
-                        ,Projects = [project1, project2]
-                        }
+                        ,Projects = new List<Projects>{project1, project2}
+                        })
                     ,
                     // 6
-                    new Employees{ 
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Laura",
                         LastName = "Williams",
@@ -197,12 +194,12 @@ namespace TaskManager
                         Position = "Software Devoleper",
                         BirthDay = DateTime.Parse("1959-03-10"),
                         team = teams[1]
-                        ,Projects = [project1, project2]
-                    }
+                        ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
 
                     // 7
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Sattam",
                         LastName = "Aljofan",
@@ -212,12 +209,12 @@ namespace TaskManager
                         Position = "backend Devoleper",
                         BirthDay = DateTime.Parse("1990-03-10"),
                         team = teams[1]
-                        ,Projects = [project1, project2]
-                    }
+                        ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
                     
                     // 8
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Fahad",
                         LastName = "Alturki",
@@ -227,11 +224,11 @@ namespace TaskManager
                         Position = "Software Engineer",
                         BirthDay = DateTime.Parse("1995-05-22"),
                         team = teams[1]
-                        ,Projects = [project1, project2]
-                    }
+                        ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
                     // 9
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Ibrahim",
                         LastName = "Alrayes",
@@ -241,12 +238,12 @@ namespace TaskManager
                         Position = "Software Engineer",
                         BirthDay = DateTime.Parse("2001-05-22"),
                         team = teams[1]
-                        ,Projects = [project1]
-                    }
+                        ,Projects = new List<Projects>{project1}
+                    })
                     ,
-
+                    
                     // 10
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Muhammed",
                         LastName = "Ali",
@@ -256,12 +253,12 @@ namespace TaskManager
                         Position = "Software Engineer intern",
                         BirthDay = DateTime.Parse("2002-06-12"),
                         team = teams[1],
-                        Projects = [project1]
-                    }
+                        Projects = new List<Projects>{project1}
+                    })
                     ,
 
                     // 11
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Mark",
                         LastName = "Liu",
@@ -271,12 +268,12 @@ namespace TaskManager
                         Position = "Product Manager",
                         BirthDay = DateTime.Parse( "1960-09-20"),
                         team = teams[4]
-                        ,Projects = [project1, project2]
-                    }
+                        ,Projects =new List<Projects> {project1, project2}
+                    })
                     ,
 
                     // 12 
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "Amy",
                         LastName = "Collins",
@@ -286,12 +283,12 @@ namespace TaskManager
                         Position = "Project Manager",
                         BirthDay = DateTime.Parse("1966-03-18"),
                     team = teams[4]
-                    ,Projects = [project1, project2]
-                    }
+                    ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
 
                     // 13
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "Ruben",
                         LastName = "Nevez",
@@ -301,12 +298,12 @@ namespace TaskManager
                         Position = "Product Manager",
                         BirthDay = DateTime.Parse("1966-03-18"),
                     team = teams[4]
-                    ,Projects = [project1, project2]
-                    }
+                    ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
 
                     // 14
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "Kenneth",
                         LastName = "Mitchell",
@@ -316,12 +313,12 @@ namespace TaskManager
                         Position = "UX/UI Designer",
                         BirthDay = DateTime.Parse("1971-10-30"),
                     team = teams[5]
-                    ,Projects = [project1, project2]
-                    }
+                    ,Projects =new List<Projects> {project1, project2}
+                    })
                     ,
 
                     // 15
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Latasha",
                         LastName = "Hughes",
@@ -331,12 +328,12 @@ namespace TaskManager
                         Position = "UX/UI Designer",
                         BirthDay = DateTime.Parse("1982-04-06"),
                         team = teams[5]
-                        ,Projects = [project1, project2]
-                    }
+                        ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
 
                     // 16
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Thamer",
                         LastName = "Almusa",
@@ -346,12 +343,12 @@ namespace TaskManager
                         Position = "UX/UI Designer intern",
                         BirthDay = DateTime.Parse("2005-04-06"),
                         team = teams[5]
-                        ,Projects = [project1]
-                    }
+                        ,Projects = new List<Projects>{project1}
+                    })
                     ,
 
                     // 17
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "Derek",
                         LastName = "Atkinson",
@@ -361,11 +358,11 @@ namespace TaskManager
                         Position = "FrontEnd Devoleper",
                         BirthDay = DateTime.Parse("1978-06-22"),
                         team= teams[2]
-                        ,Projects = [project1, project2]
-                    }
+                        ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
                     // 18
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "Debbie",
                         LastName = "Wong",
@@ -375,12 +372,12 @@ namespace TaskManager
                         Position = "FrontEnd Devoleper",
                         BirthDay = DateTime.Parse("1998-06-02"),
                         team= teams[2]
-                        ,Projects = [project1, project2]
-                    }
+                        ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
                     
                     // 19
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Derek",
                         LastName = "Davis",
@@ -390,14 +387,14 @@ namespace TaskManager
                         Position = "DevOps manager",
                         BirthDay = DateTime.Parse("1993-08-05"),
                         team= teams[3]
-                        ,Projects = [project1, project2]
+                        ,Projects = new List<Projects>{project1, project2}
 
 
-                    }
+                    })
                     ,
                     
                     // 20
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "Alexander",
                         LastName = "Atkinson",
@@ -407,12 +404,12 @@ namespace TaskManager
                         Position = "DevOps Enginner",
                         BirthDay = DateTime.Parse("1991-01-29"),
                         team= teams[3]
-                        ,Projects = [project1, project2]
-                    }
+                        ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
 
                     // 21
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "Christian",
                         LastName = "Reed",
@@ -422,12 +419,12 @@ namespace TaskManager
                         Position = "DevOps Engineer",
                         BirthDay = DateTime.Parse("1989-11-27"),
                         team= teams[3]
-                        ,Projects = [project1]
-                    }
+                        ,Projects =new List<Projects> {project1}
+                    })
                     ,
 
                     // 22
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "Nawaf",
                         LastName = "Alqahtani",
@@ -437,12 +434,12 @@ namespace TaskManager
                         Position = "DevOps intern",
                         BirthDay = DateTime.Parse("1999-10-27"),
                         team= teams[3]
-                        ,Projects = [project1]
-                    }
+                        ,Projects = new List<Projects>{project1}
+                    })
                     ,
 
                     // 23
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "David",
                         LastName = "Vang",
@@ -452,12 +449,12 @@ namespace TaskManager
                         Position = "Marketing Manager",
                         BirthDay = DateTime.Parse("1965-03-10"),
                         team = teams[6]
-                        ,Projects = [project1, project2]
-                    }
+                        ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
 
                     // 24
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Christine",
                         LastName = "Li",
@@ -467,12 +464,12 @@ namespace TaskManager
                         Position = "Marketer",
                         BirthDay = DateTime.Parse("1980-08-03"),
                         team = teams[6]
-                        ,Projects = [project1, project2]
-                    }
+                        ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
                     
                     // 25
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "Anthony",
                         LastName = "Combs",
@@ -482,12 +479,12 @@ namespace TaskManager
                         Position = "Marketer intern",
                         BirthDay = DateTime.Parse("1994-03-30"),
                         team = teams[6]
-                        ,Projects = [project1]
-                    }
+                        ,Projects = new List<Projects>{project1}
+                    })
                     ,
 
                     // 26
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Jennifer",
                         LastName = "Dominguez",
@@ -497,12 +494,12 @@ namespace TaskManager
                         Position = "customer support specialist",
                         BirthDay = DateTime.Parse("1962-12-18"),
                         team = teams[7]
-                        ,Projects = [project1, project2]
-                    }
+                        ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
 
                     // 27
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "Angela",
                         LastName = "Duran",
@@ -512,12 +509,12 @@ namespace TaskManager
                         Position = "customer support employee",
                         BirthDay = DateTime.Parse("1983-07-19"),
                         team = teams[7]
-                        ,Projects = [project1, project2]
-                    }
+                        ,Projects = new List<Projects>{project1, project2}
+                    })
                     ,
 
                     // 28
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Donald",
                         LastName = "Grant",
@@ -527,12 +524,12 @@ namespace TaskManager
                         Position = "customer support intern",
                         BirthDay = DateTime.Parse("1993-07-28"),
                         team = teams[7]
-                        ,Projects = [project1]
-                    }
+                        ,Projects =new List<Projects> {project1}
+                    })
                     ,
 
                     // 29
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = false,
                         FirstName = "Tricia",
                         LastName = "Brown",
@@ -542,11 +539,11 @@ namespace TaskManager
                         Position = "customer support intern",
                         BirthDay = DateTime.Parse("1966-07-20"),
                         team = teams[7]
-                        ,Projects = [project1]
-                    }
+                        ,Projects =new List<Projects> {project1}
+                    })
                     ,
                     // testing account
-                    new Employees{
+                    Employees.CreateDummy(new{
                         Manager = true,
                         FirstName = "Turki",
                         LastName = "Alothman",
@@ -556,11 +553,11 @@ namespace TaskManager
                         Position = "customer support intern",
                         BirthDay = DateTime.Parse("2001-07-15"),
                         team = teams[1]
-                        ,Projects = [project1]
-                    }
+                        ,Projects =new List<Projects> {project1}
+                    })
                 };
 
-                
+
                 project1.Tasks = new List<Tasks> {
                     
                     // project1
@@ -578,7 +575,7 @@ namespace TaskManager
                         Reporter =employess[4]
 
                     }),
-                    
+
                     Tasks.createDummy(new {
                         Title = "Automated Test Development",
                         StartDate = DateTime.Parse("2024-03-06"),
@@ -614,7 +611,7 @@ namespace TaskManager
                         Asignees = employess[0],
                         Reporter =employess[13]
                     }),
-                    
+
                     Tasks.createDummy(new{
                         Title = "Security Testing",
                         StartDate = DateTime.Parse("2024-03-27"),
@@ -1012,7 +1009,7 @@ namespace TaskManager
                         Description = "Integrate third-party APIs for enhanced functionality.",
                         Status = "Planned",
                         Type="backend",
-                        
+
                         Asignees = employess[9],
                         Reporter =employess[12]
                     }),
@@ -2640,7 +2637,7 @@ Tasks.createDummy(new{
                 Context.SaveChanges();
 
             }
-            
+
         }
     }
 }
