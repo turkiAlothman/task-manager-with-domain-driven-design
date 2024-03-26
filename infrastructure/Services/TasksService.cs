@@ -1,33 +1,32 @@
 ﻿using Application.Errors;
-using Application.Services.Interfaces;
-using Domain.Models.Repositories.interfaces;
-using Application.Errors.Tasks;
-using Application.Errors.Employees;
 using Application.Errors.Comments;
-using Microsoft.AspNetCore.JsonPatch;
-using System.ComponentModel.DataAnnotations;
+using Application.Errors.Employees;
+using Application.Errors.Tasks;
+using Application.Services.Interfaces;
+using Domain.Base;
+using Domain.Comment;
+using Domain.Employee;
+using Domain.Models.Repositories.interfaces;
+using Domain.Project;
+using Domain.Task;
+using infrastructure.Extentions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
-using infrastructure.Extentions;
-using Domain.Base;
-using Domain.Task;
-using Domain.Employee;
-using Domain.Comment;
-using Microsoft.VisualBasic;
-using Domain.Project;
 
 namespace infrastructure.Services
 {
-    public class TasksService : BaseService ,  ITasksService
+    public class TasksService : BaseService, ITasksService
     {
         private readonly ITasksRepository _tasksRepository;
         private readonly IEmployeesRepository _employeesRepository;
         private readonly ICommentsRepository _commentsRepository;
         private readonly IProjectsRepository _projectsRepository;
         private readonly IConfiguration _configuration;
-        public TasksService(IUnitOfWork unitOfWork  , ITasksRepository tasksRepository, IEmployeesRepository employeesRepository, ICommentsRepository commentsRepository, IProjectsRepository projectsRepository, IConfiguration configuration) :base(unitOfWork)
+        public TasksService(IUnitOfWork unitOfWork, ITasksRepository tasksRepository, IEmployeesRepository employeesRepository, ICommentsRepository commentsRepository, IProjectsRepository projectsRepository, IConfiguration configuration) : base(unitOfWork)
         {
             _tasksRepository = tasksRepository;
             _employeesRepository = employeesRepository;
@@ -46,7 +45,7 @@ namespace infrastructure.Services
                 (bool ValidationResult, string Message) = file.validate();
 
                 if (!ValidationResult)
-                    return new customError { Message = Message  , StatusCode = System.Net.HttpStatusCode.BadRequest};
+                    return new customError { Message = Message, StatusCode = System.Net.HttpStatusCode.BadRequest };
 
                 attachments.Add(new Attachments());
             }
@@ -54,19 +53,19 @@ namespace infrastructure.Services
 
             Projects Project = await _projectsRepository.GetById(project);
 
-            if(Project == null)
+            if (Project == null)
             {
                 return new ProjectNotFoundError();
             }
 
-            Tasks task = new Tasks(title, startDate, deadline,  priority , description, "Planned", type);
+            Tasks task = new Tasks(title, startDate, deadline, priority, description, "Planned", type);
             task.SetReporter(await _employeesRepository.GetEmployee(UserId));
             task.AddAssignees(await _employeesRepository.getByIds(asignees));
             task.SetProject(Project);
             task.AddAttachments(attachments);
             await _tasksRepository.Add(task);
 
-            
+
             // after the task is commited in the database , we get the Id of the task to specify the storage path of the attachments
             if (!attachments.IsNullOrEmpty())
             {
@@ -110,16 +109,16 @@ namespace infrastructure.Services
             {
                 return new ReporterOrAssigneeAuthorizationError();
             }
-            
+
             var result = new List<ValidationResult>();
             var context = new ValidationContext(Origin, null, null);
 
-             patch.ApplyToTask(Origin);
+            patch.ApplyToTask(Origin);
 
 
 
-            if (! Validator.TryValidateObject(Origin,context , result,true))
-                return new customError {Message = result.First().ErrorMessage.ToString() ,  StatusCode = System.Net.HttpStatusCode.BadRequest} ;
+            if (!Validator.TryValidateObject(Origin, context, result, true))
+                return new customError { Message = result.First().ErrorMessage.ToString(), StatusCode = System.Net.HttpStatusCode.BadRequest };
 
             await UnitOfWork.SaveChangesAsync();
 
@@ -149,7 +148,7 @@ namespace infrastructure.Services
 
             // the reporter is the only one allowed to assign employees
             if (task.Reporter.Id != UserId)
-                return new UnathorizedTaskActionError(); 
+                return new UnathorizedTaskActionError();
 
             Employees Employee = await this._employeesRepository.GetEmployee(AssigneeId);
 
@@ -183,7 +182,7 @@ namespace infrastructure.Services
                 return new NotAssignedError();
 
             this._tasksRepository.RemoveAsignee(task, Employee);
-            
+
             return null;
         }
 
@@ -195,19 +194,16 @@ namespace infrastructure.Services
 
             Employees employee = await _employeesRepository.GetEmployee(UserId);
 
-
-            task.AddComment( new Comments
-            {
-                Sender = employee,
-                MessageContent = MessageContent
-            });
+            Comments comment = new Comments(MessageContent);
+            comment.SetSender(employee);
+            task.AddComment(comment);
 
             await UnitOfWork.SaveChangesAsync();
 
             return null;
         }
 
-        public async Task<IError> DeleteComment(int UserId , int CommentID)
+        public async Task<IError> DeleteComment(int UserId, int CommentID)
         {
             Comments comment = await _commentsRepository.GetComment(CommentID);
 

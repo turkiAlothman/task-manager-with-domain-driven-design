@@ -1,13 +1,23 @@
 ﻿using Domain.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.Employee;
+using Domain.Task;
 
 namespace Domain.Comment
 {
-    public partial class Comments :IAggregateRoot
+    public partial class Comments : IAggregateRoot
     {
+        public Comments(string MessageContent)
+        {
+            this.MessageContent = MessageContent;
+        }
+
+        public void SetSender(Employees sender)
+        {
+            this.Sender = sender;
+        }
+        public void SetTask(Tasks task)
+        {
+            this.MessageTask = task;
+        }
     }
 }

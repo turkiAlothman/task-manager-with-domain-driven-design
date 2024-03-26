@@ -5,7 +5,6 @@ using Domain.Project;
 using Domain.Task;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using TaskManager.HttpExtensions;
 
 namespace TaskManager.Middlewares
@@ -100,7 +99,7 @@ namespace TaskManager.Middlewares
                     Projects project = await _projectsRepository.GetById(int.Parse(Context.Request.Form["project"].ToString()));
                     ;
 
-                    Activities activity = new Activities($"created new task <span class=\"fw-bold\">{Context.Request.Form["title"]}</span>" , project.Name);
+                    Activities activity = new Activities($"created new task <span class=\"fw-bold\">{Context.Request.Form["title"]}</span>", project.Name);
                     activity.SetActor(actor);
 
                     _activitiesRepository.AddChangeStatusActivities([activity]);
@@ -109,7 +108,7 @@ namespace TaskManager.Middlewares
                 }
                 else if (Context.Request.Method.Equals("DELETE"))
                 {
-                    
+
 
                 }
 

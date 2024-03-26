@@ -17,7 +17,7 @@ namespace Domain.Employee
         public string Email { get; set; }
         public string Password { get; set; }
         public string Position { get; set; }
-        public DateTime BirthDay { get; set; }
+        public DateTime BirthDay { get; set;}
         public IList<Projects> Projects { get; set; }
         public IList<Tasks> Tasks { get; set; }
         public IList<Tasks> tasksReported { get; set; }
