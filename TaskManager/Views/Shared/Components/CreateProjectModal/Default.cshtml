@@ -53,8 +53,8 @@
                         <!-- Deadline -->
                         <div class="form-group  col-sm-4">
                             <label class="form-label">Deadline</label>
-                            <input asp-for="DueDate" type="date" class="form-control" value="">
-                            <span asp-validation-for="DueDate" class="text-danger"></span>
+                            <input asp-for="Deadline" type="date" class="form-control" value="">
+                            <span asp-validation-for="Deadline" class="text-danger"></span>
                         </div>
 
 
@@ -99,7 +99,7 @@
             var description = $("#description").val();
             var type = $("#type").val();
             var startDate = $("#startDate").val();
-            var deadline = $("#DueDate").val();
+            var deadline = $("#Deadline").val();
             console.log(Name)
 
             $.ajax({

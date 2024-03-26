@@ -41,7 +41,7 @@ namespace TaskManager.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            IError result = await _projectsService.CreateProject(_contextAccessor.IsManager(), form.Name, form.Type, form.Description, form.StartDate, form.DueDate);
+            IError result = await _projectsService.CreateProject(_contextAccessor.IsManager(), form.Name, form.Type, form.Description, form.StartDate, form.Deadline);
             if (result != null)
                 return StatusCode((int)result.StatusCode, result);
             return Ok();

@@ -20,6 +20,6 @@ namespace TaskManager.RequestForms
         public DateTime StartDate { set; get; }
         
         [Required]
-        public DateTime DueDate { set; get; }
+        public DateTime Deadline { set; get; }
     }
 }
