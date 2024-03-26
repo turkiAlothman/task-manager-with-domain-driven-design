@@ -121,7 +121,7 @@ namespace TaskManager.Services
             // send email 
             await this._emailService.SendResetPasswordEmail(Email, SecretKey,host);
 
-            await _resetPasswordRepository.CreateResetPasswordRequest(new ResetPassword { Email = Email, ExpirationDate = ExpirationDate, SecretKey = SecretKey.Hash() });
+            await _resetPasswordRepository.CreateResetPasswordRequest(new ResetPassword(Email, SecretKey.Hash(), ExpirationDate));
             return null;
 
         }
