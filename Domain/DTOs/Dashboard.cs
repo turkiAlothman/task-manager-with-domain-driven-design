@@ -12,5 +12,9 @@ namespace Domain.DTOs
         public int TeamsCount { get; set; }
         public int ProjectsCount { get; set; }
         public int ActivitiesCount { get; set; }
+
+        public List<TeamStatus> TeamStatuses { get; set; }
+        public List<PriorityStatus> PriorityStatuses { get; set; }
+        public List<TasksStatusPercentage> TasksStatusesPercentage { get; set;}
     }
 }

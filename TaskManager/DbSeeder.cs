@@ -553,7 +553,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-05"),
                         Priority = "High",
                         Description = "Create detailed test plans for the new project features.",
-                        Status = "Not Started",
+                        Status = "In Progress",
                         Type="Quality assurance",
                         Asignees = employess[0],
                         Reporter =employess[4]
@@ -578,7 +578,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-19"),
                         Priority = "Medium",
                         Description = "Conduct regression testing for the latest release.",
-                        Status = "Not Started",
+                        Status = "In Progress",
                         Type="Quality assurance",
                         Asignees = employess[0],
                         Reporter =employess[12]
@@ -590,7 +590,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-26"),
                         Priority = "Medium",
                         Description = "Perform performance testing on critical features.",
-                        Status = "Not Started",
+                        Status = "In Progress",
                         Type="Quality assurance",
                         Asignees = employess[0],
                         Reporter =employess[13]
@@ -614,7 +614,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-09"),
                         Priority = "Low",
                         Description = "Compile testing reports and document findings.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Quality assurance",
                         Asignees = employess[1],
                         Reporter =employess[11]
@@ -627,7 +627,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-16"),
                         Priority = "Medium",
                         Description = "Coordinate user acceptance testing with stakeholders.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Quality assurance",
                         Asignees = employess[1],
                         Reporter =employess[12]
@@ -640,7 +640,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-23"),
                         Priority = "High",
                         Description = "Lead bug triage meetings to prioritize bug fixes.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Quality assurance",
                         Asignees = employess[1],
                         Reporter =employess[13]
@@ -652,7 +652,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-30"),
                         Priority = "Low",
                         Description = "Evaluate new testing tools and processes for efficiency.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Quality assurance",
                         Asignees = employess[1],
                         Reporter =employess[4]
@@ -664,7 +664,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-05-07"),
                         Priority = "Medium",
                         Description = "Review and update the quality assurance processes.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Quality assurance",
                         Asignees = employess[1],
                         Reporter =employess[11]
@@ -688,7 +688,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-05-21"),
                         Priority = "High",
                         Description = "Test application compatibility across multiple browsers.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Quality assurance",
                         Asignees = employess[2],
                         Reporter =employess[12]
@@ -700,7 +700,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-05-28"),
                         Priority = "High",
                         Description = "Validate the functionality, reliability, performance, and security of the application's API.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Quality assurance",
                         Asignees = employess[2],
                         Reporter =employess[13]
@@ -724,7 +724,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-06-11"),
                         Priority = "Medium",
                         Description = "Evaluate the application for user friendliness and ease of use.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Quality assurance",
                         Asignees = employess[2],
                         Reporter =employess[4]
@@ -736,7 +736,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-06-18"),
                         Priority = "Low",
                         Description = "Check the software for adaptability in different languages and regions.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Quality assurance",
                         Asignees = employess[3],
                         Reporter =employess[11]
@@ -760,7 +760,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-07-02"),
                         Priority = "High",
                         Description = "Prepare the application for security certification assessments.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Quality assurance",
                         Asignees = employess[3]
                         ,
@@ -773,7 +773,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-07-09"),
                         Priority = "Medium",
                         Description = "Improve the efficiency and coverage of the continuous testing pipeline.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Quality assurance",
                         Asignees = employess[3],
                         Reporter =employess[13]
@@ -798,7 +798,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-01-07"),
                         Priority = "High",
                         Description = "Design and review database schema for the new inventory system.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="backend",
                         Asignees = employess[6],
                         Reporter =employess[11]
@@ -810,7 +810,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-01-14"),
                         Priority = "High",
                         Description = "Update the authentication service to support OAuth 2.0.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="backend",
                         Asignees = employess[6],
                         Reporter =employess[12]
@@ -834,7 +834,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-01-28"),
                         Priority = "Medium",
                         Description = "Integrate a new logging framework for better traceability.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="backend",
                         Asignees = employess[6],
                         Reporter =employess[12]
@@ -846,7 +846,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-04"),
                         Priority = "High",
                         Description = "Integrate Stripe payment gateway for processing transactions.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="backend",
                         Asignees = employess[6],
                         Reporter =employess[14]
@@ -858,7 +858,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-11"),
                         Priority = "Medium",
                         Description = "Add Redis caching to improve application performance.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="backend",
                         Asignees = employess[7],
                         Reporter =employess[11]
@@ -868,7 +868,7 @@ namespace TaskManager
                         Title = "Microservices Architecture Migration",
                         StartDate = DateTime.Parse("2024-02-12"),
                         DueDate = DateTime.Parse("2024-02-18"),
-                        Priority = "High",
+                        Priority = "Low",
                         Description = "Migrate monolithic architecture to microservices for scalability.",
                         Status = "Planned",
                         Type="backend",
@@ -880,7 +880,7 @@ namespace TaskManager
                         Title = "Dockerization of Services",
                         StartDate = DateTime.Parse("2024-02-19"),
                         DueDate = DateTime.Parse("2024-02-25"),
-                        Priority = "Medium",
+                        Priority = "Low",
                         Description = "Dockerize existing services for better deployment efficiency.",
                         Status = "Planned",
                         Type="backend",
@@ -942,7 +942,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-01"),
                         Priority = "High",
                         Description = "Optimize database queries and indexes for performance improvement.",
-                        Status = "Planned",
+                        Status = "Canceled",
                         Type="backend",
                         Asignees = employess[8],
                         Reporter =employess[14]
@@ -954,7 +954,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-08"),
                         Priority = "Medium",
                         Description = "Develop a comprehensive error handling framework for the backend.",
-                        Status = "Planned",
+                        Status = "Canceled",
                         Type="backend",
                         Asignees = employess[8]
                         ,
@@ -967,7 +967,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-15"),
                         Priority = "Medium",
                         Description = "Create detailed API documentation for developers and API consumers.",
-                        Status = "Planned",
+                        Status = "Canceled",
                         Type="backend",
                         Asignees = employess[8],
                         Reporter =employess[12]
@@ -979,7 +979,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-22"),
                         Priority = "High",
                         Description = "Implement data encryption for sensitive user data storage and transfer.",
-                        Status = "Planned",
+                        Status = "Canceled",
                         Type="backend",
                         Asignees = employess[9],
                         Reporter =employess[13]
@@ -991,7 +991,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-29"),
                         Priority = "Medium",
                         Description = "Integrate third-party APIs for enhanced functionality.",
-                        Status = "Planned",
+                        Status = "Canceled",
                         Type="backend",
 
                         Asignees = employess[9],
@@ -1004,7 +1004,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-05-06"),
                         Priority = "Medium",
                         Description = "Refactor existing backend code to improve maintainability and scalability.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="backend",
                         Asignees = employess[9],
                         Reporter =employess[11]
@@ -1028,7 +1028,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-05-20"),
                         Priority = "Low",
                         Description = "Explore the adoption of serverless architecture for specific microservices.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="backend",
                         Asignees = employess[9],
                         Reporter =employess[4]
@@ -1052,7 +1052,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-06-03"),
                         Priority = "Medium",
                         Description = "Optimize cloud services usage to reduce costs while maintaining performance.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="backend",
                         Asignees = employess[10]
                         ,
@@ -1065,7 +1065,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-06-10"),
                         Priority = "High",
                         Description = "Conduct a security audit to identify and fix potential vulnerabilities.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="backend",
                         Asignees = employess[10],
                         Reporter =employess[4]
@@ -1077,7 +1077,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-06-17"),
                         Priority = "Medium",
                         Description = "Implement WebSockets for real-time data exchange.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="backend",
                         Asignees = employess[10],
                         Reporter =employess[11]
@@ -1089,7 +1089,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-06-24"),
                         Priority = "Low",
                         Description = "Set up automated database migration scripts for seamless deployments.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="backend",
                         Asignees = employess[10],
                         Reporter =employess[12]
@@ -1102,7 +1102,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-01-07"),
                         Priority = "High",
                         Description = "Conduct user research to gather insights for the new mobile application design.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="UI-UX",
                         Asignees = employess[14],
                         Reporter =employess[13]
@@ -1138,7 +1138,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-01-28"),
                         Priority = "Medium",
                         Description = "Create a UI kit for consistent design across all platforms.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="UI-UX",
                         Asignees = employess[14],
                         Reporter =employess[5]
@@ -1150,7 +1150,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-04"),
                         Priority = "High",
                         Description = "Analyze and optimize user flows for the checkout process.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="UI-UX",
                         Asignees = employess[14],
                         Reporter =employess[11]
@@ -1174,7 +1174,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-18"),
                         Priority = "High",
                         Description = "Create interactive prototypes for the new feature set.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="UI-UX",
                         Asignees = employess[15],
                         Reporter =employess[13]
@@ -1186,7 +1186,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-25"),
                         Priority = "Medium",
                         Description = "Update the design system with new components and guidelines.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="UI-UX",
                         Asignees = employess[15],
                         Reporter =employess[13]
@@ -1210,7 +1210,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-11"),
                         Priority = "Low",
                         Description = "Conduct a competitive analysis to benchmark UX practices.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="UI-UX",
                         Asignees = employess[15]
                         ,
@@ -1223,7 +1223,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-18"),
                         Priority = "Medium",
                         Description = "Develop user personas for targeted design strategies.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="UI-UX",
                         Asignees = employess[16],
                         Reporter =employess[12]
@@ -1235,7 +1235,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-25"),
                         Priority = "Medium",
                         Description = "Facilitate a UX workshop for the product team.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="UI-UX",
                         Asignees = employess[16],
                         Reporter =employess[5]
@@ -1271,7 +1271,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-15"),
                         Priority = "Medium",
                         Description = "Refresh the brand identity to align with the new company vision.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="UI-UX",
                         Asignees = employess[16],
                         Reporter =employess[4]
@@ -1284,7 +1284,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-01-08"),
                         Priority = "High",
                         Description = "Redesign the landing page to improve user engagement and conversion rates.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="frontend",
                         Asignees = employess[17],
                         Reporter =employess[4]
@@ -1296,7 +1296,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-01-16"),
                         Priority = "Medium",
                         Description = "Develop a reusable component library using React for faster development cycles.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="frontend",
                         Asignees = employess[17]
                         ,
@@ -1309,7 +1309,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-01-24"),
                         Priority = "High",
                         Description = "Perform an accessibility audit and implement improvements to meet WCAG standards.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="frontend",
                         Asignees = employess[17]
                         ,
@@ -1322,7 +1322,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-01"),
                         Priority = "High",
                         Description = "Ensure all new web pages are fully responsive across devices.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="frontend",
                         Asignees = employess[17],
                         Reporter =employess[11]
@@ -1334,7 +1334,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-09"),
                         Priority = "Medium",
                         Description = "Optimize website performance to achieve a sub-2-second load time.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="frontend",
                         Asignees = employess[17],
                         Reporter =employess[11]
@@ -1358,7 +1358,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-25"),
                         Priority = "Medium",
                         Description = "Integrate frontend with new backend API endpoints for enhanced functionality.",
-                        Status = "Planned",
+                        Status = "Canceled",
                         Type="frontend",
                         Asignees = employess[18]
                         ,
@@ -1396,7 +1396,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-21"),
                         Priority = "Medium",
                         Description = "Set up automated UI testing to ensure frontend stability and reduce bugs.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="frontend",
                         Asignees = employess[18]
                         ,
@@ -1422,7 +1422,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-01-31"),
                         Priority = "High",
                         Description = "Implement Infrastructure as Code (IaC) using Terraform to manage and provision infrastructure through code.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="DevOps",
                     Asignees = employess[19],
                         Reporter =employess[12]
@@ -1434,7 +1434,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-14"),
                         Priority = "Medium",
                         Description = "Containerize applications using Docker to enhance portability and consistency across environments.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="DevOps",
                     Asignees = employess[19]
                     ,
@@ -1459,7 +1459,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-16"),
                         Priority = "Medium",
                         Description = "Set up logging and monitoring solutions to track application performance and troubleshoot issues.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="DevOps",
                     Asignees = employess[19],
                         Reporter =employess[4]
@@ -1471,7 +1471,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-31"),
                         Priority = "Medium",
                         Description = "Analyze and optimize cloud resource usage to reduce costs without compromising performance.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="DevOps",
                     Asignees = employess[20],
                         Reporter =employess[12]
@@ -1496,7 +1496,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-30"),
                         Priority = "Low",
                         Description = "Develop and implement automated backup strategies for disaster recovery and data retention.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="DevOps",
                     Asignees = employess[20]
                     ,
@@ -1521,7 +1521,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-05-30"),
                         Priority = "Medium",
                         Description = "Conduct performance tuning and stress testing to ensure the system's reliability under high load.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="DevOps",
                     Asignees = employess[20],
                         Reporter =employess[11]
@@ -1557,7 +1557,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-07-15"),
                         Priority = "High",
                         Description = "Set up a secure secrets management tool to handle sensitive information like passwords and API keys.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="DevOps",
                     Asignees = employess[21]
                     ,
@@ -1570,7 +1570,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-07-31"),
                         Priority = "Medium",
                         Description = "Configure cloud network settings to optimize performance and security.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="DevOps",
                     Asignees = employess[21],
                         Reporter =employess[13]
@@ -1594,7 +1594,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-08-31"),
                         Priority = "Low",
                         Description = "Perform a thorough cost analysis of the current infrastructure and identify areas for cost reduction.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="DevOps",
                     Asignees = employess[22]
                     ,
@@ -1607,7 +1607,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-09-15"),
                         Priority = "Medium",
                         Description = "Set up a build artifacts repository to store and manage build artifacts efficiently.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="DevOps",
                     Asignees = employess[22],
                         Reporter =employess[12]
@@ -1631,7 +1631,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-10-15"),
                         Priority = "Medium",
                         Description = "Enhance the internal developer platform to streamline development workflows.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="DevOps",
                     Asignees = employess[22],
                         Reporter =employess[5]
@@ -1643,7 +1643,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-10-31"),
                         Priority = "Low",
                         Description = "Automate compliance auditing processes to ensure continuous compliance with industry standards.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="DevOps",
                     Asignees = employess[22]
                     ,
@@ -1657,7 +1657,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-01-15"),
                         Priority = "High",
                         Description = "Develop a comprehensive SEO strategy to improve organic search rankings.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Marketing",
                     Asignees = employess[23]
                     ,
@@ -1682,7 +1682,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-14"),
                         Priority = "High",
                         Description = "Launch a social media campaign to increase brand awareness and engagement.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Marketing",
                     Asignees = employess[23],
                         Reporter =employess[13]
@@ -1707,7 +1707,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-15"),
                         Priority = "High",
                         Description = "Optimize PPC campaigns to improve click-through and conversion rates.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Marketing",
                     Asignees = employess[23],
                         Reporter =employess[5]
@@ -1732,7 +1732,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-15"),
                         Priority = "Medium",
                         Description = "Develop an influencer partnership program to extend brand reach.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Marketing",
                     Asignees = employess[24]
                     ,
@@ -1745,7 +1745,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-30"),
                         Priority = "Low",
                         Description = "Deploy a customer feedback survey to gather insights for product improvements.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Marketing",
                     Asignees = employess[24]
                     ,
@@ -1758,7 +1758,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-05-15"),
                         Priority = "Medium",
                         Description = "Refresh the brand messaging to align with current market positioning.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Marketing",
                     Asignees = employess[24]
                     ,
@@ -1783,7 +1783,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-06-15"),
                         Priority = "Medium",
                         Description = "Produce a product video to highlight features and benefits for marketing channels.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Marketing",
                     Asignees = employess[25],
                         Reporter =employess[11]
@@ -1795,7 +1795,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-06-30"),
                         Priority = "High",
                         Description = "Prepare for trade show participation, including booth design and promotional materials.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Marketing",
                     Asignees = employess[25],
                         Reporter =employess[4]
@@ -1807,7 +1807,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-07-15"),
                         Priority = "Medium",
                         Description = "Develop customer case studies to showcase success stories and build trust.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Marketing",
                     Asignees = employess[25],
                         Reporter =employess[11]
@@ -1831,7 +1831,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-08-15"),
                         Priority = "Low",
                         Description = "Conduct a strategy session to explore potential rebranding efforts.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Marketing",
                     Asignees = employess[25],
                         Reporter =employess[12]
@@ -1857,7 +1857,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-01-20"),
                         Priority = "Medium",
                         Description = "Conduct a customer satisfaction survey to gather feedback on support interactions.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Customer Support",
                     Asignees = employess[26],
                         Reporter =employess[12]
@@ -1869,7 +1869,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-01"),
                         Priority = "High",
                         Description = "Revise and expand the knowledge base to provide more comprehensive self-service resources.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Customer Support",
                     Asignees = employess[26],
                         Reporter =employess[13]
@@ -1881,7 +1881,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-15"),
                         Priority = "Medium",
                         Description = "Implement a chatbot to offer instant support for common issues and questions.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Customer Support",
                     Asignees = employess[26],
                         Reporter =employess[4]
@@ -1893,7 +1893,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-01"),
                         Priority = "High",
                         Description = "Develop and execute a training program for support agents to enhance service quality.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Customer Support",
                     Asignees = employess[26],
                         Reporter =employess[5]
@@ -1929,7 +1929,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-31"),
                         Priority = "Low",
                         Description = "Initiate monthly performance reviews to assess ticket resolution efficiency and customer feedback.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Customer Support",
                     Asignees = employess[27],
                         Reporter =employess[13]
@@ -1941,7 +1941,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-15"),
                         Priority = "Medium",
                         Description = "Implement workflow automation tools to streamline ticket routing and resolution processes.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Customer Support",
                     Asignees = employess[27],
                         Reporter =employess[4]
@@ -1953,7 +1953,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-30"),
                         Priority = "High",
                         Description = "Develop an emergency response protocol for handling critical support issues.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Customer Support",
                     Asignees = employess[27],
                         Reporter =employess[5]
@@ -1977,7 +1977,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-05-14"),
                         Priority = "High",
                         Description = "Initiate cross-training sessions for support agents to handle a wider range of customer issues.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Customer Support",
                     Asignees = employess[28],
                         Reporter =employess[12]
@@ -1989,7 +1989,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-05-21"),
                         Priority = "Medium",
                         Description = "Analyze recent customer feedback to identify common issues and areas for service improvement.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Customer Support",
                     Asignees = employess[28],
                         Reporter =employess[13]
@@ -2001,7 +2001,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-05-28"),
                         Priority = "Medium",
                         Description = "Work with the marketing team to develop a customer loyalty program to reward and retain long-term customers.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Customer Support",
                     Asignees = employess[28],
                         Reporter =employess[4]
@@ -2013,7 +2013,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-06-04"),
                         Priority = "Low",
                         Description = "Organize regular knowledge sharing sessions among support agents to disseminate solutions to common problems.",
-                        Status = "Planned",
+                        Status = "Done",
                         Type="Customer Support",
                     Asignees = employess[28],
                         Reporter =employess[12]
@@ -2025,7 +2025,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-06-11"),
                         Priority = "High",
                         Description = "Review and update the support service level agreements (SLAs) to ensure they meet current customer expectations.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Customer Support",
                     Asignees = employess[29],
                         Reporter =employess[13]
@@ -2037,7 +2037,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-06-18"),
                         Priority = "Medium",
                         Description = "Evaluate the effectiveness of different support channels and optimize based on customer preferences and resolution efficiency.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Customer Support",
                     Asignees = employess[29],
                         Reporter =employess[3]
@@ -2062,7 +2062,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-07-02"),
                         Priority = "Medium",
                         Description = "Implement a wellness program for the support team to address burnout and improve overall job satisfaction.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Type="Customer Support",
                     Asignees = employess[29],
                         Reporter =employess[5]
@@ -2097,7 +2097,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-07"),
                         Priority = "High",
                         Description = "Develop a comprehensive test plan covering all functional areas of the CRM system.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Asignees = employess[0],
                         Reporter =employess[4]
                     }),
@@ -2119,7 +2119,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-21"),
                         Priority = "Medium",
                         Description = "Define clear user acceptance testing criteria in collaboration with stakeholders to ensure the system meets business requirements.",
-                        Status = "Planned",
+                        Status = "Done",
                         Asignees = employess[0],
                         Reporter =employess[11]
                     }),
@@ -2130,7 +2130,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-28"),
                         Priority = "High",
                         Description = "Conduct performance testing to ensure the CRM system can handle expected load and user count efficiently.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Asignees = employess[1],
                         Reporter =employess[12]
                     }),
@@ -2152,7 +2152,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-11"),
                         Priority = "Medium",
                         Description = "Execute regression testing prior to major releases to ensure new changes do not adversely affect existing functionalities.",
-                        Status = "Planned",
+                        Status = "Done",
                         Asignees = employess[1],
                         Reporter =employess[4]
                     }),
@@ -2168,7 +2168,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-10"),
                         Priority = "High",
                         Description = "Design and model the database schema for the CRM system to ensure efficient data storage and retrieval.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Asignees = employess[6],
                         Reporter =employess[4]
                     }),
@@ -2190,7 +2190,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-02"),
                         Priority = "Medium",
                         Description = "Implement integration with email services for marketing campaigns and customer communication.",
-                        Status = "Planned",
+                        Status = "Done",
                         Asignees = employess[6],
                         Reporter =employess[12]
                     }),
@@ -2201,7 +2201,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-12"),
                         Priority = "High",
                         Description = "Develop a secure authentication and authorization module for the CRM system.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Asignees = employess[7],
                         Reporter =employess[4]
                     }),
@@ -2223,7 +2223,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-01"),
                         Priority = "Medium",
                         Description = "Develop a mobile application version of the CRM system for iOS and Android platforms.",
-                        Status = "Planned",
+                        Status = "Done",
                         Asignees = employess[7],
                         Reporter =employess[12]
                     }),
@@ -2234,7 +2234,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-04-11"),
                         Priority = "Medium",
                         Description = "Implement features within the CRM to collect and analyze customer feedback.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Asignees = employess[8],
                         Reporter =employess[4]
                     }),
@@ -2256,7 +2256,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-05-01"),
                         Priority = "High",
                         Description = "Develop real-time analytics and reporting capabilities to provide insights into customer interactions and system performance.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Asignees = employess[8],
                         Reporter =employess[4]
                     }),
@@ -2269,7 +2269,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-08"),
                         Priority = "High",
                         Description = "Design the user interface for the CRM system, focusing on simplicity and ease of navigation for an optimal user experience.",
-                        Status = "Planned",
+                        Status = "Done",
                         Asignees = employess[14],
                         Reporter =employess[4]
                     }),
@@ -2280,7 +2280,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-16"),
                         Priority = "High",
                         Description = "Conduct user experience research to identify the needs and pain points of CRM users.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Asignees = employess[14],
                         Reporter =employess[11]
                     }),
@@ -2302,7 +2302,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-04"),
                         Priority = "High",
                         Description = "Create interactive prototypes of the CRM system for early testing and feedback.",
-                        Status = "Planned",
+                        Status = "Done",
                         Asignees = employess[15],
                         Reporter =employess[4]
                     }),
@@ -2313,7 +2313,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-12"),
                         Priority = "Medium",
                         Description = "Perform an audit to ensure the CRM design is accessible and inclusive, adhering to WCAG guidelines.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Asignees = employess[15],
                         Reporter =employess[12]
                     }),
@@ -2349,7 +2349,7 @@ namespace TaskManager
                             DueDate = DateTime.Parse("2024-02-17"),
                             Priority = "High",
                             Description = "Integrate the frontend components with backend APIs for dynamic data retrieval and management.",
-                            Status = "Planned",
+                            Status = "In Progress",
                             Asignees = employess[17],
                             Reporter =employess[12]
                         }),
@@ -2360,7 +2360,7 @@ namespace TaskManager
                             DueDate = DateTime.Parse("2024-02-24"),
                             Priority = "Medium",
                             Description = "Optimize frontend performance to ensure quick load times and a smooth user experience.",
-                            Status = "Planned",
+                            Status = "Done",
                             Asignees = employess[17],
                             Reporter =employess[11]
                         }),
@@ -2382,7 +2382,7 @@ namespace TaskManager
                             DueDate = DateTime.Parse("2024-03-10"),
                             Priority = "High",
                             Description = "Conduct thorough testing to ensure the CRM system is fully responsive and functional on mobile devices.",
-                            Status = "Planned",
+                            Status = "In Progress",
                             Asignees = employess[18],
                             Reporter =employess[11]
                         }),
@@ -2393,7 +2393,7 @@ namespace TaskManager
                             DueDate = DateTime.Parse("2024-03-17"),
                             Priority = "High",
                             Description = "Implement security enhancements in the frontend to protect against XSS, CSRF, and other vulnerabilities.",
-                            Status = "Planned",
+                            Status = "Done",
                             Asignees = employess[18],
                             Reporter =employess[11]
                         }),
@@ -2419,7 +2419,7 @@ namespace TaskManager
                             DueDate = DateTime.Parse("2024-02-14"),
                             Priority = "High",
                             Description = "Provision and configure cloud infrastructure for hosting the CRM system, ensuring scalability and reliability.",
-                            Status = "Planned",
+                            Status = "Done",
                             Asignees = employess[19],
                             Reporter =employess[12]
                         }),
@@ -2430,7 +2430,7 @@ namespace TaskManager
                             DueDate = DateTime.Parse("2024-02-21"),
                             Priority = "Medium",
                             Description = "Containerize the CRM application using Docker to ensure consistency across different environments.",
-                            Status = "Planned",
+                            Status = "In Progress",
                             Asignees = employess[19],
                             Reporter =employess[12]
                         }),
@@ -2452,7 +2452,7 @@ namespace TaskManager
                             DueDate = DateTime.Parse("2024-03-07"),
                             Priority = "Medium",
                             Description = "Implement monitoring and logging systems to track the CRM system's performance and troubleshoot issues.",
-                            Status = "Planned",
+                            Status = "Done",
                             Asignees = employess[20],
                             Reporter =employess[12]
                         }),
@@ -2463,7 +2463,7 @@ namespace TaskManager
                             DueDate = DateTime.Parse("2024-03-14"),
                             Priority = "High",
                             Description = "Develop and implement an automated backup and recovery plan to ensure data integrity and availability.",
-                            Status = "Planned",
+                            Status = "In Progress",
                             Asignees = employess[20],
                             Reporter =employess[12]
                         }),
@@ -2476,7 +2476,7 @@ namespace TaskManager
                             DueDate = DateTime.Parse("2024-02-08"),
                             Priority = "High",
                             Description = "Conduct a comprehensive market analysis to understand the competitive landscape and identify target markets for the CRM system.",
-                            Status = "Planned",
+                            Status = "Done",
                             Asignees = employess[23],
                             Reporter =employess[11]
                         }),
@@ -2487,7 +2487,7 @@ namespace TaskManager
                             DueDate = DateTime.Parse("2024-02-15"),
                             Priority = "High",
                             Description = "Develop a branding and messaging strategy that clearly communicates the value proposition of the CRM system.",
-                            Status = "Planned",
+                            Status = "In Progress",
                             Asignees = employess[23],
                             Reporter =employess[11]
                         }),
@@ -2509,7 +2509,7 @@ namespace TaskManager
                             DueDate = DateTime.Parse("2024-03-01"),
                             Priority = "Medium",
                             Description = "Develop a social media strategy to promote the CRM system and engage with potential customers on various platforms.",
-                            Status = "Planned",
+                            Status = "Done",
                             Asignees = employess[24],
                             Reporter =employess[13]
                         }),
@@ -2520,7 +2520,7 @@ namespace TaskManager
                             DueDate = DateTime.Parse("2024-03-09"),
                             Priority = "High",
                             Description = "Plan and organize a launch event for the CRM system to generate buzz and attract early adopters.",
-                            Status = "Planned",
+                            Status = "In Progress",
                             Asignees = employess[24],
                             Reporter =employess[13]
                         }),
@@ -2544,7 +2544,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-10"),
                         Priority = "High",
                         Description = "Develop and conduct a training program for customer support agents on the new CRM system to ensure they are equipped to assist users effectively.",
-                        Status = "Planned",
+                        Status = "Done",
                         Asignees = employess[26],
                         Reporter =employess[4]
                     }),
@@ -2555,7 +2555,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-02-17"),
                         Priority = "Medium",
                         Description = "Compile a comprehensive list of FAQs related to the CRM system to aid in quick resolution of common queries.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Asignees = employess[26],
                         Reporter =employess[4]
                     }),
@@ -2577,7 +2577,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-03"),
                         Priority = "High",
                         Description = "Implement a mechanism for collecting feedback from CRM system users to continuously improve the support process.",
-                        Status = "Planned",
+                        Status = "Done",
                         Asignees = employess[27],
                         Reporter =employess[11]
                     }),
@@ -2588,7 +2588,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-10"),
                         Priority = "Medium",
                         Description = "Evaluate and optimize the various support channels (email, phone, chat) to ensure efficient and effective user support.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Asignees = employess[27],
                         Reporter =employess[12]
                     }),
@@ -2599,7 +2599,7 @@ namespace TaskManager
                         DueDate = DateTime.Parse("2024-03-17"),
                         Priority = "High",
                         Description = "Develop an emergency response plan to swiftly address and resolve critical issues reported by CRM system users.",
-                        Status = "Planned",
+                        Status = "In Progress",
                         Asignees = employess[27],
                         Reporter =employess[13]
                     })

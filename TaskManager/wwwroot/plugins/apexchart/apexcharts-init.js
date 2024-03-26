@@ -3874,7 +3874,7 @@ var options = {
   xaxis: {
   },
   xaxis: {
-    categories: ['January', 'February', 'March', 'April', 'May', 'June'],
+    categories: ['Jhhhhhhhhanuary', 'February', 'March', 'April', 'May', 'June'],
   },
   yaxis: {
     labels: {

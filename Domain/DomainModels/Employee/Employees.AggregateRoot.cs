@@ -43,13 +43,34 @@ namespace Domain.Employee
             ((List<Projects>)this.Projects).AddRange(Projects);
         }
 
-        public static Employees CreateDummy(dynamic fake)
+        public static Employees CreateDummy(dynamic data)
         {
-            Employees employee = new Employees(fake.Manager, fake.FirstName, fake.LastName, fake.PhoneNumber, fake.Email, fake.Password, fake.Position, fake.BirthDay);
-            employee.SetTeam(fake.team);
-            employee.AddProjects(fake.Projects); 
+            Type  type = data.GetType();
+            
+            Employees employee = new Employees(
+                type.GetProperty("Manager").GetValue(data, null),
+                type.GetProperty("FirstName").GetValue(data, null),
+                type.GetProperty("LastName").GetValue(data, null) ,
+                type.GetProperty("PhoneNumber").GetValue(data, null),
+                type.GetProperty("Email").GetValue(data, null),
+                type.GetProperty("Password").GetValue(data, null),
+                type.GetProperty("Position").GetValue(data, null),
+                type.GetProperty("BirthDay").GetValue(data, null));
+            employee.SetTeam(type.GetProperty("team").GetValue(data, null));
+            employee.AddProjects(type.GetProperty("Projects").GetValue(data, null)); 
             return employee; 
         }
+        public static Object dd(dynamic data)
+        {
+            Type type = data.GetType();
 
-}
+            return type.GetProperty("Projects").GetValue(data, null);
+
+            Employees employee = new Employees(data.Manager, data.FirstName, data.LastName, data.PhoneNumber, data.Email, data.Password, data.Position, data.BirthDay);
+            employee.SetTeam(data.team);
+            employee.AddProjects(data.Projects);
+            return employee;
+        }
+
+    }
 }

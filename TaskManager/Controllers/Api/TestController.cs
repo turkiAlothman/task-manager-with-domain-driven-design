@@ -12,6 +12,11 @@ using Application.Services.Interfaces;
 using Application.Errors;
 using Domain.DomainModels.Employee;
 using Domain.DomainModels.ResetPasswords;
+using Domain.DomainModels.Team;
+using Domain.Employee;
+using Domain.Project;
+using Domain.Team;
+using Domain.DomainModels.Task;
 
 namespace TaskManager.Controllers.Api
 {
@@ -23,13 +28,17 @@ namespace TaskManager.Controllers.Api
         private readonly IProjectsRepository _projectsRepository;
         private readonly IEmployeesRepository _employeesRepository;
         private readonly TaskManagerDbContext _dbContext;
+        private readonly ITeamsRepository _teamsRepository;
+        private readonly ITasksRepository _tasksRepository;
         
-        public TestController(IHttpContextAccessor contextAccessor, IProjectsRepository _projectsRepository , IEmployeesRepository employeesRepository, TaskManagerDbContext _dbContext, IConfiguration configuration)
+        public TestController(IHttpContextAccessor contextAccessor, IProjectsRepository _projectsRepository , IEmployeesRepository employeesRepository, TaskManagerDbContext _dbContext, IConfiguration configuration, ITeamsRepository teamsRepository,ITasksRepository tasksRepository) 
         {
             _contextAccessor = contextAccessor;
             this._projectsRepository = _projectsRepository;
             this._employeesRepository = employeesRepository;
             this._dbContext = _dbContext;
+            this._teamsRepository = teamsRepository;
+            this._tasksRepository = tasksRepository;
 
         }
         [HttpGet]
@@ -37,7 +46,8 @@ namespace TaskManager.Controllers.Api
         {
 
             //throw new TaskNotFoundException();
-            return Ok();
+  
+            return Ok(await _tasksRepository.GetPriorityStatus());
         }
     }
 }

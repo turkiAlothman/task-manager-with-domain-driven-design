@@ -1,7 +1,7 @@
-﻿using Domain.Task;
+﻿using Domain.DTOs;
 using Domain.Employee;
-using Domain.Comment;
 using Domain.Project;
+using Domain.Task;
 
 
 namespace Domain.DomainModels.Task
@@ -23,9 +23,9 @@ namespace Domain.DomainModels.Task
 
         public void RemoveAsignee(Tasks task, Employees Asignee);
 
-
-
         public Task<IEnumerable<Tasks>> GetByProject(Projects project);
+        public Task<List<PriorityStatus>> GetPriorityStatus();
+        public Task<List<TasksStatusPercentage>> GetTasksStatusPercentage();
 
 
     }

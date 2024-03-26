@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.DomainModels.Team;
+using Domain.DTOs;
 using Domain.Team;
-using Domain.DomainModels.Team;
+using Microsoft.EntityFrameworkCore;
 
 namespace infrastructure.Persistence.Repositores
 {
@@ -26,6 +27,17 @@ namespace infrastructure.Persistence.Repositores
         public async Task<int> Count()
         {
             return await _context.teams.CountAsync();
+        }
+
+        public async Task<List<TeamStatus>> GetTeamStatus()
+        {
+            return await _context.teams.AsNoTracking().Select(t => new TeamStatus
+            {
+                tasksCount = t.Members.SelectMany(m => m.Tasks).Count(),
+                TeamName = t.Name,
+                tasksCompletedCount = t.Members.SelectMany(m => m.Tasks.Where(t => t.Status.Equals("Done"))).Count(),
+
+            }).ToListAsync();
         }
     }
 }

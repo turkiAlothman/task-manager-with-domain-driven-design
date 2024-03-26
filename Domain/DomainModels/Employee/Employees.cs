@@ -18,11 +18,11 @@ namespace Domain.Employee
         public string Password { get; protected set; }
         public string Position { get; protected set; }
         public DateTime BirthDay { get; protected set;}
-        public IList<Projects> Projects { get; protected set; }
-        public IList<Tasks> Tasks { get; protected set; }
-        public IList<Tasks> tasksReported { get; protected set; }
-        public Teams team { get; protected set; }
+        public IList<Projects> Projects { get; protected set; } = new List<Projects>();
+        public IList<Tasks> Tasks { get; protected set; } = new List<Tasks>();
+        public IList<Tasks> tasksReported { get; protected set; } = new List<Tasks>();
+        public Teams team { get; protected set; } = null;
 
-        public IList<Activities> activities { get; protected set; }
+        public IList<Activities> activities { get; protected set; } = new List<Activities>();
     }
 }

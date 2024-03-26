@@ -11,28 +11,7 @@
 <div class="row">
     <div class="col-xxl-6 col-lg-12">
         <div class="row">
-            <div class="col col-12">
-                <div class="card border-0 shadow-sm py-3">
-                    <div class="card-body py-0">
-                        <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap">
-                            <div class="d-flex align-items-center gap-0 flex-wrap">
-                                <div id="chart-45"></div>
-                                <div>
-                                    <h4 class="mb-3">Total Balance</h4>
-                                    <h2 class="fs-38 mb-0">$21,560.57</h2>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h5 class="fw-semibold mb-1">Average from last month</h5>
-                                <p class="text-gray mb-0"><span class="text-success fw-bold"><i
-                                            class="bi bi-graph-up-arrow"></i> +0.5%</span> invoices sent</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+    
             <div class="col col-lg-6">
                 <div class="card border-0 shadow-sm pd-top-40 pd-bottom-40">
                     <div class="card-body py-0">
@@ -72,63 +51,27 @@
                     </div>
                 </div>
             </div>
-
-       
-            <div class="col col-lg-6">
-                <div class="card border-0 shadow-sm pd-top-40 pd-bottom-40">
-                    <div class="card-body py-0">
-                        <h4 class="mb-3">Invoice Remaining</h4>
-                        <div class="d-flex align-items-center gap-3 mt-3">
-                            <div class="flex-grow-1">
-                                <div class="progress rounded-1 bg-light-200 mb-2" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" style="height: 10px;">
-                                    <div class="progress-bar bg-primary bg-gradient rounded-1" style="width: 24%"></div>
-                                </div>
-                                <p class="text-gray mb-0"><span class="text-danger fw-bold">-0.8%</span> from last month
-                                </p>
-                            </div>
-                            <h2 class="fs-38"> 24</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            
             <div class="col col-12">
                 <div class="card pie-card border-0 shadow-sm">
                     <div
                         class="card-header bg-transparent border-0 p-5 pb-0 d-flex align-items-center justify-content-between gap-3 flex-wrap">
-                        <h4 class="mb-0">Pie Chart</h4>
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="form-check form-check-inline m-0">
-                                    <label class="form-label mb-0 ff-heading fs-18 fw-semibold"
-                                        for="checkbox1">Chart</label>
-                                    <input type="checkbox" class="form-check-input" id="checkbox1" value="">
-                                </div>
-                                <div class="form-check form-check-inline m-0">
-                                    <label class="form-label mb-0 ff-heading fs-18 fw-semibold"
-                                        for="checkbox2">Value</label>
-                                    <input type="checkbox" class="form-check-input" id="checkbox2" value="" checked>
-                                </div>
-                            </div>
-                        </div>
+                        <h4 class="mb-0">tasks Priorities Percentage</h4>
                     </div>
 
                     <div class="card-body pt-0">
                         <div
                             class="d-flex align-items-center justify-content-around justify-content-xxl-between gap-3 flex-wrap">
-                            <div>
-                                <div id="chart-48"></div>
-                                <h5 class="fw-semibold text-center mb-0 negative-margin">Invoices Made</h5>
+                         
+
+                            @foreach(var status in  Model.PriorityStatuses)
+                            {
+                                <div>
+                                <div id="chart-@status.PriorityName"></div>
+                                <h5 class="fw-semibold text-center mb-0 negative-margin">@status.PriorityName</h5>
                             </div>
-                            <div>
-                                <div id="chart-49"></div>
-                                <h5 class="fw-semibold text-center mb-0 negative-margin">Clients Growth</h5>
-                            </div>
-                            <div>
-                                <div id="chart-50"></div>
-                                <h5 class="fw-semibold text-center mb-0 negative-margin">Projects Done</h5>
-                            </div>
+                                
+                            }
                         </div>
 
                       
@@ -137,6 +80,7 @@
             </div>
 
          
+         
         </div>
     </div>
 
@@ -144,19 +88,19 @@
         <div class="card border-0 shadow-sm">
             <div
                 class="card-header bg-transparent border-0 p-5 pb-0 d-flex align-items-center justify-content-between gap-3 flex-wrap">
-                <h4 class="mb-0">Invoices Statistic</h4>
+                <h4 class="mb-0">Teams Statistic</h4>
                      </div>
 
             <div class="card-body pt-2">
                 <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap">
                     <div>
                         <div class="d-flex align-items-baseline gap-3 gap-xxl-7 mb-3">
-                            <p class="mb-0"><span class="indicator bg-success"></span> Total Paid</p>
-                            <h4 class="fs-20 mb-0">1,567</h4>
+                            <p class="mb-0"><span class="indicator bg-success"></span> Total Tasks</p>
+                            <h4 class="fs-20 mb-0">@Model.TeamStatuses.Sum(status => status.tasksCount) </h4>
                         </div>
                         <div class="d-flex align-items-baseline gap-3 gap-xxl-7">
-                            <p class="mb-0"><span class="indicator bg-info"></span> Total Unpaid</p>
-                            <h4 class="fs-20 mb-0">569</h4>
+                            <p class="mb-0"><span class="indicator bg-info"></span> Total Completed Tasks</p>
+                            <h4 class="fs-20 mb-0">@Model.TeamStatuses.Sum(status => status.tasksCompletedCount)</h4>
                         </div>
                     </div>
 
@@ -167,6 +111,34 @@
         </div>
 
 
+           <div class="col col-12">
+                <div class="card pie-card border-0 shadow-sm">
+                    <div
+                        class="card-header bg-transparent border-0 p-5 pb-0 d-flex align-items-center justify-content-between gap-3 flex-wrap">
+                        <h4 class="mb-0">tasks Status Percentage</h4>
+                    </div>
+
+                    <div class="card-body pt-0">
+                        <div
+                            class="d-flex align-items-center justify-content-around justify-content-xxl-between gap-3 flex-wrap">
+                         
+
+                            @foreach(var status in  Model.TasksStatusesPercentage)
+                            {
+                                <div>
+                                <div id="chart-@status.StatusName.Replace(" ","_")"></div>
+                                <h5 class="fw-semibold text-center mb-0 negative-margin">@status.StatusName</h5>
+                            </div>
+                                
+                            }
+                        </div>
+
+                      
+                    </div>
+                </div>
+            </div>
+
+
      
     </div>
 </div>
@@ -174,5 +146,238 @@
 
 
 <!-- ApexChart -->
+
 <script src="plugins/apexchart/apexcharts.min.js"></script>
 <script src="plugins/apexchart/apexchart-inits/apexcharts-analytics-2.js"></script>
+
+
+
+<script>
+
+
+    var tasks = [];
+    var completed = [];
+    var xAxis = [];
+
+    @foreach(TeamStatus status in Model.TeamStatuses)
+    {
+        if(@status.TeamName !="Product Management")
+        {
+        <text>
+        tasks.push(@status.tasksCount)
+        completed.push(@status.tasksCompletedCount)
+        xAxis.push('@status.TeamName')
+        </text>    
+        }
+        
+    }
+
+
+    // Chart 44
+    var options = {
+        series: [
+            {
+                name: 'completed tasks',
+                data: completed
+            },
+            {
+                name: 'tasks',
+                data: tasks
+            },
+        ],
+        chart: {
+            type: 'bar',
+            height: 350,
+            toolbar: {
+                show: false,
+            },
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '50%',
+                borderRadius: 7
+            },
+        },
+
+        dataLabels: {
+            enabled: false,
+            offsetX: -6,
+            style: {
+                fontSize: '12px',
+                colors: ['#fff']
+            }
+        },
+        colors: ['#5ECFFF', '#38E25D'],
+        legend: {
+            show: false,
+            position: 'top',
+            fontSize: '14px',
+            fontFamily: "'Open Sans' Sans-serif",
+            fontWeight: 400,
+            offsetY: 5,
+            labels: {
+                colors: '#A5A5A5',
+                useSeriesColors: false
+            },
+            markers: {
+                width: 13,
+                height: 13,
+                offsetX: -10,
+                offsetY: 0,
+            },
+            itemMargin: {
+                horizontal: 25,
+                vertical: 0
+            },
+            onItemClick: {
+                toggleDataSeries: true
+            },
+            onItemHover: {
+                highlightDataSeries: true
+            },
+        },
+        stroke: {
+            show: true,
+            width: 4,
+            colors: ['transparent']
+        },
+        xaxis: {
+        },
+        xaxis: {
+            categories: xAxis,
+        },
+        yaxis: {
+            labels: {
+                show: true,
+                // rotate: -45,
+                rotateAlways: false,
+                hideOverlappingLabels: true,
+                showDuplicates: false,
+                trim: false,
+                minHeight: undefined,
+                maxHeight: 120,
+                style: {
+                    colors: ['#A5A5A5'],
+                    fontSize: '14px',
+                    fontFamily: "'Public Sans' Sans-serif",
+                    fontWeight: 600,
+                    cssClass: 'apexcharts-yaxis-label',
+                },
+            },
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " Invoices"
+                }
+            }
+        },
+        responsive: [
+            {
+                breakpoint: 991,
+                options: {
+                    plotOptions: {
+                        bar: {
+                            horizontal: true,
+                            columnWidth: '100%',
+                            borderRadius: 5
+                        },
+                    },
+                    legend: {
+                        position: 'bottom',
+                        horizontalAlign: 'center'
+                    }
+                },
+            }
+        ]
+    };
+
+    var chart_fourtyfour = new ApexCharts(document.querySelector("#chart-44"), options);
+    chart_fourtyfour.render();
+
+
+
+
+
+
+
+
+    var options = {
+    series: [],
+    chart: {
+      width: 170,
+      height: 280,
+      type: 'radialBar',
+    },
+    colors: ['#924AEF'],
+    
+    plotOptions: {
+      radialBar: {
+        hollow: {
+          size: '30%',
+          margin: 5,
+          background: 'transparent',
+        },
+        track: {
+          background: "#F6EEFF",
+        },
+        dataLabels: {
+          name: {
+            show: false
+          },
+          value: {
+            offsetY: 5,
+            fontFamily: "'Cairo' Sans-serif",
+            fontSize: '20px',
+            fontWeight: 700,
+          }
+        }
+      },
+    },
+    
+    labels: [''],
+    responsive: [
+      {
+        breakpoint: 767,
+        options: {        
+          legend: {
+            position: 'bottom',
+            horizontalAlign: 'center'
+          }
+        }
+      }
+    ]
+  };
+
+
+    @foreach (PriorityStatus status in Model.PriorityStatuses)
+    {
+        <text>
+  
+  options.series =  [@((int)((1.0 * status.PriorityCount/Model.TasksCount) * 100))]
+
+  var chart_fourtyeight = new ApexCharts(document.querySelector("#chart-@status.PriorityName"), options);
+  chart_fourtyeight.render();
+        </text>
+    }
+
+
+
+    @foreach (TasksStatusPercentage status in Model.TasksStatusesPercentage)
+    {
+        <text>
+  
+  options.series =  [@((int)((1.0 * status.StatusCount/Model.TasksCount) * 100))]
+
+  var chart_fourtyeight = new ApexCharts(document.querySelector("#chart-@status.StatusName.Replace(" ","_")"), options);
+  chart_fourtyeight.render();
+        </text>
+    }
+
+  
+
+</script>

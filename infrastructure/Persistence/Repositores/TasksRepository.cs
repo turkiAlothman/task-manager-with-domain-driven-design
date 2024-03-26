@@ -8,6 +8,7 @@ using Domain.Employee;
 using Domain.Project;
 using Domain.Comment;
 using Domain.DomainModels.Task;
+using Domain.DTOs;
 namespace infrastructure.Persistence.Repositores
 {
     public class TasksRepository : ITasksRepository
@@ -132,6 +133,21 @@ namespace infrastructure.Persistence.Repositores
         public async Task<IEnumerable<Tasks>> GetByProject(Projects project)
         {
             return await _Context.tasks.AsNoTracking().Where(t => t.Project.Equals(project)).ToListAsync();
+        }
+        public async Task<List<PriorityStatus>> GetPriorityStatus()
+        {
+            return await _Context.tasks.GroupBy(t => t.Priority).Select(t => new PriorityStatus { PriorityCount = t.Count(), PriorityName = t.Key }).ToListAsync();
+        }
+
+
+        public async Task<List<TasksStatusPercentage>> GetTasksStatusPercentage()
+        {
+            return await _Context.tasks.GroupBy(t => t.Status).Select(
+                t => new TasksStatusPercentage
+            {
+                StatusCount = t.Count(),
+                StatusName = t.Key
+            }).ToListAsync();
         }
     }
 }

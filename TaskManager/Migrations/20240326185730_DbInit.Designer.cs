@@ -11,8 +11,8 @@ using infrastructure.Persistence;
 namespace TaskManager.Migrations
 {
     [DbContext(typeof(TaskManagerDbContext))]
-    [Migration("20240318194023_changeDatabaseContrains")]
-    partial class changeDatabaseContrains
+    [Migration("20240326185730_DbInit")]
+    partial class DbInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,37 +22,7 @@ namespace TaskManager.Migrations
                 .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("EmployeesProjects", b =>
-                {
-                    b.Property<int>("EmployeesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProjectsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EmployeesId", "ProjectsId");
-
-                    b.HasIndex("ProjectsId");
-
-                    b.ToTable("EmployeesProjects");
-                });
-
-            modelBuilder.Entity("EmployeesTasks", b =>
-                {
-                    b.Property<int>("AsigneesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TasksId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AsigneesId", "TasksId");
-
-                    b.HasIndex("TasksId");
-
-                    b.ToTable("EmployeesTasks");
-                });
-
-            modelBuilder.Entity("Domain.Models.DomainModels.Activities", b =>
+            modelBuilder.Entity("Domain.Activitiy.Activities", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,35 +57,7 @@ namespace TaskManager.Migrations
                     b.ToTable("Activities");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Attachments", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("PhysicalPath")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("taskId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("url")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("taskId");
-
-                    b.ToTable("Attachments");
-                });
-
-            modelBuilder.Entity("Domain.Models.DomainModels.Comments", b =>
+            modelBuilder.Entity("Domain.Comment.Comments", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,7 +88,68 @@ namespace TaskManager.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Employees", b =>
+            modelBuilder.Entity("Domain.DomainModels.Employee.Invites", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("AsManager")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("SecretKey")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("inviteeEmail")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("inviterId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("inviterId");
+
+                    b.ToTable("Invites");
+                });
+
+            modelBuilder.Entity("Domain.DomainModels.Task.Attachments", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("PhysicalPath")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("taskId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("url")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("taskId");
+
+                    b.ToTable("Attachments");
+                });
+
+            modelBuilder.Entity("Domain.Employee.Employees", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -198,40 +201,7 @@ namespace TaskManager.Migrations
                     b.ToTable("employees");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Invites", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<bool>("AsManager")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("SecretKey")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("inviteeEmail")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("inviterId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("inviterId");
-
-                    b.ToTable("Invites");
-                });
-
-            modelBuilder.Entity("Domain.Models.DomainModels.Projects", b =>
+            modelBuilder.Entity("Domain.Project.Projects", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -266,7 +236,7 @@ namespace TaskManager.Migrations
                     b.ToTable("projects");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.ResetPassword", b =>
+            modelBuilder.Entity("Domain.ResetPasswords.ResetPassword", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -293,7 +263,7 @@ namespace TaskManager.Migrations
                     b.ToTable("resetPassword");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Tasks", b =>
+            modelBuilder.Entity("Domain.Task.Tasks", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -344,7 +314,7 @@ namespace TaskManager.Migrations
                     b.ToTable("tasks");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Teams", b =>
+            modelBuilder.Entity("Domain.Team.Teams", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -371,43 +341,43 @@ namespace TaskManager.Migrations
 
             modelBuilder.Entity("EmployeesProjects", b =>
                 {
-                    b.HasOne("Domain.Models.DomainModels.Employees", null)
-                        .WithMany()
-                        .HasForeignKey("EmployeesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("EmployeesId")
+                        .HasColumnType("int");
 
-                    b.HasOne("Domain.Models.DomainModels.Projects", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EmployeesId", "ProjectsId");
+
+                    b.HasIndex("ProjectsId");
+
+                    b.ToTable("EmployeesProjects");
                 });
 
             modelBuilder.Entity("EmployeesTasks", b =>
                 {
-                    b.HasOne("Domain.Models.DomainModels.Employees", null)
-                        .WithMany()
-                        .HasForeignKey("AsigneesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("AsigneesId")
+                        .HasColumnType("int");
 
-                    b.HasOne("Domain.Models.DomainModels.Tasks", null)
-                        .WithMany()
-                        .HasForeignKey("TasksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("TasksId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AsigneesId", "TasksId");
+
+                    b.HasIndex("TasksId");
+
+                    b.ToTable("EmployeesTasks");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Activities", b =>
+            modelBuilder.Entity("Domain.Activitiy.Activities", b =>
                 {
-                    b.HasOne("Domain.Models.DomainModels.Employees", "actor")
+                    b.HasOne("Domain.Employee.Employees", "actor")
                         .WithMany("activities")
                         .HasForeignKey("actorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Models.DomainModels.Tasks", "task")
+                    b.HasOne("Domain.Task.Tasks", "task")
                         .WithMany("Activities")
                         .HasForeignKey("taskId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -417,26 +387,15 @@ namespace TaskManager.Migrations
                     b.Navigation("task");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Attachments", b =>
+            modelBuilder.Entity("Domain.Comment.Comments", b =>
                 {
-                    b.HasOne("Domain.Models.DomainModels.Tasks", "task")
-                        .WithMany("Attachments")
-                        .HasForeignKey("taskId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("task");
-                });
-
-            modelBuilder.Entity("Domain.Models.DomainModels.Comments", b =>
-                {
-                    b.HasOne("Domain.Models.DomainModels.Tasks", "MessageTask")
+                    b.HasOne("Domain.Task.Tasks", "MessageTask")
                         .WithMany("Comments")
                         .HasForeignKey("MessageTaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Models.DomainModels.Employees", "Sender")
+                    b.HasOne("Domain.Employee.Employees", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -447,20 +406,9 @@ namespace TaskManager.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Employees", b =>
+            modelBuilder.Entity("Domain.DomainModels.Employee.Invites", b =>
                 {
-                    b.HasOne("Domain.Models.DomainModels.Teams", "team")
-                        .WithMany("Members")
-                        .HasForeignKey("teamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("team");
-                });
-
-            modelBuilder.Entity("Domain.Models.DomainModels.Invites", b =>
-                {
-                    b.HasOne("Domain.Models.DomainModels.Employees", "inviter")
+                    b.HasOne("Domain.Employee.Employees", "inviter")
                         .WithMany()
                         .HasForeignKey("inviterId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -469,13 +417,35 @@ namespace TaskManager.Migrations
                     b.Navigation("inviter");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Tasks", b =>
+            modelBuilder.Entity("Domain.DomainModels.Task.Attachments", b =>
                 {
-                    b.HasOne("Domain.Models.DomainModels.Projects", "Project")
+                    b.HasOne("Domain.Task.Tasks", "task")
+                        .WithMany("Attachments")
+                        .HasForeignKey("taskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("task");
+                });
+
+            modelBuilder.Entity("Domain.Employee.Employees", b =>
+                {
+                    b.HasOne("Domain.Team.Teams", "team")
+                        .WithMany("Members")
+                        .HasForeignKey("teamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("team");
+                });
+
+            modelBuilder.Entity("Domain.Task.Tasks", b =>
+                {
+                    b.HasOne("Domain.Project.Projects", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectId");
 
-                    b.HasOne("Domain.Models.DomainModels.Employees", "Reporter")
+                    b.HasOne("Domain.Employee.Employees", "Reporter")
                         .WithMany("tasksReported")
                         .HasForeignKey("ReporterId");
 
@@ -484,19 +454,49 @@ namespace TaskManager.Migrations
                     b.Navigation("Reporter");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Employees", b =>
+            modelBuilder.Entity("EmployeesProjects", b =>
+                {
+                    b.HasOne("Domain.Employee.Employees", null)
+                        .WithMany()
+                        .HasForeignKey("EmployeesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Project.Projects", null)
+                        .WithMany()
+                        .HasForeignKey("ProjectsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EmployeesTasks", b =>
+                {
+                    b.HasOne("Domain.Employee.Employees", null)
+                        .WithMany()
+                        .HasForeignKey("AsigneesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Task.Tasks", null)
+                        .WithMany()
+                        .HasForeignKey("TasksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Employee.Employees", b =>
                 {
                     b.Navigation("activities");
 
                     b.Navigation("tasksReported");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Projects", b =>
+            modelBuilder.Entity("Domain.Project.Projects", b =>
                 {
                     b.Navigation("Tasks");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Tasks", b =>
+            modelBuilder.Entity("Domain.Task.Tasks", b =>
                 {
                     b.Navigation("Activities");
 
@@ -505,7 +505,7 @@ namespace TaskManager.Migrations
                     b.Navigation("Comments");
                 });
 
-            modelBuilder.Entity("Domain.Models.DomainModels.Teams", b =>
+            modelBuilder.Entity("Domain.Team.Teams", b =>
                 {
                     b.Navigation("Members");
                 });

@@ -73,16 +73,16 @@ namespace Domain.Task
             Type type = fake.GetType();
             
             Tasks task = new Tasks();
-            task.Title = fake.Title;
-            task.StartDate = fake.Status;
-            task.DueDate = fake.DueDate;
-            task.Description = fake.Description;
-            task.Status = fake.Status;
-            task.Type = fake.Type;
-            task.Priority = fake.Priority;
-            task.Project = fake.Project;
-            task.Reporter = fake.Reporter;
-            task.Asignees = new List<Employees>() { fake.Asignees };
+
+            task.Title = type.GetProperty("Title").GetValue(fake,null);
+            task.StartDate = type.GetProperty("StartDate").GetValue(fake, null);
+            task.DueDate = type.GetProperty("DueDate").GetValue(fake, null);
+            task.Description = type.GetProperty("Description").GetValue(fake, null);
+            task.Status = type.GetProperty("Status").GetValue(fake, null);
+            
+            task.Priority = type.GetProperty("Priority").GetValue(fake, null);
+            task.Reporter = type.GetProperty("Reporter").GetValue(fake, null);
+            task.Asignees = new List<Employees>() { type.GetProperty("Asignees").GetValue(fake, null) };
 
             return task;
 

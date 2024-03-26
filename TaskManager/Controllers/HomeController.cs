@@ -37,12 +37,20 @@ namespace TaskManager.Controllers
            int ProjectsCount = await _ProjectsRepository.Count();
            int TasksCount = await this._TasksRepository.Count();
            int TeamsCount = await this._TeamsRepository.Count();
+           
+           List<TeamStatus> TeamStatuses = await _TeamsRepository.GetTeamStatus();
+
+           List<PriorityStatus> priorityStatuses = await _TasksRepository.GetPriorityStatus();
+           List<TasksStatusPercentage> TasksStatusesPercentage = await _TasksRepository.GetTasksStatusPercentage();
 
             Dashboard data = new Dashboard {
                 ActivitiesCount = ActivitiesCount,
                 ProjectsCount = ProjectsCount, 
                 TasksCount = TasksCount,
-                TeamsCount = TeamsCount 
+                TeamsCount = TeamsCount ,
+                TeamStatuses = TeamStatuses,
+                PriorityStatuses = priorityStatuses,
+                TasksStatusesPercentage = TasksStatusesPercentage
             };
             return View(data);
         }

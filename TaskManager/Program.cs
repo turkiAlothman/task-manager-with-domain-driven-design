@@ -52,7 +52,7 @@ builder.Services.AddApplicationServices();
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<TaskManagerDbContext>(Options=>{
     Options.UseMySql(
-        connectionString, ServerVersion.AutoDetect(connectionString)
+        connectionString, ServerVersion.AutoDetect(connectionString) , options => options.MigrationsAssembly("TaskManager")
         );
 });
 
