@@ -96,11 +96,11 @@
                     <div>
                         <div class="d-flex align-items-baseline gap-3 gap-xxl-7 mb-3">
                             <p class="mb-0"><span class="indicator bg-success"></span> Total Tasks</p>
-                            <h4 class="fs-20 mb-0">@Model.TeamStatuses.Sum(status => status.tasksCount) </h4>
+                            <h4 class="fs-20 mb-0">@Model.TasksCount </h4>
                         </div>
                         <div class="d-flex align-items-baseline gap-3 gap-xxl-7">
                             <p class="mb-0"><span class="indicator bg-info"></span> Total Completed Tasks</p>
-                            <h4 class="fs-20 mb-0">@Model.TeamStatuses.Sum(status => status.tasksCompletedCount)</h4>
+                            <h4 class="fs-20 mb-0">@Model.TasksStatusesPercentage.First(status=>status.StatusName.Equals("Done")).StatusCount</h4>
                         </div>
                     </div>
 
