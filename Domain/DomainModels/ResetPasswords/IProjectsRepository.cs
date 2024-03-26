@@ -8,6 +8,7 @@ namespace Domain.DomainModels.ResetPasswords
         public Task<IEnumerable<Projects>> GetAll();
         public Task<IEnumerable<Projects>> GetWithDetails();
         public Task<Projects> GetById(int id);
+        public Task<int> Count();
         public System.Threading.Tasks.Task CreateProject(Projects project);
         public Task<IEnumerable<EmployeesDetailsWithinProjectResposne>?> GetProjectsEmployeesDetails(int ProjectId);
         public Task<IEnumerable<ActivityRecord>> GetProjectsActivities(Projects project);

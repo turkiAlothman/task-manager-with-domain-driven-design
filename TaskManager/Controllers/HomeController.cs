@@ -10,6 +10,7 @@ using Domain.DomainModels.Employee;
 using Domain.DomainModels.ResetPasswords;
 using Domain.DomainModels.Task;
 using Domain.DomainModels.Team;
+using Domain.DTOs;
 namespace TaskManager.Controllers
 {
 
@@ -30,9 +31,20 @@ namespace TaskManager.Controllers
             this._TeamsRepository = teamsRepository;
             this._HttpContextAccessor = HttpContextAccessor;
         }
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
-            return View();
+           int ActivitiesCount = await this._ActivitiesRepository.count();
+           int ProjectsCount = await _ProjectsRepository.Count();
+           int TasksCount = await this._TasksRepository.Count();
+           int TeamsCount = await this._TeamsRepository.Count();
+
+            Dashboard data = new Dashboard {
+                ActivitiesCount = ActivitiesCount,
+                ProjectsCount = ProjectsCount, 
+                TasksCount = TasksCount,
+                TeamsCount = TeamsCount 
+            };
+            return View(data);
         }
         public async Task<IActionResult> Tasks(TasksFilterQuery query)
         {

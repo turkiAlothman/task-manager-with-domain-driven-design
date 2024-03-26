@@ -23,5 +23,9 @@ namespace infrastructure.Persistence.Repositores
         {
             return await _context.teams.FirstOrDefaultAsync(t => t.Id == id);
         }
+        public async Task<int> Count()
+        {
+            return await _context.teams.CountAsync();
+        }
     }
 }

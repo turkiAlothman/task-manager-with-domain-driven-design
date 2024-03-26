@@ -32,7 +32,10 @@ namespace infrastructure.Persistence.Repositores
         {
             return await _context.projects.FirstOrDefaultAsync(p => p.Id == id);
         }
-
+        public async Task<int> Count()
+        {
+            return await _context.projects.CountAsync();
+        }
         public async Task CreateProject(Projects project)
         {
             _context.projects.Add(project);
