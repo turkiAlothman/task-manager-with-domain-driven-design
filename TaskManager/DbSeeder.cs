@@ -18,29 +18,13 @@ namespace TaskManager
             if (!Context.projects.Any())
             {
 
-                Projects project1 = new Projects
-                {
-                    Name = "E-commerce Platform",
-                    Description = "Building a comprehensive platform for online sales and customer management.",
-                    Type = "E-commerce"
-                };
+                Projects project1 = new Projects("E-commerce Platform", "E-commerce", "Building a comprehensive platform for online sales and customer management.", DateTime.Parse("2024-1-12"), DateTime.Parse("2024-12-12"));
+
+                Projects project2 = new Projects("Customer Relationship Management System", "Public relations", "Developing a system to manage interactions with current and potential customers.", DateTime.Parse("2024-1-12"), DateTime.Parse("2024-12-12"));
+                
 
 
-                Projects project2 = new Projects
-                {
-                    Name = "Customer Relationship Management System",
-                    Description = "Developing a system to manage interactions with current and potential customers.",
-                    Type = "Software"
-                };
-
-                Projects project3 = new Projects
-                {
-                    Name = "SEO Optimization",
-                    Description = "Implementing SEO strategies to improve website visibility and ranking on search engines.",
-                    Type = "Marketing"
-                };
-                project1.Tasks = new List<Tasks>();
-
+                
                 List<Teams> teams = new List<Teams> {
 
                     new Teams{
@@ -558,7 +542,7 @@ namespace TaskManager
                 };
 
 
-                project1.Tasks = new List<Tasks> {
+                project1.AddTasks(  new List<Tasks> {
                     
                     // project1
                     // Quality assurance tasks
@@ -2097,13 +2081,13 @@ namespace TaskManager
                     })
 
 
-                };
+                });
 
 
 
 
 
-                project2.Tasks = new List<Tasks>
+                project2.AddTasks( new List<Tasks>
                     {
 
                     // quality assurance 
@@ -2555,77 +2539,77 @@ namespace TaskManager
                         // customer support
 
                         Tasks.createDummy(new{
-    Title = "CRM Support Training Program",
-    StartDate = DateTime.Parse("2024-02-01"),
-    DueDate = DateTime.Parse("2024-02-10"),
-    Priority = "High",
-    Description = "Develop and conduct a training program for customer support agents on the new CRM system to ensure they are equipped to assist users effectively.",
-    Status = "Planned",
-    Asignees = employess[26],
-    Reporter =employess[4]
-}),
+                        Title = "CRM Support Training Program",
+                        StartDate = DateTime.Parse("2024-02-01"),
+                        DueDate = DateTime.Parse("2024-02-10"),
+                        Priority = "High",
+                        Description = "Develop and conduct a training program for customer support agents on the new CRM system to ensure they are equipped to assist users effectively.",
+                        Status = "Planned",
+                        Asignees = employess[26],
+                        Reporter =employess[4]
+                    }),
 
-Tasks.createDummy(new{
-    Title = "FAQs Compilation for CRM System",
-    StartDate = DateTime.Parse("2024-02-11"),
-    DueDate = DateTime.Parse("2024-02-17"),
-    Priority = "Medium",
-    Description = "Compile a comprehensive list of FAQs related to the CRM system to aid in quick resolution of common queries.",
-    Status = "Planned",
-    Asignees = employess[26],
-    Reporter =employess[4]
-}),
+                    Tasks.createDummy(new{
+                        Title = "FAQs Compilation for CRM System",
+                        StartDate = DateTime.Parse("2024-02-11"),
+                        DueDate = DateTime.Parse("2024-02-17"),
+                        Priority = "Medium",
+                        Description = "Compile a comprehensive list of FAQs related to the CRM system to aid in quick resolution of common queries.",
+                        Status = "Planned",
+                        Asignees = employess[26],
+                        Reporter =employess[4]
+                    }),
 
-Tasks.createDummy(new{
-    Title = "Create CRM System Support Guides",
-    StartDate = DateTime.Parse("2024-02-18"),
-    DueDate = DateTime.Parse("2024-02-24"),
-    Priority = "Medium",
-    Description = "Create detailed support guides and documentation for the CRM system to enhance the self-service resources for users.",
-    Status = "Planned",
-    Asignees = employess[26],
-    Reporter =employess[4]
-}),
+                    Tasks.createDummy(new{
+                        Title = "Create CRM System Support Guides",
+                        StartDate = DateTime.Parse("2024-02-18"),
+                        DueDate = DateTime.Parse("2024-02-24"),
+                        Priority = "Medium",
+                        Description = "Create detailed support guides and documentation for the CRM system to enhance the self-service resources for users.",
+                        Status = "Planned",
+                        Asignees = employess[26],
+                        Reporter =employess[4]
+                    }),
 
-Tasks.createDummy(new{
-    Title = "Feedback Collection Mechanism",
-    StartDate = DateTime.Parse("2024-02-25"),
-    DueDate = DateTime.Parse("2024-03-03"),
-    Priority = "High",
-    Description = "Implement a mechanism for collecting feedback from CRM system users to continuously improve the support process.",
-    Status = "Planned",
-    Asignees = employess[27],
-    Reporter =employess[11]
-}),
+                    Tasks.createDummy(new{
+                        Title = "Feedback Collection Mechanism",
+                        StartDate = DateTime.Parse("2024-02-25"),
+                        DueDate = DateTime.Parse("2024-03-03"),
+                        Priority = "High",
+                        Description = "Implement a mechanism for collecting feedback from CRM system users to continuously improve the support process.",
+                        Status = "Planned",
+                        Asignees = employess[27],
+                        Reporter =employess[11]
+                    }),
 
-Tasks.createDummy(new{
-    Title = "Support Channel Optimization",
-    StartDate = DateTime.Parse("2024-03-04"),
-    DueDate = DateTime.Parse("2024-03-10"),
-    Priority = "Medium",
-    Description = "Evaluate and optimize the various support channels (email, phone, chat) to ensure efficient and effective user support.",
-    Status = "Planned",
-    Asignees = employess[27],
-    Reporter =employess[12]
-}),
+                    Tasks.createDummy(new{
+                        Title = "Support Channel Optimization",
+                        StartDate = DateTime.Parse("2024-03-04"),
+                        DueDate = DateTime.Parse("2024-03-10"),
+                        Priority = "Medium",
+                        Description = "Evaluate and optimize the various support channels (email, phone, chat) to ensure efficient and effective user support.",
+                        Status = "Planned",
+                        Asignees = employess[27],
+                        Reporter =employess[12]
+                    }),
 
-Tasks.createDummy(new{
-    Title = "Emergency Response Plan for CRM Issues",
-    StartDate = DateTime.Parse("2024-03-11"),
-    DueDate = DateTime.Parse("2024-03-17"),
-    Priority = "High",
-    Description = "Develop an emergency response plan to swiftly address and resolve critical issues reported by CRM system users.",
-    Status = "Planned",
-    Asignees = employess[27],
-    Reporter =employess[13]
-})
-
-
+                    Tasks.createDummy(new{
+                        Title = "Emergency Response Plan for CRM Issues",
+                        StartDate = DateTime.Parse("2024-03-11"),
+                        DueDate = DateTime.Parse("2024-03-17"),
+                        Priority = "High",
+                        Description = "Develop an emergency response plan to swiftly address and resolve critical issues reported by CRM system users.",
+                        Status = "Planned",
+                        Asignees = employess[27],
+                        Reporter =employess[13]
+                    })
 
 
 
 
-                };
+
+
+                });
 
 
 

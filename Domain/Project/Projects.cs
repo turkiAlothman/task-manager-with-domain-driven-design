@@ -6,13 +6,13 @@ namespace Domain.Project
 {
     public partial class Projects : BaseEntity<int>
     {
-        public string Name { set; get; }
-        public string Type { set; get; }
-        public string Description { set; get; }
-        public DateTime StartDate { set; get; }
-        public DateTime DueDate { set; get; }
-        public IList<Tasks> Tasks { set; get; }
-        public IList<Employees> Employees { set; get; }
+        public string Name { protected set; get; }
+        public string Type { protected set; get; }
+        public string Description { protected set; get; }
+        public DateTime StartDate { protected set; get; }
+        public DateTime DueDate { protected set; get; }
+        public IList<Tasks> Tasks { protected set; get; } = new List<Tasks>();
+        public IList<Employees> Employees { protected set; get; } = new List<Employees>();
     }
 }
 

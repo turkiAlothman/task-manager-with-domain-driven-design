@@ -87,17 +87,6 @@ namespace infrastructure.Persistence.Repositores
         }
 
 
-        public async Task AddListOfEmployeesInPoject(Projects project, List<Employees> employees)
-        {
-            project.Employees = new List<Employees>();
-            foreach (Employees emmployee in employees)
-                project.Employees.Add(emmployee);
-
-            await _context.SaveChangesAsync();
-
-
-
-
-        }
+        
     }
 }

@@ -40,15 +40,8 @@ namespace infrastructure.Services
             if (!IsManager)
                 return new ManagerAuthorizationError();
 
-            await _projectsRepository.CreateProject(new Projects
-            {
-                Name = Name,
-                Description = Description,
-                Type = Type,
-                StartDate = StartDate,
-                DueDate = DueDate,
-
-            });
+            await _projectsRepository.CreateProject(new Projects(Name,Type,Description,StartDate,DueDate)
+            );
 
             return null;
         }
@@ -86,7 +79,9 @@ namespace infrastructure.Services
 
             List<Employees> employees = await _employeesRepository.GetEmployeesByListOfIds(EmployeesIds, project);
 
-            await _projectsRepository.AddListOfEmployeesInPoject(project, employees);
+            project.AddEmployees(employees);
+            await UnitOfWork.SaveChangesAsync();
+
             return null;
 
         }

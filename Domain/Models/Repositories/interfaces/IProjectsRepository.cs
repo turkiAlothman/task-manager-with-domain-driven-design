@@ -12,7 +12,7 @@ namespace Domain.Models.Repositories.interfaces
         public Task<IEnumerable<EmployeesDetailsWithinProjectResposne>?> GetProjectsEmployeesDetails(int  ProjectId);
         public Task<IEnumerable<ActivityRecord>> GetProjectsActivities(Projects project);
         public System.Threading.Tasks.Task RemoveEmployee(Projects project , Employees employee);
-        public System.Threading.Tasks.Task AddListOfEmployeesInPoject(Projects project, List<Employees> employees);
+        
 
     }
 }
