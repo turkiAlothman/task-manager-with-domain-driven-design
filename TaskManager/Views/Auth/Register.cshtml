@@ -10,7 +10,7 @@
 </div>
 
 <div class="card-body p-0">
-    <form class="form-horizontal" method="POST" asp-controller="Auth" asp-action="Register">
+    <form class="form-horizontal" method="POST" asp-controller="Auth" asp-action="Register" onsubmit="register.disabled = true; return true;">
         <input asp-for="SecretKey"  type="hidden"/>
         <input asp-for="email" type="hidden" />
         
@@ -81,7 +81,7 @@
         
         
 
-        <button type="submit" class="btn btn-primary w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold shadow m-0 mt-5 ">Register</button>
+        <button id="register" type="submit" class="btn btn-primary w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold shadow m-0 mt-5 ">Register</button>
 
     </form>
 </div>

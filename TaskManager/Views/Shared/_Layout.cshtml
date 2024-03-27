@@ -87,31 +87,11 @@
                     <ul class="nav-elements d-flex align-items-center list-unstyled m-0 p-0">
                         
                         <li class="nav-item nav-search">
-                            <a asp-controller="auth" asp-action="logout" class="btn  bg-primary text-white">
+                            <a id="logout" asp-controller="auth" asp-action="logout" class="btn bg-primary text-white">
                                 <i class="bi bi-box-arrow-right"></i> Log out
                             </a>
                         </li>
-                        
-                        <li class="nav-item nav-color-switch d-flex align-items-center gap-3">
-                            <div class="sun"><img src="assets/img/sun.svg" alt="img"></div>
-                            <div class="switch">
-                                <input type="checkbox" id="colorSwitch" value="false" name="defaultMode">
-                                <div class="shutter">
-                                    <span class="lbl-off"></span>
-                                    <span class="lbl-on"></span>
-                                    <div class="slider bg-primary"></div>
-                                </div>
-                            </div>
-                            <div class="moon"><img src="assets/img/moon.svg" alt="img"></div>
-                        </li>
-
-                      
-                        <li class="nav-item nav-settings">
-                            <a href="#" class="nav-toggler">
-                                <img src="assets/img/svg/settings.svg" alt="img">
-                            </a>
-                        </li>
-
+                       
                         <li class="nav-item nav-author">
                             <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                                 
@@ -159,8 +139,7 @@
 
                                         </div>
                                         <div class="card-footer p-3">
-                                            <a href="login.html" class="btn btn-outline-gray bg-transparent w-100 py-1 rounded-1 text-dark fs-14 fw-medium"><i class="bi bi-box-arrow-right"></i> Logout</a>
-                                        </div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -240,13 +219,6 @@
                                 </div>
                             </div>
                         </li>
-                       
-                        <li class="nav-item nav-settings">
-                            <a href="#" class="nav-toggler">
-                                <i class="bi bi-gear-fill"></i>
-                            </a>
-                        </li>
-
                         <li class="nav-item nav-author px-3">
                             <a href="#" class="nav-toggler" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="avatar bg-blue text-white">

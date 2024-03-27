@@ -23,6 +23,8 @@
 
 
 
+
+
 <!-- jQuery for Bootstrap popover -->
 
   <div class="card border-0">
@@ -193,7 +195,7 @@
                             <button id="dpz-multiple-files" class="dropzone file-upload btn border-0 p-1 px-2 fs-30 rounded-2 text-primary m-0" type="button">
                                 <div class="dz-message" data-dz-message><span><i class="bi bi-paperclip fs-30"></i></span></div>
                             </button> *@
-                            <a id="commentButton" href="javascript:void(0)" onclick="SendComment()" class="btn btn-primary rounded-2 ff-heading fs-18 text-uppercase m-0 flex-shrink-0"> <i class="bi bi-send-fill me-2"></i> Send</a>
+                            <button id="commentButton" href="javascript:void(0)" onclick="SendComment()" class="btn btn-primary rounded-2 ff-heading fs-18 text-uppercase m-0 flex-shrink-0"> <i class="bi bi-send-fill me-2"></i> Send</button>
                         </div>
                     </div>
                 </div>
@@ -342,6 +344,7 @@
 
     function deleteComment(id) {
 
+        $(this).attr("disabled", "disabled")
         $.ajax({
             type: "DELETE",
         url: "/api/Tasks/DeleteComment/" + id,

@@ -14,7 +14,7 @@
    
         
        
-    <form class="form-horizontal" method="POST" asp-controller="Auth" asp-action="login">
+    <form class="form-horizontal" method="POST" asp-controller="Auth" asp-action="login" onsubmit="login.disabled = true; return true;">
 
         <input type="hidden" asp-for="returnUrl" />
         
@@ -35,7 +35,7 @@
         <apan class="text-danger"> @Html.ValidationMessage("LoginError") </apan>
 
         <button type="submit"
-            class="btn btn-primary w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold shadow">Login</button>
+            class="btn btn-primary w-100 text-uppercase text-white rounded-2 lh-34 ff-heading fw-bold shadow" id="login">Login</button>
 
         <p class="d-flex align-items-center justify-content-between mt-4 mb-4">Forgot your password? <a
                 asp-controller="auth" asp-action="ResetPasswordRequest" class="text-primary fw-bold text-decoration-underline">Reset Here</a></p>
