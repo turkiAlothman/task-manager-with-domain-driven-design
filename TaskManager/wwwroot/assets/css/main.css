@@ -25112,3 +25112,13 @@ h5.negative-margin, .negative-margin.h5 {
 }
 
 
+.offcanvas-custom {
+    width: 100%;
+}
+
+/* Screen larger than 768px */
+@media (min-width: 768px) {
+    .offcanvas-custom {
+        width: 50% !important; /* Override Bootstrap's default width */
+    }
+}

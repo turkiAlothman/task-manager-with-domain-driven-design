@@ -46,7 +46,7 @@
         @if (Model.Sender.Id == User.GetUserId())
         {
             <button onclick="deleteComment('@Model.Id')" class="btn border-0 p-1 px-2 fs-20 rounded-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" data-bs-custom-class="tooltip-primary">
-                <button class="bi bi-trash-fill"></button>
+                <i class="bi bi-trash-fill"></i>
             </button>
         }
         <!-- <button type="submit" class="btn ff-heading fs-18 fw-bold text-dark p-0 m-0 border-0"> <i class="bi bi-hand-thumbs-up text-primary me-2"></i> 45 Like</button>
