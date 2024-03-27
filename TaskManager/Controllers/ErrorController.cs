@@ -13,20 +13,8 @@ namespace TaskManager.Controllers
         [HttpGet]
         public IActionResult ErrorHandler()
         {
-            Debug.WriteLine("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrroooooooooooooooooooooooooooooooooooooooooooooooooooooor");
-
             Exception? exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
-
-            //var (StatusCode, Description) = exception switch
-            //{
-            //    IServiceException ServiceException => ((int)ServiceException.StatusCode, ServiceException.Message)
-            //    _=> (500, "error occurred during processing the request")
-            //};
-
-
-            // return Problem(title: Description);    
-
-            return Ok();
+            return Problem(title: exception.Message);    
         }
     }
 }

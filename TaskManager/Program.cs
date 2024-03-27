@@ -91,7 +91,7 @@ app.UseStaticFiles(new StaticFileOptions
 // middleware for iserting tasks activites in the database
 app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/Tasks") && !context.Request.Method.Equals("GET") && context.Response.StatusCode == 200, AppBuilder => AppBuilder.UseMiddleware<TasksActivitiesMiddleware>());
 
-// app.UseExceptionHandler("/error");
+ app.UseExceptionHandler("/error");
 
 app.MapControllerRoute(name:"default",pattern:"{controller=Home}/{action=dashboard}/{id?}");
 

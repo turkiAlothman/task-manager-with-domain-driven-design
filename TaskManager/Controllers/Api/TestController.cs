@@ -46,8 +46,8 @@ namespace TaskManager.Controllers.Api
         {
 
             //throw new TaskNotFoundException();
-  
-            return Ok(await _tasksRepository.GetPriorityStatus());
+            int i = 0;
+            return Ok(2/i);
         }
     }
 }
