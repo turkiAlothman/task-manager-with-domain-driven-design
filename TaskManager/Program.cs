@@ -20,6 +20,7 @@ using Domain.DomainModels.Employee;
 using Domain.DomainModels.ResetPasswords;
 using Domain.DomainModels.Task;
 using Domain.DomainModels.Team;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,6 +81,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseAuthentication();
+
+Debug.WriteLine(builder.Environment.ContentRootPath);
 
 app.UseStaticFiles(new StaticFileOptions
 {
