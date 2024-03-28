@@ -7,7 +7,13 @@ TaskManager is designed following the principles of Domain-Driven Design (DDD) a
 
 
 ## project's dependencies and packages
-
+- **Humanizer:** provide utilizations to convert DateTime object into human readble format date
+- **MimeKit:** Mail client tool used to sends emails within the application
+- **JsonPatch:** provide utilizations to apply a smooth patch request
+- **NewtonsoftJson:** object to json converter
+- **Pomelo.EntityFrameworkCore.MySql** Mysql DBMS driver
+-- **Microsoft.EntityFrameworkCore** most pupoler ORM system in asp.net
+-- **RandomString4Net** 
 
 ## Architecture
 
