@@ -72,12 +72,12 @@ namespace infrastructure.Services
             // after the task is commited in the database , we get the Id of the task to specify the storage path of the attachments
             if (!attachments.IsNullOrEmpty())
             {
-                Directory.CreateDirectory((_configuration.GetValue<string>("TaskAttachmantsStoragePathUrl") + attachments.First().task.Id).Replace("static", _configuration.GetValue<string>("StoragePath")));
+                Directory.CreateDirectory(Path.Combine(_configuration.GetValue<string>("StoragePath"),_configuration.GetValue<string>("TaskAttachmantsStoragePathUrl") + attachments.First().task.Id));
                 foreach ((Attachments attach, IFormFile file) in attachments.Zip(Attachments))
                 {
                     string startPerfix = _configuration.GetValue<string>("TaskAttachmantsStoragePathUrl") + attach.task.Id;
                     string Url = startPerfix + "/" + Path.GetFileName(file.FileName).Replace(" ", "_");
-                    string PhysicalPath = Url.Replace("static", _configuration.GetValue<string>("StoragePath"));
+                    string PhysicalPath = Path.Combine(_configuration.GetValue<string>("StoragePath") , Url);
                     string FullPath = Path.GetFullPath(PhysicalPath);
                     Debug.WriteLine(FullPath);
 

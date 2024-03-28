@@ -53,7 +53,7 @@ builder.Services.AddApplicationServices();
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<TaskManagerDbContext>(Options=>{
     Options.UseMySql(
-        connectionString, ServerVersion.AutoDetect(connectionString) , options => options.MigrationsAssembly("TaskManager")
+        connectionString, ServerVersion.AutoDetect(connectionString) , options => options.MigrationsAssembly("TaskManager").CommandTimeout(40)
         );
 });
 
@@ -84,11 +84,11 @@ app.UseAuthentication();
 
 Debug.WriteLine(builder.Environment.ContentRootPath);
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider= new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath,"Storage")),
-    RequestPath="/static"
-});
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//    FileProvider= new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath,"Storage")),
+//    RequestPath="/static"
+//});
 
 
 // middleware for iserting tasks activites in the database
