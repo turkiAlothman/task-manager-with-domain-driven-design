@@ -40,7 +40,7 @@ TaskManager is designed following the principles of Domain-Driven Design (DDD) a
 
 
 
-### Tasks Features
+### Tasks management Features
 
 #### Viewing Tasks
 
@@ -62,7 +62,7 @@ TaskManager is designed following the principles of Domain-Driven Design (DDD) a
 - Tasks can be deleted if they are no longer relevant or necessary.
 
 
-### Project Features
+### Projects management Features
 
 #### Project Creation
 
@@ -86,7 +86,19 @@ TaskManager is designed following the principles of Domain-Driven Design (DDD) a
 #### Project Editing
 
 - Employees have the ability to make modifications to projects, including:
-  - Removing employees from specific projects to adjust team composition and responsibilities.
+- Removing employees from specific projects to adjust team composition and responsibilities.
+
+
+
+### Employees and teams management features
+
+- View all employees within the organization including their contact info
+- Search for employees by their name
+- Filter employees by team
+- View all tasks assigned to the employee
+- View all tasks reported by the employee
+- View all activities applied by a specific employee
+- View all teams with their members
 
 
 
