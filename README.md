@@ -7,33 +7,35 @@ TaskManager is designed following the principles of Domain-Driven Design (DDD) a
 
 
 ## project's dependencies and packages
-- **Humanizer:** provide utilizations to convert DateTime object into human readble format date
-- **MimeKit:** Mail client tool used to sends emails within the application
-- **JsonPatch:** provide utilizations to apply a smooth patch request
-- **NewtonsoftJson:** object to json converter
-- **Pomelo.EntityFrameworkCore.MySql** Mysql DBMS driver
--- **Microsoft.EntityFrameworkCore** most pupoler ORM system in asp.net
--- **RandomString4Net** 
+- **Humanizer:** provide utilizations to convert DateTime object into human readble format date.
+- **MimeKit:** Mail client tool used to sends emails within the application.
+- **JsonPatch:** provide utilizations to apply a smooth patch request.
+- **NewtonsoftJson:** object to json converter.
+- **Pomelo.EntityFrameworkCore.MySql** Mysql DBMS driver.
+- **Microsoft.EntityFrameworkCore** most pupoler ORM system in asp.net.
+- **RandomString4Net** - random text generator.
 
-## Architecture
+## features
 
-- **Task Management:** Employees can seamlessly create, delete, and update tasks as needed.
-- **Enhanced Task Reports:** Users can incorporate comments, attachments, and additional details to enrich task reports.
-- **Project Creation:** Managers have the ability to create new projects within the platform.
-- **Advanced Functionality:** Access to detailed statistics empowers managers to optimize project workflows and enhance productivity within the organization.
+#### Viewing Tasks
 
+- Employees can view all tasks assigned within the organization.
+- Task filtering options are available, allowing employees to filter tasks based on criteria such as status, priority, team, and project.
+- Employees can easily access tasks assigned specifically to them.
 
-### 1. Infrastructure
+#### Task Creation
 
-This component deals with the technical concerns such as databases, file systems, external services, and frameworks. It ensures that the application can interact with external resources efficiently.
+- Employees can create new tasks with various attributes including title, description, priority, status, type, start date, and due date.
+- Tasks can be assigned to multiple employees, facilitating collaboration.
+- Attachments can be added to tasks, providing additional context or resources.
+- Employees have the ability to comment on tasks, promoting communication and collaboration within the team.
 
-### 2. Domain
+#### Editing and Deleting
 
-The domain component encapsulates the core logic and rules of the application domain. It represents the business concepts, rules, and logic. This component is independent of the infrastructure and application layers, ensuring that the business logic remains decoupled and testable.
+- Task attributes can be edited by double-clicking on the task.
+- Employees can delete their own comments to maintain task clarity and organization.
+- Tasks can be deleted if they are no longer relevant or necessary.
 
-### 3. Application
-
-The application component acts as a mediator between the infrastructure and domain layers. It orchestrates the execution of application use cases, handling input and output operations, and coordinating the interactions between different parts of the system. This component contains the application-specific logic necessary for fulfilling user requests and achieving system goals.
 
 ## Getting Started
 
