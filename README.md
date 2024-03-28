@@ -17,6 +17,31 @@ TaskManager is designed following the principles of Domain-Driven Design (DDD) a
 
 ## features
 
+### user authentication and registration
+
+#### User Login
+
+- Employees can securely log in to the system using their email address and password.
+- Upon successful authentication, employees gain access to their personalized dashboard and features.
+
+#### User Registration
+
+- Employees can register for the system by receiving an invitation email containing a registration link.
+- To complete the registration process, employees click on the registration link provided in the invitation email.
+- Registration involves setting up a password and providing necessary details to create a user account.
+
+#### Password Management
+
+- Employees can reset their passwords if they forget them or need to change them for security reasons.
+- To reset the password, employees initiate the process by clicking on the "Reset Password" link.
+- An email containing a password reset link is sent to the employee's registered email address.
+- By clicking on the password reset link, employees can securely set a new password for their account.
+
+
+
+
+### Tasks Features
+
 #### Viewing Tasks
 
 - Employees can view all tasks assigned within the organization.
@@ -35,6 +60,34 @@ TaskManager is designed following the principles of Domain-Driven Design (DDD) a
 - Task attributes can be edited by double-clicking on the task.
 - Employees can delete their own comments to maintain task clarity and organization.
 - Tasks can be deleted if they are no longer relevant or necessary.
+
+
+### Project Features
+
+#### Project Creation
+
+- Employees can create new projects with various attributes, including:
+  - Title: A descriptive name for the project.
+  - Description: Details about the project objectives, scope, and requirements.
+  - Type: Categorization of the project (e.g., development, marketing, research).
+  - Start Date: The date when the project is scheduled to begin.
+  - Due Date: The deadline or expected completion date for the project.
+- Employees can add participants to the project, allowing for team collaboration and coordination.
+
+#### Project View
+
+- Employees have access to a comprehensive view of all current projects within the organization.
+- Detailed project views include:
+  - Participants: Employees can see a list of all participants involved in a specific project.
+  - Employee Statistics: Insights into employee contributions and performance within a particular project.
+  - Tasks: A list of tasks associated with the project, providing clarity on project milestones and progress.
+  - Activity Log: Records of all actions and updates made by employees related to the project.
+
+#### Project Editing
+
+- Employees have the ability to make modifications to projects, including:
+  - Removing employees from specific projects to adjust team composition and responsibilities.
+
 
 
 ## Getting Started
