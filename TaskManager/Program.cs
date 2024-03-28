@@ -20,9 +20,12 @@ using Domain.DomainModels.Employee;
 using Domain.DomainModels.ResetPasswords;
 using Domain.DomainModels.Task;
 using Domain.DomainModels.Team;
-using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                          .AddEnvironmentVariables();
 
 // mvc configurations with json respone + NewtonsoftJson (for patial update in patch reuqest)
 builder.Services.AddControllersWithViews(c=>c.Filters.Add(new AuthorizeFilter())).AddNewtonsoftJson(Options => Options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore).AddJsonOptions(Options => Options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
@@ -40,8 +43,8 @@ builder.Services.AddScoped<IActivitiesRepository, ActivitiesRepository>();
 builder.Services.AddScoped<IInvitesRepository, InvitesRepository>();
 builder.Services.AddScoped<IResetPasswordRepository, ResetPasswordRepository>();
 
-// configurations Objects
 
+// configurations Objects
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 
 // Custom services
@@ -53,7 +56,7 @@ builder.Services.AddApplicationServices();
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<TaskManagerDbContext>(Options=>{
     Options.UseMySql(
-        connectionString, ServerVersion.AutoDetect(connectionString) , options => options.MigrationsAssembly("TaskManager").CommandTimeout(40)
+        connectionString, ServerVersion.AutoDetect(connectionString) , options => options.MigrationsAssembly("TaskManager").CommandTimeout(50)
         );
 });
 
@@ -72,23 +75,15 @@ var app = builder.Build();
 
 app.UseStaticFiles();
 
-if(app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
     app.UseDeveloperExceptionPage();
-
-
-
-app.UseSwagger();
-app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+    
 
 app.UseAuthentication();
-
-Debug.WriteLine(builder.Environment.ContentRootPath);
-
-//app.UseStaticFiles(new StaticFileOptions
-//{
-//    FileProvider= new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath,"Storage")),
-//    RequestPath="/static"
-//});
 
 
 // middleware for iserting tasks activites in the database

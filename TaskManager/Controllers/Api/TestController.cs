@@ -17,6 +17,11 @@ using Domain.Employee;
 using Domain.Project;
 using Domain.Team;
 using Domain.DomainModels.Task;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+using Microsoft.Extensions.Configuration.EnvironmentVariables;
+using Microsoft.Extensions.Options;
+using infrastructure.Configurations;
 
 namespace TaskManager.Controllers.Api
 {
@@ -30,8 +35,11 @@ namespace TaskManager.Controllers.Api
         private readonly TaskManagerDbContext _dbContext;
         private readonly ITeamsRepository _teamsRepository;
         private readonly ITasksRepository _tasksRepository;
-        
-        public TestController(IHttpContextAccessor contextAccessor, IProjectsRepository _projectsRepository , IEmployeesRepository employeesRepository, TaskManagerDbContext _dbContext, IConfiguration configuration, ITeamsRepository teamsRepository,ITasksRepository tasksRepository) 
+        private readonly IConfiguration _configuration;
+        private readonly IOptions<MailSettings> MailSettings;
+
+
+        public TestController(IHttpContextAccessor contextAccessor, IProjectsRepository _projectsRepository , IEmployeesRepository employeesRepository, TaskManagerDbContext _dbContext, IConfiguration configuration, ITeamsRepository teamsRepository,ITasksRepository tasksRepository, IOptions<MailSettings> MailSettings) 
         {
             _contextAccessor = contextAccessor;
             this._projectsRepository = _projectsRepository;
@@ -39,15 +47,18 @@ namespace TaskManager.Controllers.Api
             this._dbContext = _dbContext;
             this._teamsRepository = teamsRepository;
             this._tasksRepository = tasksRepository;
+            this._configuration = configuration;
+            this.MailSettings = MailSettings;
 
         }
         [HttpGet]
-        public async Task<IActionResult> Index(IConfiguration _configuration , IEmailService mail )
+        public async Task<IActionResult> Index(IConfiguration _configuration, IEmailService mail)
         {
 
             //throw new TaskNotFoundException();
             int i = 0;
-            return Ok(2/i);
+            //this.MailSettings       
+            return Ok(new {mail = Environment.GetEnvironmentVariable("MAIL_USERNAME") , data = this.MailSettings });
         }
     }
 }
