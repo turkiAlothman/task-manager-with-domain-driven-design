@@ -100,7 +100,14 @@ TaskManager is designed following the principles of Domain-Driven Design (DDD) a
 - View all activities applied by a specific employee
 - View all teams with their members
 
+### Employee Profile Features:
 
+- View personal information
+- View all assigned tasks
+- View all reported tasks
+- View all activities applied by the employee
+- View team affiliation
+- View projects the employee is participating in
 
 ## Getting Started
 
