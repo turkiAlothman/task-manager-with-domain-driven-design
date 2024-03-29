@@ -10,7 +10,7 @@
 </div>
 
 <div class="card-body p-0">
-    <form class="form-horizontal" method="POST" asp-controller="Auth" asp-action="Register" onsubmit="register.disabled = true; return true;">
+    <form class="form-horizontal" method="POST" asp-controller="Auth" asp-action="Register" id="form">
         <input asp-for="SecretKey"  type="hidden"/>
         <input asp-for="email" type="hidden" />
         
@@ -107,5 +107,18 @@
     })
 
 
+
+
+
+
+
+    $("#register").click(function () {
+        $("#form").validate()
+        if ($("#form").valid()) {
+            $("#register").attr('disabled', 'disabled')
+            $("#form").submit()
+        }
+
+    })
 
 </script>
