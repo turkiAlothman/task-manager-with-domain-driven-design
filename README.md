@@ -5,8 +5,11 @@
 TaskManager is designed following the principles of ***Domain-Driven Design (DDD)*** and employing a ***clean architecture*** approach. It is structured into three main components: infrastructure, Domain, and Application. This setup ensures efficiency and maintainability.
 
 you can use the application here : https://taskmanager20240328032228.azurewebsites.net
+
 please use the below crediantils in order to access the application functionalities
+
 email = SattamDfo@yahoo.com
+<br/>
 password = jioejv*U&&^ 
 
 
