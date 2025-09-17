@@ -93,9 +93,11 @@ app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/Tasks") && 
 
 app.MapControllerRoute(name:"default",pattern:"{controller=Home}/{action=dashboard}/{id?}");
 
-// insert dummay data
-if(app.Environment.IsDevelopment())
+app.UseHealthChecks("/health");
 
-DbSeeder.Seed(app);
+// insert dummay data
+if (app.Environment.IsDevelopment())
+
+    DbSeeder.Seed(app);
 
 app.Run();
