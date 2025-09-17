@@ -47,8 +47,8 @@ namespace TaskManager.Tests.Services
             // Act & Assert
             // Note: Since EmailService uses actual SMTP client, we can't easily mock it
             // In a real scenario, you might want to extract SMTP functionality to an interface
-            // For now, we'll test that the method doesn't throw an exception with valid settings
-            await Assert.ThrowsAsync<Exception>(() => _emailService.SendMail(mail));
+            // For now, we'll test that the method throws a network-related exception with invalid SMTP settings
+            await Assert.ThrowsAsync<System.Net.Sockets.SocketException>(() => _emailService.SendMail(mail));
         }
 
         [Fact]
@@ -62,8 +62,8 @@ namespace TaskManager.Tests.Services
 
             // Act & Assert
             // Since SendInviteEmail calls SendMail internally, and SendMail uses actual SMTP,
-            // we expect this to throw an exception in test environment
-            await Assert.ThrowsAsync<Exception>(() => _emailService.SendInviteEmail(inviter, inviteeEmail, secretKey, host));
+            // we expect this to throw a socket exception in test environment
+            await Assert.ThrowsAsync<System.Net.Sockets.SocketException>(() => _emailService.SendInviteEmail(inviter, inviteeEmail, secretKey, host));
         }
 
         [Fact]
@@ -76,8 +76,8 @@ namespace TaskManager.Tests.Services
 
             // Act & Assert
             // Since SendResetPasswordEmail calls SendMail internally, and SendMail uses actual SMTP,
-            // we expect this to throw an exception in test environment
-            await Assert.ThrowsAsync<Exception>(() => _emailService.SendResetPasswordEmail(email, secretKey, host));
+            // we expect this to throw a socket exception in test environment
+            await Assert.ThrowsAsync<System.Net.Sockets.SocketException>(() => _emailService.SendResetPasswordEmail(email, secretKey, host));
         }
 
         [Fact]
@@ -105,8 +105,8 @@ namespace TaskManager.Tests.Services
             };
 
             // Act & Assert
-            // Testing that different mail objects are handled (will throw in test environment)
-            await Assert.ThrowsAsync<Exception>(() => _emailService.SendMail(mail));
+            // Testing that different mail objects are handled (will throw socket exception in test environment)
+            await Assert.ThrowsAsync<System.Net.Sockets.SocketException>(() => _emailService.SendMail(mail));
         }
     }
 }

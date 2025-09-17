@@ -203,6 +203,9 @@ namespace TaskManager.Tests.Services
             int userId = 1;
             int taskId = 1;
             var reporter = new Employees(false, "John", "Doe", "123456789", "john@test.com", "password", "Manager", DateTime.Now);
+            // Set the Id property manually since the constructor doesn't set it
+            typeof(Employees).GetProperty("Id").SetValue(reporter, userId);
+            
             var task = new Tasks("Test Task", DateTime.Now, DateTime.Now.AddDays(7), "High", "Description", "Open", "Feature");
             task.SetReporter(reporter);
 
@@ -269,6 +272,9 @@ namespace TaskManager.Tests.Services
             int assigneeId = 999;
             int taskId = 1;
             var reporter = new Employees(false, "John", "Doe", "123456789", "john@test.com", "password", "Manager", DateTime.Now);
+            // Set the reporter Id to match userId
+            typeof(Employees).GetProperty("Id").SetValue(reporter, userId);
+            
             var task = new Tasks("Test Task", DateTime.Now, DateTime.Now.AddDays(7), "High", "Description", "Open", "Feature");
             task.SetReporter(reporter);
 
@@ -294,7 +300,12 @@ namespace TaskManager.Tests.Services
             int assigneeId = 2;
             int taskId = 1;
             var reporter = new Employees(false, "John", "Doe", "123456789", "john@test.com", "password", "Manager", DateTime.Now);
+            // Set the reporter Id to match userId
+            typeof(Employees).GetProperty("Id").SetValue(reporter, userId);
+            
             var assignee = new Employees(false, "Jane", "Smith", "987654321", "jane@test.com", "password", "Developer", DateTime.Now);
+            typeof(Employees).GetProperty("Id").SetValue(assignee, assigneeId);
+            
             var task = new Tasks("Test Task", DateTime.Now, DateTime.Now.AddDays(7), "High", "Description", "Open", "Feature");
             task.SetReporter(reporter);
             task.AddAssignees(new List<Employees> { assignee });
@@ -321,7 +332,12 @@ namespace TaskManager.Tests.Services
             int assigneeId = 2;
             int taskId = 1;
             var reporter = new Employees(false, "John", "Doe", "123456789", "john@test.com", "password", "Manager", DateTime.Now);
+            // Set the reporter Id to match userId
+            typeof(Employees).GetProperty("Id").SetValue(reporter, userId);
+            
             var assignee = new Employees(false, "Jane", "Smith", "987654321", "jane@test.com", "password", "Developer", DateTime.Now);
+            typeof(Employees).GetProperty("Id").SetValue(assignee, assigneeId);
+            
             var task = new Tasks("Test Task", DateTime.Now, DateTime.Now.AddDays(7), "High", "Description", "Open", "Feature");
             task.SetReporter(reporter);
 
@@ -433,6 +449,9 @@ namespace TaskManager.Tests.Services
             int userId = 1;
             int commentId = 1;
             var sender = new Employees(false, "John", "Doe", "123456789", "john@test.com", "password", "Developer", DateTime.Now);
+            // Set the sender Id to match userId
+            typeof(Employees).GetProperty("Id").SetValue(sender, userId);
+            
             var comment = new Comments("Test comment");
             comment.SetSender(sender);
 
