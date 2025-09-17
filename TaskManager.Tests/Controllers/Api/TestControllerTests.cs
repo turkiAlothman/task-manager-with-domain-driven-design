@@ -21,7 +21,7 @@ namespace TaskManager.Tests.Controllers.Api
         {
             // Act & Assert
             // Verify that TestController inherits from ControllerBase
-            Assert.IsAssignableFrom<ControllerBase>(typeof(TestController));
+            Assert.True(typeof(ControllerBase).IsAssignableFrom(typeof(TestController)));
         }
 
         [Fact]
