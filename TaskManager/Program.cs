@@ -43,8 +43,16 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddRepositories();
 
 
-// configurations Objects
-builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+// email configurations 
+builder.Services.Configure<MailSettings>(options =>
+{
+    options.Server = Environment.GetEnvironmentVariable("MAIL_SERVER");
+    options.Username = Environment.GetEnvironmentVariable("MAIL_USERNAME");
+    options.Password = Environment.GetEnvironmentVariable("MAIL_PASSWORD");
+    options.SenderName = Environment.GetEnvironmentVariable("MAIL_SENDER_NAME");
+    options.Port = int.TryParse(Environment.GetEnvironmentVariable("MAIL_PORT"), out var port) ? port : 25;
+    options.TLS = bool.TryParse(Environment.GetEnvironmentVariable("MAIL_TLS"), out var tls) && tls;
+});
 
 // Custom services
 builder.Services.AddScoped<IAuthService, AuthService>();
