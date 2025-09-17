@@ -1,5 +1,12 @@
 ﻿using Application.Services.Interfaces;
 using Domain.Base;
+using Domain.DomainModels.Activitiy;
+using Domain.DomainModels.Comment;
+using Domain.DomainModels.Employee;
+using Domain.DomainModels.ResetPasswords;
+using Domain.DomainModels.Task;
+using Domain.DomainModels.Team;
+using infrastructure.Persistence.Repositores;
 using infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -34,5 +41,29 @@ namespace infrastructure
 
             return collection;
         }
+
+
+
+
+         public static IServiceCollection AddRepositories(this IServiceCollection collection)
+        {
+           
+          // repositories
+            collection.AddScoped<ITasksRepository, TasksRepository>();
+            collection.AddScoped<IEmployeesRepository, EmployeesRepository>();
+            collection.AddScoped<ITeamsRepository, TeamsRepository>();
+            collection.AddScoped<IProjectsRepository, ProjectsRepository>();
+            collection.AddScoped<ICommentsRepository, CommentsRepository>();
+            collection.AddScoped<IActivitiesRepository, ActivitiesRepository>();
+            collection.AddScoped<IInvitesRepository, InvitesRepository>();
+            collection.AddScoped<IResetPasswordRepository, ResetPasswordRepository>();
+
+            return collection;
+        }
     }
+
+
+
+
+
 }

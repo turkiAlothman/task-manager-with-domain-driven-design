@@ -20,8 +20,14 @@ using Domain.DomainModels.Employee;
 using Domain.DomainModels.ResetPasswords;
 using Domain.DomainModels.Task;
 using Domain.DomainModels.Team;
+using DotNetEnv;
+
+
+Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHealthChecks();
 
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
@@ -33,15 +39,8 @@ builder.Services.AddControllersWithViews(c=>c.Filters.Add(new AuthorizeFilter())
 // authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(e=>e.LoginPath="/auth/login");
 
-// repositories
-builder.Services.AddScoped<ITasksRepository, TasksRepository>();
-builder.Services.AddScoped<IEmployeesRepository, EmployeesRepository>();
-builder.Services.AddScoped<ITeamsRepository, TeamsRepository>();
-builder.Services.AddScoped<IProjectsRepository, ProjectsRepository>();
-builder.Services.AddScoped<ICommentsRepository, CommentsRepository>();
-builder.Services.AddScoped<IActivitiesRepository, ActivitiesRepository>();
-builder.Services.AddScoped<IInvitesRepository, InvitesRepository>();
-builder.Services.AddScoped<IResetPasswordRepository, ResetPasswordRepository>();
+// add repositories
+builder.Services.AddRepositories();
 
 
 // configurations Objects
@@ -52,8 +51,9 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddApplicationServices();
 
 
+
 // configurting the database(mysql)
-string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+string? connectionString = builder.Configuration["MYSQL_CONNECTION_STRING"];
 builder.Services.AddDbContext<TaskManagerDbContext>(Options=>{
     Options.UseMySql(
         connectionString, ServerVersion.AutoDetect(connectionString) , options => options.MigrationsAssembly("TaskManager").CommandTimeout(50)
@@ -81,23 +81,27 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-    
+
+
+
+app.UseHealthChecks("/health"); 
 
 app.UseAuthentication();
 
 
-// middleware for iserting tasks activites in the database
+// middleware for inserting tasks activites in the database
 app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/Tasks") && !context.Request.Method.Equals("GET") && context.Response.StatusCode == 200, AppBuilder => AppBuilder.UseMiddleware<TasksActivitiesMiddleware>());
 
  app.UseExceptionHandler("/error");
 
+
+
 app.MapControllerRoute(name:"default",pattern:"{controller=Home}/{action=dashboard}/{id?}");
 
-app.UseHealthChecks("/health");
+
 
 // insert dummay data
 if (app.Environment.IsDevelopment())
-
-    DbSeeder.Seed(app);
+   DbSeeder.Seed(app);
 
 app.Run();
