@@ -21,95 +21,144 @@ using Domain.DomainModels.ResetPasswords;
 using Domain.DomainModels.Task;
 using Domain.DomainModels.Team;
 using DotNetEnv;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.Grafana.Loki;
 
 
 Env.Load();
 
-var builder = WebApplication.CreateBuilder(args);
+// Configure Serilog
+var lokiUrl = Environment.GetEnvironmentVariable("LOKI_URL") ?? "http://localhost:3100";
+var appName = Environment.GetEnvironmentVariable("APP_NAME") ?? "task-manager";
+var logLevel = Environment.GetEnvironmentVariable("LOG_LEVEL") ?? "Information";
 
-builder.Services.AddHealthChecks();
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Is(Enum.Parse<LogEventLevel>(logLevel))
+    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .Enrich.WithEnvironmentName()
+    .Enrich.WithMachineName()
+    .Enrich.WithProcessId()
+    .Enrich.WithThreadId()
+    .WriteTo.Console()
+    .WriteTo.GrafanaLoki(lokiUrl, labels: new List<LokiLabel>
+    {
+        new() { Key = "app", Value = appName },
+        new() { Key = "environment", Value = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development" }
+    })
+    .CreateLogger();
 
-
-builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                          .AddEnvironmentVariables();
-
-// mvc configurations with json respone + NewtonsoftJson (for patial update in patch reuqest)
-builder.Services.AddControllersWithViews(c=>c.Filters.Add(new AuthorizeFilter())).AddNewtonsoftJson(Options => Options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore).AddJsonOptions(Options => Options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
-
-// authentication
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(e=>e.LoginPath="/auth/login");
-
-// add repositories
-builder.Services.AddRepositories();
-
-
-// email configurations 
-builder.Services.Configure<MailSettings>(options =>
+try
 {
-    options.Server = Environment.GetEnvironmentVariable("MAIL_SERVER");
-    options.Username = Environment.GetEnvironmentVariable("MAIL_USERNAME");
-    options.Password = Environment.GetEnvironmentVariable("MAIL_PASSWORD");
-    options.SenderName = Environment.GetEnvironmentVariable("MAIL_SENDER_NAME");
-    options.Port = int.TryParse(Environment.GetEnvironmentVariable("MAIL_PORT"), out var port) ? port : 25;
-    options.TLS = bool.TryParse(Environment.GetEnvironmentVariable("MAIL_TLS"), out var tls) && tls;
-});
+    Log.Information("Starting TaskManager application");
 
-// Custom services
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddApplicationServices();
+    var builder = WebApplication.CreateBuilder(args);
 
+    // Add Serilog to the DI container
+    builder.Host.UseSerilog();
 
+    builder.Services.AddHealthChecks();
 
-// configurting the database(mysql)
-string? connectionString = builder.Configuration["MYSQL_CONNECTION_STRING"];
-builder.Services.AddDbContext<TaskManagerDbContext>(Options=>{
-    Options.UseMySql(
-        connectionString, ServerVersion.AutoDetect(connectionString) , options => options.MigrationsAssembly("TaskManager").CommandTimeout(50)
-        );
-});
+    builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+        .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+        .AddEnvironmentVariables();
 
+    // mvc configurations with json respone + NewtonsoftJson (for patial update in patch reuqest)
+    builder.Services.AddControllersWithViews(c=>c.Filters.Add(new AuthorizeFilter()))
+        .AddNewtonsoftJson(Options => Options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
+        .AddJsonOptions(Options => Options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
-// swagger configurations 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+    // authentication
+    builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+        .AddCookie(e=>e.LoginPath="/auth/login");
 
-//  register httpContext as service
-builder.Services.AddHttpContextAccessor();
+    // add repositories
+    builder.Services.AddRepositories();
 
-// set Multipart Body Length Limit to 10MB
- builder.Services.Configure<FormOptions>(Options => Options.MultipartBodyLengthLimit = 10000000);
+    // email configurations 
+    builder.Services.Configure<MailSettings>(options =>
+    {
+        options.Server = Environment.GetEnvironmentVariable("MAIL_SERVER");
+        options.Username = Environment.GetEnvironmentVariable("MAIL_USERNAME");
+        options.Password = Environment.GetEnvironmentVariable("MAIL_PASSWORD");
+        options.SenderName = Environment.GetEnvironmentVariable("MAIL_SENDER_NAME");
+        options.Port = int.TryParse(Environment.GetEnvironmentVariable("MAIL_PORT"), out var port) ? port : 25;
+        options.TLS = bool.TryParse(Environment.GetEnvironmentVariable("MAIL_TLS"), out var tls) && tls;
+    });
 
-var app = builder.Build();
+    // Custom services
+    builder.Services.AddScoped<IAuthService, AuthService>();
+    builder.Services.AddApplicationServices();
 
-app.UseStaticFiles();
+    // configurting the database(mysql)
+    string? connectionString = builder.Configuration["MYSQL_CONNECTION_STRING"];
+    builder.Services.AddDbContext<TaskManagerDbContext>(Options=>{
+        Options.UseMySql(
+            connectionString, ServerVersion.AutoDetect(connectionString) , 
+            options => options.MigrationsAssembly("TaskManager").CommandTimeout(50)
+            );
+    });
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // swagger configurations 
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+
+    //  register httpContext as service
+    builder.Services.AddHttpContextAccessor();
+
+    // set Multipart Body Length Limit to 10MB
+    builder.Services.Configure<FormOptions>(Options => Options.MultipartBodyLengthLimit = 10000000);
+
+    var app = builder.Build();
+
+    // Add Serilog request logging
+    app.UseSerilogRequestLogging(options =>
+    {
+        options.MessageTemplate = "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms";
+        options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+        {
+            diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
+            diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
+            diagnosticContext.Set("UserAgent", httpContext.Request.Headers["User-Agent"].FirstOrDefault());
+            diagnosticContext.Set("RemoteIP", httpContext.Connection.RemoteIpAddress?.ToString());
+        };
+    });
+
+    app.UseStaticFiles();
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseHealthChecks("/health"); 
+
+    app.UseAuthentication();
+
+    // middleware for inserting tasks activites in the database
+    app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/Tasks") && 
+        !context.Request.Method.Equals("GET") && context.Response.StatusCode == 200, 
+        AppBuilder => AppBuilder.UseMiddleware<TasksActivitiesMiddleware>());
+
+    app.UseExceptionHandler("/error");
+
+    app.MapControllerRoute(name:"default",pattern:"{controller=Home}/{action=dashboard}/{id?}");
+
+    // insert dummay data
+    if (app.Environment.IsDevelopment())
+       DbSeeder.Seed(app);
+
+    Log.Information("TaskManager application started successfully");
+    app.Run();
 }
-
-
-
-app.UseHealthChecks("/health"); 
-
-app.UseAuthentication();
-
-
-// middleware for inserting tasks activites in the database
-app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/Tasks") && !context.Request.Method.Equals("GET") && context.Response.StatusCode == 200, AppBuilder => AppBuilder.UseMiddleware<TasksActivitiesMiddleware>());
-
- app.UseExceptionHandler("/error");
-
-
-
-app.MapControllerRoute(name:"default",pattern:"{controller=Home}/{action=dashboard}/{id?}");
-
-
-
-// insert dummay data
-if (app.Environment.IsDevelopment())
-   DbSeeder.Seed(app);
-
-app.Run();
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
