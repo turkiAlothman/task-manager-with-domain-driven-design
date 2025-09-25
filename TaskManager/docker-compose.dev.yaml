@@ -41,7 +41,17 @@ services:
       - loki
     restart: unless-stopped
 
+  redis:
+    image: redis:7-alpine
+    container_name: redis_cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
 volumes:
   mysql_data:
   loki_data:
   grafana_data:
+  redis_data:

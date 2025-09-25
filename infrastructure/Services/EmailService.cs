@@ -4,26 +4,35 @@ using Microsoft.Extensions.Options;
 using MimeKit;
 using infrastructure.Configurations;
 using Application.Services.Interfaces;
-using Application.Services.Interfaces;
 using Domain.Base;
 using Domain.DTOs;
 using Domain.Employee;
+using Hangfire;
 
 namespace infrastructure.Services
 {
     public class EmailService :  BaseService , IEmailService
     {
         private readonly MailSettings _settings;
-        public EmailService(IUnitOfWork unitOfWork, IOptions<MailSettings> settings) : base(unitOfWork)
+        private readonly IBackgroundJobClient _backgroundJobClient;
+        
+        public EmailService(IUnitOfWork unitOfWork, IOptions<MailSettings> settings, IBackgroundJobClient backgroundJobClient) : base(unitOfWork)
         {  
             _settings = settings.Value;
+            _backgroundJobClient = backgroundJobClient;
         }
 
         public async Task SendMail(Mail mail)
         {
+            // Enqueue the email sending as a background job
+            _backgroundJobClient.Enqueue(() => SendMailBackground(mail));
+        }
+
+        [AutomaticRetry(Attempts = 3)]
+        public async Task SendMailBackground(Mail mail)
+        {
             using (SmtpClient Client = new SmtpClient())
             {
-
                 // setup client
                 await Client.ConnectAsync(_settings.Server, _settings.Port, SecureSocketOptions.SslOnConnect);
 
@@ -35,7 +44,6 @@ namespace infrastructure.Services
                 Message.To.Add(new MailboxAddress(mail.EmailTo, mail.EmailTo));
                 Message.Subject = mail.Subject;
 
-
                 BodyBuilder MessageBody = new BodyBuilder();
 
                 MessageBody.HtmlBody = mail.Body;
@@ -44,13 +52,11 @@ namespace infrastructure.Services
                 await Client.SendAsync(Message);
                 Client.Disconnect(true);
             }
-
-
         }
 
         public async Task SendInviteEmail(Employees inviter, string inviteeEmail, string SecretKey, string host)
         {
-            await SendMail(new Mail { Body = @$"
+            var mail = new Mail { Body = @$"
 
                     <div style=""max-width: 600px; margin: 0 auto; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);"">
                         <h2 style=""text-align: center; color: #333;"">Account Registration</h2>
@@ -60,12 +66,15 @@ namespace infrastructure.Services
                             <a href="" https://{host}/auth/RegisterationRedirect/{inviteeEmail}/{SecretKey}""  style=""display: inline-block; padding: 10px 20px; background-color: #924AEF; color: #fff; text-decoration: none; border-radius: 5px;"">Register Now</a>
                         </div>
                     </div>
-                            ", EmailTo = inviteeEmail, Subject = "Account Registration" });
+                            ", EmailTo = inviteeEmail, Subject = "Account Registration" };
+            
+            // Enqueue the invite email as a background job
+            _backgroundJobClient.Enqueue(() => SendMailBackground(mail));
         }
 
         public async Task SendResetPasswordEmail(string Email, string SecretKey, string host)
         {
-            await SendMail(new Mail { Body = @$"
+            var mail = new Mail { Body = @$"
 
                     <div style=""max-width: 600px; margin: 0 auto; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);"">
                         <h2 style=""text-align: center; color: #333;"">Reset Password</h2>
@@ -74,8 +83,10 @@ namespace infrastructure.Services
                             <a href="" https://{host}/auth/ResetPasswordRedirect/{Email}/{SecretKey}""  style=""display: inline-block; padding: 10px 20px; background-color: #924AEF; color: #fff; text-decoration: none; border-radius: 5px;"">Reset Password</a>
                         </div>
                     </div>
-                            ", EmailTo = Email, Subject = "Reset Password" });
-
+                            ", EmailTo = Email, Subject = "Reset Password" };
+            
+            // Enqueue the reset password email as a background job
+            _backgroundJobClient.Enqueue(() => SendMailBackground(mail));
         }
     }
 }

@@ -24,6 +24,8 @@ using DotNetEnv;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.Grafana.Loki;
+using Hangfire;
+using Hangfire.Redis.StackExchange;
 
 
 Env.Load();
@@ -87,6 +89,16 @@ try
         options.TLS = bool.TryParse(Environment.GetEnvironmentVariable("MAIL_TLS"), out var tls) && tls;
     });
 
+    // Hangfire configuration with Redis storage
+    var redisConnectionString = Environment.GetEnvironmentVariable("REDIS_CONNECTION_STRING") ?? "localhost:6379";
+    builder.Services.AddHangfire(configuration => configuration
+        .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+        .UseSimpleAssemblyNameTypeSerializer()
+        .UseRecommendedSerializerSettings()
+        .UseRedisStorage(redisConnectionString));
+
+    builder.Services.AddHangfireServer();
+
     // Custom services
     builder.Services.AddScoped<IAuthService, AuthService>();
     builder.Services.AddApplicationServices();
@@ -137,6 +149,12 @@ try
     app.UseHealthChecks("/health"); 
 
     app.UseAuthentication();
+
+    // Add Hangfire Dashboard (only in development)
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseHangfireDashboard("/hangfire");
+    }
 
     // middleware for inserting tasks activites in the database
     app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/Tasks") && 
