@@ -14,6 +14,7 @@ namespace Application.Services.Interfaces
         public Task<IError> RemoveAsignee(int UserId, int AssigneeId, int TaskId);
         public Task<IError> AddComment(int UserId, int TaskId, string MessageContent);
         public Task<IError> DeleteComment(int UserId, int CommentID);
+        public Task<string> GetAttachmentPresignedUrl(string objectName);
 
     }
 }

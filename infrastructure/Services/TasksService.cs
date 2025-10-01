@@ -13,6 +13,7 @@ using Domain.Employee;
 using Domain.Project;
 using Domain.Task;
 using infrastructure.Extentions;
+using infrastructure.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.Extensions.Configuration;
@@ -29,13 +30,16 @@ namespace infrastructure.Services
         private readonly ICommentsRepository _commentsRepository;
         private readonly IProjectsRepository _projectsRepository;
         private readonly IConfiguration _configuration;
-        public TasksService(IUnitOfWork unitOfWork, ITasksRepository tasksRepository, IEmployeesRepository employeesRepository, ICommentsRepository commentsRepository, IProjectsRepository projectsRepository, IConfiguration configuration) : base(unitOfWork)
+        private readonly IMinioService _minioService;
+        
+        public TasksService(IUnitOfWork unitOfWork, ITasksRepository tasksRepository, IEmployeesRepository employeesRepository, ICommentsRepository commentsRepository, IProjectsRepository projectsRepository, IConfiguration configuration, IMinioService minioService) : base(unitOfWork)
         {
             _tasksRepository = tasksRepository;
             _employeesRepository = employeesRepository;
             _commentsRepository = commentsRepository;
             _projectsRepository = projectsRepository;
             _configuration = configuration;
+            _minioService = minioService;
         }
 
 
@@ -69,26 +73,32 @@ namespace infrastructure.Services
             await _tasksRepository.Add(task);
 
 
-            // after the task is commited in the database , we get the Id of the task to specify the storage path of the attachments
+            // after the task is commited in the database, upload attachments to MinIO
             if (!attachments.IsNullOrEmpty())
             {
-                Directory.CreateDirectory(Path.Combine(_configuration.GetValue<string>("StoragePath"),_configuration.GetValue<string>("TaskAttachmantsStoragePathUrl") + attachments.First().task.Id));
                 foreach ((Attachments attach, IFormFile file) in attachments.Zip(Attachments))
                 {
-                    string startPerfix = _configuration.GetValue<string>("TaskAttachmantsStoragePathUrl") + attach.task.Id;
-                    string Url = startPerfix + "/" + Path.GetFileName(file.FileName).Replace(" ", "_");
-                    string PhysicalPath = Path.Combine(_configuration.GetValue<string>("StoragePath") , Url);
-                    string FullPath = Path.GetFullPath(PhysicalPath);
-                    Debug.WriteLine(FullPath);
-
-                    attach.url = Url;
-                    attach.PhysicalPath = PhysicalPath;
-
-
-                    using (var stream = System.IO.File.Create(FullPath))
-                        await file.CopyToAsync(stream);
+                    try
+                    {
+                        // Create unique object name for MinIO: tasks/{taskId}/{filename}
+                        string fileName = Path.GetFileName(file.FileName).Replace(" ", "_");
+                        string objectName = $"tasks/{attach.task.Id}/{Guid.NewGuid()}_{fileName}";
+                        
+                        // Upload file to MinIO
+                        string uploadedObjectName = await _minioService.UploadFileAsync(file, objectName);
+                        
+                        // Store MinIO object name and original filename
+                        attach.url = uploadedObjectName;
+                        attach.PhysicalPath = uploadedObjectName; // Using this field to store MinIO object name
+                        attach.FileName = fileName; // Store the original filename
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Failed to upload attachment: {ex.Message}");
+                        // You might want to handle this error more gracefully
+                        return new customError { Message = $"Failed to upload attachment: {file.FileName}", StatusCode = System.Net.HttpStatusCode.InternalServerError };
+                    }
                 }
-
             }
 
             await UnitOfWork.SaveChangesAsync();
@@ -136,9 +146,29 @@ namespace infrastructure.Services
             if (!(task.Reporter.Id == UserId))
                 return new UnathorizedTaskActionError();
 
+            // Delete attachments from MinIO before deleting the task
+            if (task.Attachments != null && task.Attachments.Any())
+            {
+                foreach (var attachment in task.Attachments)
+                {
+                    try
+                    {
+                        // Delete file from MinIO using the object name stored in PhysicalPath
+                        if (!string.IsNullOrEmpty(attachment.PhysicalPath))
+                        {
+                            await _minioService.DeleteFileAsync(attachment.PhysicalPath);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Failed to delete attachment from MinIO: {ex.Message}");
+                        // Continue with task deletion even if attachment deletion fails
+                    }
+                }
+            }
+
             await _tasksRepository.Delete(task);
             return null;
-
         }
 
         public async Task<IError> AddAsignee(int UserId, int AssigneeId, int TaskId)
@@ -218,6 +248,19 @@ namespace infrastructure.Services
 
             _commentsRepository.DeleteComment(comment);
             return null;
+        }
+
+        public async Task<string> GetAttachmentPresignedUrl(string objectName)
+        {
+            try
+            {
+                return await _minioService.GetPresignedUrlAsync(objectName);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to generate presigned URL: {ex.Message}");
+                return string.Empty;
+            }
         }
 
     }

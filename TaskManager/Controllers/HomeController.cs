@@ -11,6 +11,8 @@ using Domain.DomainModels.ResetPasswords;
 using Domain.DomainModels.Task;
 using Domain.DomainModels.Team;
 using Domain.DTOs;
+using Application.Services.Interfaces;
+
 namespace TaskManager.Controllers
 {
 
@@ -22,7 +24,9 @@ namespace TaskManager.Controllers
         private readonly IActivitiesRepository _ActivitiesRepository;
         private readonly ITeamsRepository _TeamsRepository;
         private readonly IHttpContextAccessor _HttpContextAccessor;
-        public HomeController(ITasksRepository _tasksRepository, IEmployeesRepository employeesRepository, IProjectsRepository _ProjectsRepository, IActivitiesRepository activitiesRepository, ITeamsRepository teamsRepository, IHttpContextAccessor HttpContextAccessor)
+        private readonly ITasksService _TasksService;
+        
+        public HomeController(ITasksRepository _tasksRepository, IEmployeesRepository employeesRepository, IProjectsRepository _ProjectsRepository, IActivitiesRepository activitiesRepository, ITeamsRepository teamsRepository, IHttpContextAccessor HttpContextAccessor, ITasksService tasksService)
         {
             this._TasksRepository = _tasksRepository;
             this._EmployeesRepository = employeesRepository;
@@ -30,6 +34,7 @@ namespace TaskManager.Controllers
             this._ActivitiesRepository = activitiesRepository;
             this._TeamsRepository = teamsRepository;
             this._HttpContextAccessor = HttpContextAccessor;
+            this._TasksService = tasksService;
         }
         public async Task<IActionResult> Dashboard()
         {
@@ -89,7 +94,26 @@ namespace TaskManager.Controllers
         [HttpGet("/[controller]/[action]/{id}")]
         public async Task<IActionResult> TaskDetails(int id)
         {
-            return View(await _TasksRepository.GetTaskWithAllDetails(id));
+            var task = await _TasksRepository.GetTaskWithAllDetails(id);
+            
+            // Generate presigned URLs for all attachments
+            if (task?.Attachments != null && task.Attachments.Any())
+            {
+                foreach (var attachment in task.Attachments)
+                {
+                    if (!string.IsNullOrEmpty(attachment.url))
+                    {
+                        // Replace MinIO object name with presigned URL for frontend access
+                        var presignedUrl = await _TasksService.GetAttachmentPresignedUrl(attachment.url);
+                        if (!string.IsNullOrEmpty(presignedUrl))
+                        {
+                            attachment.url = presignedUrl;
+                        }
+                    }
+                }
+            }
+            
+            return View(task);
         }
 
         public async Task<IActionResult> Profile()

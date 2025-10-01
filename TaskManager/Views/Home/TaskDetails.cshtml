@@ -167,7 +167,7 @@
                 }
                 @foreach (Attachments attachment in Model.Attachments)
                 {
-                    if (new List<string> {".jpg", ".png", ".jpeg"}.Contains(attachment.url.GetExtansion()))
+                    if (new List<string> {".jpg", ".png", ".jpeg"}.Contains(attachment.FileName.GetExtansion()))
                     {
                         <div class="col-sm-3 h-25 p-0 me-1"><img src="@attachment.url" class="img-thumbnail img-fluid" alt="..." onclick="this.requestFullscreen()"></div>
                         
@@ -177,7 +177,7 @@
                     {
                         <div class="bg-soft-primary p-3 rounded-1 col-sm-3 me-2">
                             <img src="assets/img/svg/folder-primary.svg" alt="img">
-                            <a class="fw-semibold mb-0" href="@attachment.url" class="text-truncate"> @attachment.url.GetFileName()</a>
+                            <a class="fw-semibold mb-0" href="@attachment.url" class="text-truncate"> @attachment.FileName</a>
                         </div>
                         
                     }

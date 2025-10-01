@@ -30,6 +30,7 @@ namespace TaskManager.Tests.Services
         private readonly Mock<ICommentsRepository> _mockCommentsRepository;
         private readonly Mock<IProjectsRepository> _mockProjectsRepository;
         private readonly Mock<IConfiguration> _mockConfiguration;
+        private readonly Mock<IMinioService> _mockMinioService;
         private readonly TasksService _tasksService;
 
         public TasksServiceTests()
@@ -40,7 +41,8 @@ namespace TaskManager.Tests.Services
             _mockCommentsRepository = new Mock<ICommentsRepository>();
             _mockProjectsRepository = new Mock<IProjectsRepository>();
             _mockConfiguration = new Mock<IConfiguration>();
-            _tasksService = new TasksService(_mockUnitOfWork.Object, _mockTasksRepository.Object, _mockEmployeesRepository.Object, _mockCommentsRepository.Object, _mockProjectsRepository.Object, _mockConfiguration.Object);
+            _mockMinioService = new Mock<IMinioService>();
+            _tasksService = new TasksService(_mockUnitOfWork.Object, _mockTasksRepository.Object, _mockEmployeesRepository.Object, _mockCommentsRepository.Object, _mockProjectsRepository.Object, _mockConfiguration.Object, _mockMinioService.Object);
         }
 
         [Fact]

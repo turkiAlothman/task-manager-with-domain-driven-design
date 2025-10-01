@@ -99,9 +99,21 @@ try
 
     builder.Services.AddHangfireServer();
 
+    // MinIO configuration
+    builder.Services.Configure<infrastructure.Configurations.MinioSettings>(options =>
+    {
+        options.Endpoint = Environment.GetEnvironmentVariable("MINIO_ENDPOINT") ?? "localhost:9000";
+        options.AccessKey = Environment.GetEnvironmentVariable("MINIO_ACCESS_KEY") ?? "minioadmin";
+        options.SecretKey = Environment.GetEnvironmentVariable("MINIO_SECRET_KEY") ?? "minioadmin123";
+        options.BucketName = Environment.GetEnvironmentVariable("MINIO_BUCKET_NAME") ?? "task-attachments";
+        options.UseSSL = bool.TryParse(Environment.GetEnvironmentVariable("MINIO_USE_SSL"), out var useSSL) && useSSL;
+        options.PresignedUrlExpiry = int.TryParse(Environment.GetEnvironmentVariable("MINIO_PRESIGNED_URL_EXPIRY"), out var expiry) ? expiry : 604800;
+    });
+
     // Custom services
     builder.Services.AddScoped<IAuthService, AuthService>();
     builder.Services.AddApplicationServices();
+    builder.Services.AddMinioServices(builder.Configuration);
 
     // configurting the database(mysql)
     string? connectionString = builder.Configuration["MYSQL_CONNECTION_STRING"];
