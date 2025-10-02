@@ -26,6 +26,9 @@ using Serilog.Events;
 using Serilog.Sinks.Grafana.Loki;
 using Hangfire;
 using Hangfire.Redis.StackExchange;
+using infrastructure.HealthChecks;
+using TaskManager.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 
 Env.Load();
@@ -60,7 +63,19 @@ try
     // Add Serilog to the DI container
     builder.Host.UseSerilog();
 
-    builder.Services.AddHealthChecks();
+    // Health checks configuration
+    var mysqlConnectionString = Environment.GetEnvironmentVariable("MYSQL_CONNECTION_STRING") ?? builder.Configuration["MYSQL_CONNECTION_STRING"];
+    var redisConnectionString = Environment.GetEnvironmentVariable("REDIS_CONNECTION_STRING") ?? "localhost:6379";
+
+    builder.Services.AddHealthChecks()
+        .AddMySql(mysqlConnectionString, name: "mysql", failureStatus: HealthStatus.Unhealthy, tags: new[] { "db", "mysql" })
+        .AddRedis(redisConnectionString, name: "redis", failureStatus: HealthStatus.Unhealthy, tags: new[] { "cache", "redis" })
+        .AddCheck<MinioHealthCheck>("minio", failureStatus: HealthStatus.Unhealthy, tags: new[] { "storage", "minio" })
+        .AddCheck<LokiHealthCheck>("loki", failureStatus: HealthStatus.Unhealthy, tags: new[] { "logging", "loki" });
+
+    // Register custom health check dependencies
+    builder.Services.AddScoped<MinioHealthCheck>();
+    builder.Services.AddHttpClient<LokiHealthCheck>();
 
     builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
         .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
@@ -90,7 +105,6 @@ try
     });
 
     // Hangfire configuration with Redis storage
-    var redisConnectionString = Environment.GetEnvironmentVariable("REDIS_CONNECTION_STRING") ?? "localhost:6379";
     builder.Services.AddHangfire(configuration => configuration
         .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
         .UseSimpleAssemblyNameTypeSerializer()
@@ -158,7 +172,16 @@ try
         app.UseSwaggerUI();
     }
 
-    app.UseHealthChecks("/health"); 
+    // Health check endpoints
+    app.UseHealthChecks("/health");
+    app.UseHealthChecks("/health/ready", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+    {
+        Predicate = _ => true
+    });
+    app.UseHealthChecks("/health/live", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+    {
+        Predicate = _ => false
+    });
 
     app.UseAuthentication();
 
@@ -181,7 +204,13 @@ try
     if (app.Environment.IsDevelopment())
        DbSeeder.Seed(app);
 
+    // Manual health check validation before starting the application
+    var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
+    var logger = loggerFactory.CreateLogger("HealthCheckValidation");
+    await HealthCheckValidationService.ValidateHealthChecksAsync(app.Services, logger);
+
     Log.Information("TaskManager application started successfully");
+
     app.Run();
 }
 catch (Exception ex)
