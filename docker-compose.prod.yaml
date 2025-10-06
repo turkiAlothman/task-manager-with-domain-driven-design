@@ -1,0 +1,136 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: myappdb
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root --password=rootpassword --silent"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s 
+
+  loki:
+    image: grafana/loki:2.9.0
+    container_name: loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki-config.yaml:/etc/loki/local-config.yaml
+      - loki_data:/loki
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3100/ready"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      - loki
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis_cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  minio:
+    image: minio/minio:latest
+    container_name: minio_storage
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    command: server /data --console-address ":9001"
+    restart: unless-stopped
+  
+  taskmanager:
+    container_name: "task-manager-app"
+    image: taskmanager:latest
+    build:
+      context: ./
+      dockerfile: dockerfile
+    ports:
+      - 80:8080
+    environment:
+      - AllowedHosts=*
+      # database connection string
+      - MYSQL_CONNECTION_STRING=Server=mysql;Port=3306;Database=myappdb;User=myuser;Password=mypassword;
+      # mailing settings
+      - MAIL_SERVER=smtp.gmail.com
+      - MAIL_USERNAME=example@example.com
+      - MAIL_PASSWORD=example
+      - MAIL_SENDER_NAME=Task Manager
+      - MAIL_PORT=465
+      - MAIL_TLS=true
+      # logging settings
+      - LOKI_URL=http://loki:3100
+      - APP_NAME=task-manager
+      - LOG_LEVEL=Information
+      # redis settings
+      - REDIS_CONNECTION_STRING=redis:6379
+
+      # MinIO Configuration
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=minioadmin
+      - MINIO_SECRET_KEY=minioadmin123
+      - MINIO_BUCKET_NAME=task-attachments
+      - MINIO_USE_SSL=false
+      - MINIO_PRESIGNED_URL_EXPIRY=604800
+    depends_on:
+      mysql:
+        condition: service_healthy
+      loki:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      minio:
+        condition: service_started
+
+    healthcheck:
+      test: ["CMD", "curl -f http://localhost:8080/health"]
+      interval: 30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  mysql_data:
+  loki_data:
+  grafana_data:
+  redis_data:
+  minio_data:

@@ -29,9 +29,14 @@ using Hangfire.Redis.StackExchange;
 using infrastructure.HealthChecks;
 using TaskManager.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using TaskManager.Configuration;
 
 
 Env.Load();
+
+
+// check the existance of environment variables
+StartUpChecks.CheckEnvironmentsExistance();
 
 // Configure Serilog
 var lokiUrl = Environment.GetEnvironmentVariable("LOKI_URL") ?? "http://localhost:3100";
