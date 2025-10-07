@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0
+WORKDIR /app
+
+COPY TaskManager.sln ./
+COPY "./Application" './Application'
+COPY "./Domain" './Domain'
+COPY "./infrastructure" './infrastructure'
+COPY "./Presentation" './Presentation'
+COPY "./TaskManager" './TaskManager'
+COPY "./TaskManager.Tests" './TaskManager.Tests'
+
+RUN dotnet restore "TaskManager.sln"
+COPY . .
+
+RUN dotnet tool install --global dotnet-ef --version 9.0.*
+ENV PATH="${PATH}:/root/.dotnet/tools"
+
+# ENTRYPOINT ["dotnet", "ef", "database", "update", "--project", "TaskManager/TaskManager.csproj", "--startup-project", "TaskManager/TaskManager.csproj"]
+ENTRYPOINT [ "sleep", "10000000" ]
