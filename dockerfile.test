@@ -1,0 +1,21 @@
+FROM  mcr.microsoft.com/dotnet/sdk:9.0 AS build
+
+WORKDIR /app
+
+# Copy the project file and restore any dependencies (use .csproj for the project name)
+COPY TaskManager.sln ./
+
+COPY "./Application" '/app/Application'
+COPY "./Domain" '/app/Domain'
+COPY "./infrastructure" '/app/infrastructure'
+COPY "./Presentation" '/app/Presentation'
+COPY "./TaskManager" '/app/TaskManager'
+COPY "./TaskManager.Tests" '/app/TaskManager.Tests'
+
+RUN dotnet restore "TaskManager.sln"
+
+# Copy the rest of the application code
+COPY . .
+
+# Run the tests
+ENTRYPOINT ["dotnet", "test", "TaskManager.Tests/TaskManager.Tests.csproj", "--logger:trx", "--results-directory", "/app/TestResults"]
