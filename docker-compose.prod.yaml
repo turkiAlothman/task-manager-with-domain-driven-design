@@ -120,6 +120,8 @@ services:
         condition: service_started
       minio:
         condition: service_started
+      taskmanager-migration:
+        condition: service_completed_successfully
 
     healthcheck:
       test: ["CMD", "curl -f http://localhost:8080/health"]
@@ -127,6 +129,17 @@ services:
       timeout: 30s
       retries: 5
       start_period: 30s
+  taskmanager-migration:
+    container_name: "task-manager-migrations"
+    image: taskmanager-migrations:latest
+    build:
+      context: ./
+      dockerfile: dockerfile.migrations
+    environment:
+      - MYSQL_CONNECTION_STRING=Server=mysql;Port=3306;Database=myappdb;User=myuser;Password=mypassword;
+    depends_on:
+      mysql:
+        condition: service_healthy
 
 volumes:
   mysql_data:
