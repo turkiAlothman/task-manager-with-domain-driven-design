@@ -56,9 +56,14 @@ var lokiUrl = Environment.GetEnvironmentVariable("LOKI_URL") ?? "http://localhos
 var appName = Environment.GetEnvironmentVariable("APP_NAME") ?? "task-manager";
 var logLevel = Environment.GetEnvironmentVariable("LOG_LEVEL") ?? "Information";
 
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+var isProduction = environment.Equals("Production", StringComparison.OrdinalIgnoreCase);
+
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Is(Enum.Parse<LogEventLevel>(logLevel))
     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.EntityFrameworkCore.Database.Command", isProduction ? LogEventLevel.Warning : LogEventLevel.Information)
+    .MinimumLevel.Override("Microsoft.EntityFrameworkCore", isProduction ? LogEventLevel.Warning : LogEventLevel.Information)
     .Enrich.FromLogContext()
     .Enrich.WithEnvironmentName()
     .Enrich.WithMachineName()
@@ -68,7 +73,7 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.GrafanaLoki(lokiUrl, labels: new List<LokiLabel>
     {
         new() { Key = "app", Value = appName },
-        new() { Key = "environment", Value = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development" }
+        new() { Key = "environment", Value = environment }
     })
     .CreateLogger();
 
@@ -150,13 +155,24 @@ try
     // configurting the database(mysql)
     string? connectionString = builder.Configuration["MYSQL_CONNECTION_STRING"];
     builder.Services.AddDbContext<TaskManagerDbContext>(Options=>{
-        Options.UseMySql(
+        var dbOptions = Options.UseMySql(
             connectionString, ServerVersion.AutoDetect(connectionString),
             options => options.MigrationsAssembly("TaskManager").CommandTimeout(50)
-            )
-            .ConfigureWarnings(w => w.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.CommandExecuting))
-            .EnableSensitiveDataLogging(false)
-            .EnableDetailedErrors(false);
+        );
+        
+        // Only enable detailed logging in Development
+        if (builder.Environment.IsDevelopment())
+        {
+            dbOptions.EnableSensitiveDataLogging()
+                     .EnableDetailedErrors();
+        }
+        else
+        {
+            // Production: Disable all query logging and sensitive data
+            dbOptions.EnableSensitiveDataLogging(false)
+                     .EnableDetailedErrors(false)
+                     .ConfigureWarnings(w => w.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.CommandExecuting));
+        }
     });
 
     // swagger configurations 

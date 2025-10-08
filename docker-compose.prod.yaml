@@ -111,6 +111,7 @@ services:
       - MINIO_BUCKET_NAME=task-attachments
       - MINIO_USE_SSL=false
       - MINIO_PRESIGNED_URL_EXPIRY=604800
+      - ASPNETCORE_ENVIRONMENT=Production
     depends_on:
       mysql:
         condition: service_healthy

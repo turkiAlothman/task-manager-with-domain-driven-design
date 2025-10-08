@@ -34,6 +34,9 @@ namespace TaskManager.Configuration
                         "MINIO_BUCKET_NAME",
                         "MINIO_USE_SSL",
                         "MINIO_PRESIGNED_URL_EXPIRY",
+
+                        // environment
+                        "ASPNETCORE_ENVIRONMENT"
              };
 
 
