@@ -15,5 +15,4 @@ COPY . .
 RUN dotnet tool install --global dotnet-ef --version 9.0.*
 ENV PATH="${PATH}:/root/.dotnet/tools"
 
-# ENTRYPOINT ["dotnet", "ef", "database", "update", "--project", "TaskManager/TaskManager.csproj", "--startup-project", "TaskManager/TaskManager.csproj"]
-ENTRYPOINT [ "sleep", "10000000" ]
+ENTRYPOINT ["dotnet", "ef", "database", "update", "--project", "TaskManager/TaskManager.csproj", "--startup-project", "TaskManager/TaskManager.csproj"]

@@ -31,6 +31,19 @@ using TaskManager.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using TaskManager.Configuration;
 
+// Detect if running in design-time mode (EF migrations)
+// Check multiple indicators that EF tools are running this
+var isEfDesignTime = args.Any(a => a.StartsWith("--applicationName")) ||
+                     args.Any(a => a.Contains("Microsoft.EntityFrameworkCore")) ||
+                     Environment.GetEnvironmentVariable("EF_DESIGN_TIME") == "true" ||
+                     AppDomain.CurrentDomain.GetData("EF.Design.IsDesignTime") != null;
+
+if (isEfDesignTime)
+{
+    // Design-time mode detected - exit without running the application
+    // The DesignTimeDbContextFactory will handle database operations
+    return;
+}
 
 Env.Load();
 
@@ -138,9 +151,12 @@ try
     string? connectionString = builder.Configuration["MYSQL_CONNECTION_STRING"];
     builder.Services.AddDbContext<TaskManagerDbContext>(Options=>{
         Options.UseMySql(
-            connectionString, ServerVersion.AutoDetect(connectionString) , 
+            connectionString, ServerVersion.AutoDetect(connectionString),
             options => options.MigrationsAssembly("TaskManager").CommandTimeout(50)
-            );
+            )
+            .ConfigureWarnings(w => w.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.CommandExecuting))
+            .EnableSensitiveDataLogging(false)
+            .EnableDetailedErrors(false);
     });
 
     // swagger configurations 
